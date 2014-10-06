@@ -1,0 +1,7 @@
+# Änderungen an der SQL-Datenbank bitte hier vermerken.
+#
+# BETA-Phase! Aktuell verwendete Datenbank-Versionen bitte in dieser Datei markieren!
+#
+
+
+# demo002.sql =====================================================================================

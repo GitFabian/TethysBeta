@@ -1,3 +1,7 @@
 /.buildpath
 /.project
 /.settings/
+/FTP/
+/modules/
+/skins/
+/config*.php
