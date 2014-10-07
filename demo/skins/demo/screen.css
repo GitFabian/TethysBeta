@@ -5,7 +5,7 @@
 ==================================================================*/
 @font-face {
 	font-family: 'AnonymousPro';
-	src: local('Anonymous Pro'), url(AnonymousPro.woff) format('woff');
+	src: local('AnonymousPro'), url(AnonymousPro.woff) format('woff');
 }
 
 /*==================================================================
@@ -20,7 +20,6 @@ img{
 body,div,th,td{
 	margin:0px;
 	padding:0px;
-x	border:1px solid yellow;
 }
 
 ul{
@@ -31,8 +30,16 @@ ul{
 body{
 	font-family:"AnonymousPro";
 	font-size:14px;
-	background:#0f3a7b;
+	background:black;
 	color:#85dea5;
+}
+
+div.innerbody{
+	background:#0f3a7b;
+	padding:20px;
+	margin:20px;
+	border-radius:5px;
+	box-shadow:0px 0px 5px #3f6fb7 inset;
 }
 
 /*==================================================================
@@ -45,6 +52,40 @@ a{
 }
 a:hover{
 	background:#174d9d;
+}
+
+/*==================================================================
+    MENÜ
+==================================================================*/
+div.mainmenu{
+	background:#e7cd5e;
+	color:black;
+}
+div.mainmenu a{
+	color:black;
+}
+div.mainmenu a:hover,
+div.mainmenu div.menutopic.highlight,
+div.mainmenu div.menutopic.highlight a{
+	color:#cc060e;
+	background:inherit;
+}
+div.mainmenu ul{
+	padding:5px;
+	list-style:none;
+}
+/* Menüpunkte: */
+div.mainmenu > ul > li{
+	display:inline-block;
+}
+/* Unter-Menüs: */
+div.mainmenu > ul > li > div.submenulabel + ul{
+	background:#e7cd5e;
+	position:absolute;
+	display:none;
+}
+div.mainmenu > ul > li:hover > div.submenulabel + ul{
+	display:block;
 }
 
 /*==================================================================

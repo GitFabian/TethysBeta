@@ -3,12 +3,10 @@
 class menu extends menu_topic{
 	
 	var $topics;
-	var $highlight;
 	
-	function __construct($highlight,$label=null,$link=null,$menu_id=null){
-		parent::__construct($menu_id,$label,$link);
+	function __construct($parent_menu,$menu_id,$highlight,$label=null,$link=null){
+		parent::__construct($parent_menu,$menu_id,$highlight,$label,$link);
 		$this->topics=array();
-		$this->highlight=$highlight;
 	}
 	
 	function add($topic){
@@ -18,17 +16,24 @@ class menu extends menu_topic{
 	function toHTML(){
 		$html="";
 		if ($this->label){
-			$html.="<div class=\"submenulabel\">".parent::toHTML($this->highlight)."</div>";
+			$html.="<div class=\"submenulabel\">".parent::toHTML()."</div>";
 		}
 		if ($this->topics){
 			$sub="";
 			foreach ($this->topics as $topic) {
 				if ($topic)
-					$sub.="\n\t<li>".$topic->toHTML($this->highlight)."</li>";
+					$sub.="\n\t<li>".$topic->toHTML()."</li>";
 			}
 			$html.="\n<ul>$sub\n</ul>";
 		}
 		return $html;
+	}
+	
+	function highlight(){
+		$this->highlight=true;
+		if ($this->parent_menu){
+			$this->parent_menu->highlight();
+		}
 	}
 	
 }
@@ -38,19 +43,25 @@ class menu_topic{
 	var $page_id;
 	var $label;
 	var $link;
+	var $highlight;
+	var $parent_menu;
 	
-	function __construct($page_id,$label,$link=null){
+	function __construct($parent_menu,$page_id,$highlight,$label,$link=null){
 		$this->page_id=$page_id;
 		$this->label=$label;
 		$this->link=$link;
+		$this->highlight=($page_id==$highlight);
+		$this->parent_menu=$parent_menu;
+		if ($parent_menu){
+			$parent_menu->add($this);
+			if ($this->highlight){ $parent_menu->highlight(); }
+		}
 	}
 	
-	function toHTML($highlight){
-		$hcl="";
-		
+	function toHTML(){
 		$html=$this->label;
 		if ($this->link) $html="<a href=\"".$this->link."\">$html</a>";
-		if ($highlight==$this->page_id) $hcl=" highlight";
+		$hcl=($this->highlight?" highlight":"");
 		$html="<div class=\"menutopic $this->page_id$hcl\">$html</div>";
 		return $html;
 	}
@@ -59,14 +70,14 @@ class menu_topic{
 
 function menu_get_default($page_id){
 	global $modules;
-	$menu=new menu($page_id);
+	$menu=new menu(null,null,$page_id);
 	
-	$menu->add(new menu_topic("core_index", CFG_HOME_LABEL, CFG_HTTPROOT."/index.".CFG_EXTENSION));
+	new menu_topic($menu,"core_index",$page_id, CFG_HOME_LABEL, CFG_HTTPROOT."/index.".CFG_EXTENSION);
 	
 	if(USER_ADMIN){
-		$menu->add($menu_admin=new menu($page_id,"Admin",null,"core_admin"));
-		$menu_admin->add(new menu_topic("core_rights","Rechte",CFG_HTTPROOT."/core/admin/rights.".CFG_EXTENSION));
-		$menu_admin->add(new menu_topic("core_config","Konfig" ));// ,CFG_HTTPROOT."/core/admin/config.".CFG_EXTENSION));
+		$menu_admin=new menu($menu,"core_admin",$page_id,"Admin");
+		new menu_topic($menu_admin,"core_rights",$page_id,"Rechte",CFG_HTTPROOT."/core/admin/rights.".CFG_EXTENSION);
+		new menu_topic($menu_admin,"core_config",$page_id,"Konfig" );// ,CFG_HTTPROOT."/core/admin/config.".CFG_EXTENSION);
 	}
 
 	foreach ($modules as $module) {
