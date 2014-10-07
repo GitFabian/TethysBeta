@@ -1,7 +1,9 @@
 <?php
-
 include_once 'core/start.php';
 
-dbio_SELECT("core_users");
+$page->init('core_index',CFG_HOME_TITLE);
 
+
+
+$page->send();
 ?>

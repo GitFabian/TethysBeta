@@ -18,12 +18,14 @@ mysql_select_db('tethys');
 /*
  * Hauptmenü
  */
-#include_once 'config_xxxxxxxxxx.php';
-function hauptmenue($highlight){
-	return "MENU_${highlight}_HERE";
-	//TODO:...
+//include_once 'config_xxxxxxxxxx.php';
+function hauptmenue($page_id){
+// 	return "MENU_{$page_id}_HERE_".USER_NICK;
 	include_once CFG_HDDROOT.'/core/classes/menu.php';
-	//TODO:...
+// 	$menu=new menu();
+// 	//...
+	$menu=menu_get_default($page_id);
+	return $menu->toHTML();
 }
 
 ?>

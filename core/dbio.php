@@ -35,14 +35,8 @@ function dbio_query_to_array($anfrage){
 }
 
 function dbio_query($anfrage){
-	$query = mysql_query ( $anfrage ) or die ( dbio_error_die(mysql_error()."<br><code>".$anfrage."</code>") );
+	$query = mysql_query ( $anfrage ) or die ( error_die(mysql_error()."<br><code>".$anfrage."</code>") );
 	return $query;
-}
-
-function dbio_error_die($msg){
-	$backtrace=(USER_ADMIN?"<div class=\"entwickler\">".backtrace_to_html(debug_backtrace())."</div>":"");
-	echo $msg.$backtrace;
-	exit;
 }
 
 class dbio_leftjoin{

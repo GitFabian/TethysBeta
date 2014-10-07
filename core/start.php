@@ -17,7 +17,7 @@ include_once 'dbio.php';
 mysql_query ('SET NAMES utf8');
 
 /*
- * HTML
+ * HTML-Page
  */
 include_once CFG_HDDROOT.'/core/classes/page.php';
 $page=new page();
@@ -41,17 +41,19 @@ $rights=rights_init();
 include_once CFG_HDDROOT.'/core/config.php';
 
 /*
+ * Module
+ */
+include_once CFG_HDDROOT.'/core/classes/module.php';
+$modules=array();
+module_read();
+
+/*
  * Benutzerkonfiguration
  */
 
-//$page->add_stylesheet(CFG_HTTPROOT."/skins/".USER_DESIGN."/_screen.css");
+$page->add_stylesheet(CFG_HTTPROOT."/skins/".CFG_SKIN."/screen.css");
 
 //Admin bekommt PHP-Fehler angezeigt:
 if (USER_ADMIN) ini_set('display_errors', 'On');
-
-//Entwicklungshilfe:
-if(false){
-	define('CFG_TITLE', null);
-}
 
 ?>

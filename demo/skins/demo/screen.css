@@ -1,0 +1,77 @@
+@CHARSET "ISO-8859-1";
+
+/*==================================================================
+    FONTS
+==================================================================*/
+@font-face {
+	font-family: 'AnonymousPro';
+	src: local('Anonymous Pro'), url(AnonymousPro.woff) format('woff');
+}
+
+/*==================================================================
+    BODY,TEXT
+==================================================================*/
+
+/*(IE-Fix)*/
+img{
+	border:none;
+}
+
+body,div,th,td{
+	margin:0px;
+	padding:0px;
+x	border:1px solid yellow;
+}
+
+ul{
+	margin:0px;
+	padding:0px 0px 0px 20px;
+}
+
+body{
+	font-family:"AnonymousPro";
+	font-size:14px;
+	background:#0f3a7b;
+	color:#85dea5;
+}
+
+/*==================================================================
+    BUTTONS,LINKS
+==================================================================*/
+
+a{
+	color:#e7cd5e;
+	text-decoration:none;
+}
+a:hover{
+	background:#174d9d;
+}
+
+/*==================================================================
+    TABELLEN
+==================================================================*/
+
+table{
+	border-collapse:collapse;
+}
+
+table th{
+	font-weight:normal;
+	text-align:left;
+	background:#85dea5;
+	color:#0f3a7b;
+}
+
+table td,table th{
+	padding-right:10px;
+}
+table td:first-child,table th:first-child{
+	padding-left:10px;
+}
+
+table tr:nth-child(odd) td{
+	background:#174d9d;
+}
+
+
+

@@ -17,7 +17,7 @@ function rights_init(){
 	return $rights;
 }
 
-function has_right($right){
+function berechtigung($right){
 	global $rights;
 	return (isset($rights[$right]));
 }

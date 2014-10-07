@@ -18,4 +18,10 @@ function backtrace_to_html($debug_backtrace){
 	return $backtrace;
 }
 
+function error_die($msg){
+	$backtrace=(USER_ADMIN?"<div class=\"entwickler\">".backtrace_to_html(debug_backtrace())."</div>":"");
+	echo $msg.$backtrace;
+	exit;
+}
+
 ?>

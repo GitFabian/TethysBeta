@@ -5,3 +5,18 @@
 
 
 # demo002.sql =====================================================================================
+
+ALTER TABLE `core_config` DROP `name`;
+
+ALTER TABLE `core_config` DROP `type` ;
+
+INSERT INTO `core_config` ( `phpname` , `value` ) VALUES ( 'CFG_SKIN', 'demo' );
+
+ALTER TABLE `core_rights` DROP `name`, DROP `beschreibung`;
+
+INSERT INTO `core_config` (`phpname` ,`value`)
+VALUES ('CFG_HOME_LABEL', 'Start'),('CFG_HOME_TITLE', 'Startseite');
+
+# DB:Fabian_C -----------------------------------------------------------------
+
+
