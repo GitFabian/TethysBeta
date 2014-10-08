@@ -18,10 +18,10 @@ ALTER TABLE `core_rights` DROP `name`, DROP `beschreibung`;
 INSERT INTO `core_config` (`phpname` ,`value`)
 VALUES ('CFG_HOME_LABEL', 'Start'),('CFG_HOME_TITLE', 'Startseite');
 
-# DB:Fabian_H -----------------------------------------------------------------
 
 INSERT INTO `core_config` ( `phpname` , `value` )
 	VALUES ( 'CFG_MODULES', 'demo,tethys' );
 
+# DB:Fabian_H -----------------------------------------------------------------
 # DB:Fabian_C -----------------------------------------------------------------
 	
