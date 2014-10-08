@@ -58,6 +58,17 @@ a{
 a:hover{
 	background:#174d9d;
 }
+input[type=submit]{
+	border:none;
+	background:#85dea5;
+	color:#0f3a7b;
+	border-radius:5px;
+	padding:0px 10px;
+}
+input[type=submit]:hover{
+	box-shadow:0px 0px 3px #0f3a7b inset;
+	cursor:pointer;
+}
 
 /*==================================================================
     MENÜ
@@ -127,6 +138,33 @@ table td:first-child,table th:first-child{
 
 table tr:nth-child(odd) td{
 	background:#174d9d;
+}
+
+/*==================================================================
+    FORMULARE
+==================================================================*/
+
+input{
+	font-family:"AnonymousPro";
+	font-size:14px;
+	color:#85dea5;
+}
+form label{
+	display:inline-block;
+	vertical-align:top;
+	min-width:250px;
+}
+form input{
+	vertical-align:bottom;
+	width:500px;
+	background:#174d9d;
+	border:none;
+}
+input[type=submit]{
+	width:inherit;
+}
+form div.form_field{
+	margin-bottom:10px;
 }
 
 /*==================================================================

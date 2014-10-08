@@ -7,11 +7,13 @@ class page{
 	var $page_id;
 	var $stylesheets;
 	var $inline_JS;
+	var $onload_JS;
 	
 	function __construct(){
 		$this->content="";
 		$this->stylesheets=array();
 		$this->inline_JS="";
+		$this->onload_JS="";
 	}
 	
 	function send(){
@@ -29,6 +31,8 @@ class page{
 		
 		$inline_JS=($this->inline_JS?"<script type=\"text/javascript\">".$this->inline_JS."</script>":"");
 		
+		$onload=($this->onload_JS?" onload=\"$this->onload_JS\"":"");
+		
 		echo <<<ENDE
 <!DOCTYPE HTML>
 <html>
@@ -37,7 +41,7 @@ class page{
 	$stylesheets
 	$inline_JS
 </head>
-<body id="$this->page_id">
+<body id="$this->page_id"$onload>
 	<div class="outerbody">
 		<div class="mainmenu">
 			$menu
@@ -58,6 +62,10 @@ ENDE;
 	
 	function add_html($html){
 		$this->content.=$html;
+	}
+
+	function add_div($html,$pars=""){
+		$this->content.="<div $pars>$html</div>";
 	}
 	
 	function add_stylesheet($url,$media=null){

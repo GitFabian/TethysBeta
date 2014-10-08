@@ -1,5 +1,5 @@
 <?php
-
+//TODO:Integrieren in settings.php
 $query_cfg=dbio_SELECT("core_config","1","phpname,value");
 
 if ($query_cfg){

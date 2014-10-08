@@ -17,17 +17,24 @@ class module{
 
 function module_read(){
 	
-	$modules=explode(",", CFG_MODULES);
-
-	foreach ($modules as $module) {
-		$php=CFG_HDDROOT.'/modules/'.$module.'/tethys.php';
-		if (file_exists($php)){
-			include_once $php;
-		}else{
-			if (USER_ADMIN) echo "Modul nicht gefunden: \"$module\"!";
+	$module_count=0;
+	if(CFG_MODULES){
+		$modules=explode(",", CFG_MODULES);
+		foreach ($modules as $module) {
+			$module=trim($module);
+			if ($module){
+				$php=CFG_HDDROOT.'/modules/'.$module.'/tethys.php';
+				if (file_exists($php)){
+					include_once $php;
+					$module_count++;
+				}else{
+					if (USER_ADMIN) echo "Modul nicht gefunden: \"$module\"!";
+				}
+			}
 		}
 	}
-	
+
+	if (!$module_count) if (USER_ADMIN) echo "Keine Module geladen!";	
 }
 
 ?>

@@ -80,7 +80,7 @@ function menu_get_default($page_id){
 	if(USER_ADMIN){
 		$menu_admin=new menu($menu,"core_admin",$page_id,"Admin");
 		new menu_topic($menu_admin,"core_rights",$page_id,"Rechte",CFG_HTTPROOT."/core/admin/rights.".CFG_EXTENSION);
-		new menu_topic($menu_admin,"core_config",$page_id,"Konfig" );// ,CFG_HTTPROOT."/core/admin/config.".CFG_EXTENSION);
+		new menu_topic($menu_admin,"core_settings",$page_id,"Konfig",CFG_HTTPROOT."/core/admin/settings.".CFG_EXTENSION);
 	}
 
 	foreach ($modules as $module) {

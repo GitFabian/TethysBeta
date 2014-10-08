@@ -28,4 +28,36 @@ function html_iframe_fullsize($url){
 	return "<iframe src=\"$url\" width=\"100%\" frameborder=\"0\" class=\"fullsize\"></iframe>";
 }
 
+function request_command($cmd){
+	if (isset($_REQUEST['cmd']) && $_REQUEST['cmd']==$cmd){
+		unset($_REQUEST['cmd']);
+		unset($_REQUEST['submit']);
+		return true;
+	}
+	return false;
+}
+
+function page_send_exit(){
+	global $page;
+	$page->send();
+	exit;
+}
+
+function sqlEscape($text){
+	$text=str_replace("\\", "\\\\", $text);
+	$text=str_replace("'", "\'", $text);
+	return $text;
+}
+
+function ajax_refresh($msg,$url){
+	global $page;
+	$page->content=$msg;
+	$page->onload_JS.="location.href='$url';";
+	page_send_exit();
+}
+
+function escape_html($text){
+	return htmlentities(utf8_decode($text));
+}
+
 ?>

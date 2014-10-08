@@ -23,6 +23,21 @@ function dbio_SELECT($db,$where=null,$fields="*",$leftjoins=null,$order=null,$or
 	return dbio_query_to_array($anfrage);
 }
 
+function dbio_UPDATE($db,$where,$data){
+	$anfrage="UPDATE `$db` SET ";
+
+	$sets="";
+	foreach ($data as $key => $value) {
+		if ($value===null) $sets.=", `".$key."`=NULL"; else
+			$sets.=", `".$key."`='".sqlEscape($value)."'";
+	}
+	$anfrage.=substr($sets,2);
+
+	$anfrage.=" WHERE $where;";
+
+	dbio_query($anfrage);
+}
+
 function dbio_query_to_array($anfrage){
 	$result=dbio_query($anfrage);
 	if (!$result) return array();
