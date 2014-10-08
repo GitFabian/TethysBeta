@@ -37,10 +37,14 @@ body{
 div.innerbody{
 	background:#0f3a7b;
 	padding:20px;
-	margin:20px;
+	margin:20px auto;
 	border-radius:5px;
 	box-shadow:0px 0px 5px #3f6fb7 inset;
-	min-height:500px;
+	min-height:760px;
+	max-width:1310px;
+}
+body#core_index div.innerbody{
+	width:1310px;
 }
 
 /*==================================================================
@@ -125,5 +129,27 @@ table tr:nth-child(odd) td{
 	background:#174d9d;
 }
 
+/*==================================================================
+    IFRAMES
+==================================================================*/
 
+iframe.fullsize{
+	height:800px;
+	background:white;
+	box-shadow:0px 0px 10px white;
+	border-radius:5px;
+}
+
+
+/*==================================================================
+    MODUL:TETHYS
+==================================================================*/
+
+body#tethys_ftp div.innerbody,
+body#tethys_commits div.innerbody{
+	background:none;
+	padding:0px;
+	max-width:1350px;
+	box-shadow:none;
+}
 

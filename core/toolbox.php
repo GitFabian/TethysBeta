@@ -24,4 +24,8 @@ function error_die($msg){
 	exit;
 }
 
+function html_iframe_fullsize($url){
+	return "<iframe src=\"$url\" width=\"100%\" frameborder=\"0\" class=\"fullsize\"></iframe>";
+}
+
 ?>

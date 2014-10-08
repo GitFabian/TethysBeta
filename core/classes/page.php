@@ -6,10 +6,12 @@ class page{
 	var $content;
 	var $page_id;
 	var $stylesheets;
+	var $inline_JS;
 	
 	function __construct(){
 		$this->content="";
 		$this->stylesheets=array();
+		$this->inline_JS="";
 	}
 	
 	function send(){
@@ -25,14 +27,17 @@ class page{
 			$stylesheets.="<link href=\"$url\" rel=\"stylesheet\" type=\"text/css\"$mediahtml />\n";
 		}
 		
+		$inline_JS=($this->inline_JS?"<script type=\"text/javascript\">".$this->inline_JS."</script>":"");
+		
 		echo <<<ENDE
 <!DOCTYPE HTML>
 <html>
 <head>
 	<title>$title</title>
 	$stylesheets
+	$inline_JS
 </head>
-<body>
+<body id="$this->page_id">
 	<div class="outerbody">
 		<div class="mainmenu">
 			$menu
@@ -57,6 +62,10 @@ ENDE;
 	
 	function add_stylesheet($url,$media=null){
 		$this->stylesheets[$url]=$media;
+	}
+	
+	function add_inline_script($skript){
+		$this->inline_JS.=$skript;
 	}
 	
 }
