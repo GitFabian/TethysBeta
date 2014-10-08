@@ -7,8 +7,11 @@ if ($query_cfg){
 		define($cfg['phpname'],$cfg['value']);
 	}
 }else{
-	define('CFG_TITLE', 'Tethys');
+	define('CFG_HOME_LABEL','Start');
+	define('CFG_HOME_TITLE','Startseite');
+	define('CFG_MODULES', 'demo,tethys');
 	define('CFG_SKIN', 'demo');
+	define('CFG_TITLE', 'Tethys');
 }
 
 ?>

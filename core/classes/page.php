@@ -17,6 +17,7 @@ class page{
 		$content=$this->content;
 		$title=$this->title;
 		$menu=hauptmenue($this->page_id);
+		$checkContent=($content?"":" empty");
 		
 		$stylesheets="";
 		foreach ($this->stylesheets as $url => $media) {
@@ -36,8 +37,8 @@ class page{
 		<div class="mainmenu">
 			$menu
 		</div>
-		<div class="innerbody">
-				$content
+		<div class="innerbody$checkContent">
+			$content
 		</div>
 	</div>
 </body>

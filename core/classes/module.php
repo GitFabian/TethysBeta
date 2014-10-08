@@ -17,7 +17,17 @@ class module{
 
 function module_read(){
 	
-	include_once CFG_HDDROOT.'/modules/demo/tethys.php';
+	$modules=explode(",", CFG_MODULES);
+
+	foreach ($modules as $module) {
+		$php=CFG_HDDROOT.'/modules/'.$module.'/tethys.php';
+		if (file_exists($php)){
+			include_once $php;
+		}else{
+			if (USER_ADMIN) echo "Modul nicht gefunden: \"$module\"!";
+		}
+	}
+	
 }
 
 ?>
