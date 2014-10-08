@@ -11,15 +11,31 @@ if (request_command("updated")) $page->add_div("--- Konfiguration aktualisiert. 
 
 $form=new form("update");
 
-$form->add_field(new form_field("CFG_TITLE","Titel",CFG_TITLE));
-$form->add_field(new form_field("CFG_HOME_LABEL","Startseite-Menüeintrag",CFG_HOME_LABEL));
-// $form->add_field(new form_field("CFG_","Startseite-URL",CFG_));
-$form->add_field(new form_field("CFG_HOME_TITLE","Index-Titel",CFG_HOME_TITLE));
-$form->add_field(new form_field("CFG_SKIN","Skin",CFG_SKIN));
-$form->add_field(new form_field("CFG_MODULES","Module",CFG_MODULES));
+if(false/*Entwicklungshilfe*/)define('CFG_TITLE');
+$form->add_field(new form_field(     "CFG_TITLE",
+		"Titel",                      CFG_TITLE));
+
+if(false/*Entwicklungshilfe*/)define('CFG_HOME_LABEL');
+$form->add_field(new form_field(     "CFG_HOME_LABEL",
+		"Startseite-Menüeintrag",     CFG_HOME_LABEL));
+
+if(false/*Entwicklungshilfe*/)define('CFG_HOME_URL');
+$form->add_field(new form_field(     "CFG_HOME_URL",
+		"Startseite-URL",             CFG_HOME_URL));
+
+if(false/*Entwicklungshilfe*/)define('CFG_HOME_TITLE');
+$form->add_field(new form_field(     "CFG_HOME_TITLE",
+		"Index-Titel",                CFG_HOME_TITLE));
+
+if(false/*Entwicklungshilfe*/)define('CFG_SKIN');
+$form->add_field(new form_field(     "CFG_SKIN",
+		"Skin",                       CFG_SKIN));
+
+if(false/*Entwicklungshilfe*/)define('CFG_MODULES');
+$form->add_field(new form_field(     "CFG_MODULES",
+		"Module",                     CFG_MODULES));
 
 $page->add_html($form->toHTML());
-
 
 $page->send();
 exit;//============================================================================================

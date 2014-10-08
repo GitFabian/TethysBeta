@@ -75,7 +75,7 @@ function menu_get_default($page_id){
 	global $modules;
 	$menu=new menu(null,null,$page_id);
 	
-	new menu_topic($menu,"core_index",$page_id, CFG_HOME_LABEL, CFG_HTTPROOT."/index.".CFG_EXTENSION);
+	new menu_topic($menu,"core_index",$page_id, CFG_HOME_LABEL, (CFG_HOME_URL?CFG_HOME_URL:CFG_HTTPROOT."/index.".CFG_EXTENSION) );
 	
 	if(USER_ADMIN){
 		$menu_admin=new menu($menu,"core_admin",$page_id,"Admin");
