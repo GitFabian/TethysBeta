@@ -64,13 +64,19 @@ function dbio_UPDATE($db,$where,$data){
 	dbio_query($anfrage);
 }
 
-function dbio_query_to_array($anfrage,$link_identifier=null){
+function dbio_query_to_array($anfrage,$link_identifier=null,$assoc_key=null){
 	$result=dbio_query($anfrage,$link_identifier);
 	if (!$result) return array();
 
 	$array=array();
-	while ( $myrow = mysql_fetch_assoc ( $result ) ) {
-		array_push($array, $myrow);
+	if ($assoc_key){
+		while ( $myrow = mysql_fetch_assoc ( $result ) ) {
+			$array[$myrow[$assoc_key]]=$myrow;
+		}
+	}else{
+		while ( $myrow = mysql_fetch_assoc ( $result ) ) {
+			array_push($array, $myrow);
+		}
 	}
 	return $array;
 }

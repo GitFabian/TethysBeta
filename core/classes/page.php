@@ -65,11 +65,16 @@ ENDE;
 		global $devel_zeitmessung_start,$devel_performance_query_counter;
 		$zeitmessung_ende=microtime(true);
 		$dauer=$zeitmessung_ende-$devel_zeitmessung_start;
-		$dauer=round($dauer*1000000)/1000;
-		$dauer=$dauer." ms";
+		if ($dauer<1){
+			$dauer=round($dauer*1000000)/1000;
+			$dauer=$dauer." ms";
+		}else{
+			$dauer=round($dauer*1000)/1000;
+			$dauer=$dauer." s";
+		}
 		
 		$queries=$devel_performance_query_counter;
-		$queries=$queries." Queries";
+		$queries=$queries." queries";
 		
 		$html=$dauer."<br>".$queries;
 		return "<div class=\"devel_performance\">$html</div>";

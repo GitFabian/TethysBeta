@@ -178,6 +178,9 @@ table tbody tr:nth-child(even) td{
 ul{
 	margin:10px 0px;
 }
+table tbody tr:hover td{
+	background:#4f1b39;
+}
 
 /*==================================================================
     FORMULARE

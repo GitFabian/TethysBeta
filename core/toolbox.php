@@ -84,4 +84,13 @@ function encode_query_to_utf8($query){
 	return $query;
 }
 
+function encode_query_to_utf8_assoc($query){
+	foreach ($query as $rowkey=>$row) {
+		foreach ($row as $key => $value) {
+			$query[$rowkey][$key]=utf8_encode($value);
+		}
+	}
+	return $query;
+}
+
 ?>

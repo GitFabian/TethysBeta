@@ -50,7 +50,7 @@ function db_import($db_id){
 	$db_target=$targets[$db_id];
 	
 	if ($db_id=="Kunden(Firmen)"){//==========================================================================
-		//Änderungen aufbewahren:
+		//Neue Spalten:
 			#$save_=dbio_SELECT_keyValueArray($db_target, "kurzname");
 		//Datenbank und abhängige löschen:
 			db_delete("kunden_personen");
@@ -65,7 +65,7 @@ function db_import($db_id){
 				$id=$data['FirmaId'];
 
 				$kurzname=substr($data['FirmaName'],0,20);
-				#/*Änderungen übernehmen:*/if (isset($save_[$id])){ $kurzname=$save_[$id]; }
+				#if (isset($save_[$id])){ $kurzname=$save_[$id]; }
 
 			//Import:
 			dbio_INSERT($db_target, array(
@@ -89,7 +89,7 @@ function db_query_source($db_source,$correct_encoding=true){
 	if ($correct_encoding) $query=encode_query_to_utf8($query);
 	return $query;
 }
-function db_testlisting($query_source,$titel){
+function db_testlisting($query_source,$titel=null){
 	global $page;
 	$table = new table($query_source);
 	if ($titel) $page->add_html("<h1>$titel</h1>");

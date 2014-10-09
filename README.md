@@ -1,7 +1,7 @@
 Tethys (Beta)
 =============
 
-Version: 0.6
+Version: 0.7
 
 Database: demo001.sql + changes
 
