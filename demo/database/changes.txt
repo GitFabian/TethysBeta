@@ -6,7 +6,6 @@
 
 # demo002.sql =====================================================================================
 
-
 ALTER TABLE `core_config` DROP `name`;
 
 ALTER TABLE `core_config` DROP `type` ;
@@ -18,12 +17,13 @@ ALTER TABLE `core_rights` DROP `name`, DROP `beschreibung`;
 INSERT INTO `core_config` (`phpname` ,`value`)
 VALUES ('CFG_HOME_LABEL', 'Start'),('CFG_HOME_TITLE', 'Startseite');
 
-
 INSERT INTO `core_config` ( `phpname` , `value` )
 	VALUES ( 'CFG_MODULES', 'demo,tethys' );
-
-# DB:Fabian_C -----------------------------------------------------------------
 
 INSERT INTO `core_config` (`phpname` ,`value`)VALUES ('CFG_HOME_URL', '');
 
 # DB:Fabian_H -----------------------------------------------------------------
+
+INSERT INTO `core_config` (`phpname` ,`value`)VALUES ('CFG_CSS_VERSION', '');
+
+# DB:Fabian_C -----------------------------------------------------------------

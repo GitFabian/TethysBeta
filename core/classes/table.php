@@ -43,13 +43,15 @@ class table{
 		foreach ($headers as $value) {
 			$th.="<th>$value</th>";
 		}
-				
+		if ($th){$th="<tr>$th</tr>";}
+		
 		$rows="";
 		foreach ($this->rows as $row) {
 			$rows.=$row->toHTML($headers);
 		}
-		
-		$html="\n<table>\n\t<tr>$th</tr>\n$rows\n</table>";
+		if (!$rows) $rows="<tr><td>(Keine Einträge)</td></tr>";
+
+		$html="\n<table>\n\t<thead>\n\t\t$th\n\t</thead>\n\t<tbody>\n$rows\n\t</tbody>\n</table>";
 		return $html;
 	}
 	
@@ -67,18 +69,18 @@ class table_row{
 		$tr="";
 		if (!$headers){
 			foreach ($this->data as $data) {
-				$tr.="\n\t\t<td>$data</td>";
+				$tr.="\n\t\t\t<td>$data</td>";
 			}
 		}else{
 			foreach ($headers as $th => $value) {
 				if (isset($this->data[$th])){
-					$tr.="\n\t\t<td>".$this->data[$th]."</td>";
+					$tr.="\n\t\t\t<td>".$this->data[$th]."</td>";
 				}else{
-					$tr.="\n\t\t<td></td>";
+					$tr.="\n\t\t\t<td></td>";
 				}
 			}
 		}
-		return "\t<tr>$tr\n\t</tr>";
+		return "\t\t<tr>$tr\n\t\t</tr>";
 	}
 	
 }

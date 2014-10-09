@@ -23,6 +23,32 @@ function dbio_SELECT($db,$where=null,$fields="*",$leftjoins=null,$order=null,$or
 	return dbio_query_to_array($anfrage);
 }
 
+function dbio_SELECT_keyValueArray($db,$field,$key="id",$where=null){
+	$query=dbio_SELECT($db,$where,"$field,$key");
+	$list=array();
+	foreach ($query as $row) {
+		$list[$row[$key]]=$row[$field];
+	}
+	return $list;
+}
+
+function dbio_INSERT($db,$data){
+
+	$values=array();
+	$keys=array();
+	foreach ($data as $key => $value) {
+		$keys[]="`$key`";
+		if ($value===null) $values[]="NULL"; else
+			$values[]="'".sqlEscape($value)."'";
+	}
+	$values=implode(", ", $values);
+	$keys=implode(", ", $keys);
+	
+	$anfrage="INSERT INTO `$db` ( $keys ) VALUES ( $values );";
+	
+	dbio_query($anfrage);
+}
+
 function dbio_UPDATE($db,$where,$data){
 	$anfrage="UPDATE `$db` SET ";
 
@@ -38,8 +64,8 @@ function dbio_UPDATE($db,$where,$data){
 	dbio_query($anfrage);
 }
 
-function dbio_query_to_array($anfrage){
-	$result=dbio_query($anfrage);
+function dbio_query_to_array($anfrage,$link_identifier=null){
+	$result=dbio_query($anfrage,$link_identifier);
 	if (!$result) return array();
 
 	$array=array();
@@ -49,8 +75,14 @@ function dbio_query_to_array($anfrage){
 	return $array;
 }
 
-function dbio_query($anfrage){
-	$query = mysql_query ( $anfrage ) or die ( error_die(mysql_error()."<br><code>".$anfrage."</code>") );
+function dbio_query($anfrage,$link_identifier=null){
+	global $devel_performance_query_counter;
+	$devel_performance_query_counter++;
+	if ($link_identifier){
+		$query = mysql_query( $anfrage,$link_identifier ) or die ( error_die(mysql_error()."<br><code>".$anfrage."</code>") );
+	}else{
+		$query = mysql_query( $anfrage                  ) or die ( error_die(mysql_error()."<br><code>".$anfrage."</code>") );
+	}
 	return $query;
 }
 

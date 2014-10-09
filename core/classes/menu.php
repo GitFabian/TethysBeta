@@ -79,8 +79,10 @@ function menu_get_default($page_id){
 	
 	if(USER_ADMIN){
 		$menu_admin=new menu($menu,"core_admin",$page_id,"Admin");
-		new menu_topic($menu_admin,"core_rights",$page_id,"Rechte",CFG_HTTPROOT."/core/admin/rights.".CFG_EXTENSION);
-		new menu_topic($menu_admin,"core_settings",$page_id,"Konfig",CFG_HTTPROOT."/core/admin/settings.".CFG_EXTENSION);
+		new menu_topic($menu_admin,"core_rights",$page_id,"Rechte",url_core_admin("rights"));
+		new menu_topic($menu_admin,"core_settings",$page_id,"Konfig",url_core_admin("settings"));
+		if (file_exists(CFG_HDDROOT."/core/admin/import.php"))
+			new menu_topic($menu_admin,"core_import",$page_id,"Import",url_core_admin("import"));
 	}
 
 	foreach ($modules as $module) {

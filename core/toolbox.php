@@ -37,6 +37,11 @@ function request_command($cmd){
 	return false;
 }
 
+function request_value($key,$else=null){
+	if (isset($_REQUEST[$key])) return $_REQUEST[$key];
+	return $else;
+}
+
 function page_send_exit(){
 	global $page;
 	$page->send();
@@ -58,6 +63,25 @@ function ajax_refresh($msg,$url){
 
 function escape_html($text){
 	return htmlentities(utf8_decode($text));
+}
+
+function url_mod_pg($modul,$page){
+	return CFG_HTTPROOT."/modules/$modul/$page.".CFG_EXTENSION;
+}
+
+function url_core_admin($page){
+	return CFG_HTTPROOT."/core/admin/$page.".CFG_EXTENSION;
+}
+
+function encode_query_to_utf8($query){
+	$i=0;
+	foreach ($query as $row) {
+		foreach ($row as $key => $value) {
+			$query[$i][$key]=utf8_encode($value);
+		}
+		$i++;
+	}
+	return $query;
 }
 
 ?>

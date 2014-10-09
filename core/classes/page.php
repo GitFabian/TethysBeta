@@ -33,6 +33,10 @@ class page{
 		
 		$onload=($this->onload_JS?" onload=\"$this->onload_JS\"":"");
 		
+		$dynamic_css_development=(CFG_CSS_VERSION?"<div class=\"css_version_".CFG_CSS_VERSION."\">CSS nicht aktuell!</div>":"");
+		
+		$devel_zeitmessung=(USER_ADMIN?$this::get_performance():"");
+		
 		echo <<<ENDE
 <!DOCTYPE HTML>
 <html>
@@ -43,6 +47,7 @@ class page{
 </head>
 <body id="$this->page_id"$onload>
 	<div class="outerbody">
+		$dynamic_css_development
 		<div class="mainmenu">
 			$menu
 		</div>
@@ -50,9 +55,24 @@ class page{
 			$content
 		</div>
 	</div>
+	$devel_zeitmessung
 </body>
 </html>
 ENDE;
+	}
+	
+	static function get_performance(){
+		global $devel_zeitmessung_start,$devel_performance_query_counter;
+		$zeitmessung_ende=microtime(true);
+		$dauer=$zeitmessung_ende-$devel_zeitmessung_start;
+		$dauer=round($dauer*1000000)/1000;
+		$dauer=$dauer." ms";
+		
+		$queries=$devel_performance_query_counter;
+		$queries=$queries." Queries";
+		
+		$html=$dauer."<br>".$queries;
+		return "<div class=\"devel_performance\">$html</div>";
 	}
 	
 	function init($page_id,$page_title){

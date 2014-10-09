@@ -35,6 +35,10 @@ if(false/*Entwicklungshilfe*/)define('CFG_MODULES');
 $form->add_field(new form_field(     "CFG_MODULES",
 		"Module",                     CFG_MODULES));
 
+if(false/*Entwicklungshilfe*/)define('CFG_CSS_VERSION');
+$form->add_field(new form_field(     "CFG_CSS_VERSION",
+		"CSS-Version",                CFG_CSS_VERSION));
+
 $page->add_html($form->toHTML());
 
 $page->send();

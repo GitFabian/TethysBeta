@@ -1,4 +1,4 @@
-@CHARSET "ISO-8859-1";
+@CHARSET "utf-8";
 
 /*==================================================================
     FONTS
@@ -6,6 +6,24 @@
 @font-face {
 	font-family: 'AnonymousPro';
 	src: local('AnonymousPro'), url(AnonymousPro.woff) format('woff');
+}
+
+/*==================================================================
+    DYNAMIC DEVELOPMENT
+==================================================================*/
+.invisible{
+	display:none;
+}
+/*CSS Developer:
+.invisible{background:url('img/core/devel_bg.png');}
+div.invisible{display:block;}
+span.invisible{display:inline;}
+/**/
+div.css_version_141009{
+	display:none;
+}
+div.devel_performance{
+	text-align:right;
 }
 
 /*==================================================================
@@ -17,7 +35,7 @@ img{
 	border:none;
 }
 
-body,div,th,td{
+body,div,th,td,h1,h2,h3,h4,hr{
 	margin:0px;
 	padding:0px;
 }
@@ -46,6 +64,18 @@ div.innerbody{
 body#core_index div.innerbody{
 	width:1310px;
 }
+h1{
+	font-size:21px;
+	font-weight:bold;
+	color:white;
+	border-bottom:1px solid white;
+	margin:10px 0px;
+}
+hr{
+	border:none;
+	border-bottom:1px solid #85dea5;
+	margin:5px 0px;
+}
 
 /*==================================================================
     BUTTONS,LINKS
@@ -71,7 +101,7 @@ input[type=submit]:hover{
 }
 
 /*==================================================================
-    MENÜ
+    MENÃœ
 ==================================================================*/
 div.mainmenu{
 	background:#e7cd5e;
@@ -96,14 +126,15 @@ div.mainmenu div.menutopic.highlight a{
 	color:#cc060e;
 }
 div.mainmenu ul{
+	margin:0px;
 	padding:5px;
 	list-style:none;
 }
-/* Menüpunkte: */
+/* MenÃ¼punkte: */
 div.mainmenu > ul > li{
 	display:inline-block;
 }
-/* Unter-Menüs: */
+/* Unter-MenÃ¼s: */
 div.mainmenu > ul > li > div.submenulabel + ul{
 	background:#e7cd5e;
 	position:absolute;
@@ -114,7 +145,7 @@ div.mainmenu > ul > li:hover > div.submenulabel + ul{
 }
 
 /*==================================================================
-    TABELLEN
+    TABELLEN,LISTEN
 ==================================================================*/
 
 table{
@@ -125,19 +156,27 @@ table{
 table th{
 	font-weight:normal;
 	text-align:left;
+	vertical-align:bottom;
 	background:#85dea5;
 	color:#0f3a7b;
 }
 
-table td,table th{
+table td,
+table th{
 	padding-right:10px;
+}
+table td{
+	vertical-align:top;
 }
 table td:first-child,table th:first-child{
 	padding-left:10px;
 }
 
-table tr:nth-child(odd) td{
+table tbody tr:nth-child(even) td{
 	background:#174d9d;
+}
+ul{
+	margin:10px 0px;
 }
 
 /*==================================================================

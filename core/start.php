@@ -1,5 +1,8 @@
 <?php
 
+$devel_zeitmessung_start=microtime(true);
+$devel_performance_query_counter=0;
+
 /*
  * Includes
  */
