@@ -26,4 +26,14 @@ INSERT INTO `core_config` (`phpname` ,`value`)VALUES ('CFG_HOME_URL', '');
 
 INSERT INTO `core_config` (`phpname` ,`value`)VALUES ('CFG_CSS_VERSION', '');
 
+CREATE TABLE IF NOT EXISTS `core_features` (
+  `phpname` varchar(30) COLLATE utf8_bin NOT NULL,
+  `value` tinyint(1) NOT NULL,
+  PRIMARY KEY (`phpname`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+INSERT INTO `core_features` (`phpname`, `value`) VALUES ('FEATURE_BETA', 0);
+
+ALTER TABLE `core_users` ADD `set_pageselected_settings` VARCHAR( 100 ) NOT NULL ;
+
 # DB:Fabian_C -----------------------------------------------------------------

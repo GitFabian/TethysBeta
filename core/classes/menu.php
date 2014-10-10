@@ -46,6 +46,7 @@ class menu_topic{
 	var $highlight;
 	var $parent_menu;
 	var $external;
+	var $class_a;
 	
 	function __construct($parent_menu,$page_id,$highlight,$label,$link=null,$external=false){
 		$this->page_id=$page_id;
@@ -63,12 +64,18 @@ class menu_topic{
 	function toHTML(){
 		$html=$this->label;
 		$ext=($this->external?" target=\"_blank\"":"");
-		if ($this->link) $html="<a href=\"".$this->link."\"$ext>$html</a>";
+		$class_a=($this->class_a?" class=\"".$this->class_a."\"":"");
+		if ($this->link) $html="<a href=\"".$this->link."\"$ext$class_a>$html</a>";
 		$hcl=($this->highlight?" highlight":"");
 		$html="<div class=\"menutopic $this->page_id$hcl\">$html</div>";
 		return $html;
 	}
 	
+}
+class menu_topic2 extends menu_topic{
+	function __construct($id, $label){
+		parent::__construct(null, $id, null, $label);
+	}
 }
 
 function menu_get_default($page_id){

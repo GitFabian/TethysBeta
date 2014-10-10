@@ -3,51 +3,66 @@ include_once '../start.php';
 
 $page->init('core_settings','Konfiguration');
 
-if (request_command("update")) core_settings_update();
-
 include_once CFG_HDDROOT.'/core/classes/form.php';
 
-if (request_command("updated")) $page->add_div("--- Konfiguration aktualisiert. ---<br><br>");
+$view=$page->init_views($user['set_pageselected_settings'],array(
+	new menu_topic2('settings', "Settings"),
+	new menu_topic2('features', "Features"),
+));
+dbio_UPDATE("core_users", "id=".USER_ID, array("set_pageselected_settings"=>$view));
+
+if (request_command("updated")){
+	$n=request_value("n");
+	if ($n){
+		$page->add_div("--- $n Konfigurationen aktualisiert. ---<br><br>");
+	}else{
+		$page->add_div("--- (Keine Änderung) ---<br><br>");
+	}
+}
+
+if ($view=="features"){ include 'settings_features.php'; }
+
+if (request_command("update")) core_settings_update();
 
 $form=new form("update");
 
-if(false/*Entwicklungshilfe*/)define('CFG_TITLE');
-$form->add_field(new form_field(     "CFG_TITLE",
-		"Titel",                      CFG_TITLE));
+if(false/*!DEV!*/)define('CFG_TITLE');
+settings_add_field($form,"CFG_TITLE","Titel");
 
-if(false/*Entwicklungshilfe*/)define('CFG_HOME_LABEL');
-$form->add_field(new form_field(     "CFG_HOME_LABEL",
-		"Startseite-Menüeintrag",     CFG_HOME_LABEL));
+if(false/*!DEV!*/)define('CFG_HOME_LABEL');
+settings_add_field($form,"CFG_HOME_LABEL","Startseite-Menüeintrag");
 
-if(false/*Entwicklungshilfe*/)define('CFG_HOME_URL');
-$form->add_field(new form_field(     "CFG_HOME_URL",
-		"Startseite-URL",             CFG_HOME_URL));
+if(false/*!DEV!*/)define('CFG_HOME_URL');
+settings_add_field($form,"CFG_HOME_URL","Startseite-URL");
 
-if(false/*Entwicklungshilfe*/)define('CFG_HOME_TITLE');
-$form->add_field(new form_field(     "CFG_HOME_TITLE",
-		"Index-Titel",                CFG_HOME_TITLE));
+if(false/*!DEV!*/)define('CFG_HOME_TITLE');
+settings_add_field($form,"CFG_HOME_TITLE","Index-Titel");
 
-if(false/*Entwicklungshilfe*/)define('CFG_SKIN');
-$form->add_field(new form_field(     "CFG_SKIN",
-		"Skin",                       CFG_SKIN));
+if(false/*!DEV!*/)define('CFG_SKIN');
+settings_add_field($form,"CFG_SKIN","Skin");
 
-if(false/*Entwicklungshilfe*/)define('CFG_MODULES');
-$form->add_field(new form_field(     "CFG_MODULES",
-		"Module",                     CFG_MODULES));
+if(false/*!DEV!*/)define('CFG_MODULES');
+settings_add_field($form,"CFG_MODULES","Module");
 
-if(false/*Entwicklungshilfe*/)define('CFG_CSS_VERSION');
-$form->add_field(new form_field(     "CFG_CSS_VERSION",
-		"CSS-Version",                CFG_CSS_VERSION));
+if(false/*!DEV!*/)define('CFG_CSS_VERSION');
+settings_add_field($form,"CFG_CSS_VERSION","CSS-Version");
 
 $page->add_html($form->toHTML());
 
 $page->send();
 exit;//============================================================================================
+function settings_add_field($form,$cfg,$label,$type='TEXT'){
+	$form->add_field( new form_field($cfg, $label, constant($cfg),$type,$cfg) );
+}
 function core_settings_update(){
 	if (!USER_ADMIN) return;
+	$n=0;
 	foreach ($_REQUEST as $key => $value) {
-		if ($value!=constant($key)) dbio_UPDATE("core_config", "phpname='$key'", array("value"=>$value));
+		if ($value!=constant($key)){
+			dbio_UPDATE("core_config", "phpname='$key'", array("value"=>$value));
+			$n++;
+		}
 	}
-	ajax_refresh("Speichere Konfiguration...", "settings.".CFG_EXTENSION."?cmd=updated");
+	ajax_refresh("Speichere Konfiguration...", "settings.".CFG_EXTENSION."?cmd=updated&n=$n");
 }
 ?>

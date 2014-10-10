@@ -14,6 +14,7 @@ if (file_exists('config.php')) include_once 'config.php';
 
 //Globale Funktionen:
 include_once 'toolbox.php';
+include_once CFG_HDDROOT.'/core/classes/menu.php';
 
 //Datenbank:
 include_once 'dbio.php';
@@ -29,6 +30,7 @@ header('Content-type: text/html; charset=UTF-8');
 /*
  * Login
  */
+$user=null;
 include_once CFG_HDDROOT.'/core/login.php';
 login();
 
@@ -41,8 +43,12 @@ $rights=rights_init();
 /*
  * Globale Konfiguration
  */
+
 $query_cfg=dbio_SELECT("core_config","1","phpname,value");
 foreach ($query_cfg as $cfg) { define($cfg['phpname'],$cfg['value']); }
+
+$query_features=dbio_SELECT("core_features","1","phpname,value");
+foreach ($query_features as $cfg) { define($cfg['phpname'],$cfg['value']); }
 
 /*
  * Module

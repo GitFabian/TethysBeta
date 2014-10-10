@@ -42,6 +42,26 @@ function request_value($key,$else=null){
 	return $else;
 }
 
+/**
+ * Formular überträgt Checkboxen in Extra-Array, sonst würden nicht aktivierte Checkboxen verlorengehen.
+ */
+function request_extract_booleans(){
+	if (!isset($_REQUEST['booleans'])) return array();
+	$booleans=$_REQUEST['booleans'];
+	unset($_REQUEST['booleans']);
+	$booleans=explode(",", $booleans);
+	$r=array();
+	foreach ($booleans as $bool) {
+		$value=false;
+		if (isset($_REQUEST[$bool])){
+			if ($_REQUEST[$bool]=='on') $value=true;
+			unset($_REQUEST[$bool]);
+		}
+		$r[$bool]=($value?"1":"0");
+	}
+	return $r;
+}
+
 function page_send_exit(){
 	global $page;
 	$page->send();

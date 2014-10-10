@@ -52,7 +52,8 @@ body{
 	color:#85dea5;
 }
 
-div.innerbody{
+div.innerbody,
+ul.views_menu{
 	background:#0f3a7b;
 	padding:20px;
 	margin:20px auto;
@@ -67,8 +68,7 @@ body#core_index div.innerbody{
 h1{
 	font-size:21px;
 	font-weight:bold;
-	color:white;
-	border-bottom:1px solid white;
+	border-bottom:1px solid #e7cd5e;
 	margin:10px 0px;
 }
 hr{
@@ -88,14 +88,16 @@ a{
 a:hover{
 	background:#174d9d;
 }
-input[type=submit]{
+input[type=submit],
+a.button{
 	border:none;
 	background:#85dea5;
 	color:#0f3a7b;
 	border-radius:5px;
 	padding:0px 10px;
 }
-input[type=submit]:hover{
+input[type=submit]:hover,
+a.button:hover{
 	box-shadow:0px 0px 3px #0f3a7b inset;
 	cursor:pointer;
 }
@@ -142,6 +144,26 @@ div.mainmenu > ul > li > div.submenulabel + ul{
 }
 div.mainmenu > ul > li:hover > div.submenulabel + ul{
 	display:block;
+}
+
+/*==================================================================
+    VIEWS-MENÜ
+==================================================================*/
+ul.views_menu li div.highlight a{
+	color:#cc060e;
+}
+ul.views_menu{
+	list-style:none;
+	min-height:0px;
+	margin:0px auto 20px auto;
+	padding:10px 10px 10px 10px;
+	max-width:1330px;
+	border-top-right-radius:0px;
+	border-top-left-radius:0px;
+}
+ul.views_menu li{
+	display:inline-block;
+	margin-right:5px;
 }
 
 /*==================================================================
@@ -196,17 +218,51 @@ form label{
 	vertical-align:top;
 	min-width:250px;
 }
-form input{
+form input[type='text']{
 	vertical-align:bottom;
 	width:500px;
 	background:#174d9d;
 	border:none;
+}
+form input[type=checkbox]{
+	width:20px;
+	height:13px;
+	position:relative;
+	z-index:1;
+	opacity:0;
+}
+form input[type=checkbox] + div.checkbox_ghost{
+	display:inline-block;
+	height:13px;
+	width:13px;
+	background:url('img/core/checkbox_0.png');
+	background-repeat:no-repeat;
+	position:relative;
+	left:-20px;
+	z-index:0;
+}
+form input[type=checkbox]:checked + div.checkbox_ghost{
+	background:url('img/core/checkbox_1.png');
 }
 input[type=submit]{
 	width:inherit;
 }
 form div.form_field{
 	margin-bottom:10px;
+}
+form fieldset + div.form_buttons{
+}
+form fieldset{
+	border:none;
+	border-bottom:1px solid #174d9d;
+	margin:10px 0px;
+	padding:10px 0px;
+}
+form fieldset div.form_field:last-child{
+	margin-bottom:0px;
+}
+form fieldset legend{
+	border-bottom:1px solid #e7cd5e;
 }
 
 /*==================================================================

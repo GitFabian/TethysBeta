@@ -8,12 +8,14 @@ class page{
 	var $stylesheets;
 	var $inline_JS;
 	var $onload_JS;
+	var $views;
 	
 	function __construct(){
 		$this->content="";
 		$this->stylesheets=array();
 		$this->inline_JS="";
 		$this->onload_JS="";
+		$this->views=array();
 	}
 	
 	function send(){
@@ -37,6 +39,14 @@ class page{
 		
 		$devel_zeitmessung=(USER_ADMIN?$this::get_performance():"");
 		
+		$views="";
+		if ($this->views){
+			foreach ($this->views as $view) {
+				$views.="\n\t<li>".$view->toHTML()."</li>";
+			}
+			$views="\n<ul class=\"views_menu\">$views\n</ul>";
+		}
+		
 		echo <<<ENDE
 <!DOCTYPE HTML>
 <html>
@@ -51,6 +61,7 @@ class page{
 		<div class="mainmenu">
 			$menu
 		</div>
+		$views
 		<div class="innerbody$checkContent">
 			$content
 		</div>
@@ -59,6 +70,26 @@ class page{
 </body>
 </html>
 ENDE;
+	}
+
+	/**
+	 *<code> 
+
+$view=$page->init_views('xxxxxDEFAULTIDxxxxxxx',array(
+	new menu_topic2('xxxxxxIDxxxxxxxx', "xxxxxxxxLABELxxxxxxx"),
+));
+
+	 *</code> 
+	 */
+	function init_views($default,$views){
+		$view=(isset($_REQUEST['view'])?$_REQUEST['view']:$default);
+		foreach ($views as $topic) {
+			if(!$topic->highlight)$topic->highlight=($view==$topic->page_id);
+			if(!$topic->link)$topic->link="?view=".$topic->page_id;
+			$topic->class_a="button";
+			$this->views[]=$topic;
+		}
+		return $view;
 	}
 	
 	static function get_performance(){

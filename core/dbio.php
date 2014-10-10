@@ -23,6 +23,12 @@ function dbio_SELECT($db,$where=null,$fields="*",$leftjoins=null,$order=null,$or
 	return dbio_query_to_array($anfrage);
 }
 
+function dbio_SELECT_SINGLE($db,$id,$id_key="id"){
+	$query=dbio_SELECT($db,"`$id_key`='$id'");
+	if (!$query) return null;
+	return $query[0];
+}
+
 function dbio_SELECT_keyValueArray($db,$field,$key="id",$where=null){
 	$query=dbio_SELECT($db,$where,"$field,$key");
 	$list=array();

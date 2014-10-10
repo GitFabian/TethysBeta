@@ -21,7 +21,6 @@ mysql_select_db('tethys');
 //include_once 'config_xxxxxxxxxx.php';
 function hauptmenue($page_id){
 // 	return "MENU_{$page_id}_HERE_".USER_NICK;
-	include_once CFG_HDDROOT.'/core/classes/menu.php';
 // 	$menu=new menu(null,null,$page_id);
 // 	//...
 	$menu=menu_get_default($page_id);

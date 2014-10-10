@@ -1,7 +1,7 @@
 <?php
 
 global $modules;
-$modules[]=new modul_tethys('Entwickler-Modul');
+$modules['tethys']=new modul_tethys('Entwickler-Modul');
 
 class modul_tethys extends module{
 	

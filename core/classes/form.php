@@ -14,6 +14,7 @@ class form{
 	var $action;
 	var $method;
 	var $hidden_fields;
+	var $booleans;
 	
 	function __construct($cmd,$target=null,$submit_msg=null,$class=null){
 		$this->method=(USER_ADMIN?"get":"post");
@@ -23,8 +24,13 @@ class form{
 		$this->action=$target;
 		$this->hidden_fields=array();
 		if ($cmd){
-			$this->hidden_fields[]=new form_field("cmd",null,$cmd);
+			$this->add_hidden("cmd", $cmd);
 		}
+		$this->booleans=array();
+	}
+	
+	function add_hidden($name,$value){
+		$this->hidden_fields[]=new form_field($name,null,$value);
 	}
 	
 	/**
@@ -33,17 +39,21 @@ class form{
 	function add_field($field){
 		if (!$this->field_groups){ $this->field_groups[]=new form_group(); }
 		$this->field_groups[count($this->field_groups)-1]->fields[]=$field;
+		if ($field->type=='CHECKBOX'){
+			$this->booleans[]=$field->name;
+		}
 	}
 	
 	/**
 	 * Eine neue Gruppe erzeugen
 	 */
 	function add_fields($title,$fields){
-		$grp=new form_group($title);
-		foreach ($fields as $field) {
-			$grp->fields[]=$field;
+		$this->field_groups[]=new form_group($title);
+		if ($fields){
+			foreach ($fields as $field) {
+				$this->add_field($field);
+			}
 		}
-		$this->field_groups[]=$grp;
 	}
 	
 	function toHTML(){
@@ -70,6 +80,10 @@ class form{
 				$hidden_fields.="\n\t<input type=\"hidden\" name=\"$field->name\" value=\"".escape_html($field->value)."\" />";
 			}
 		}
+		if ($this->booleans){
+			$booleans=implode(",", $this->booleans);
+			$hidden_fields.="\n\t<input type=\"hidden\" name=\"booleans\" value=\"$booleans\" />";
+		}
 		
 		$html="\n<form$class action=\"$this->action\" method=\"$this->method\">$hidden_fields$form$buttons\n</form>";
 		return $html;
@@ -92,24 +106,28 @@ class form_field{
 	var $name;
 	var $type;
 	var $value;
+	var $title;
 	
-	function __construct($name,$label=null,$value="",$type="TEXT"){
+	function __construct($name,$label=null,$value="",$type="TEXT",$title=null){
 		if ($label===null) $label=$name;
 		$this->label=$label;
 		$this->name=$name;
 		$this->type=$type;
 		$this->value=$value;
+		$this->title=$title;
 	}
 	
 	function toHTML(){
 		$input="";
 		$value=escape_html($this->value);
-		if ($this->type=="TEXTAREA"){
-			//TODO
+		if ($this->type=="CHECKBOX"){
+			$checked=($value?" checked":"");
+			$input="<input type=\"checkbox\" name=\"".$this->name."\"$checked /><div class=\"checkbox_ghost\"></div>";
 		}else{
 			$input="<input type=\"text\" name=\"".$this->name."\" value=\"$value\" />";
 		}
-		return "<div class=\"form_field\"><label for=\"".$this->name."\">".$this->label."</label>$input</div>";
+		$title=($this->title?" title=\"".htmlentities($this->title)."\"":"");
+		return "<div class=\"form_field\"><label for=\"".$this->name."\"$title>".$this->label."</label>$input</div>";
 	}
 	
 }

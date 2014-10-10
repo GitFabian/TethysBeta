@@ -14,6 +14,7 @@ include_once CFG_HDDROOT.'/core/classes/table.php';
 $status="Bitte Datenbank auswählen.";
 
 $targets=array(
+	"---"=>"Kunden",
 	"Kunden(Firmen)"=>"kunden_firmen",
 	"Kunden(Personen)"=>"kunden_personen",
 );
@@ -22,8 +23,12 @@ if ($db=request_value("db")) db_import($db);
 if ($check=request_value("check")) db_testlisting(dbio_SELECT($targets[$check]),$targets[$check]);
 
 $dblis="";
-foreach ($targets as $db_id => $dummy) {
-	$dblis.=db_li($db_id);
+foreach ($targets as $db_id => $db) {
+	if ($db_id=="---"){
+		$dblis.="</ul><u>$db</u><ul>";
+	}else{
+		$dblis.=db_li($db_id);
+	}
 }
 $page->add_html("<h1>Datenbank-Import</h1><ul>$dblis</ul><hr>Status: $status");
 
