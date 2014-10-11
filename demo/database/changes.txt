@@ -52,9 +52,6 @@ CREATE TABLE IF NOT EXISTS `core_settings` (
   KEY `user` (`user`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=2 ;
 
-INSERT INTO `core_settings` (`id` ,`key` ,`modul` ,`user` ,`type` ,`value`)
-VALUES (NULL , 'FEATURE1', 'demo', NULL , 'CHECKBOX', '1' );
-
 ALTER TABLE `core_settings` ADD `label` VARCHAR( 100 ) NOT NULL ;
 
 # DB:Fabian_H -----------------------------------------------------------------
