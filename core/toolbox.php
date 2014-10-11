@@ -45,6 +45,20 @@ function request_value($key,$else=null){
 /**
  * Formular überträgt Checkboxen in Extra-Array, sonst würden nicht aktivierte Checkboxen verlorengehen.
  */
+function request_extract_booleans2(){
+	if (!isset($_REQUEST['booleans'])) return array();
+	$booleans=$_REQUEST['booleans'];
+	unset($_REQUEST['booleans']);
+	$booleans=explode(",", $booleans);
+	foreach ($booleans as $bool) {
+		$value=false;
+		if (isset($_REQUEST[$bool])){
+			if ($_REQUEST[$bool]=='on') $value=true;
+		}
+		$_REQUEST[$bool]=($value?"1":"0");
+	}
+}
+/** DEPRECATED */
 function request_extract_booleans(){
 	if (!isset($_REQUEST['booleans'])) return array();
 	$booleans=$_REQUEST['booleans'];

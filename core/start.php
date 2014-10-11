@@ -43,12 +43,9 @@ $rights=rights_init();
 /*
  * Globale Konfiguration
  */
-
 $query_cfg=dbio_SELECT("core_config","1","phpname,value");
 foreach ($query_cfg as $cfg) { define($cfg['phpname'],$cfg['value']); }
-
-$query_features=dbio_SELECT("core_features","1","phpname,value");
-foreach ($query_features as $cfg) { define($cfg['phpname'],$cfg['value']); }
+$settings=get_core_settings();
 
 /*
  * Module
@@ -66,4 +63,16 @@ $page->add_stylesheet(CFG_HTTPROOT."/skins/".CFG_SKIN."/screen.css");
 //Admin bekommt PHP-Fehler angezeigt:
 if (USER_ADMIN) ini_set('display_errors', 'On');
 
+//===============================================================================================
+function get_core_settings(){
+	$query_settings=dbio_SELECT("core_settings","`user` IS NULL");
+	$settings=array();
+	foreach ($query_settings as $setting) {
+		$modul=$setting['modul'];
+		if (!isset($settings[$modul])) $settings[$modul]=array();
+		$key=$setting['key'];
+		$settings[$modul][$key]=$setting['value'];
+	}
+	return $settings;
+}
 ?>

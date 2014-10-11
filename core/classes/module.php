@@ -13,32 +13,6 @@ class module{
 		return null;
 	}
 	
-	function get_features(){
-		#if (USER_ADMIN) echo("Nicht implementiert: Funktion \"".__FUNCTION__."\" in Modul \"".$this->modul_name."\"!");
-		return null;
-	}
-	
-	function set_feature($feature,$value){
-		#if (USER_ADMIN) echo("Nicht implementiert: Funktion \"".__FUNCTION__."\" in Modul \"".$this->modul_name."\"!");
-		return false;
-	}
-	
-}
-
-function get_feature($modul_id,$feature_id){
-	global $modules;
-	$modul=$modules[$modul_id];
-	$features=$modul->get_features();
-	return $features[$feature_id]->value;
-}
-
-class feature{
-	var $value;
-	var $description;
-	function __construct($value,$description){
-		$this->value=$value;
-		$this->description=$description;
-	}
 }
 
 function module_read(){

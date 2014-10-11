@@ -5,7 +5,11 @@ $page->init('demo_index','Demopage');
 
 include_once CFG_HDDROOT.'/core/classes/table.php';
 
-$page->add_html("Hello world!");
+/*
+ * Features:
+ */
+$page->add_div("<a href=\"".CFG_HTTPROOT."/core/admin/settings.".CFG_EXTENSION."?view=demo"."\">Feature 1</a>
+		= ".($settings['demo']['FEATURE1']?"activated":"inactive"));
 
 /*
  * Tabelle X

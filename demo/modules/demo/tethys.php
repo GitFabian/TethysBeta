@@ -11,19 +11,6 @@ class modul_demo extends module{
 		return $menu;
 	}
 	
-	function get_features(){
-		$query_features=dbio_SELECT_keyValueArray("demo_features", "value", "ID");
-		return array(
-			"FEATURE1"=>new feature($query_features['FEATURE1'], "Feature 1"),
-		);
-	}
-	
-	function set_feature($feature,$value){
-		if (!USER_ADMIN) return false;
-		dbio_UPDATE("demo_features", "ID='$feature'", array("value"=>$value));
-		return true;
-	}
-	
 }
 
 function url_demo($page){

@@ -4,7 +4,7 @@
 #
 
 
-# demo002.sql =====================================================================================
+# demo001.sql =====================================================================================
 
 ALTER TABLE `core_config` DROP `name`;
 
@@ -22,18 +22,40 @@ INSERT INTO `core_config` ( `phpname` , `value` )
 
 INSERT INTO `core_config` (`phpname` ,`value`)VALUES ('CFG_HOME_URL', '');
 
-# DB:Fabian_H -----------------------------------------------------------------
-
 INSERT INTO `core_config` (`phpname` ,`value`)VALUES ('CFG_CSS_VERSION', '');
 
-CREATE TABLE IF NOT EXISTS `core_features` (
-  `phpname` varchar(30) COLLATE utf8_bin NOT NULL,
-  `value` tinyint(1) NOT NULL,
-  PRIMARY KEY (`phpname`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+	CREATE TABLE IF NOT EXISTS `core_features` (
+	  `phpname` varchar(30) COLLATE utf8_bin NOT NULL,
+	  `value` tinyint(1) NOT NULL,
+	  PRIMARY KEY (`phpname`)
+	) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
-INSERT INTO `core_features` (`phpname`, `value`) VALUES ('FEATURE_BETA', 0);
+	INSERT INTO `core_features` (`phpname`, `value`) VALUES ('FEATURE_BETA', 0);
 
 ALTER TABLE `core_users` ADD `set_pageselected_settings` VARCHAR( 100 ) NOT NULL ;
 
 # DB:Fabian_C -----------------------------------------------------------------
+
+	# !!!ACHTUNG!!! Features in "core_config" übertragen!
+	DROP TABLE core_features;
+
+INSERT INTO `core_config` (`phpname` ,`value`)VALUES ('FEATURE_BETA', '0');
+
+CREATE TABLE IF NOT EXISTS `core_settings` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `key` varchar(20) COLLATE utf8_bin NOT NULL,
+  `modul` varchar(20) COLLATE utf8_bin NOT NULL,
+  `user` int(11) DEFAULT NULL,
+  `type` enum('TEXT','TEXTAREA','CHECKBOX') COLLATE utf8_bin NOT NULL,
+  `value` text COLLATE utf8_bin NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user` (`user`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=2 ;
+
+INSERT INTO `core_settings` (`id` ,`key` ,`modul` ,`user` ,`type` ,`value`)
+VALUES (NULL , 'FEATURE1', 'demo', NULL , 'CHECKBOX', '1' );
+
+ALTER TABLE `core_settings` ADD `label` VARCHAR( 100 ) NOT NULL ;
+
+# DB:Fabian_H -----------------------------------------------------------------
+# demo002.sql =====================================================================================
