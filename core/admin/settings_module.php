@@ -17,7 +17,7 @@ if (isset($settings[$view])){
 		$type=$query_settings[$key]['type'];
 		$label=$query_settings[$key]['label'];
 		if (!$label) $label=$key;
-		$form->add_field( new form_field($key, $label, $value, $type, "\$settings['$view']['$key']") );
+		$form->add_field( new form_field($key, $label, $value, $type, "get_setting_global('$view','$key')") );
 	}
 }else{
 	$page->add_html("--- Keine Settings für \"".$modul->modul_name."\" definiert! ---");

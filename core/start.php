@@ -45,7 +45,9 @@ $rights=rights_init();
  */
 $query_cfg=dbio_SELECT("core_config","1","phpname,value");
 foreach ($query_cfg as $cfg) { define($cfg['phpname'],$cfg['value']); }
-$settings=get_core_settings();
+$settings=array();
+$user_settings=array();
+get_core_settings();
 
 /*
  * Module
@@ -65,14 +67,18 @@ if (USER_ADMIN) ini_set('display_errors', 'On');
 
 //===============================================================================================
 function get_core_settings(){
-	$query_settings=dbio_SELECT("core_settings","`user` IS NULL");
-	$settings=array();
+	global $settings, $user_settings;
+	$query_settings=dbio_SELECT("core_settings","`user` IS NULL OR `user`=".USER_ID);
 	foreach ($query_settings as $setting) {
 		$modul=$setting['modul'];
-		if (!isset($settings[$modul])) $settings[$modul]=array();
 		$key=$setting['key'];
-		$settings[$modul][$key]=$setting['value'];
+		$user_id=$setting['user'];
+		if ($user_id){
+			set_setting_user($modul, $key, $setting['value']);
+		}else{
+			if (!isset($settings[$modul])) $settings[$modul]=array();
+			$settings[$modul][$key]=$setting['value'];
+		}
 	}
-	return $settings;
 }
 ?>

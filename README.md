@@ -1,7 +1,7 @@
 Tethys (Beta)
 =============
 
-Version: 0.9.0
+Version: 0.9.1
 
 Database: demo002.sql + changes
 
@@ -11,6 +11,5 @@ TODO:
 * Widgets
 * Login
 * Libraries / jQuery / datatables
-* User Specific Settings
 * Logs
 * Setcard-Klassen

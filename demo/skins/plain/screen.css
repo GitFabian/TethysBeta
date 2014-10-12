@@ -1,0 +1,46 @@
+@CHARSET "utf-8";
+
+/*==================================================================
+    DYNAMIC DEVELOPMENT
+==================================================================*/
+.invisible{
+	display:none;
+}
+/*CSS Developer:*/
+.invisible{background:url('img/core/devel_bg.png');}
+div.invisible{display:block;}
+span.invisible{display:inline;}
+/**/
+div.css_version_141011{
+	/*display:none;/**/
+	background:url('img/core/devel_bg.png');
+}
+div.devel_performance{
+	text-align:right;
+}
+
+/*==================================================================
+    BODY,TEXT
+==================================================================*/
+
+/*(IE-Fix)*/
+img{
+	border:none;
+}
+
+body,div,th,td,h1,h2,h3,h4,hr{
+	margin:0px;
+	padding:0px;
+}
+
+ul{
+	margin:0px;
+	padding:0px 0px 0px 20px;
+}
+
+/*==================================================================
+    MENÜ
+==================================================================*/
+div.mainmenu{
+	border-bottom:1px solid black;
+}

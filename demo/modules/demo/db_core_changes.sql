@@ -1,7 +1,11 @@
 
 -- Tethys Core Changes
 
-INSERT INTO `core_settings` (`id` ,`key` ,`modul` ,`user` ,`type` ,`value`)
-VALUES (NULL , 'FEATURE1', 'demo', NULL , 'CHECKBOX', '1' );
+-- DB:Fabian_C -----------------------------------------------------------------
 
--- DB:Fabian -----------------------------------------------------------------
+INSERT INTO `core_settings`
+	(`key` ,`modul` ,`type` ,`value`, `label`)
+VALUES
+	('FEATURE1', 'demo', 'CHECKBOX', '1', '');
+
+-- DB:Fabian_H -----------------------------------------------------------------

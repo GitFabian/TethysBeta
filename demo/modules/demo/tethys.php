@@ -11,6 +11,11 @@ class modul_demo extends module{
 		return $menu;
 	}
 	
+	function user_setting_default($key){
+		if ($key=='demosetting') return setting_create("demo", 'demosetting', "", "TEXT", "Hello world!"); 
+		return null;
+	}
+	
 }
 
 function url_demo($page){

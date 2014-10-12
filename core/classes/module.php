@@ -13,6 +13,11 @@ class module{
 		return null;
 	}
 	
+	function user_setting_default($key){
+		if (USER_ADMIN) echo("Nicht implementiert: Funktion \"".__FUNCTION__."\" in Modul \"".$this->modul_name."\"!");
+		return null;
+	}
+	
 }
 
 function module_read(){
