@@ -19,15 +19,18 @@ class modul_demo extends module{
 	function global_settings($form){
 		if ($form){
 			$form->add_fields("",array(
-				new form_field("FEATURE1","Feature 1",setting_get('demo','FEATURE1'),'CHECKBOX',"setting_get('demo','FEATURE1')"),
+				new_form_field('demo', "FEATURE1", "Feature 1", 'CHECKBOX'),
 			));
 		}
 		return true;
 	}
 	
 	function get_default_setting($key){
+		//Global:
+		if ($key=='FEATURE1') return "1";
+		//User Specific:
 		if ($key=='demosetting') return "Hello world!";
-		if (USER_ADMIN) echo("Kein Default-Value für \"$key\"! /modules/demo/tethys.php:30");
+		if (USER_ADMIN) echo("Kein Default-Value für \"$key\"! /modules/demo/tethys.php:33");
 		return null;
 	}
 	
