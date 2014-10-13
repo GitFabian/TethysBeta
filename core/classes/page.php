@@ -123,6 +123,10 @@ $view=$page->init_views('xxxxxDEFAULTIDxxxxxxx',array(
 	function add_div($html,$pars=""){
 		$this->content.="<div $pars>$html</div>";
 	}
+
+	function add_header1($html){
+		$this->content.="<h1>$html</h1>";
+	}
 	
 	function add_stylesheet($url,$media=null){
 		$this->stylesheets[$url]=$media;
