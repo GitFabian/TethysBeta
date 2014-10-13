@@ -3,21 +3,30 @@
 class module{
 	
 	var $modul_name;
+	var $has_user_page=false;
 	
 	function __construct($modul_name){
 		$this->modul_name=$modul_name;
 	}
 	
 	function get_menu($page_id){
-		#if (USER_ADMIN) echo("Nicht implementiert: Funktion \"".__FUNCTION__."\" in Modul \"".$this->modul_name."\"!");
 		return null;
 	}
 	
-	function user_setting_default($key){
+	function global_settings($form){
+		return false;
+	}
+	
+	function get_default_setting($key){
 		if (USER_ADMIN) echo("Nicht implementiert: Funktion \"".__FUNCTION__."\" in Modul \"".$this->modul_name."\"!");
 		return null;
 	}
 	
+	function get_user_page(){
+		if (USER_ADMIN) echo("Nicht implementiert: Funktion \"".__FUNCTION__."\" in Modul \"".$this->modul_name."\"!");
+		return null;
+	}
+
 }
 
 function module_read(){

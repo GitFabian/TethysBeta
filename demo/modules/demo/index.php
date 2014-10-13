@@ -15,16 +15,7 @@ if (request_command("update")) update();
  * Global Feature:
  */
 // $page->add_div("<a href=\"".CFG_HTTPROOT."/core/admin/settings.".CFG_EXTENSION."?view=demo"."\">Feature 1</a>
-// 		= ".(get_setting_global('demo','FEATURE1')?"activated":"inactive"));
-
-/*
- * Formular, User Specific Setting:
- */
-$form=new form("update");
-$form->add_fields("User Specific Settings", array(
-	new form_field("demosetting",null,get_setting_user('demo','demosetting')),
-));
-#$page->add_html($form->toHTML());
+// 		= ".(setting_get('demo','FEATURE1')?"activated":"inactive"));
 
 /*
  * Tabelle X

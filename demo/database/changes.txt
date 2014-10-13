@@ -6,40 +6,27 @@
 
 # demo001.sql =====================================================================================
 
-ALTER TABLE `core_config` DROP `name`;
+	ALTER TABLE `core_config` DROP `name`;
 
-ALTER TABLE `core_config` DROP `type` ;
+	ALTER TABLE `core_config` DROP `type` ;
 
-INSERT INTO `core_config` ( `phpname` , `value` ) VALUES ( 'CFG_SKIN', 'demo' );
+	INSERT INTO `core_config` ( `phpname` , `value` ) VALUES ( 'CFG_SKIN', 'demo' );
 
 ALTER TABLE `core_rights` DROP `name`, DROP `beschreibung`;
 
-INSERT INTO `core_config` (`phpname` ,`value`)
-VALUES ('CFG_HOME_LABEL', 'Start'),('CFG_HOME_TITLE', 'Startseite');
+	INSERT INTO `core_config` (`phpname` ,`value`)
+	VALUES ('CFG_HOME_LABEL', 'Start'),('CFG_HOME_TITLE', 'Startseite');
 
-INSERT INTO `core_config` ( `phpname` , `value` )
-	VALUES ( 'CFG_MODULES', 'demo,tethys' );
+	INSERT INTO `core_config` ( `phpname` , `value` )
+		VALUES ( 'CFG_MODULES', 'demo,tethys' );
 
-INSERT INTO `core_config` (`phpname` ,`value`)VALUES ('CFG_HOME_URL', '');
+	INSERT INTO `core_config` (`phpname` ,`value`)VALUES ('CFG_HOME_URL', '');
 
-INSERT INTO `core_config` (`phpname` ,`value`)VALUES ('CFG_CSS_VERSION', '');
-
-	CREATE TABLE IF NOT EXISTS `core_features` (
-	  `phpname` varchar(30) COLLATE utf8_bin NOT NULL,
-	  `value` tinyint(1) NOT NULL,
-	  PRIMARY KEY (`phpname`)
-	) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
-	INSERT INTO `core_features` (`phpname`, `value`) VALUES ('FEATURE_BETA', 0);
+	INSERT INTO `core_config` (`phpname` ,`value`)VALUES ('CFG_CSS_VERSION', '');
 
 ALTER TABLE `core_users` ADD `set_pageselected_settings` VARCHAR( 100 ) NOT NULL ;
 
-# DB:Fabian_C -----------------------------------------------------------------
-
-	# !!!ACHTUNG!!! Features in "core_config" übertragen!
-	DROP TABLE core_features;
-
-INSERT INTO `core_config` (`phpname` ,`value`)VALUES ('FEATURE_BETA', '0');
+	INSERT INTO `core_config` (`phpname` ,`value`)VALUES ('FEATURE_BETA', '0');
 
 CREATE TABLE IF NOT EXISTS `core_settings` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -50,18 +37,28 @@ CREATE TABLE IF NOT EXISTS `core_settings` (
   `value` text COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`id`),
   KEY `user` (`user`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
 
 ALTER TABLE `core_settings` ADD `label` VARCHAR( 100 ) NOT NULL ;
 
-# DB:Fabian_H -----------------------------------------------------------------
+# DB:Fabian_HD -----------------------------------------------------------------
 # demo002.sql =====================================================================================
 
+ALTER TABLE `core_settings` DROP `type`, DROP `label` ;
 
+ALTER TABLE `core_settings` CHANGE `modul` `modul` VARCHAR( 20 ) CHARACTER SET utf8 COLLATE utf8_bin NULL ;
 
+	DROP TABLE `core_config`;
 
+ALTER TABLE `core_users` DROP `set_pageselected_settings` ;
 
+ALTER TABLE `core_user_right` DROP FOREIGN KEY `core_user_right_ibfk_2` ;
 
+DROP TABLE core_rights;
 
+ALTER TABLE `core_settings` ADD FOREIGN KEY ( `user` ) REFERENCES `core_users` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT ;
 
+ALTER TABLE core_user_right DROP INDEX `right`;
+
+# DB:Fabian_CD -----------------------------------------------------------------
 # core003.sql =====================================================================================

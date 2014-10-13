@@ -95,6 +95,8 @@ function menu_get_default($page_id){
 	foreach ($modules as $module) {
 		$menu->add($module->get_menu($page_id));
 	}
+
+	new menu_topic($menu,"core_user",$page_id, USER_NICK, url_core_admin("user") );
 	
 	return $menu;
 }

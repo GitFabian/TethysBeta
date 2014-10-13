@@ -3,13 +3,10 @@
 function rights_init(){
 	$rights=array();
 	
-	$query_rights=dbio_SELECT("core_user_right", "user=".USER_ID,
-			"r.phpname",
-			array(new dbio_leftjoin("right","core_rights","r","phpname"))
-			);
+	$query_rights=dbio_SELECT("core_user_right", "user=".USER_ID, "`right`");
 	
 	foreach ($query_rights as $right) {
-		$rights[$right['phpname']]=true;
+		$rights[$right['right']]=true;
 	}
 	
 	define("USER_ADMIN", isset($rights['RIGHT_ADMIN']));

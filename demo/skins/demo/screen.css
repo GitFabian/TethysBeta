@@ -262,6 +262,7 @@ form fieldset div.form_field:last-child{
 	margin-bottom:0px;
 }
 form fieldset legend{
+	padding:0px;
 	border-bottom:1px solid #e7cd5e;
 }
 

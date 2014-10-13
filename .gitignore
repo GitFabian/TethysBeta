@@ -6,3 +6,4 @@
 /config*.php
 /core/admin/import.php
 /*.cmd
+/*.txt

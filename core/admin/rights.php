@@ -10,32 +10,23 @@ include_once CFG_HDDROOT.'/core/classes/table.php';
  */
 $all_rights=array(
 	"RIGHT_ADMIN"=>new right("Administrator/Entwickler","Vorsicht! ALLE Rechte. Auch instabile BETA-Features und Entwickler-Ausgaben!"),
+	"RIGHT_EDIT_NICK"=>new right("Nick bearbeiten","Eigenen Nick ändern"),
 );
 
 
 /*
  * Tabelle Rechte
  */
-
-$query_rights=dbio_SELECT("core_rights");
-
 $rights_table=array();
-foreach ($query_rights as $right) {
-	$phpname=$right['phpname'];
-	$name="";
-	$desc="";
-	if (isset($all_rights[$phpname])){
-		$name=$all_rights[$phpname]->name;
-		$desc=$all_rights[$phpname]->description;
-	}
+foreach ($all_rights as $key=>$right) {
+	$name=$right->name;
+	$desc=$right->description;
 	$rights_table[]=array(
-		"Berechtigung"=>$name." ($phpname)",
+		"Berechtigung"=>$name." ($key)",
 		"Beschreibung"=>$desc,
 	);
 }
-
-$table_rights=new table();
-$table_rights->add_query($rights_table);
+$table_rights=new table($rights_table);
 $page->add_html($table_rights->toHTML());
 
 

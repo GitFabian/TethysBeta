@@ -7,7 +7,7 @@
  */
 define('CFG_HDDROOT', 'C:\\...\\Tethys');
 define('CFG_HTTPROOT', '/tethys');
-define('CFG_EXTENSION', 'dev');
+define('CFG_EXTENSION', 'php');
 
 /*
  * Datenbank
@@ -25,6 +25,14 @@ function hauptmenue($page_id){
 // 	//...
 	$menu=menu_get_default($page_id);
 	return $menu->toHTML();
+}
+
+/*
+ * Default Settings
+ */
+function get_default_setting($key){
+	#if ($key=='CFG_SKIN') return "demo";
+	return null;
 }
 
 ?>

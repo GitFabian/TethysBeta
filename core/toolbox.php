@@ -127,45 +127,4 @@ function encode_query_to_utf8_assoc($query){
 	return $query;
 }
 
-function get_setting_global($modul,$key,$user=null){
-	global $settings;
-	//TODO:Fehlerabfrage
-	return $settings[$modul][$key];
-}
-function get_setting_user($modul,$key,$init=true,$user=USER_ID){
-	global $user_settings;
-	if (!isset($user_settings[$modul])||!isset($user_settings[$modul][$key])){
-		if ($init){
-			global $modules;
-			$setting=$modules[$modul]->user_setting_default($key);
-			if($setting)set_setting_user_save($setting);
-		}else{
-			return null;
-		}
-	}
-	return $user_settings[$modul][$key];
-}
-function setting_create($modul,$key,$label,$type,$value){
-	return array(
-		"key"=>$key,
-		"modul"=>$modul,
-		"user"=>USER_ID,
-		"type"=>$type,
-		"value"=>$value,
-		"label"=>$label,
-	);
-}
-function set_setting_user($modul,$key,$value){
-	global $user_settings;
-	if (!isset($user_settings[$modul])) $user_settings[$modul]=array();
-	$user_settings[$modul][$key]=$value;
-}
-function set_setting_user_save($setting){
-	set_setting_user($setting['modul'], $setting['key'], $setting['value']);
-	dbio_INSERT("core_settings", $setting);
-}
-function update_setting_user($modul,$key,$value){
-	dbio_UPDATE("core_settings", "`key`='$key' AND `modul`='demo' AND `user`=".USER_ID,array("value"=>$value));
-}
-
 ?>

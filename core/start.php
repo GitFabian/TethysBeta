@@ -43,11 +43,10 @@ $rights=rights_init();
 /*
  * Globale Konfiguration
  */
-$query_cfg=dbio_SELECT("core_config","1","phpname,value");
-foreach ($query_cfg as $cfg) { define($cfg['phpname'],$cfg['value']); }
+include_once CFG_HDDROOT.'/core/settings.php';
 $settings=array();
 $user_settings=array();
-get_core_settings();
+init_settings();
 
 /*
  * Module
@@ -66,19 +65,4 @@ $page->add_stylesheet(CFG_HTTPROOT."/skins/".CFG_SKIN."/screen.css");
 if (USER_ADMIN) ini_set('display_errors', 'On');
 
 //===============================================================================================
-function get_core_settings(){
-	global $settings, $user_settings;
-	$query_settings=dbio_SELECT("core_settings","`user` IS NULL OR `user`=".USER_ID);
-	foreach ($query_settings as $setting) {
-		$modul=$setting['modul'];
-		$key=$setting['key'];
-		$user_id=$setting['user'];
-		if ($user_id){
-			set_setting_user($modul, $key, $setting['value']);
-		}else{
-			if (!isset($settings[$modul])) $settings[$modul]=array();
-			$settings[$modul][$key]=$setting['value'];
-		}
-	}
-}
 ?>

@@ -84,7 +84,7 @@ $view=$page->init_views('xxxxxDEFAULTIDxxxxxxx',array(
 	function init_views($default,$views){
 		$view=(isset($_REQUEST['view'])&&$_REQUEST['view']?$_REQUEST['view']:$default);
 		foreach ($views as $topic) {
-			if(!$topic->highlight)$topic->highlight=($view==$topic->page_id);
+			$topic->highlight=($view==$topic->page_id);
 			if(!$topic->link)$topic->link="?view=".$topic->page_id;
 			$topic->class_a="button";
 			$this->views[]=$topic;
