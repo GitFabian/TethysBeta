@@ -58,6 +58,13 @@ class modul_demo extends module{
 		return ($set?1:0);
 	}
 
+	function get_rights(){
+		include_once CFG_HDDROOT.'/core/classes/rights.php';
+		return array(
+				"DEMO01"=>new right("Name", "Beschreibung"),
+		);
+	}
+	
 }
 
 function url_demo($page){

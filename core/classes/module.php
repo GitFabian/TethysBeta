@@ -26,6 +26,10 @@ class module{
 		if (USER_ADMIN) echo("Nicht implementiert: Funktion \"".__FUNCTION__."\" in Modul \"".$this->modul_name."\"!");
 		return null;
 	}
+	
+	function get_rights(){
+		return null;
+	}
 
 }
 

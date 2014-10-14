@@ -4,6 +4,7 @@ include_once '../start.php';
 $page->init('core_rights','Rechte');
 
 include_once CFG_HDDROOT.'/core/classes/table.php';
+include_once CFG_HDDROOT.'/core/classes/rights.php';
 
 /*
  * Beschreibung aller Rechte
@@ -12,6 +13,18 @@ $all_rights=array(
 	"RIGHT_ADMIN"=>new right("Administrator/Entwickler","Vorsicht! ALLE Rechte. Auch instabile BETA-Features und Entwickler-Ausgaben!"),
 	"RIGHT_EDIT_NICK"=>new right("Nick bearbeiten","Eigenen Nick ändern"),
 );
+
+/*
+ * Modulspezifische Rechte
+ */
+foreach ($modules as $modul) {
+	$modul_rights=$modul->get_rights();
+	if($modul_rights)
+	foreach ($modul_rights as $key => $right) {
+		$all_rights[$key]=$right;
+		$right->description.=" (Modul \"".$modul->modul_name."\")";
+	}
+}
 
 
 /*
@@ -46,12 +59,4 @@ $page->add_html( $table->toHTML() );
 
 $page->send();
 exit;//============================================================================================
-class right{
-	var $name;
-	var $description;
-	function __construct($name,$beschreibung){
-		$this->name=$name;
-		$this->description=$beschreibung;
-	}
-}
 ?>
