@@ -11,6 +11,7 @@ class page{
 	var $onload_JS;
 	var $views;
 	var $focus;
+	var $focus_delay=500;//ms
 	
 	function __construct(){
 		$this->content="";
@@ -45,7 +46,7 @@ class page{
 		$onload=$this->onload_JS;
 		if ($this->focus){
 			include_jquery();
-			$onload.="$('$this->focus').first().focus();";
+			$onload.="window.setTimeout(&quot;$('$this->focus').first().focus();&quot;,$this->focus_delay);";
 		}
 		$onload=($onload?" onload=\"$onload\"":"");
 		
