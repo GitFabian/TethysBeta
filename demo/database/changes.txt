@@ -3,45 +3,6 @@
 # BETA-Phase! Aktuell verwendete Datenbank-Versionen bitte in dieser Datei markieren!
 #
 
-
-# demo001.sql =====================================================================================
-
-	ALTER TABLE `core_config` DROP `name`;
-
-	ALTER TABLE `core_config` DROP `type` ;
-
-	INSERT INTO `core_config` ( `phpname` , `value` ) VALUES ( 'CFG_SKIN', 'demo' );
-
-ALTER TABLE `core_rights` DROP `name`, DROP `beschreibung`;
-
-	INSERT INTO `core_config` (`phpname` ,`value`)
-	VALUES ('CFG_HOME_LABEL', 'Start'),('CFG_HOME_TITLE', 'Startseite');
-
-	INSERT INTO `core_config` ( `phpname` , `value` )
-		VALUES ( 'CFG_MODULES', 'demo,tethys' );
-
-	INSERT INTO `core_config` (`phpname` ,`value`)VALUES ('CFG_HOME_URL', '');
-
-	INSERT INTO `core_config` (`phpname` ,`value`)VALUES ('CFG_CSS_VERSION', '');
-
-ALTER TABLE `core_users` ADD `set_pageselected_settings` VARCHAR( 100 ) NOT NULL ;
-
-	INSERT INTO `core_config` (`phpname` ,`value`)VALUES ('FEATURE_BETA', '0');
-
-CREATE TABLE IF NOT EXISTS `core_settings` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `key` varchar(20) COLLATE utf8_bin NOT NULL,
-  `modul` varchar(20) COLLATE utf8_bin NOT NULL,
-  `user` int(11) DEFAULT NULL,
-  `type` enum('TEXT','TEXTAREA','CHECKBOX') COLLATE utf8_bin NOT NULL,
-  `value` text COLLATE utf8_bin NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `user` (`user`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
-
-ALTER TABLE `core_settings` ADD `label` VARCHAR( 100 ) NOT NULL ;
-
-# DB:Fabian_HD -----------------------------------------------------------------
 # demo002.sql =====================================================================================
 
 ALTER TABLE `core_settings` DROP `type`, DROP `label` ;
@@ -62,3 +23,7 @@ ALTER TABLE core_user_right DROP INDEX `right`;
 
 # DB:Fabian_CD -----------------------------------------------------------------
 # core003.sql =====================================================================================
+
+ALTER TABLE `core_users` ADD `active` BOOLEAN NOT NULL DEFAULT TRUE AFTER `id` ;
+
+# DB:Fabian_HD -----------------------------------------------------------------

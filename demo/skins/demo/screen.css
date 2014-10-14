@@ -213,14 +213,18 @@ table.core_rights th{
 	background:none;
 	color:#85dea5;
 	transform: rotate(-30deg);
-	transform-origin:0px 85px;
+	transform-origin:0px 70px;
 	padding:0px;
-	max-width:50px;
+	max-width:37px;
 }
 table.core_rights th:first-child{
 	max-width:inherit;
 	transform:none;
 	padding:0px 10px;
+	opacity:0;
+}
+table.core_rights tr:hover td{
+	background:inherit;
 }
 /*----------------------- datatables -----------------------*/
 div.dataTables_filter{
@@ -248,14 +252,14 @@ form input[type='text']{
 	vertical-align:bottom;
 	width:500px;
 }
-form input[type=checkbox]{
+input[type=checkbox]{
 	width:20px;
 	height:13px;
 	position:relative;
 	z-index:1;
 	opacity:0;
 }
-form input[type=checkbox] + div.checkbox_ghost{
+input[type=checkbox] + div.checkbox_ghost{
 	display:inline-block;
 	height:13px;
 	width:13px;
@@ -263,9 +267,10 @@ form input[type=checkbox] + div.checkbox_ghost{
 	background-repeat:no-repeat;
 	position:relative;
 	left:-20px;
+	margin-right:-20px;
 	z-index:0;
 }
-form input[type=checkbox]:checked + div.checkbox_ghost{
+input[type=checkbox]:checked + div.checkbox_ghost{
 	background:url('img/core/checkbox_1.png');
 }
 input[type=submit]{

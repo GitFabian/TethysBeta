@@ -46,22 +46,35 @@ $page->add_html($table_rights->toHTML());
 /*
  * Tabelle Benutzer-Rechte
  */
+$query_users=dbio_SELECT("core_users","active=1","id,nick");
 $query_user_right = dbio_SELECT("core_user_right");
 $rights=array();
-foreach ($query_user_right as $right) {
-	$user=$right['user'];
-	$berechtigung=$right['right'];
-	if (!isset($rights[$user])) $rights[$user]=array("Benutzer"=>$user);
-	$header=$all_rights[$berechtigung]->name;
+foreach ($query_users as $user) {
+	$user_rights=array("-USER-"=>$user['nick']." (".$user['id'].")");
+	foreach ($all_rights as $right_id => $dummy) {
+		$user_rights[$right_id]=rights_checkbox(false);
+	}
+	$rights[$user['id']]=$user_rights;
+}
+$headers=array("-USER-"=>"Benutzer");
+foreach ($all_rights as $right_id => $right_object) {
+	$header=$right_object->name;
 	$header=preg_replace("/ /", "&nbsp;", $header);
-	$header="<span title=\"$berechtigung\">$header</span>";
-	$rights[$user][$header]="true";
+	$header="<span title=\"$right_id\">$header</span>";
+	$headers[$right_id]=$header;
+}
+foreach ($query_user_right as $right) {
+	$rights[$right['user']][$right['right']]=rights_checkbox(true);
 }
 $table = new table($rights,'core_rights',false);
+$table->set_header($headers);
 $page->add_html( $table->toHTML() );
 
 
 
 $page->send();
 exit;//============================================================================================
+function rights_checkbox($checked){
+	return html_checkbox(null,$checked,"ajax(...);");
+}
 ?>

@@ -142,4 +142,11 @@ function include_datatables(){
 	$page->add_library(CFG_HTTPROOT."/core/html/jquery.dataTables.min.1.10.js");
 }
 
+function html_checkbox($name=null,$checked=false,$js=null){
+	$name=($name?" name=\"$name\"":"");
+	$checked=($checked?" checked":"");
+	$js=($js?" onChange=\"$js\"":"");
+	return "<input type=\"checkbox\"$name$checked$js /><div class=\"checkbox_ghost\"></div>";
+}
+
 ?>

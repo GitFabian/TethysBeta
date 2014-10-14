@@ -121,8 +121,9 @@ class form_field{
 		$input="";
 		$value=escape_html($this->value);
 		if ($this->type=="CHECKBOX"){
-			$checked=($value?" checked":"");
-			$input="<input type=\"checkbox\" name=\"".$this->name."\"$checked /><div class=\"checkbox_ghost\"></div>";
+			//$checked=($value?" checked":"");
+			$input=html_checkbox($this->name,$value);
+			//$input="<input type=\"checkbox\" name=\"".$this->name."\"$checked /><div class=\"checkbox_ghost\"></div>";
 		}else{
 			$input="<input type=\"text\" name=\"".$this->name."\" value=\"$value\" />";
 		}

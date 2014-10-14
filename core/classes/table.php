@@ -34,6 +34,16 @@ class table{
 		}
 	}
 	
+	/**
+	 * 
+$table_X->set_header(array(
+		"id" => "ID",
+		"nick" => "Anzeigename",
+		"vorname" => "Vorname",
+		"nachname" => "Name",
+		"http_auth" => "LDAP",
+));
+	 */
 	function set_header($headers){
 		$this->headers=$headers;
 	}

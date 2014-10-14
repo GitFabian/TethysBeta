@@ -28,7 +28,7 @@ img{
 	border:none;
 }
 
-body,div,th,td,h1,h2,h3,h4,hr{
+body,div,th,td,h1,h2,h3,h4,hr,pre{
 	margin:0px;
 	padding:0px;
 }
