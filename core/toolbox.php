@@ -127,4 +127,19 @@ function encode_query_to_utf8_assoc($query){
 	return $query;
 }
 
+function encode_html($text){
+	return htmlentities($text,null,'UTF-8');
+}
+
+function include_jquery(){
+	global $page;
+	$page->add_library(CFG_HTTPROOT."/core/html/jquery-1.10.2.js");
+}
+
+function include_datatables(){
+	include_jquery();
+	global $page;
+	$page->add_library(CFG_HTTPROOT."/core/html/jquery.dataTables.min.1.10.js");
+}
+
 ?>

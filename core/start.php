@@ -26,6 +26,7 @@ mysql_query ('SET NAMES utf8');
 include_once CFG_HDDROOT.'/core/classes/page.php';
 $page=new page();
 header('Content-type: text/html; charset=UTF-8');
+$global_id_counter=0;
 
 /*
  * Login

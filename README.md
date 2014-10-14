@@ -1,7 +1,7 @@
 Tethys (Beta)
 =============
 
-Version: 0.9.3
+Version: 0.9.4
 
 Database: core003.sql + changes
 
@@ -10,6 +10,7 @@ TODO:
 * Messages
 * Widgets
 * Login
-* Libraries / jQuery / datatables
 * Logs
 * Setcard-Klassen
+* Ajax
+* eMails

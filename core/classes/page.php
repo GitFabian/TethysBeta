@@ -6,16 +6,20 @@ class page{
 	var $content;
 	var $page_id;
 	var $stylesheets;
+	var $libraries;
 	var $inline_JS;
 	var $onload_JS;
 	var $views;
+	var $focus;
 	
 	function __construct(){
 		$this->content="";
 		$this->stylesheets=array();
+		$this->libraries=array();
 		$this->inline_JS="";
 		$this->onload_JS="";
 		$this->views=array();
+		$this->focus=null;
 	}
 	
 	function send(){
@@ -28,12 +32,22 @@ class page{
 		$stylesheets="";
 		foreach ($this->stylesheets as $url => $media) {
 			$mediahtml=($media?" media=\"$media\"":"");
-			$stylesheets.="<link href=\"$url\" rel=\"stylesheet\" type=\"text/css\"$mediahtml />\n";
+			$stylesheets.="\n\t<link href=\"$url\" rel=\"stylesheet\" type=\"text/css\"$mediahtml />";
 		}
 		
-		$inline_JS=($this->inline_JS?"<script type=\"text/javascript\">".$this->inline_JS."</script>":"");
+		$libraries="";
+		foreach ($this->libraries as $url=>$dummy) {
+			$libraries.="\n\t<script type=\"text/javascript\" src=\"$url\"></script>";
+		}
 		
-		$onload=($this->onload_JS?" onload=\"$this->onload_JS\"":"");
+		$inline_JS=($this->inline_JS?"<script type=\"text/javascript\">".$this->inline_JS."\n\t</script>":"");
+		
+		$onload=$this->onload_JS;
+		if ($this->focus){
+			include_jquery();
+			$onload.="$('$this->focus').first().focus();";
+		}
+		$onload=($onload?" onload=\"$onload\"":"");
 		
 		$dynamic_css_development=(CFG_CSS_VERSION?"<div class=\"css_version_".CFG_CSS_VERSION."\">CSS nicht aktuell!</div>":"");
 		
@@ -53,6 +67,7 @@ class page{
 <head>
 	<title>$title</title>
 	$stylesheets
+	$libraries
 	$inline_JS
 </head>
 <body id="$this->page_id"$onload>
@@ -131,9 +146,15 @@ $view=$page->init_views('xxxxxDEFAULTIDxxxxxxx',array(
 	function add_stylesheet($url,$media=null){
 		$this->stylesheets[$url]=$media;
 	}
+
+	function add_library($url){
+		$ok=!isset($this->libraries[$url]);
+		$this->libraries[$url]=true;
+		return $ok;
+	}
 	
 	function add_inline_script($skript){
-		$this->inline_JS.=$skript;
+		$this->inline_JS.="\n".$skript;
 	}
 	
 }

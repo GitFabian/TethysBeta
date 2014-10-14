@@ -39,20 +39,25 @@ foreach ($all_rights as $key=>$right) {
 		"Beschreibung"=>$desc,
 	);
 }
-$table_rights=new table($rights_table);
+$table_rights=new table($rights_table,null,false);
 $page->add_html($table_rights->toHTML());
 
 
 /*
  * Tabelle Benutzer-Rechte
  */
-$query = dbio_SELECT("core_user_right");
-$table = new table();
-$table->add_query($query);
-$table->set_header(array(
-		"user" => "Benutzer",
-		"right" => "Berechtigung",
-));
+$query_user_right = dbio_SELECT("core_user_right");
+$rights=array();
+foreach ($query_user_right as $right) {
+	$user=$right['user'];
+	$berechtigung=$right['right'];
+	if (!isset($rights[$user])) $rights[$user]=array("Benutzer"=>$user);
+	$header=$all_rights[$berechtigung]->name;
+	$header=preg_replace("/ /", "&nbsp;", $header);
+	$header="<span title=\"$berechtigung\">$header</span>";
+	$rights[$user][$header]="true";
+}
+$table = new table($rights,'core_rights',false);
 $page->add_html( $table->toHTML() );
 
 
