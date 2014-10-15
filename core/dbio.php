@@ -38,6 +38,11 @@ function dbio_SELECT_keyValueArray($db,$field,$key="id",$where=null){
 	return $list;
 }
 
+function dbio_DELETE($db,$where){
+	$anfrage="DELETE FROM `$db` WHERE $where;";
+	dbio_query($anfrage);
+}
+
 function dbio_INSERT($db,$data){
 
 	$values=array();

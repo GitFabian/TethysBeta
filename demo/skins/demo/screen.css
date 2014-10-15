@@ -78,6 +78,9 @@ hr{
 	border-bottom:1px solid #85dea5;
 	margin:5px 0px;
 }
+span.strike{
+	text-decoration:line-through;
+}
 
 /*==================================================================
     BUTTONS,LINKS

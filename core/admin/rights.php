@@ -6,27 +6,12 @@ $page->init('core_rights','Rechte');
 include_once ROOT_HDD_CORE.'/core/classes/table.php';
 include_once ROOT_HDD_CORE.'/core/classes/rights.php';
 include_once ROOT_HDD_CORE.'/core/alertify.php';
+include_once 'rights_.php';
 
 /*
  * Beschreibung aller Rechte
  */
-$all_rights=array(
-	"RIGHT_ADMIN"=>new right("Administrator/Entwickler","Vorsicht! ALLE Rechte. Auch instabile BETA-Features und Entwickler-Ausgaben!"),
-	"RIGHT_EDIT_NICK"=>new right("Nick bearbeiten","Eigenen Nick ändern"),
-);
-
-/*
- * Modulspezifische Rechte
- */
-foreach ($modules as $modul) {
-	$modul_rights=$modul->get_rights();
-	if($modul_rights)
-	foreach ($modul_rights as $key => $right) {
-		$all_rights[$key]=$right;
-		$right->description.=" (Modul \"".$modul->modul_name."\")";
-	}
-}
-
+$all_rights=all_rights();
 
 /*
  * Tabelle Rechte
@@ -47,13 +32,18 @@ $page->add_html($table_rights->toHTML());
 /*
  * Tabelle Benutzer-Rechte
  */
+$page->add_inline_script("function ajax_update_rights(id,right,elem){
+		state=(elem.checked?'1':'0');
+		".ajax("update_rights&id=\"+id+\"&right=\"+right+\"&state=\"+state+\"",null,"alertify_ajax_response(response);")."
+}
+");
 $query_users=dbio_SELECT("core_users","active=1","id,nick");
 $query_user_right = dbio_SELECT("core_user_right");
 $rights=array();
 foreach ($query_users as $user) {
 	$user_rights=array("-USER-"=>$user['nick']." (".$user['id'].")");
 	foreach ($all_rights as $right_id => $dummy) {
-		$user_rights[$right_id]=rights_checkbox(false);
+		$user_rights[$right_id]=rights_checkbox(false,$user['id'],$right_id);
 	}
 	$rights[$user['id']]=$user_rights;
 }
@@ -65,7 +55,7 @@ foreach ($all_rights as $right_id => $right_object) {
 	$headers[$right_id]=$header;
 }
 foreach ($query_user_right as $right) {
-	$rights[$right['user']][$right['right']]=rights_checkbox(true);
+	$rights[$right['user']][$right['right']]=rights_checkbox(true,$right['user'],$right['right']);
 }
 $table = new table($rights,'core_rights wide',false);
 $table->set_header($headers);
@@ -76,7 +66,7 @@ $page->add_html( $table->toHTML() );
 
 $page->send();
 exit;//============================================================================================
-function rights_checkbox($checked){
-	return html_checkbox(null,$checked,alertify_error("TODO!"));
+function rights_checkbox($checked,$id,$right){
+	return html_checkbox(null,$checked,"ajax_update_rights('$id','$right',this);");
 }
 ?>

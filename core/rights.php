@@ -19,4 +19,15 @@ function berechtigung($right){
 	return (isset($rights[$right]));
 }
 
+/**
+ * Berechtigung zum Setzen des Rechts muss bereits überprüft sein!
+ */
+function right_set($user,$right,$state){
+	if ($state){
+		dbio_INSERT("core_user_right", array("user"=>$user,"right"=>$right));
+	}else{
+		dbio_DELETE("core_user_right", "user='$user' AND `right`='$right'");
+	}
+}
+
 ?>
