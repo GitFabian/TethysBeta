@@ -39,13 +39,13 @@ $page->add_inline_script("function ajax_update_rights(id,right,elem){
 ");
 $query_users=dbio_SELECT("core_users","active=1","id,nick");
 $query_user_right = dbio_SELECT("core_user_right");
-$rights=array();
+$rights_grid=array();
 foreach ($query_users as $user) {
 	$user_rights=array("-USER-"=>$user['nick']." (".$user['id'].")");
 	foreach ($all_rights as $right_id => $dummy) {
 		$user_rights[$right_id]=rights_checkbox(false,$user['id'],$right_id);
 	}
-	$rights[$user['id']]=$user_rights;
+	$rights_grid[$user['id']]=$user_rights;
 }
 $headers=array("-USER-"=>"Benutzer");
 foreach ($all_rights as $right_id => $right_object) {
@@ -55,9 +55,9 @@ foreach ($all_rights as $right_id => $right_object) {
 	$headers[$right_id]=$header;
 }
 foreach ($query_user_right as $right) {
-	$rights[$right['user']][$right['right']]=rights_checkbox(true,$right['user'],$right['right']);
+	$rights_grid[$right['user']][$right['right']]=rights_checkbox(true,$right['user'],$right['right']);
 }
-$table = new table($rights,'core_rights wide',false);
+$table = new table($rights_grid,'core_rights wide',false);
 $table->set_header($headers);
 $table->col_highlight=true;
 $page->add_html( $table->toHTML() );
