@@ -45,7 +45,7 @@ function module_read(){
 		foreach ($modules as $module) {
 			$module=trim($module);
 			if ($module){
-				$php=CFG_HDDROOT.'/modules/'.$module.'/tethys.php';
+				$php=ROOT_HDD_MODULES.'/'.$module.'/tethys.php';
 				if (file_exists($php)){
 					include_once $php;
 					$module_count++;

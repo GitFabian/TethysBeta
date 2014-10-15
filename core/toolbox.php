@@ -100,11 +100,11 @@ function escape_html($text){
 }
 
 function url_mod_pg($modul,$page){
-	return CFG_HTTPROOT."/modules/$modul/$page.".CFG_EXTENSION;
+	return ROOT_HTTP_MODULES."/$modul/$page.".CFG_EXTENSION;
 }
 
 function url_core_admin($page){
-	return CFG_HTTPROOT."/core/admin/$page.".CFG_EXTENSION;
+	return ROOT_HTTP_CORE."/core/admin/$page.".CFG_EXTENSION;
 }
 
 function encode_query_to_utf8($query){
@@ -133,13 +133,13 @@ function encode_html($text){
 
 function include_jquery(){
 	global $page;
-	$page->add_library(CFG_HTTPROOT."/core/html/jquery-1.10.2.js");
+	$page->add_library(ROOT_HTTP_CORE."/core/html/jquery-1.10.2.js");
 }
 
 function include_datatables(){
 	include_jquery();
 	global $page;
-	$page->add_library(CFG_HTTPROOT."/core/html/jquery.dataTables.min.1.10.js");
+	$page->add_library(ROOT_HTTP_CORE."/core/html/jquery.dataTables.min.1.10.js");
 }
 
 function html_checkbox($name=null,$checked=false,$js=null){

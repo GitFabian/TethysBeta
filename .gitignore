@@ -3,7 +3,6 @@
 /.settings/
 /modules/
 /skins/
-/config*.php
+/config_*.php
 /core/admin/import.php
-/*.cmd
-/*.txt
+/FTP/

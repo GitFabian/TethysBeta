@@ -21,9 +21,9 @@ ALTER TABLE `core_settings` ADD FOREIGN KEY ( `user` ) REFERENCES `core_users` (
 
 ALTER TABLE core_user_right DROP INDEX `right`;
 
-# DB:Fabian_CD -----------------------------------------------------------------
 # core003.sql =====================================================================================
 
 ALTER TABLE `core_users` ADD `active` BOOLEAN NOT NULL DEFAULT TRUE AFTER `id` ;
 
+# DB:Fabian_CD -----------------------------------------------------------------
 # DB:Fabian_HD -----------------------------------------------------------------

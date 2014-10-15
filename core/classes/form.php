@@ -1,7 +1,7 @@
 <?php
 
 /*
-include_once CFG_HDDROOT.'/core/classes/form.php';
+include_once ROOT_HDD_CORE.'/core/classes/form.php';
 
 http://217.91.49.199/tethyswiki/index.php/Formular
  */

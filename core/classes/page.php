@@ -17,6 +17,7 @@ class page{
 		$this->content="";
 		$this->stylesheets=array();
 		$this->libraries=array();
+		$this->add_library(ROOT_HTTP_CORE."/core/html/toolbox.js");
 		$this->inline_JS="";
 		$this->onload_JS="";
 		$this->views=array();
@@ -41,7 +42,8 @@ class page{
 			$libraries.="\n\t<script type=\"text/javascript\" src=\"$url\"></script>";
 		}
 		
-		$inline_JS=($this->inline_JS?"<script type=\"text/javascript\">".$this->inline_JS."\n\t</script>":"");
+		$inline_JS=$this->inline_JS;
+		$inline_JS=($inline_JS?"<script type=\"text/javascript\">".$inline_JS."\n\t</script>":"");
 		
 		$onload=$this->onload_JS;
 		if ($this->focus){

@@ -9,7 +9,7 @@ mysql_select_db('xxxxxxxxDBASExxxxxxxxxx');
 include_once '../../core/start.php';
 if (!USER_ADMIN) exit;
 
-include_once CFG_HDDROOT.'/core/classes/table.php';
+include_once ROOT_HDD_CORE.'/core/classes/table.php';
 
 $status="Bitte Datenbank auswählen.";
 

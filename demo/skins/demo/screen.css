@@ -205,26 +205,43 @@ ul{
 table tbody tr:hover td{
 	background:#4f1b39;
 }
-/*----------------------- core_rights -----------------------*/
-table.core_rights thead tr{
+/*----------------------- table.wide -----------------------*/
+table.wide thead tr{
 	height:100px;
 }
-table.core_rights th{
+table.wide th{
 	background:none;
 	color:#85dea5;
 	transform: rotate(-30deg);
 	transform-origin:0px 70px;
 	padding:0px;
-	max-width:37px;
+	max-width:50px;
 }
-table.core_rights th:first-child{
+table.wide th:first-child{
 	max-width:inherit;
 	transform:none;
 	padding:0px 10px;
 	opacity:0;
 }
+table.wide th.col_highlight{
+	color:#e7cd5e;
+}
+/*----------------------- core_rights -----------------------*/
+table.core_rights thead tr{
+	height:120px;
+}
+table.core_rights th{
+	transform-origin:0px 90px;
+	max-width:37px;
+}
 table.core_rights tr:hover td{
 	background:inherit;
+}
+table.core_rights tr:hover td:first-child{
+	color:#e7cd5e;
+}
+table.core_rights tr:hover td:first-child:hover{
+	color:inherit;
 }
 /*----------------------- datatables -----------------------*/
 div.dataTables_filter{
@@ -318,4 +335,3 @@ body#tethys_commits div.innerbody{
 	max-width:1350px;
 	box-shadow:none;
 }
-

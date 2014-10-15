@@ -10,7 +10,7 @@ function init_settings(){
 	define('CFG_HOME_TITLE',setting_get(null,'CFG_HOME_TITLE'));
 	define('CFG_HOME_URL',setting_get(null,'CFG_HOME_URL'));
 	define('CFG_HOME_LABEL',setting_get(null,'CFG_HOME_LABEL'));
-	define('CFG_SKIN',setting_get(null,'CFG_SKIN'));
+	define('CFG_SKIN',trim(setting_get(null,'CFG_SKIN')));
 	define('CFG_CSS_VERSION',setting_get(null,'CFG_CSS_VERSION'));
 	define('CFG_MODULES',setting_get(null,'CFG_MODULES'));
 	define('FEATURE_BETA',setting_get(null,'FEATURE_BETA'));

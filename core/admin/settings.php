@@ -1,9 +1,9 @@
 <?php
-include_once '../start.php';
+include_once '../../config_start.php';
 
 $page->init('core_settings','Konfiguration');
 
-include_once CFG_HDDROOT.'/core/classes/form.php';
+include_once ROOT_HDD_CORE.'/core/classes/form.php';
 
 /*
  * Module => Views

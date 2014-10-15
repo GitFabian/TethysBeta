@@ -3,8 +3,8 @@ include_once '../../core/start.php';
 
 $page->init('demo_index','Demopage');
 
-include_once CFG_HDDROOT.'/core/classes/table.php';
-include_once CFG_HDDROOT.'/core/classes/form.php';
+include_once ROOT_HDD_CORE.'/core/classes/table.php';
+include_once ROOT_HDD_CORE.'/core/classes/form.php';
 
 /*
  * Request verarbeiten:
@@ -14,7 +14,7 @@ if (request_command("update")) update();
 /*
  * Global Feature:
  */
-// $page->add_div("<a href=\"".CFG_HTTPROOT."/core/admin/settings.".CFG_EXTENSION."?view=demo"."\">Feature 1</a>
+// $page->add_div("<a href=\"".ROOT_HTTP_CORE."/core/admin/settings.".CFG_EXTENSION."?view=demo"."\">Feature 1</a>
 // 		= ".(setting_get('demo','FEATURE1')?"activated":"inactive"));
 
 /*

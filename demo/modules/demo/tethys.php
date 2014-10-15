@@ -35,7 +35,7 @@ class modul_demo extends module{
 	}
 	
 	function get_user_page(){
-		include_once CFG_HDDROOT.'/core/classes/form.php';
+		include_once ROOT_HDD_CORE.'/core/classes/form.php';
 		if (request_command("update")) $this->update_settings(); 
 		$form=new form("update");
 		
@@ -59,7 +59,7 @@ class modul_demo extends module{
 	}
 
 	function get_rights(){
-		include_once CFG_HDDROOT.'/core/classes/rights.php';
+		include_once ROOT_HDD_CORE.'/core/classes/rights.php';
 		return array(
 				"DEMO01"=>new right("Name", "Beschreibung"),
 		);

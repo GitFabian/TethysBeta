@@ -1,7 +1,7 @@
 <?php
 
 /*
-include_once CFG_HDDROOT.'/core/classes/rights.php';
+include_once ROOT_HDD_CORE.'/core/classes/rights.php';
  */
 
 class right{

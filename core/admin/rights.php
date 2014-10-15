@@ -1,10 +1,11 @@
 <?php
-include_once '../start.php';
+include_once '../../config_start.php';
 
 $page->init('core_rights','Rechte');
 
-include_once CFG_HDDROOT.'/core/classes/table.php';
-include_once CFG_HDDROOT.'/core/classes/rights.php';
+include_once ROOT_HDD_CORE.'/core/classes/table.php';
+include_once ROOT_HDD_CORE.'/core/classes/rights.php';
+include_once ROOT_HDD_CORE.'/core/alertify.php';
 
 /*
  * Beschreibung aller Rechte
@@ -66,8 +67,9 @@ foreach ($all_rights as $right_id => $right_object) {
 foreach ($query_user_right as $right) {
 	$rights[$right['user']][$right['right']]=rights_checkbox(true);
 }
-$table = new table($rights,'core_rights',false);
+$table = new table($rights,'core_rights wide',false);
 $table->set_header($headers);
+$table->col_highlight=true;
 $page->add_html( $table->toHTML() );
 
 
@@ -75,6 +77,6 @@ $page->add_html( $table->toHTML() );
 $page->send();
 exit;//============================================================================================
 function rights_checkbox($checked){
-	return html_checkbox(null,$checked,"ajax(...);");
+	return html_checkbox(null,$checked,alertify_error("TODO!"));
 }
 ?>

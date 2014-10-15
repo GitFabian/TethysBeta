@@ -1,7 +1,7 @@
 Tethys (Beta)
 =============
 
-Version: 0.9.5
+Version: 0.10.0
 
 Database: core003.sql + changes
 
