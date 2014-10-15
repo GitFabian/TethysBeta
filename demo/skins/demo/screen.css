@@ -255,7 +255,8 @@ div.dataTables_filter{
     FORMULARE
 ==================================================================*/
 
-input{
+input,
+select{
 	color:#85dea5;
 	background:#174d9d;
 }
@@ -265,9 +266,11 @@ form label{
 	min-width:250px;
 }
 input[type='text'],
-input[type='search']{
+input[type='search'],
+select{
 	border:none;
 }
+form select,
 form input[type='text']{
 	vertical-align:bottom;
 	width:500px;

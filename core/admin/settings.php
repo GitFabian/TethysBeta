@@ -30,6 +30,26 @@ if ($view!="core" && isset($modules[$view])){ include 'settings_module.php'; }
 
 if (request_command("update")) core_settings_update2(null);
 
+/*
+ * Skins ermitteln
+ */
+$skins=array("demo"=>"demo");
+$skins_dir=opendir(ROOT_HDD_SKINS);
+while (false !== ($file = readdir($skins_dir))) {
+	if ($file!='.'&&$file!='..'){
+		$datei=ROOT_HDD_SKINS."/".$file;
+		if (is_dir($datei)){
+			if (file_exists($datei."/screen.css")){
+				$skins[$file]=$file;
+			}
+		}
+	}
+}
+
+/*
+ * Formular
+ */
+
 $form=new form("update");
 
 $form->add_fields(CFG_TITLE,null);
@@ -40,7 +60,7 @@ settings_add_field($form,"CFG_HOME_URL","Startseite-URL",'TEXT');
 settings_add_field($form,"CFG_HOME_TITLE","Index-Titel",'TEXT');
 
 $form->add_fields("Aussehen",null);
-settings_add_field($form,"CFG_SKIN","Skin",'TEXT');
+$form->add_field( new form_field("CFG_SKIN","Skin",setting_value('CFG_SKIN'),'SELECT',null,$skins) );
 settings_add_field($form,"CFG_CSS_VERSION","CSS-Version",'TEXT');
 
 $form->add_fields("Module",null);

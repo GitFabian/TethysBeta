@@ -107,23 +107,30 @@ class form_field{
 	var $type;
 	var $value;
 	var $title;
+	var $options;
 	
-	function __construct($name,$label=null,$value="",$type="TEXT",$title=null){
+	function __construct($name,$label=null,$value="",$type="TEXT",$title=null,$options=null){
 		if ($label===null) $label=$name;
 		$this->label=$label;
 		$this->name=$name;
 		$this->type=$type;
 		$this->value=$value;
 		$this->title=$title;
+		$this->options=$options;
 	}
 	
 	function toHTML(){
 		$input="";
 		$value=escape_html($this->value);
 		if ($this->type=="CHECKBOX"){
-			//$checked=($value?" checked":"");
 			$input=html_checkbox($this->name,$value);
-			//$input="<input type=\"checkbox\" name=\"".$this->name."\"$checked /><div class=\"checkbox_ghost\"></div>";
+		}else if ($this->type=="SELECT"){
+			$options="";
+			if($this->options)foreach ($this->options as $key=>$value) {
+				$selected=($this->value==$key?" selected":"");
+				$options.="\n\t<option$selected value=\"$key\">$value</option>";
+			}
+			$input="<select name=\"".$this->name."\">$options\n</select>";
 		}else{
 			$input="<input type=\"text\" name=\"".$this->name."\" value=\"$value\" />";
 		}
