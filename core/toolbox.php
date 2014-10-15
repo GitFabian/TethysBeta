@@ -100,6 +100,7 @@ function escape_html($text){
 }
 
 function url_mod_pg($modul,$page){
+	if ($modul=='demo') return ROOT_HTTP_CORE."/demo/modules/$modul/$page.".CFG_EXTENSION;
 	return ROOT_HTTP_MODULES."/$modul/$page.".CFG_EXTENSION;
 }
 

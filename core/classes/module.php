@@ -38,19 +38,31 @@ function new_form_field($modul,$key,$label,$type){
 }
 
 function module_read(){
+	global $modules;
 	
 	$module_count=0;
 	if(CFG_MODULES){
-		$modules=explode(",", CFG_MODULES);
-		foreach ($modules as $module) {
-			$module=trim($module);
-			if ($module){
-				$php=ROOT_HDD_MODULES.'/'.$module.'/tethys.php';
+		$module=explode(",", CFG_MODULES);
+		foreach ($module as $modul) {
+			$modul=trim($modul);
+			if ($modul){
+				if (strcasecmp($modul, "demo")==0){
+					$php=ROOT_HDD_CORE.'/demo/modules/'.$modul.'/tethys.php';
+				}else{
+					$php=ROOT_HDD_MODULES.'/'.$modul.'/tethys.php';
+				}
 				if (file_exists($php)){
+					$last_modul=null;
+					foreach ($modules as $key => $value) { $last_modul=$key; }
 					include_once $php;
+					$new_modul=null;
+					foreach ($modules as $key => $value) { $new_modul=$key; }
+					if ($new_modul==null || $new_modul==$last_modul){
+						echo "Fehler beim initialisieren von Modul \"$modul\"!";
+					}
 					$module_count++;
 				}else{
-					if (USER_ADMIN) echo "Modul nicht gefunden: \"$module\"!";
+					if (USER_ADMIN) echo "Modul nicht gefunden: \"$modul\"!";
 				}
 			}
 		}
