@@ -6,7 +6,7 @@
 $sql_source=mysql_connect('xxxxxxxHOSTxxxxxxxx','xxxxxxxxUSERNAMExxxxxxxxx','xxxxxxxxPASSxxxxxxxxx');
 mysql_select_db('xxxxxxxxDBASExxxxxxxxxx');
 
-include_once '../../core/start.php';
+include_once '../../config_start.php';
 if (!USER_ADMIN) exit;
 
 include_once ROOT_HDD_CORE.'/core/classes/table.php';
@@ -14,7 +14,7 @@ include_once ROOT_HDD_CORE.'/core/classes/table.php';
 $status="Bitte Datenbank auswählen.";
 
 $targets=array(
-	"---"=>"Kunden",
+	"---1"=>"Kunden",
 	"Kunden(Firmen)"=>"kunden_firmen",
 	"Kunden(Personen)"=>"kunden_personen",
 );
@@ -24,7 +24,7 @@ if ($check=request_value("check")) db_testlisting(dbio_SELECT($targets[$check]),
 
 $dblis="";
 foreach ($targets as $db_id => $db) {
-	if ($db_id=="---"){
+	if (substr($db_id,0,3)=="---"){
 		$dblis.="</ul><u>$db</u><ul>";
 	}else{
 		$dblis.=db_li($db_id);
@@ -96,6 +96,7 @@ function db_query_source($db_source,$correct_encoding=true){
 }
 function db_testlisting($query_source,$titel=null){
 	global $page;
+	$page->focus="div.dataTables_filter input";
 	$table = new table($query_source);
 	if ($titel) $page->add_html("<h1>$titel</h1>");
 	$page->add_html( $table->toHTML() );

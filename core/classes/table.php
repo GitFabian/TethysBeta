@@ -132,7 +132,7 @@ class table_row{
 				}
 			}
 		}
-		return "\t\t<tr>$tr\n\t\t</tr>";
+		return "\n\t\t<tr>$tr\n\t\t</tr>";
 	}
 	
 }
