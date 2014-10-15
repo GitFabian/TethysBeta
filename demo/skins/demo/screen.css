@@ -219,6 +219,7 @@ table.wide th{
 	transform-origin:0px 70px;
 	padding:0px;
 	max-width:50px;
+	word-break: keep-all;
 }
 table.wide th:first-child{
 	max-width:inherit;
