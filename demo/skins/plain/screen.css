@@ -37,6 +37,9 @@ ul{
 	margin:0px;
 	padding:0px 0px 0px 20px;
 }
+.strike{
+	text-decoration:line-through;
+}
 
 /*==================================================================
     MENÜ
@@ -44,3 +47,26 @@ ul{
 div.mainmenu{
 	border-bottom:1px solid black;
 }
+
+/*==================================================================
+    TABELLEN,LISTEN
+==================================================================*/
+
+/*----------------------- table.wide -----------------------*/
+table.wide thead tr{
+	height:100px;
+}
+table.wide th{
+	text-align:left;
+	vertical-align:bottom;
+	transform: rotate(-30deg);
+	transform-origin:0px 70px;
+	padding:0px;
+	max-width:50px;
+	word-break: keep-all;
+}
+table.wide th:first-child{
+	max-width:inherit;
+	transform:none;
+}
+

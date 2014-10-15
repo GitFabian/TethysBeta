@@ -21,6 +21,9 @@ function all_rights(){
 		$modul_rights=$modul->get_rights();
 		if($modul_rights)
 			foreach ($modul_rights as $key => $right) {
+				if (isset($all_rights[$key])){
+					if(USER_ADMIN)echo "!!!Berechtigung wurde überschrieben: \"$key\" (".$all_rights[$key]->name.")!!!";
+				}
 				$all_rights[$key]=$right;
 				$right->description.=" (Modul \"".$modul->modul_name."\")";
 			}
