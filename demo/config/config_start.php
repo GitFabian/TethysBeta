@@ -22,8 +22,9 @@ define('ROOT_HTTP_DATA', '/tethys/data');
 /*
  * Datenbank
  */
+define('TETHYSDB', 'tethys');
 mysql_connect('localhost','username','password');
-mysql_select_db('tethys');
+mysql_select_db(TETHYSDB);
 
 /*
  * Hauptmenü
@@ -48,6 +49,6 @@ function get_default_setting($key){
 /*
  * Start
  */
-include_once ROOT_HDD_CORE.'\\core\\start.php';
+if (!isset($configOnly)) include_once ROOT_HDD_CORE.'\\core\\start.php';
 
 ?>

@@ -25,5 +25,15 @@ ALTER TABLE core_user_right DROP INDEX `right`;
 
 ALTER TABLE `core_users` ADD `active` BOOLEAN NOT NULL DEFAULT TRUE AFTER `id` ;
 
-# DB:Fabian_CD -----------------------------------------------------------------
 # DB:Fabian_HD -----------------------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS `core_meta_dbversion` (
+  `modul_uc` varchar(20) COLLATE utf8_bin NOT NULL COMMENT 'UPPERCASE!',
+  `version` int(11) NOT NULL,
+  PRIMARY KEY (`modul_uc`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+INSERT INTO `core_meta_dbversion` (`modul_uc`, `version`) VALUES ('CORE', 4);
+
+# core0004.sql =====================================================================================
+# DB:Fabian_CD -----------------------------------------------------------------

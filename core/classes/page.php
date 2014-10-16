@@ -2,7 +2,7 @@
 
 class page{
 	
-	var $title;
+	var $title=null;
 	var $content;
 	var $page_id;
 	var $stylesheets;
@@ -25,6 +25,8 @@ class page{
 	}
 	
 	function send(){
+		
+		if ($this->title===null && USER_ADMIN) echo"Seite nicht initialisiert!";
 		
 		$content=$this->content;
 		$title=$this->title;

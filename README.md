@@ -1,9 +1,9 @@
 Tethys (Beta)
 =============
 
-Version: 0.10.2
+Version: 0.11.0
 
-Database: core003.sql + changes
+Database-Version: 4
 
 TODO:
 * Generic Edit, Insert
