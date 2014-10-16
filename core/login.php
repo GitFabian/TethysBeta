@@ -3,7 +3,7 @@
 function login(){
 	global $user;
 	
-	define('USER_ID', 1);
+	define('USER_ID', 54);
 	
 	$user=dbio_SELECT_SINGLE("core_users", USER_ID);
 

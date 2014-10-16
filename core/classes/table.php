@@ -102,7 +102,6 @@ class datatable{
 		$options="'bLengthChange':false,"
 				."'iDisplayLength':15,"
 				."language:{url:'".ROOT_HTTP_CORE."/core/html/jquery.dataTables.German.json'},"
-// 				."'fnInitComplete':function(oSettings,json){alert('!');},"
 			;
 		if (!$this->paginate) $options.='"bPaginate":false,';
 		$page->add_inline_script("\$(document).ready(function(){ \$('$this->selector').dataTable({".$options."}); });");

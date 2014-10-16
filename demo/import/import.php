@@ -8,6 +8,7 @@ mysql_select_db('xxxxxxxxDBASExxxxxxxxxx');
 
 include_once '../../config_start.php';
 if (!USER_ADMIN) exit;
+$page->init("core_import", "Import");
 
 include_once ROOT_HDD_CORE.'/core/classes/table.php';
 
