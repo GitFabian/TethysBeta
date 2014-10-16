@@ -1,0 +1,63 @@
+@CHARSET "utf-8";
+
+/*==================================================================
+    DYNAMIC DEVELOPMENT
+==================================================================*/
+div.invisible,
+span.invisible{
+	display:none;
+}
+/*CSS Developer:
+.invisible{background:url('img/core/devel_bg.png');}
+div.invisible{display:block;}
+span.invisible{display:inline;}
+/**/
+div.devel_performance{
+	text-align:right;
+}
+
+/*==================================================================
+    BODY,TEXT
+==================================================================*/
+
+/*(IE-Fix)*/
+img{
+	border:none;
+}
+
+body,div,th,td,h1,h2,h3,h4,hr,pre{
+	margin:0px;
+	padding:0px;
+}
+
+ul{
+	margin:0px;
+	padding:0px 0px 0px 20px;
+}
+
+span.strike{
+	text-decoration:line-through;
+}
+
+/*==================================================================
+    TABELLEN,LISTEN
+==================================================================*/
+
+/*----------------------- table.wide -----------------------*/
+table.wide thead tr{
+	height:100px;
+}
+table.wide th{
+	text-align:left;
+	vertical-align:bottom;
+	transform: rotate(-30deg);
+	transform-origin:0px 70px;
+	padding:0px;
+	max-width:50px;
+	word-break: keep-all;
+}
+table.wide th:first-child{
+	max-width:inherit;
+	transform:none;
+}
+

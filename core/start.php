@@ -54,7 +54,7 @@ module_read();
 /*
  * Benutzerkonfiguration
  */
-if (strcasecmp(CFG_SKIN,"demo")==0||strcasecmp(CFG_SKIN,"plain")==0){
+if (strcasecmp(CFG_SKIN,"demo")==0){
 	$page->add_stylesheet(ROOT_HTTP_CORE."/demo/skins/".CFG_SKIN."/screen.css");
 }else{
 	$page->add_stylesheet(ROOT_HTTP_SKINS."/".CFG_SKIN."/screen.css");

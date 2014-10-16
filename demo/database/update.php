@@ -65,6 +65,7 @@ $new_version=get_version('CORE');
 if ($new_version>$version){
 	$page->add_div("Updated CORE: v$version &rarr; v$new_version");
 }
+if(!USER_ADMIN){page_send_exit("Keine Updates der Module!");}
 foreach ($modules as $modul_id=>$modul) {
 	if (strcasecmp($modul_id, "demo")==0){
 		$php=ROOT_HDD_CORE."/demo/modules/demo/db_update.php";

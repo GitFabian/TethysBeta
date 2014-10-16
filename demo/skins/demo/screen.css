@@ -11,39 +11,13 @@
 /*==================================================================
     DYNAMIC DEVELOPMENT
 ==================================================================*/
-.invisible{
-	display:none;
-}
-/*CSS Developer:
-.invisible{background:url('img/core/devel_bg.png');}
-div.invisible{display:block;}
-span.invisible{display:inline;}
-/**/
 div.css_version_141009{
 	display:none;
-}
-div.devel_performance{
-	text-align:right;
 }
 
 /*==================================================================
     BODY,TEXT
 ==================================================================*/
-
-/*(IE-Fix)*/
-img{
-	border:none;
-}
-
-body,div,th,td,h1,h2,h3,h4,hr,pre{
-	margin:0px;
-	padding:0px;
-}
-
-ul{
-	margin:0px;
-	padding:0px 0px 0px 20px;
-}
 
 body{
 	background:black;
@@ -77,9 +51,6 @@ hr{
 	border:none;
 	border-bottom:1px solid #85dea5;
 	margin:5px 0px;
-}
-span.strike{
-	text-decoration:line-through;
 }
 
 /*==================================================================
@@ -209,25 +180,20 @@ table tbody tr:hover td{
 	background:#4f1b39;
 }
 /*----------------------- table.wide -----------------------*/
-table.wide thead tr{
-	height:100px;
-}
 table.wide th{
 	background:none;
 	color:#85dea5;
-	transform: rotate(-30deg);
-	transform-origin:0px 70px;
-	padding:0px;
-	max-width:50px;
-	word-break: keep-all;
 }
 table.wide th:first-child{
-	max-width:inherit;
-	transform:none;
-	padding:0px 10px;
 	opacity:0;
 }
 table.wide th.col_highlight{
+	color:#e7cd5e;
+}
+table.wide tbody tr td{
+	background:none;
+}
+table.wide tr:hover td:first-child{
 	color:#e7cd5e;
 }
 /*----------------------- core_rights -----------------------*/
@@ -237,15 +203,10 @@ table.core_rights thead tr{
 table.core_rights th{
 	transform-origin:0px 90px;
 	max-width:37px;
+	width:37px;
 }
-table.core_rights tr:hover td{
-	background:inherit;
-}
-table.core_rights tr:hover td:first-child{
-	color:#e7cd5e;
-}
-table.core_rights tr:hover td:first-child:hover{
-	color:inherit;
+table.wide th:first-child{
+	width:inherit;
 }
 /*----------------------- datatables -----------------------*/
 div.dataTables_filter{

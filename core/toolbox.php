@@ -76,8 +76,9 @@ function request_extract_booleans(){
 	return $r;
 }
 
-function page_send_exit(){
+function page_send_exit($error_message=null){
 	global $page;
+	if ($error_message) $page->content="---$error_message---<br><br>".$page->content;
 	$page->send();
 	exit;
 }

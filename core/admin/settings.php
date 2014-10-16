@@ -33,7 +33,7 @@ if (request_command("update")) core_settings_update2(null);
 /*
  * Skins ermitteln
  */
-$skins=array("demo"=>"demo","plain"=>"plain");
+$skins=array("demo"=>"demo");
 $skins_dir=opendir(ROOT_HDD_SKINS);
 while (false !== ($file = readdir($skins_dir))) {
 	if ($file!='.'&&$file!='..'){

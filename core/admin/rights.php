@@ -32,11 +32,18 @@ $page->add_html($table_rights->toHTML());
 /*
  * Tabelle Benutzer-Rechte
  */
-$page->add_inline_script("function ajax_update_rights(id,right,elem){
-		state=(elem.checked?'1':'0');
-		".ajax("update_rights&id=\"+id+\"&right=\"+right+\"&state=\"+state+\"",null,"alertify_ajax_response(response);")."
-}
-");
+//Strg+Klick Strg+Click Ctrl+Klick Ctrl+Click:
+$page->add_inline_script("var ctrlKey=false;
+		function bind_click_modifier(){
+			$('input').bind('click', function(event){ 
+				ctrlKey=event.ctrlKey;
+		 	}); 
+		}
+		function ajax_update_rights(id,right,elem){
+			state=(elem.checked?'1':'0');
+			".ajax("update_rights&id=\"+id+\"&right=\"+right+\"&state=\"+state+\"&modiCtrl=\"+ctrlKey+\"",null,"if(ctrlKey){window.location.reload();}else{alertify_ajax_response(response);}")."
+		}");
+$page->onload_JS.="bind_click_modifier();";
 $query_users=dbio_SELECT("core_users","active=1","id,nick");
 $query_user_right = dbio_SELECT("core_user_right");
 $rights_grid=array();

@@ -14,6 +14,8 @@ function update_rights(){
 	$id=request_value("id");
 	$right=request_value("right");
 	$state=request_value("state");
+	$modiCtrl=(request_value("modiCtrl")=="true");
+	if ($id==USER_ID&&$right=='RIGHT_ADMIN') ajax_exit("!Keine gute Idee!");
 	
 	right_set($id, $right, $state);
 	

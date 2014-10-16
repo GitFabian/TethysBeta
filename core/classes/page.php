@@ -16,6 +16,7 @@ class page{
 	function __construct(){
 		$this->content="";
 		$this->stylesheets=array();
+		$this->add_stylesheet(ROOT_HTTP_CORE."/core/html/core.css");
 		$this->libraries=array();
 		$this->add_library(ROOT_HTTP_CORE."/core/html/toolbox.js");
 		$this->inline_JS="";

@@ -1,5 +1,5 @@
 <?php
-if(!defined('USER_ADMIN')||!USER_ADMIN){echo"Demo-Modul: Keine Berechtigung!";exit;}
+if(!defined('USER_ADMIN')||!USER_ADMIN){echo"Keine Berechtigung!";exit;}
 
 if ($version<1){
 	dbio_query("CREATE TABLE IF NOT EXISTS `demo_features` (
