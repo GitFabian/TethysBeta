@@ -41,16 +41,31 @@ ul.views_menu{
 body#core_index div.innerbody{
 	width:1310px;
 }
+hr{
+	border:none;
+	border-bottom:1px solid #85dea5;
+	margin:5px 0px;
+}
+
+/*==================================================================
+    ABSÄTZE
+==================================================================*/
+
 h1{
 	font-size:21px;
 	font-weight:bold;
 	border-bottom:1px solid #e7cd5e;
 	margin:10px 0px;
 }
-hr{
-	border:none;
-	border-bottom:1px solid #85dea5;
-	margin:5px 0px;
+
+/*----------------------- Codeblock -----------------------*/
+
+pre.code{
+	background:black;
+	padding:10px;
+	border-radius:7px;
+	border:1px solid gray;
+	color:#e7cd5e;
 }
 
 /*==================================================================
