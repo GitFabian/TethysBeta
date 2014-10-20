@@ -80,6 +80,7 @@ a:hover{
 	background:#174d9d;
 }
 input[type=submit],
+input[type=button],
 a.button{
 	border:none;
 	background:#85dea5;
@@ -88,6 +89,7 @@ a.button{
 	padding:0px 10px;
 }
 input[type=submit]:hover,
+input[type=button]:hover,
 a.button:hover{
 	box-shadow:0px 0px 3px #0f3a7b inset;
 	cursor:pointer;
@@ -243,12 +245,14 @@ form label{
 	min-width:250px;
 }
 input[type='text'],
+input[type='password'],
 input[type='search'],
 select{
 	border:none;
 }
 form select,
-form input[type='text']{
+form input[type='text'],
+form input[type='password']{
 	vertical-align:bottom;
 	width:500px;
 }
@@ -306,15 +310,3 @@ iframe.fullsize{
 	border-radius:5px;
 }
 
-
-/*==================================================================
-    MODUL:TETHYS
-==================================================================*/
-
-body#tethys_ftp div.innerbody,
-body#tethys_commits div.innerbody{
-	background:none;
-	padding:0px;
-	max-width:1350px;
-	box-shadow:none;
-}

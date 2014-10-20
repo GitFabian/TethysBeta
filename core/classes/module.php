@@ -46,7 +46,7 @@ function module_read(){
 		foreach ($module as $modul) {
 			$modul=trim($modul);
 			if ($modul){
-				if (strcasecmp($modul, "demo")==0){
+				if (strcasecmp($modul, "demo")==0||strcasecmp($modul, "tethys")==0){
 					$php=ROOT_HDD_CORE.'/demo/modules/'.$modul.'/tethys.php';
 				}else{
 					$php=ROOT_HDD_MODULES.'/'.$modul.'/tethys.php';

@@ -3,7 +3,7 @@
 /*
 include_once ROOT_HDD_CORE.'/core/classes/table.php';
 
-http://217.91.49.199/tethyswiki/index.php/Tabelle
+http://tethys-framework.de/wiki/?title=Tabelle
  */
 
 class table{

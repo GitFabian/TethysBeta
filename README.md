@@ -1,7 +1,7 @@
 Tethys (Beta)
 =============
 
-Version: 0.11.1
+Version: 0.11.2
 
 Database-Version: 4
 
@@ -13,3 +13,4 @@ TODO:
 * Logs
 * Setcard-Klassen
 * eMails
+* Upload

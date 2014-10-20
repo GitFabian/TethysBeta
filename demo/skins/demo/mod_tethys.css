@@ -1,0 +1,9 @@
+@CHARSET "utf-8";
+
+body#tethys_ftp div.innerbody,
+body#tethys_commits div.innerbody{
+	background:none;
+	padding:0px;
+	max-width:1350px;
+	box-shadow:none;
+}

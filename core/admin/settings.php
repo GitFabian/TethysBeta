@@ -20,9 +20,9 @@ setting_save(null, 'SET_PGSEL_SETTINGS', $view, true);
 if (request_command("updated")){
 	$n=request_value("n");
 	if ($n){
-		$page->add_div("--- $n Konfigurationen aktualisiert. ---<br><br>");
+		$page->say(html_div("--- $n Konfigurationen aktualisiert. ---<br><br>"));
 	}else{
-		$page->add_div("--- (Keine Änderung) ---<br><br>");
+		$page->say(html_div("--- (Keine Änderung) ---<br><br>"));
 	}
 }
 
@@ -70,7 +70,8 @@ $form->add_fields("Features",null);
 settings_add_field($form,"FEATURE_BETA","BETA-Features",'CHECKBOX');
 //$form->add_field( new form_field("FEAT_EDIT_NICK","Nick bearbeiten",setting_value('FEAT_EDIT_NICK'),'CHECKBOX') );
 
-$page->add_html($form->toHTML());
+$page->say("Zur ".html_a("Server-Konfiguration", ROOT_HTTP_CORE."/install.".CFG_EXTENSION).".");
+$page->say($form->toHTML());
 
 $page->send();
 exit;//============================================================================================

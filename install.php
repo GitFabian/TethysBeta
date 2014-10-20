@@ -1,58 +1,94 @@
 <?php
-include_once 'core/classes/page.php';
-include_once 'core/classes/menu.php';
-include_once 'core/toolbox.php';
-include_once 'core/classes/form.php';
 $update=false;
 if(file_exists('config_start.php')){
+	include_once 'config_start.php';
+	if (!USER_ADMIN) page_send_exit("Keine Berechtigung!");
+	$http_core=ROOT_HTTP_CORE;
 	$update=true;
+	
+	$file=fopen("config_start.php", "r");
+	$content=fread($file, 9999);
+	fclose($file);
+	
+	preg_match("/\\n\\s*mysql_connect\\s*\\(\\s*'(.*?)'\\s*,\\s*'(.*?)'\\s*,\\s*'(.*?)'\\s*\\)\\s*;/", $content, $matches);
+	$sql_server=$matches[1];
+	$sql_user=$matches[2];
+	$sql_pass=$matches[3];
 }else{
+	include_once 'core/classes/page.php';
+	include_once 'core/classes/menu.php';
+	include_once 'core/toolbox.php';
 	define('ROOT_HTTP_CORE','.');
 	define('USER_ADMIN','0');
 	define('CFG_CSS_VERSION','');
+	define('CFG_TITLE','Installation');
+	function hauptmenue($page_id){return null;}
+	$page=new page();
+	$page->add_stylesheet("demo/skins/demo/screen.css");
+	define('CFG_EXTENSION', 'php');
+	$mydir=getcwd();
+	define('ROOT_HDD_CORE', $mydir);
+	define('ROOT_HDD_MODULES', $mydir.'\\modules');
+	define('ROOT_HDD_SKINS', $mydir.'\\skins');
+	define('ROOT_HDD_DATA', $mydir.'\\DATA');
+	$http_core=substr($_SERVER["SCRIPT_NAME"],0,strrpos($_SERVER["SCRIPT_NAME"], "/"));
+	define('ROOT_HTTP_MODULES', $http_core.'/modules');
+	define('ROOT_HTTP_SKINS', $http_core.'/skins');
+	define('ROOT_HTTP_DATA', $http_core.'/DATA');
+	define('TETHYSDB', 'tethys');
+	$sql_server=$_SERVER["SERVER_NAME"];
+	$sql_user="";
+	$sql_pass="";
 }
-$page=new page();
-$page->add_stylesheet("demo/skins/demo/screen.css");
-if(request_command("run"))run();
+$page->init("core_admin", "Server-Konfiguration");
+if(request_command("run"))run($update);
+include_once 'core/classes/form.php';
 
 $form=new form("run");
 $form->add_fields("MySQL",array(
-		new form_field("sql_server","Server"),
-		new form_field("TETHYSDB","Datenbank"),
-		new form_field("sql_user","Benutzername"),
-		new form_field("sql_pass","Passwort"),
+		new form_field("sql_server","Server",request_value("sql_server",$sql_server)),
+		new form_field("TETHYSDB","Datenbank",request_value("TETHYSDB",TETHYSDB)),
+		new form_field("sql_user","Benutzername",request_value("sql_user",$sql_user)),
+		new form_field("sql_pass","Passwort",request_value("sql_pass",$sql_pass),"PASSWORD"),
 ));
 $form->add_fields("Server-Verzeichnisse (HDD)",array(
-		new form_field("ROOT_HDD_CORE","Tethys"),
-		new form_field("ROOT_HDD_MODULES","Module"),
-		new form_field("ROOT_HDD_SKINS","Skins"),
-		new form_field("ROOT_HDD_DATA","Data"),
+		new form_field("ROOT_HDD_CORE","Tethys",request_value("ROOT_HDD_CORE",ROOT_HDD_CORE)),
+		new form_field("ROOT_HDD_MODULES","Module",request_value("ROOT_HDD_MODULES",ROOT_HDD_MODULES)),
+		new form_field("ROOT_HDD_SKINS","Skins",request_value("ROOT_HDD_SKINS",ROOT_HDD_SKINS)),
+		new form_field("ROOT_HDD_DATA","Data",request_value("ROOT_HDD_DATA",ROOT_HDD_DATA)),
 ));
 $form->add_fields("Server-Pfade (HTTP)",array(
-		new form_field("ROOT_HTTP_CORE","Tethys"),
-		new form_field("ROOT_HTTP_MODULES","Module"),
-		new form_field("ROOT_HTTP_SKINS","Skins"),
-		new form_field("ROOT_HTTP_DATA","Data"),
+		new form_field("ROOT_HTTP_CORE","Tethys",request_value("ROOT_HTTP_CORE",$http_core)),
+		new form_field("ROOT_HTTP_MODULES","Module",request_value("ROOT_HTTP_MODULES",ROOT_HTTP_MODULES)),
+		new form_field("ROOT_HTTP_SKINS","Skins",request_value("ROOT_HTTP_SKINS",ROOT_HTTP_SKINS)),
+		new form_field("ROOT_HTTP_DATA","Data",request_value("ROOT_HTTP_DATA",ROOT_HTTP_DATA)),
 ));
 
-$page->add_header1(($update?"Installation wiederholen":"Installation"));
-$page->add_html($form->toHTML());
+$page->say(html_header1(($update?"Server-Konfiguration":"Installation")));
+$page->say($form->toHTML());
 
 $page->send();
 exit;
 //===========================================================================
-function hauptmenue($page_id){
-	global $update;
-	if (!$update) return null;
-	$menu=new menu(null,null,$page_id);
-	new menu_topic($menu,"core_index",$page_id, "Start", "." );
-	return $menu->toHTML();
-}
-function run(){
+function run($update){
+	include_jquery();
 	global $page;
 	foreach ($_REQUEST as $key => $value) {
 		$$key=$value;
 	}
+	$fehler=null;
+	//SQL-Server
+	if (!@mysql_connect($sql_server,$sql_user,$sql_pass)){
+		$fehler="Fehler bei SQL-Verbindung: ".mysql_error();
+	}else if(!file_exists($ROOT_HDD_CORE."\install.php")){
+		$fehler="Server-Verzeichnis nicht gefunden!";
+	}
+	
+	if ($fehler){
+		$page->say("<div>--- $fehler ---</div>");
+		return;
+	}
+	
 	$config_file=<<<ENDE
 /*
  * Server-Konfiguration
@@ -86,10 +122,7 @@ mysql_select_db(TETHYSDB);
  * Hauptmenü
  */
 #include_once 'C:\\\\...\\\\MyProject\\\\shared\\\\config_xxxxxxxxxx.php';
-function hauptmenue(\$page_id){
-	\$menu=menu_get_default(\$page_id);
-	return \$menu->toHTML();
-}
+function hauptmenue(\$page_id){ \$menu=menu_get_default(\$page_id); return \$menu->toHTML(); }
 
 /*
  * Default Settings
@@ -104,7 +137,17 @@ function get_default_setting(\$key){
  */
 if (!isset(\$configOnly)) include_once ROOT_HDD_CORE.'\\\\core\\\\start.php';
 ENDE;
-	$page->add_pre(encode_html($config_file),"code");
+	$config_file="<?php\n$config_file\n?>";
+	
+	$file=fopen("config_start.php", "w");
+	fwrite($file, $config_file);
+	fclose($file);
+	
+	$page->say(html_div("Konfigurationsdatei erstellt."));
+	if (!mysql_select_db($TETHYSDB)||!$update)
+	$page->say(html_a_button("Datenbank initialisieren", "demo/database/update.php".($update?"":"?install")));
+// 	$page->say(html_button("config_start.php","","$('#cfg_file_content').toggle('invisible');"));
+// 	$page->say(html_div(html_pre(encode_html($config_file),"code"),"invisible","cfg_file_content"));
 	page_send_exit();
 }
 ?>

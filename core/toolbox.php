@@ -1,13 +1,13 @@
 <?php
 
 /*
- * http://217.91.49.199/tethyswiki/index.php/Toolbox
+ * http://tethys-framework.de/wiki/?title=Toolbox
  */
 
 /**
  $backtrace=backtrace_to_html(debug_backtrace());
  
- http://217.91.49.199/tethyswiki/index.php/Toolbox#backtrace_to_html
+ http://tethys-framework.de/wiki/?title=Toolbox#backtrace_to_html
  */
 function backtrace_to_html($debug_backtrace){
 	$backtrace="";
@@ -101,7 +101,7 @@ function escape_html($text){
 }
 
 function url_mod_pg($modul,$page){
-	if ($modul=='demo') return ROOT_HTTP_CORE."/demo/modules/$modul/$page.".CFG_EXTENSION;
+	if ($modul=='demo'||$modul=='tethys') return ROOT_HTTP_CORE."/demo/modules/$modul/$page.".CFG_EXTENSION;
 	return ROOT_HTTP_MODULES."/$modul/$page.".CFG_EXTENSION;
 }
 
@@ -159,6 +159,59 @@ function ajax($cmd,$modul=null,$function=null,$escape=false){
 	}
 	$quot=($escape?"&quot;":"\"");
 	return "tethys_ajax($quot$page?cmd=$cmd$quot,$quot$function$quot);";
+}
+
+function htmlEntity($name,$html,$pars){
+	$pars_html="";
+	if($pars)
+	foreach ($pars as $key => $value) {
+		if($value)
+		$pars_html.=" $key=\"$value\"";
+	}
+	return "<$name$pars_html>$html</$name>";
+}
+function htmlEntity2($name,$pars){
+	$pars_html="";
+	if($pars)
+		foreach ($pars as $key => $value) {
+			if($value)
+				$pars_html.=" $key=\"$value\"";
+		}
+	return "<$name$pars_html />";
+}
+
+function html_div($html,$class=null,$id=null){
+	return htmlEntity('div', $html, array(
+			"class"=>$class,
+			"id"=>$id,
+		));
+}
+function html_header1($html,$class=null){
+	return htmlEntity('h1', $html, array(
+			"class"=>$class,
+		));
+}
+function html_pre($html,$class=null){
+	return htmlEntity('pre', $html, array(
+			"class"=>$class,
+		));
+}
+function html_button($value,$class=null,$onClick=null){
+	return htmlEntity2('input', array(
+			"type"=>"button",
+			"value"=>$value,
+			"class"=>$class,
+			"onclick"=>$onClick,
+	));
+}
+function html_a($html,$href,$class=null){
+	return htmlEntity('a', $html, array(
+			"href"=>$href,
+			"class"=>$class,
+	));
+}
+function html_a_button($html,$href){
+	return html_a($html, $href, "button");
 }
 
 ?>

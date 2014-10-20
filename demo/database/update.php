@@ -56,35 +56,39 @@ if ($version<4){
   ADD CONSTRAINT `core_settings_ibfk_1` FOREIGN KEY (`user`) REFERENCES `core_users` (`id`);");
 }
 
+$current_version=4;
 //=================================================================================================
-dbio_query("UPDATE `core_meta_dbversion` SET `version` = '4' WHERE `modul_uc` = 'CORE';");
+dbio_query("UPDATE `core_meta_dbversion` SET `version` = '$current_version' WHERE `modul_uc` = 'CORE';");
 //=================================================================================================
 include_once '../../core/start.php';
 $page->init('core_update',"Update");
 $new_version=get_version('CORE');
 if ($new_version>$version){
-	$page->add_div("Updated CORE: v$version &rarr; v$new_version");
+	$page->say(html_div("Updated CORE: v$version &rarr; v$new_version"));
+}else{
+	$page->say(html_div("Up-To-Date! (Version $current_version)"));
 }
 if(!USER_ADMIN){page_send_exit("Keine Updates der Module!");}
 foreach ($modules as $modul_id=>$modul) {
-	if (strcasecmp($modul_id, "demo")==0){
-		$php=ROOT_HDD_CORE."/demo/modules/demo/db_update.php";
+	if (strcasecmp($modul_id, "demo")==0||strcasecmp($modul_id, "tethys")==0){
+		$php=ROOT_HDD_CORE."/demo/modules/$modul_id/db_update.php";
 	}else{
 		$php=ROOT_HDD_MODULES."/$modul_id/db_update.php";
 	}
 	if (file_exists($php)){
 		$modulnameUC=strtoupper($modul_id);
 		$version=get_version($modulnameUC);
-		if (!$version) dbio_query("INSERT INTO `core_meta_dbversion` (`modul_uc`, `version`) VALUES ('$modulnameUC', 0)");
+		if (!$version) dbio_query("INSERT INTO `core_meta_dbversion` (`modul_uc`, `version`) VALUES ('$modulnameUC', 1)");
 		include_once $php;
 		$new_version=get_version($modulnameUC);
 		if ($new_version>$version){
-			$page->add_div("Updated $modulnameUC: v$version &rarr; v$new_version");
+			$page->say(html_div("Updated $modulnameUC: v$version &rarr; v$new_version"));
 		}
 	}else{
 		if (USER_ADMIN) echo "Keine db_update.php für Modul \"".$modul->modul_name."\"!";
 	}
 }
+if (isset($_REQUEST['install'])) $page->say(html_a_button("Konfiguration", ROOT_HTTP_CORE."/core/admin/settings.php"));
 page_send_exit();//-----------------------------------------------------------
 function get_version($modul){
 	$query_version=dbio_SELECT_SINGLE("core_meta_dbversion", strtoupper($modul), "modul_uc");

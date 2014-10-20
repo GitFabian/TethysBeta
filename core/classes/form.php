@@ -3,7 +3,7 @@
 /*
 include_once ROOT_HDD_CORE.'/core/classes/form.php';
 
-http://217.91.49.199/tethyswiki/index.php/Formular
+http://tethys-framework.de/wiki/?title=Formular
  */
 
 class form{
@@ -109,11 +109,12 @@ class form_field{
 	var $title;
 	var $options;
 	
-	function __construct($name,$label=null,$value="",$type="TEXT",$title=null,$options=null){
+	function __construct($name,$label=null,$value="[REQ]",$type="TEXT",$title=null,$options=null){
 		if ($label===null) $label=$name;
 		$this->label=$label;
 		$this->name=$name;
 		$this->type=$type;
+		if ($value=="[REQ]") $value=request_value($name,"");
 		$this->value=$value;
 		$this->title=$title;
 		$this->options=$options;
@@ -131,6 +132,8 @@ class form_field{
 				$options.="\n\t<option$selected value=\"$key\">$value</option>";
 			}
 			$input="<select name=\"".$this->name."\">$options\n</select>";
+		}else if ($this->type=="PASSWORD"){
+			$input="<input type=\"password\" name=\"".$this->name."\" value=\"$value\" />";
 		}else{
 			$input="<input type=\"text\" name=\"".$this->name."\" value=\"$value\" />";
 		}

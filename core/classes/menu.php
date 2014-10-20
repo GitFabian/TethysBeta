@@ -90,7 +90,7 @@ function menu_get_default($page_id){
 		new menu_topic($menu_admin,"core_settings",$page_id,"Konfig",url_core_admin("settings"));
 		if (file_exists(ROOT_HDD_CORE."/core/admin/import.php"))
 			new menu_topic($menu_admin,"core_import",$page_id,"Import",url_core_admin("import"));
-		new menu_topic($menu_admin,"core_update",$page_id,"Update",ROOT_HTTP_CORE."/demo/database/update.php");
+		new menu_topic($menu_admin,"core_update",$page_id,"Update",ROOT_HTTP_CORE."/demo/database/update.".CFG_EXTENSION);
 	}
 
 	foreach ($modules as $module) {

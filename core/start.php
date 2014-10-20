@@ -12,6 +12,8 @@ include_once 'toolbox.php';
 include_once ROOT_HDD_CORE.'/core/classes/menu.php';
 
 //Datenbank:
+if (!mysql_select_db(TETHYSDB)||mysql_num_rows(mysql_query("SHOW TABLES LIKE 'core_meta_dbversion'"))!=1){
+	echo "Datenbank nicht gefunden! [<a href=\"demo/database/update.php\">Datenbank initialisieren</a>]";exit;}
 include_once 'dbio.php';
 mysql_query ('SET NAMES utf8');
 
@@ -36,6 +38,9 @@ login();
 include_once ROOT_HDD_CORE.'/core/rights.php';
 $rights=rights_init();
 
+//Admin bekommt PHP-Fehler angezeigt:
+if (USER_ADMIN) ini_set('display_errors', 'On');
+
 /*
  * Globale Konfiguration
  */
@@ -54,14 +59,18 @@ module_read();
 /*
  * Benutzerkonfiguration
  */
+$css_hdd=ROOT_HDD_SKINS."/".CFG_SKIN;
+$css_http=ROOT_HTTP_SKINS."/".CFG_SKIN;
 if (strcasecmp(CFG_SKIN,"demo")==0){
-	$page->add_stylesheet(ROOT_HTTP_CORE."/demo/skins/".CFG_SKIN."/screen.css");
-}else{
-	$page->add_stylesheet(ROOT_HTTP_SKINS."/".CFG_SKIN."/screen.css");
+	$css_hdd=ROOT_HDD_CORE."/demo/skins/".CFG_SKIN;
+	$css_http=ROOT_HTTP_CORE."/demo/skins/".CFG_SKIN;
 }
-
-//Admin bekommt PHP-Fehler angezeigt:
-if (USER_ADMIN) ini_set('display_errors', 'On');
+$page->add_stylesheet($css_http."/screen.css");
+foreach ($modules as $mod_id => $module) {
+	if (file_exists($css_hdd."/mod_$mod_id.css")){
+		$page->add_stylesheet($css_http."/mod_$mod_id.css");
+	}
+}
 
 //===============================================================================================
 ?>

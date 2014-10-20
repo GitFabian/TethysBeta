@@ -137,18 +137,14 @@ $view=$page->init_views('xxxxxDEFAULTIDxxxxxxx',array(
 		$this->page_id=$page_id;
 	}
 	
+	/**
+	 * DEPRECATED! Use $page->say instead!
+	 */
 	function add_html($html){
 		$this->content.=$html;
 	}
-	function add_div($html,$pars=""){
-		$this->content.="<div $pars>$html</div>";
-	}
-	function add_header1($html){
-		$this->content.="<h1>$html</h1>";
-	}
-	function add_pre($html,$class){
-		if($class)$class=" class=\"$class\"";
-		$this->content.="<pre$class>$html</pre>";
+	function say($html){
+		$this->content.=$html;
 	}
 	
 	function add_stylesheet($url,$media=null){
