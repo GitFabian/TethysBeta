@@ -11,15 +11,15 @@ class modul_demo extends module{
 	}
 	
 	function get_menu($page_id){
-		$menu=new menu(null,"demo",$page_id,"Demo");
-		new menu_topic($menu,"demo_index",$page_id,"Index",url_demo('index'));
+		$menu=new menu(null,"demo",$page_id,"Demo",url_demo('index'));
+		#new menu_topic($menu,"demo_index",$page_id,"Index",url_demo('index'));
 		return $menu;
 	}
 	
 	function global_settings($form){
 		if ($form){
 			$form->add_fields("",array(
-				new_form_field('demo', "FEATURE1", "Feature 1", 'CHECKBOX'),
+				new_form_field('demo', "DEMOFEATURE1", "Abracadabra Bananarama", 'CHECKBOX'),
 			));
 		}
 		return true;
@@ -27,9 +27,9 @@ class modul_demo extends module{
 	
 	function get_default_setting($key){
 		//Global:
-		if ($key=='FEATURE1') return "1";
+		if ($key=='DEMOFEATURE1') return "1";
 		//User Specific:
-		if ($key=='demosetting') return "Hello world!";
+		if ($key=='demosetting') return "Duh bleepity gobble nizzle!";
 		if (USER_ADMIN) echo("Kein Default-Value für \"$key\"! /modules/demo/tethys.php:33");
 		return null;
 	}
@@ -38,9 +38,9 @@ class modul_demo extends module{
 		include_once ROOT_HDD_CORE.'/core/classes/form.php';
 		if (request_command("update")) $this->update_settings(); 
 		$form=new form("update");
-		
+
 		$form->add_fields("",array(
-				new form_field("demosetting",null,setting_get_user('demo', 'demosetting'),'TEXT'),
+				new form_field("demosetting","Crongely zoomflip crangle",setting_get_user('demo','demosetting'),'TEXT',(USER_ADMIN?"setting_get_user('demo','demosetting')":"")),
 		));
 		
 		return $form->toHTML();
@@ -49,7 +49,7 @@ class modul_demo extends module{
 		global $page;
 		$n=0;
 		$n+=$this->update_setting("demosetting");
-		$page->add_div("--- $n Settings geändert. ---<br><br>");
+		$page->say(html_div("--- $n Settings geändert. ---<br><br>"));
 	}
 	function update_setting($key){
 		$value=request_value($key,null);

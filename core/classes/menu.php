@@ -22,7 +22,7 @@ class menu extends menu_topic{
 			$sub="";
 			foreach ($this->topics as $topic) {
 				if ($topic)
-					$sub.="\n\t<li>".$topic->toHTML()."</li>";
+					$sub.="\n\t<li class=\"menutopic ".$topic->page_id."\">".$topic->toHTML()."</li>";
 			}
 			$html.="\n<ul>$sub\n</ul>";
 		}
@@ -83,6 +83,12 @@ function menu_get_default($page_id){
 	$menu=new menu(null,null,$page_id);
 	
 	new menu_topic($menu,"core_index",$page_id, CFG_HOME_LABEL, (CFG_HOME_URL?CFG_HOME_URL:ROOT_HTTP_CORE."/index.".CFG_EXTENSION) );
+
+	foreach ($modules as $module) {
+		$menu->add($module->get_menu($page_id));
+	}
+	
+	new menu_topic($menu,"core_user",$page_id, USER_NICK, url_core_admin("user") );
 	
 	if(USER_ADMIN){
 		$menu_admin=new menu($menu,"core_admin",$page_id,"Admin");
@@ -93,12 +99,6 @@ function menu_get_default($page_id){
 		new menu_topic($menu_admin,"core_update",$page_id,"Update",ROOT_HTTP_CORE."/demo/database/update.".CFG_EXTENSION);
 	}
 
-	foreach ($modules as $module) {
-		$menu->add($module->get_menu($page_id));
-	}
-
-	new menu_topic($menu,"core_user",$page_id, USER_NICK, url_core_admin("user") );
-	
 	return $menu;
 }
 

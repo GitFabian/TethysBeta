@@ -23,7 +23,7 @@ body{
 	background:black;
 	color:#85dea5;
 }
-body,input,pre{
+body,input,pre,select{
 	font-family:"AnonymousPro";
 	font-size:14px;
 }
@@ -137,6 +137,16 @@ div.mainmenu > ul > li > div.submenulabel + ul{
 }
 div.mainmenu > ul > li:hover > div.submenulabel + ul{
 	display:block;
+}
+li.menutopic.core_user,
+li.menutopic.core_admin{
+	padding-left:10px;
+	float:right;
+}
+li.menutopic.core_user ul{
+	position:relative;
+	right:0px;
+	text-align:right;
 }
 
 /*==================================================================
@@ -310,3 +320,6 @@ iframe.fullsize{
 	border-radius:5px;
 }
 
+iframe.fullsize.demo_css{
+	height:200px;
+}

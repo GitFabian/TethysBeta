@@ -40,8 +40,8 @@ if ($view=="core"){
 $page->send();
 exit;//============================================================================================
 function core_user_update(){
-	if (berechtigung('RIGHT_EDIT_NICK')){
-		//...
+	if (berechtigung('RIGHT_EDIT_NICK')&&request_value("nick")){
+		dbio_UPDATE("core_users", "id=".USER_ID, array("nick"=>request_value("nick")));
 	}
 	ajax_refresh("Speichere Daten...", "user.".CFG_EXTENSION."?cmd=updated");
 }

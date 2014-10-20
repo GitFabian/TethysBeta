@@ -24,8 +24,9 @@ function error_die($msg){
 	exit;
 }
 
-function html_iframe_fullsize($url){
-	return "<iframe src=\"$url\" width=\"100%\" frameborder=\"0\" class=\"fullsize\"></iframe>";
+function html_iframe_fullsize($url,$class){
+//TODO:return htmlEntity($name, $html, $pars);
+	return "<iframe src=\"$url\" width=\"100%\" frameborder=\"0\" class=\"fullsize $class\"></iframe>";
 }
 
 function request_command($cmd){
@@ -40,6 +41,12 @@ function request_command($cmd){
 function request_value($key,$else=null){
 	if (isset($_REQUEST[$key])) return $_REQUEST[$key];
 	return $else;
+}
+
+function request_unset($key){
+	$value=request_value($key);
+	unset($_REQUEST[$key]);
+	return $value;
 }
 
 /**
@@ -181,20 +188,23 @@ function htmlEntity2($name,$pars){
 }
 
 function html_div($html,$class=null,$id=null){
-	return htmlEntity('div', $html, array(
+	return "\n".htmlEntity('div', $html, array(
 			"class"=>$class,
 			"id"=>$id,
 		));
 }
 function html_header1($html,$class=null){
-	return htmlEntity('h1', $html, array(
+	return "\n".htmlEntity('h1', $html, array(
 			"class"=>$class,
 		));
 }
 function html_pre($html,$class=null){
-	return htmlEntity('pre', $html, array(
+	return "\n".htmlEntity('pre', $html, array(
 			"class"=>$class,
 		));
+}
+function html_code($html){
+	return html_pre($html,"code");
 }
 function html_button($value,$class=null,$onClick=null){
 	return htmlEntity2('input', array(
