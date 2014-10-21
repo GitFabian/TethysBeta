@@ -197,8 +197,8 @@ table td:first-child,table th:first-child{
 	padding-left:10px;
 }
 
-table tbody tr:nth-child(even) td{
-	background:#174d9d;
+table tbody tr{
+	background: linear-gradient(to bottom, rgba(15,58,123,1) 0%,rgba(23,77,157,1) 100%);
 }
 ul{
 	margin:10px 0px;
@@ -207,20 +207,28 @@ table tbody tr:hover td{
 	background:#4f1b39;
 }
 a.tbl_option{
-	background:none;
+	border-radius:0px;
 	color:#e7cd5e;
-	padding:0px 0px 0px 10px;
-x	background:url('img/core/checkbox_0.png');
-x	background-repeat:no-repeat;
-x	display:inline-block;
-x	width:0px;
-x	overflow:hidden;
-x	margin-left:10px;
+	padding:0px 0px 0px 13px;
+	display:inline-block;
+	width:0px;
+	overflow:hidden;
+	margin-left:10px;
+	background:url('img/core/checkbox_0.png');
+	background-repeat:no-repeat;
+	background-position:0px 2px;
+}
+a.tbl_option.tbl_edit{
+	background-image:url('img/core/edit.png');
+}
+a.tbl_option.tbl_delete{
+	background-image:url('img/core/delete.png');
 }
 a.tbl_option:hover{
 	box-shadow:none;
-x	background:url('img/core/checkbox_1.png');
-x	background-repeat:no-repeat;
+}
+div.tbl_new{
+	margin-top:10px;
 }
 /*----------------------- table.wide -----------------------*/
 table.wide th{
@@ -233,7 +241,7 @@ table.wide th:first-child{
 table.wide th.col_highlight{
 	color:#e7cd5e;
 }
-table.wide tbody tr td{
+table.wide tbody tr{
 	background:none;
 }
 table.wide tr:hover td:first-child{

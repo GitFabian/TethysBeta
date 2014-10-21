@@ -15,6 +15,7 @@ class table{
 	var $id;
 	var $col_highlight=false;
 	var $options=null;
+	var $options2=null;
 	
 	function __construct($query=null,$class=null,$datatable=true,$id=null){
 		$this->rows=array();
@@ -36,12 +37,16 @@ class table{
 	
 	function set_options($new,$edit,$delete,$db,$idkey='id'){
 		$this->options="";
+		$this->options2=null;
 		$idkeyquery=($idkey=='id'?"":"&idkey=$idkey");
 		if ($edit){
-			$this->options.=html_a_button("Bearbeiten", ROOT_HTTP_CORE."/edit.".CFG_EXTENSION."?db=$db&id=[ID:$idkey]$idkeyquery", "tbl_option tbl_edit");
+			$this->options.=html_a_button("Bearbeiten", ROOT_HTTP_CORE."/core/edit.".CFG_EXTENSION."?db=$db&id=[ID:$idkey]$idkeyquery", "tbl_option tbl_edit");
 		}
 		if ($delete){
-			$this->options.=html_a_button("Löschen", ROOT_HTTP_CORE."/edit.".CFG_EXTENSION."?cmd=delete&db=$db&id=[ID:$idkey]$idkeyquery", "tbl_option tbl_delete");
+			$this->options.=html_a_button("Löschen", ROOT_HTTP_CORE."/core/edit.".CFG_EXTENSION."?cmd=delete&db=$db&id=[ID:$idkey]$idkeyquery", "tbl_option tbl_delete");
+		}
+		if ($new){
+			$this->options2=html_div(html_a_button("Neuer Eintrag", ROOT_HTTP_CORE."/core/edit.".CFG_EXTENSION."?cmd=new&db=$db"),"tbl_new");
 		}
 	}
 	
@@ -103,8 +108,10 @@ $table_X->set_header(array(
 			$page->onload_JS.="highlight_table_col('#$this->id');";
 // 			$page->add_inline_script("highlight_table_col('#$this->id');");
 		}
+		
+		$options=($this->options2?$this->options2:"");
 
-		$html="\n<table$class id=\"$this->id\">\n\t<thead>\n\t\t$th\n\t</thead>\n\t<tbody>\n$rows\n\t</tbody>\n</table>";
+		$html="\n<table$class id=\"$this->id\">\n\t<thead>\n\t\t$th\n\t</thead>\n\t<tbody>\n$rows\n\t</tbody>\n</table>$options";
 		return $html;
 	}
 	

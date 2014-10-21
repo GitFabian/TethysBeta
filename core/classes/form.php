@@ -4,6 +4,7 @@
 include_once ROOT_HDD_CORE.'/core/classes/form.php';
 
 http://tethys-framework.de/wiki/?title=Formular
+bzw. http://localhost/tethys/demo/modules/demo/formular.php
  */
 
 class form{
@@ -56,6 +57,7 @@ class form{
 		}
 	}
 	
+	function __toString(){ return $this->toHTML(); }
 	function toHTML(){
 		$form="";
 		foreach ($this->field_groups as $g) {
