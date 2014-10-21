@@ -220,8 +220,8 @@ function html_a($html,$href,$class=null){
 			"class"=>$class,
 	));
 }
-function html_a_button($html,$href){
-	return html_a($html, $href, "button");
+function html_a_button($html,$href,$class=null){
+	return html_a($html, $href, "button $class");
 }
 
 ?>

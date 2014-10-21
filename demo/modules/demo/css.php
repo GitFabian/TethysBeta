@@ -1,7 +1,7 @@
 <?php
 include_once '../../config_start.php';
 
-$page->init('demo','CSS');
+$page->init('demo_css','CSS');
 
 $page->say(html_header1("Header 1"));
 $page->say(html_code("Codeblock"));

@@ -1,6 +1,6 @@
 <?php
 include_once '../../config_start.php';
-$page->init('demo','Formular');
+$page->init('demo_formular','Formular');
 include_once ROOT_HDD_CORE.'/core/classes/form.php';
 
 if(request_command("update"))update_demoformular();

@@ -206,6 +206,22 @@ ul{
 table tbody tr:hover td{
 	background:#4f1b39;
 }
+a.tbl_option{
+	background:none;
+	color:#e7cd5e;
+	padding:0px 0px 0px 10px;
+x	background:url('img/core/checkbox_0.png');
+x	background-repeat:no-repeat;
+x	display:inline-block;
+x	width:0px;
+x	overflow:hidden;
+x	margin-left:10px;
+}
+a.tbl_option:hover{
+	box-shadow:none;
+x	background:url('img/core/checkbox_1.png');
+x	background-repeat:no-repeat;
+}
 /*----------------------- table.wide -----------------------*/
 table.wide th{
 	background:none;
@@ -234,6 +250,9 @@ table.core_rights th{
 }
 table.wide th:first-child{
 	width:inherit;
+}
+table.demo_tbl2 th{
+	width:50px;
 }
 /*----------------------- datatables -----------------------*/
 div.dataTables_filter{

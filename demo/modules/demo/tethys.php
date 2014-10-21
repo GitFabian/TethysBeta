@@ -11,8 +11,12 @@ class modul_demo extends module{
 	}
 	
 	function get_menu($page_id){
-		$menu=new menu(null,"demo",$page_id,"Demo",url_demo('index'));
-		#new menu_topic($menu,"demo_index",$page_id,"Index",url_demo('index'));
+		$menu=new menu(null,"demo",$page_id,"Demo");
+		new menu_topic($menu,"demo_css",$page_id,"CSS",url_demo('css'));
+		new menu_topic($menu,"demo_views",$page_id,"Views",url_demo('views'));
+		new menu_topic($menu,"demo_tabelle",$page_id,"Tabelle",url_demo('tabelle'));
+		new menu_topic($menu,"demo_formular",$page_id,"Formular",url_demo('formular'));
+		#new menu_topic($menu,"demo_",$page_id,"",url_demo(''));
 		return $menu;
 	}
 	

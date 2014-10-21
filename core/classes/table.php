@@ -14,6 +14,7 @@ class table{
 	var $datatable;
 	var $id;
 	var $col_highlight=false;
+	var $options=null;
 	
 	function __construct($query=null,$class=null,$datatable=true,$id=null){
 		$this->rows=array();
@@ -27,6 +28,21 @@ class table{
 		$this->datatable=($datatable===true?new datatable("#".$id):$datatable);
 		
 		if ($query){ $this->add_query($query); }
+	}
+	
+	function __toString(){
+		return $this->toHTML();
+	}
+	
+	function set_options($new,$edit,$delete,$db,$idkey='id'){
+		$this->options="";
+		$idkeyquery=($idkey=='id'?"":"&idkey=$idkey");
+		if ($edit){
+			$this->options.=html_a_button("Bearbeiten", ROOT_HTTP_CORE."/edit.".CFG_EXTENSION."?db=$db&id=[ID:$idkey]$idkeyquery", "tbl_option tbl_edit");
+		}
+		if ($delete){
+			$this->options.=html_a_button("Löschen", ROOT_HTTP_CORE."/edit.".CFG_EXTENSION."?cmd=delete&db=$db&id=[ID:$idkey]$idkeyquery", "tbl_option tbl_delete");
+		}
 	}
 	
 	function add_query($query){
@@ -66,12 +82,17 @@ $table_X->set_header(array(
 		foreach ($headers as $value) {
 			$th.="<th>$value</th>";
 		}
-		if ($th){$th="<tr>$th</tr>";}
 		
 		$rows="";
 		foreach ($this->rows as $row) {
-			$rows.=$row->toHTML($headers);
+			$rows.=$row->toHTML($headers,$this->options);
 		}
+		
+		if ($this->options){
+			$th.="<th></th>";
+		}
+
+		if ($th){$th="<tr>$th</tr>";}
 		if (!$rows) $rows="<tr><td>(Keine Einträge)</td></tr>";
 		
 		$class=($this->class?" class=\"".$this->class."\"":"");
@@ -116,7 +137,7 @@ class table_row{
 		$this->data=$data;
 	}
 	
-	function toHTML($headers=null){
+	function toHTML($headers=null,$options=null){
 		$tr="";
 		if (!$headers){
 			foreach ($this->data as $data) {
@@ -130,6 +151,12 @@ class table_row{
 					$tr.="\n\t\t\t<td></td>";
 				}
 			}
+		}
+		if ($options){
+			preg_match("/\\[ID\\:(.*?)\\]/", $options, $matches);
+			$idkey=$matches[1];
+			$value=$this->data[$idkey];
+			$tr.="\n\t\t\t<td>".preg_replace("/\\[ID\\:$idkey\\]/", $value, $options)."</td>";
 		}
 		return "\n\t\t<tr>$tr\n\t\t</tr>";
 	}
