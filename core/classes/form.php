@@ -16,6 +16,7 @@ class form{
 	var $method;
 	var $hidden_fields;
 	var $booleans;
+	var $buttons="";
 	
 	function __construct($cmd,$target=null,$submit_msg=null,$class=null){
 		$this->method=(USER_ADMIN?"get":"post");
@@ -72,7 +73,7 @@ class form{
 		}
 		
 		$submit_msg=($this->submit_msg?" value=\"".$this->submit_msg."\"":"");
-		$buttons="\n\t<div class=\"form_buttons\"><label for=\"submit\"></label><input type=\"submit\" name=\"submit\"$submit_msg /></div>";
+		$buttons="\n\t<div class=\"form_buttons\"><label for=\"submit\"></label><input type=\"submit\" name=\"submit\"$submit_msg />$this->buttons</div>";
 		
 		$class=($this->class?" class=\"".$this->class."\"":"");
 		

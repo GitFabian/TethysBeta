@@ -21,6 +21,7 @@ $form->add_fields("Hum wiggle zip", array(
 		new form_field("duh","Duh",request_value("duh","Doo nippy do-da tangity")),
 		#new form_field("Crongle-Wooble","cronglewoob"),
 ));
+$form->buttons.=html_a_button("link-button","css.".CFG_EXTENSION);
 $page->say($form->toHTML());
 
 $page->send();

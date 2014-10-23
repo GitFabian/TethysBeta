@@ -214,11 +214,13 @@ function html_button($value,$class=null,$onClick=null){
 			"onclick"=>$onClick,
 	));
 }
-function html_a($html,$href,$class=null){
-	return htmlEntity('a', $html, array(
+function html_a($html,$href,$class=null,$external=false){
+	$pars=array(
 			"href"=>$href,
 			"class"=>$class,
-	));
+	);
+	if ($external) $pars["target"]="_blank";
+	return htmlEntity('a', $html, $pars);
 }
 function html_a_button($html,$href,$class=null){
 	return html_a($html, $href, "button $class");
