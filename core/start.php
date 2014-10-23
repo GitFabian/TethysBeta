@@ -13,7 +13,7 @@ include_once ROOT_HDD_CORE.'/core/classes/menu.php';
 
 //Datenbank:
 if (!mysql_select_db(TETHYSDB)||mysql_num_rows(mysql_query("SHOW TABLES LIKE 'core_meta_dbversion'"))!=1){
-	echo "Datenbank nicht gefunden! [<a href=\"demo/database/update.php\">Datenbank initialisieren</a>]";exit;}
+	echo "Datenbank nicht gefunden! [<a href=\"demo/database/update.".CFG_EXTENSION."\">Datenbank initialisieren</a>]";exit;}
 include_once 'dbio.php';
 mysql_query ('SET NAMES utf8');
 

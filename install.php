@@ -14,6 +14,10 @@ if(file_exists('config_start.php')){
 	$sql_server=$matches[1];
 	$sql_user=$matches[2];
 	$sql_pass=$matches[3];
+	
+	preg_match("/\\n\\/\\*HM=\\*\\/include_once '(.*?)';/", $content, $matches);
+	$hauptmenue=$matches[1];
+	$hauptmenue=preg_replace("/\\\\\\\\/", "\\\\", $hauptmenue);
 }else{
 	include_once 'core/classes/page.php';
 	include_once 'core/classes/menu.php';
@@ -39,6 +43,7 @@ if(file_exists('config_start.php')){
 	$sql_server=$_SERVER["SERVER_NAME"];
 	$sql_user="";
 	$sql_pass="";
+	$hauptmenue=$mydir."\configExample.php";
 }
 $page->init("core_admin", "Server-Konfiguration");
 if(request_command("run"))run($update);
@@ -62,6 +67,10 @@ $form->add_fields("Server-Pfade (HTTP)",array(
 		new form_field("ROOT_HTTP_MODULES","Module",request_value("ROOT_HTTP_MODULES",ROOT_HTTP_MODULES)),
 		new form_field("ROOT_HTTP_SKINS","Skins",request_value("ROOT_HTTP_SKINS",ROOT_HTTP_SKINS)),
 		new form_field("ROOT_HTTP_DATA","Data",request_value("ROOT_HTTP_DATA",ROOT_HTTP_DATA)),
+));
+$form->add_fields("",array(
+		new form_field("CFG_EXTENSION","Virtuelle Extension",request_value("CFG_EXTENSION",CFG_EXTENSION)),
+		new form_field("hauptmenue","Hauptmenü",request_value("hauptmenue",$hauptmenue),'text',"Pfad zur Hauptmenü-PHP"),
 ));
 
 $page->say(html_header1(($update?"Server-Konfiguration":"Installation")));
@@ -89,6 +98,11 @@ function run($update){
 		return;
 	}
 	
+	$ROOT_HDD_CORE=preg_replace("/\\\\/", "\\\\\\\\", $ROOT_HDD_CORE);
+	$ROOT_HDD_MODULES=preg_replace("/\\\\/", "\\\\\\\\", $ROOT_HDD_MODULES);
+	$ROOT_HDD_SKINS=preg_replace("/\\\\/", "\\\\\\\\", $ROOT_HDD_SKINS);
+	$ROOT_HDD_DATA=preg_replace("/\\\\/", "\\\\\\\\", $ROOT_HDD_DATA);
+	$hauptmenue=preg_replace("/\\\\/", "\\\\\\\\", $hauptmenue);
 	$config_file=<<<ENDE
 /*
  * Server-Konfiguration
@@ -99,7 +113,7 @@ function run($update){
  * Manuelle Änderungen können vom Tethys-Installer überschrieben werden!
  * =====================================================================
  */
-define('CFG_EXTENSION', 'php');
+define('CFG_EXTENSION', '$CFG_EXTENSION');
 
 define('ROOT_HDD_CORE', '$ROOT_HDD_CORE');
 define('ROOT_HDD_MODULES', '$ROOT_HDD_MODULES');
@@ -121,8 +135,7 @@ mysql_select_db(TETHYSDB);
 /*
  * Hauptmenü
  */
-#include_once 'C:\\\\...\\\\MyProject\\\\shared\\\\config_xxxxxxxxxx.php';
-function hauptmenue(\$page_id){ \$menu=menu_get_default(\$page_id); return \$menu->toHTML(); }
+/*HM=*/include_once '$hauptmenue';
 
 /*
  * Default Settings
@@ -145,7 +158,7 @@ ENDE;
 	
 	$page->say(html_div("Konfigurationsdatei erstellt."));
 	if (!mysql_select_db($TETHYSDB)||!$update)
-	$page->say(html_a_button("Datenbank initialisieren", "demo/database/update.php".($update?"":"?install")));
+	$page->say(html_a_button("Datenbank initialisieren", "demo/database/update.".$CFG_EXTENSION.($update?"":"?install")));
 // 	$page->say(html_button("config_start.php","","$('#cfg_file_content').toggle('invisible');"));
 // 	$page->say(html_div(html_pre(encode_html($config_file),"code"),"invisible","cfg_file_content"));
 	page_send_exit();

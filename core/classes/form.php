@@ -139,7 +139,7 @@ class form_field{
 		}else{
 			$input="<input type=\"text\" name=\"".$this->name."\" value=\"$value\" />";
 		}
-		$title=($this->title?" title=\"".htmlentities($this->title)."\"":"");
+		$title=($this->title?" title=\"".encode_html($this->title)."\"":"");
 		return "<div class=\"form_field\"><label for=\"".$this->name."\"$title>".$this->label."</label>$input</div>";
 	}
 	

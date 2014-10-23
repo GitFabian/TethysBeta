@@ -88,7 +88,7 @@ foreach ($modules as $modul_id=>$modul) {
 		if (USER_ADMIN) echo "Keine db_update.php für Modul \"".$modul->modul_name."\"!";
 	}
 }
-if (isset($_REQUEST['install'])) $page->say(html_a_button("Konfiguration", ROOT_HTTP_CORE."/core/admin/settings.php"));
+if (isset($_REQUEST['install'])) $page->say(html_a_button("Konfiguration", ROOT_HTTP_CORE."/core/admin/settings.".CFG_EXTENSION));
 page_send_exit();//-----------------------------------------------------------
 function get_version($modul){
 	$query_version=dbio_SELECT_SINGLE("core_meta_dbversion", strtoupper($modul), "modul_uc");
