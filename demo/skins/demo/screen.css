@@ -151,6 +151,29 @@ li.menutopic.core_user ul{
 	right:0px;
 	text-align:right;
 }
+/*----------------------- Icons -----------------------*/
+div.mainmenu.icons > ul > li > div.submenulabel,
+div.mainmenu.icons > ul > li.menutopic > div/*DEPRECATED*/ > a{
+	background-image:url('img/core/modul.png');
+	background-repeat:no-repeat;
+	padding-left:23px;
+	background-position:2px 0px;
+}
+div.mainmenu.icons > ul > li.menutopic.core_index > div/*DEPRECATED*/ > a{ background-image:url('img/core/mm_icon_index.png'); }
+div.mainmenu.icons > ul > li.menutopic.core_user > div/*DEPRECATED*/ > a{ background-image:url('img/core/mm_icon_user.png'); }
+div.mainmenu.icons > ul > li.core_admin > div.submenulabel{ background-image:url('img/core/mm_icon_admin.png'); }
+div.mainmenu.icons > ul > li.demo > div.submenulabel{ background-image:url('img/core/mm_icon_demo.png'); }
+div.mainmenu.notext{
+	height:25px;
+}
+div.mainmenu.notext > ul > li > div.submenulabel,
+div.mainmenu.notext > ul > li.menutopic > div/*DEPRECATED*/ > a{
+	display:inline-block;
+	padding-left:20px;
+	padding-right:0px;
+	width:0px;
+	overflow:hidden;
+}
 
 /*==================================================================
     VIEWS-MENÜ

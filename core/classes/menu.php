@@ -67,6 +67,7 @@ class menu_topic{
 		$class_a=($this->class_a?" class=\"".$this->class_a."\"":"");
 		if ($this->link) $html="<a href=\"".$this->link."\"$ext$class_a>$html</a>";
 		$hcl=($this->highlight?" highlight":"");
+		if (setting_get(null, 'DEPRECATED_HMLICLASS'))
 		$html="<div class=\"menutopic $this->page_id$hcl\">$html</div>";
 		return $html;
 	}

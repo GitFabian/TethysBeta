@@ -7,3 +7,8 @@ body#tethys_commits div.innerbody{
 	max-width:1350px;
 	box-shadow:none;
 }
+
+/*==================================================================
+    MENÜ - Icon
+==================================================================*/
+div.mainmenu.icons > ul > li.tethys_index > div.submenulabel{ background-image:url('img/tethys/mm_icon.png'); }

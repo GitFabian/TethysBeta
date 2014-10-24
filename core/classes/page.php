@@ -67,6 +67,10 @@ class page{
 			$views="\n<ul class=\"views_menu\">$views\n</ul>";
 		}
 		
+		$mm_class="";
+		if (setting_get(null, 'HM_ICONS')) $mm_class.=" icons";
+		if (!setting_get(null, 'HM_TEXT')) $mm_class.=" notext";
+		
 		echo <<<ENDE
 <!DOCTYPE HTML>
 <html>
@@ -79,7 +83,7 @@ class page{
 <body id="$this->page_id"$onload>
 	<div class="outerbody">
 		$dynamic_css_development
-		<div class="mainmenu">
+		<div class="mainmenu$mm_class">
 			$menu
 		</div>
 		$views

@@ -46,7 +46,10 @@ function setting_get_default($modul,$key){
 			if ($key=='FEATURE_BETA') return "0";
 			if ($key=='SET_PGSEL_SETTINGS') return "core";
 			if ($key=='SET_PGSEL_USERSETS') return "core";
-			if (USER_ADMIN) echo "Kein Default-Value für \"$key\"! /core/settings.php:49";
+			if ($key=='HM_ICONS') return "0";
+			if ($key=='HM_TEXT') return "1";
+			if ($key=='DEPRECATED_HMLICLASS') return "0";
+			if (USER_ADMIN) echo "Kein Default-Value für \"$key\"! /core/settings.php:51";
 		}
 		return $r;
 	}else{

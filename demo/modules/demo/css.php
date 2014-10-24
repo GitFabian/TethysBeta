@@ -1,10 +1,13 @@
 <?php
 include_once '../../config_start.php';
-
 $page->init('demo_css','CSS');
+include_jquery();
 
 $page->say(html_header1("Header 1"));
 $page->say(html_code("Codeblock"));
+
+$page->say(html_button("toggle","","$('#example').toggle('invisible');"));
+$page->say(html_div(html_code(encode_html("Example"),"code"),"invisible","example"));
 
 $page->say(html_header1("Buttons, Links"));
 $page->say(html_div("Dilznoofus ho ".html_a("inline link","#")." flingity wiggleding."));

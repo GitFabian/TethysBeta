@@ -62,13 +62,17 @@ settings_add_field($form,"CFG_HOME_TITLE","Index-Titel",'TEXT');
 $form->add_fields("Aussehen",null);
 $form->add_field( new form_field("CFG_SKIN","Skin",setting_value('CFG_SKIN'),'SELECT',null,$skins) );
 settings_add_field($form,"CFG_CSS_VERSION","CSS-Version",'TEXT');
+$form->add_field( new form_field("HM_ICONS","Haupmenü Icons",setting_get(null, 'HM_ICONS'),'CHECKBOX') );
+$form->add_field( new form_field("HM_TEXT","Haupmenü Text",setting_get(null, 'HM_TEXT'),'CHECKBOX') );
 
 $form->add_fields("Module",null);
 settings_add_field($form,"CFG_MODULES","Module",'TEXT');
 
 $form->add_fields("Features",null);
 settings_add_field($form,"FEATURE_BETA","BETA-Features",'CHECKBOX');
-//$form->add_field( new form_field("FEAT_EDIT_NICK","Nick bearbeiten",setting_value('FEAT_EDIT_NICK'),'CHECKBOX') );
+
+$form->add_fields("Abwärtskompatibilität",null);
+$form->add_field( new form_field("DEPRECATED_HMLICLASS","div.mainmenu li div.menutopic",setting_get(null, 'DEPRECATED_HMLICLASS'),'CHECKBOX') );
 
 $page->say("Zur ".html_a("Server-Konfiguration", ROOT_HTTP_CORE."/install.".CFG_EXTENSION).".");
 $page->say($form->toHTML());
@@ -84,6 +88,10 @@ function core_settings_update2($modul){
 	$n=0;
 	unset($_REQUEST['view']);
 	request_extract_booleans2();
+	if ($modul===null){
+		if (setting_save(null, 'HM_ICONS', request_unset('HM_ICONS'), false)) $n++;
+		if (setting_save(null, 'HM_TEXT', request_unset('HM_TEXT'), false)) $n++;
+	}
 	foreach ($_REQUEST as $key => $value) {
 		if (setting_save($modul, $key, $value, false)) $n++;
 	}
