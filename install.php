@@ -22,6 +22,12 @@ if(file_exists('config_start.php')){
 	include_once 'core/classes/page.php';
 	include_once 'core/classes/menu.php';
 	include_once 'core/toolbox.php';
+	function setting_get($modul,$key){
+		if ($modul===null && $key=='HM_ICONS') return "0";
+		if ($modul===null && $key=='HM_TEXT') return "1";
+		echo "Setting nicht definiert: $key (".($modul?$modul:"CORE").")";
+		return null;
+	}
 	define('ROOT_HTTP_CORE','.');
 	define('USER_ADMIN','0');
 	define('CFG_CSS_VERSION','');
