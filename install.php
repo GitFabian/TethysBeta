@@ -34,6 +34,7 @@ if(file_exists('config_start.php')){
 	define('CFG_TITLE','Installation');
 	function hauptmenue($page_id){return null;}
 	$page=new page();
+	header('Content-type: text/html; charset=UTF-8');
 	$page->add_stylesheet("demo/skins/demo/screen.css");
 	define('CFG_EXTENSION', 'php');
 	$mydir=getcwd();
