@@ -46,7 +46,7 @@ if(file_exists('config_start.php')){
 	define('ROOT_HTTP_SKINS', $http_core.'/skins');
 	define('ROOT_HTTP_DATA', $http_core.'/DATA');
 	define('TETHYSDB', 'tethys');
-	$sql_server=$_SERVER["SERVER_NAME"];
+	$sql_server="localhost";#$_SERVER["SERVER_NAME"];
 	$sql_user="";
 	$sql_pass="";
 	$hauptmenue=$mydir."\configExample.php";
