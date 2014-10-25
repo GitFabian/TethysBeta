@@ -12,8 +12,8 @@ class modul_tethys extends module{
 		new menu_topic($menu,"tethys_ftp",$page_id,"FTP",url_mod_pg('tethys', 'ftp'));
 		new menu_topic($menu,"tethys_wiki",$page_id,"Wiki","http://tethys-framework.de/wiki/?title=Tethys_Wiki",true);
 		new menu_topic($menu,"tethys_commits",$page_id,"Commits","https://github.com/GitFabian/TethysBeta/commits/master",true);
-		new menu_topic($menu,"tethys_modules",$page_id,"Modules","http://tethys-framework.de/",true);//TODO:Deeplink
-		new menu_topic($menu,"tethys_skins",$page_id,"Skins","http://tethys-framework.de/",true);//TODO:Deeplink
+		new menu_topic($menu,"tethys_modules",$page_id,"Modules","http://tethys-framework.de/t/modules/tethys_shared/module.php",true);
+		new menu_topic($menu,"tethys_skins",$page_id,"Skins","http://tethys-framework.de/t/modules/tethys_shared/skins.php",true);
 		return $menu;
 	}
 	
