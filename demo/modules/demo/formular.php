@@ -2,8 +2,11 @@
 include_once '../../config_start.php';
 $page->init('demo_formular','Formular');
 include_once ROOT_HDD_CORE.'/core/classes/form.php';
+include_chosen();
 
 if(request_command("update"))update_demoformular();
+
+$page->say(html_header1("Formular"));
 
 $form=new form("update",null,"Shnozzle");
 $form->add_hidden("id", USER_ID);
@@ -17,10 +20,17 @@ $form->add_fields("Hum wiggle zip", array(
 				"ms"=>"Mr. Slave",
 				"ts"=>"Tony Soprano",
 		)),
+		new form_field("nizzle[]","Nizzle","[REQ]","SELECT_MULTIPLE",null,array(
+				"a"=>"Wobbledingle",
+				"b"=>"Twiddle boo",
+				"c"=>"Crangle",
+				"d"=>"Hizzle-shrubbery",
+		)),
 		new form_field("jinglewoogle","Jinglewoogle",request_value("jinglewoogle","abracadabra"),"PASSWORD"),
 		new form_field("duh","Duh",request_value("duh","Doo nippy do-da tangity")),
 		#new form_field("Crongle-Wooble","cronglewoob"),
 ));
+#$form->add_fields("",array(new form_field("foo")));
 $form->buttons.=html_a_button("link-button","css.".CFG_EXTENSION);
 $page->say($form->toHTML());
 

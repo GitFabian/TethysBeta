@@ -117,7 +117,22 @@ class form_field{
 		$this->label=$label;
 		$this->name=$name;
 		$this->type=$type;
-		if ($value=="[REQ]") $value=request_value($name,"");
+		if ($value=="[REQ]"){
+			if ($type=="SELECT_MULTIPLE"){
+				$id=preg_replace("/^(.*)\\[\\]$/", "$1", $name);
+				if (isset($_REQUEST[$id])){
+					$arr=$_REQUEST[$id];
+					$value=array();
+					foreach ($arr as $key) {
+						$value[$key]=true;
+					}
+				}else{
+					$value=null;
+				}
+			}else{
+				$value=request_value($name,"");
+			}
+		}
 		$this->value=$value;
 		$this->title=$title;
 		$this->options=$options;
