@@ -151,6 +151,21 @@ function include_datatables(){
 	$page->add_library(ROOT_HTTP_CORE."/core/html/jquery.dataTables.min.1.10.js");
 }
 
+function include_chosen(){
+	include_jquery();
+	global $page;
+	$ok=$page->add_library(ROOT_HTTP_CORE."/core/html/chosen_v1.2.0/chosen.jquery.min.js");
+	$page->add_stylesheet(ROOT_HTTP_CORE."/core/html/chosen_v1.2.0/chosen.min.css");
+	$hdd_css=ROOT_HDD_SKINS."/".CFG_SKIN."/chosen.css";
+	$http_css=ROOT_HTTP_SKINS."/".CFG_SKIN."/chosen.css";
+	if (CFG_SKIN=='demo'){
+		$hdd_css=ROOT_HDD_CORE."/demo/skins/demo/chosen.css";
+		$http_css=ROOT_HTTP_CORE."/demo/skins/demo/chosen.css";
+	}
+	if (file_exists($hdd_css)) $page->add_stylesheet($http_css);
+	if($ok)$page->onload_JS.="$('select.chosen').chosen();";
+}
+
 function html_checkbox($name=null,$checked=false,$js=null){
 	$name=($name?" name=\"$name\"":"");
 	$checked=($checked?" checked":"");

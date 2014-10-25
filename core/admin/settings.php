@@ -4,6 +4,7 @@ $page->init('core_settings','Konfiguration');
 if (!USER_ADMIN) page_send_exit("Keine Berechtigung!");
 
 include_once ROOT_HDD_CORE.'/core/classes/form.php';
+include_chosen();
 
 /*
  * Module => Views

@@ -140,7 +140,9 @@ class form_field{
 				}
 				$options.="\n\t<option$selected value=\"$key\">$value</option>";
 			}
-			$input="<select name=\"".$this->name."\"".($this->type=="SELECT_MULTIPLE"?" multiple":"").">$options\n</select>";
+			$input="<select name=\"".$this->name."\"".($this->type=="SELECT_MULTIPLE"?" multiple":"").""
+					.($this->type=="SELECT_MULTIPLE"?" class=\"chosen\"":"")
+					.">$options\n</select>";
 		}else if ($this->type=="PASSWORD"){
 			$input="<input type=\"password\" name=\"".$this->name."\" value=\"$thisvalue\" />";
 		}else{
