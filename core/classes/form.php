@@ -125,20 +125,26 @@ class form_field{
 	
 	function toHTML(){
 		$input="";
-		$value=escape_html($this->value);
+		if ($this->type!="SELECT_MULTIPLE")
+		$thisvalue=escape_html($this->value);
 		if ($this->type=="CHECKBOX"){
-			$input=html_checkbox($this->name,$value);
-		}else if ($this->type=="SELECT"){
+			$input=html_checkbox($this->name,$thisvalue);
+		}else if ($this->type=="SELECT"||$this->type=="SELECT_MULTIPLE"){
 			$options="";
 			if($this->options)foreach ($this->options as $key=>$value) {
-				$selected=($this->value==$key?" selected":"");
+				if ($this->type=="SELECT"){
+					$selected=($this->value==$key?" selected":"");
+				}
+				if ($this->type=="SELECT_MULTIPLE"){
+					$selected=(isset($this->value[$key])?" selected":"");
+				}
 				$options.="\n\t<option$selected value=\"$key\">$value</option>";
 			}
-			$input="<select name=\"".$this->name."\">$options\n</select>";
+			$input="<select name=\"".$this->name."\"".($this->type=="SELECT_MULTIPLE"?" multiple":"").">$options\n</select>";
 		}else if ($this->type=="PASSWORD"){
-			$input="<input type=\"password\" name=\"".$this->name."\" value=\"$value\" />";
+			$input="<input type=\"password\" name=\"".$this->name."\" value=\"$thisvalue\" />";
 		}else{
-			$input="<input type=\"text\" name=\"".$this->name."\" value=\"$value\" />";
+			$input="<input type=\"text\" name=\"".$this->name."\" value=\"$thisvalue\" />";
 		}
 		$title=($this->title?" title=\"".encode_html($this->title)."\"":"");
 		return "<div class=\"form_field\"><label for=\"".$this->name."\"$title>".$this->label."</label>$input</div>";

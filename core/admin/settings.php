@@ -51,6 +51,26 @@ while (false !== ($file = readdir($skins_dir))) {
 }
 
 /*
+ * Module ermitteln
+ */
+if (!file_exists(ROOT_HDD_MODULES)){
+	echo "Verzeichnis \"".ROOT_HDD_MODULES."\" nicht gefunden!";
+	exit;
+}
+$module=array("demo"=>"demo","tethys"=>"tethys");
+$modules_dir=opendir(ROOT_HDD_MODULES);
+while (false !== ($file = readdir($modules_dir))) {
+	if ($file!='.'&&$file!='..'){
+		$datei=ROOT_HDD_MODULES."/".$file;
+		if (is_dir($datei)){
+			if (file_exists($datei."/tethys.php")){
+				$module[$file]=$file;
+			}
+		}
+	}
+}
+
+/*
  * Formular
  */
 
@@ -70,7 +90,7 @@ $form->add_field( new form_field("HM_ICONS","Haupmenü Icons",setting_get(null, 
 $form->add_field( new form_field("HM_TEXT","Haupmenü Text",setting_get(null, 'HM_TEXT'),'CHECKBOX') );
 
 $form->add_fields("Module",null);
-settings_add_field($form,"CFG_MODULES","Module",'TEXT');
+$form->add_field( new form_field("CFG_MODULES[]","Module",$modules,'SELECT_MULTIPLE',null,$module) );
 
 $form->add_fields("Features",null);
 settings_add_field($form,"FEATURE_BETA","BETA-Features",'CHECKBOX');
@@ -97,6 +117,7 @@ function core_settings_update2($modul){
 		if (setting_save(null, 'HM_TEXT', request_unset('HM_TEXT'), false)) $n++;
 	}
 	foreach ($_REQUEST as $key => $value) {
+		if ($key=='CFG_MODULES')$value=implode(",", $value);
 		if (setting_save($modul, $key, $value, false)) $n++;
 	}
 	ajax_refresh("Speichere Konfiguration...", "settings.".CFG_EXTENSION."?view=$view&cmd=updated&n=$n");
