@@ -163,6 +163,9 @@ ENDE;
 	fwrite($file, $config_file);
 	fclose($file);
 	
+	if (!file_exists(ROOT_HDD_SKINS)){ mkdir(ROOT_HDD_SKINS); }
+	if (!file_exists(ROOT_HDD_MODULES)){ mkdir(ROOT_HDD_MODULES); }
+	
 	$page->say(html_div("Konfigurationsdatei erstellt."));
 	if (!mysql_select_db($TETHYSDB)||!$update)
 	$page->say(html_a_button("Datenbank initialisieren", "demo/database/update.".$CFG_EXTENSION.($update?"":"?install")));

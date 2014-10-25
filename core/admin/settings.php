@@ -34,6 +34,10 @@ if (request_command("update")) core_settings_update2(null);
  * Skins ermitteln
  */
 $skins=array("demo"=>"demo");
+if (!file_exists(ROOT_HDD_SKINS)){
+	echo "Verzeichnis \"".ROOT_HDD_SKINS."\" nicht gefunden!";
+	exit;
+}
 $skins_dir=opendir(ROOT_HDD_SKINS);
 while (false !== ($file = readdir($skins_dir))) {
 	if ($file!='.'&&$file!='..'){
