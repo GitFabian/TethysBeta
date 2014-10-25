@@ -1,7 +1,7 @@
 <?php
 include_once '../../config_start.php';
-
 $page->init('core_rights','Rechte');
+if (!USER_ADMIN) page_send_exit("Keine Berechtigung!");
 
 include_once ROOT_HDD_CORE.'/core/classes/table.php';
 include_once ROOT_HDD_CORE.'/core/classes/rights.php';
