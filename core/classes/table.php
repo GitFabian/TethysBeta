@@ -111,7 +111,12 @@ $table_X->set_header(array(
 		
 		$options=($this->options2?$this->options2:"");
 
-		$html="\n<table$class id=\"$this->id\">\n\t<thead>\n\t\t$th\n\t</thead>\n\t<tbody>\n$rows\n\t</tbody>\n</table>$options";
+		$html="\n<div class=\"table_wrapper\">"
+				."\n<table$class id=\"$this->id\">"
+					."\n\t<thead>\n\t\t$th\n\t</thead>"
+					."\n\t<tbody>\n$rows\n\t</tbody>"
+				."\n</table>$options"
+			."\n</div>";
 		return $html;
 	}
 	
