@@ -42,6 +42,7 @@ $tbl2=array(
 );
 $tabelle2=new table($tbl2,"wide demo_tbl2",false);
 $tabelle2->col_highlight=true;
+$page->focus="input[type=search]";
 $page->say($tabelle2);
 
 $page->send();
