@@ -36,7 +36,8 @@ if(file_exists('config_start.php')){
 	$page=new page();
 	header('Content-type: text/html; charset=UTF-8');
 	$page->add_stylesheet("demo/skins/demo/screen.css");
-	define('CFG_EXTENSION', 'php');
+	$extension=substr($_SERVER['SCRIPT_NAME'], strrpos($_SERVER['SCRIPT_NAME'], '.')+1);
+	define('CFG_EXTENSION', $extension);
 	$mydir=getcwd();
 	define('ROOT_HDD_CORE', $mydir);
 	define('ROOT_HDD_MODULES', $mydir.'\\modules');
