@@ -47,6 +47,8 @@ if(file_exists('config_start.php')){
 	define('ROOT_HTTP_MODULES', $http_core.'/modules');
 	define('ROOT_HTTP_SKINS', $http_core.'/skins');
 	define('ROOT_HTTP_DATA', $http_core.'/DATA');
+	define('CFG_LOGON_TYPE', 'none');
+	define('LOGON_NONE_DEF_USER', '1');
 	define('TETHYSDB', 'tethys');
 	$sql_server="localhost";#$_SERVER["SERVER_NAME"];
 	$sql_user="";
@@ -56,6 +58,7 @@ if(file_exists('config_start.php')){
 $page->init("core_admin", "Server-Konfiguration");
 if(request_command("run"))run($update);
 include_once 'core/classes/form.php';
+include_jquery();
 
 $form=new form("run");
 $form->add_fields("MySQL",array(
@@ -76,6 +79,28 @@ $form->add_fields("Server-Pfade (HTTP)",array(
 		new form_field("ROOT_HTTP_SKINS","Skins",request_value("ROOT_HTTP_SKINS",ROOT_HTTP_SKINS)),
 		new form_field("ROOT_HTTP_DATA","Data",request_value("ROOT_HTTP_DATA",ROOT_HTTP_DATA)),
 ));
+
+$form->add_fields("Benutzerverwaltung",array(
+		$logonType=new form_field("CFG_LOGON_TYPE","Logon",request_value("CFG_LOGON_TYPE",CFG_LOGON_TYPE),'SELECT',null,array(
+				"none"=>"(Kein)",
+				"http"=>"HTTP-Auth",
+				"cookie"=>"Cookie",
+		),"id_logonType"),
+		$defUser=new form_field("LOGON_NONE_DEF_USER","Default User",request_value("LOGON_NONE_DEF_USER",LOGON_NONE_DEF_USER)),
+));
+$logonType->onChange="update_form();";
+$page->onload_JS.="update_form();";
+$defUser->outer_id="id_defUser";
+$page->add_inline_script("function update_form(){
+		type=document.getElementById('id_logonType').options[document.getElementById('id_logonType').selectedIndex].value;
+		//Default User:
+		if (type=='none'){
+			$('#id_defUser').removeClass('invisible');
+		}else{
+			$('#id_defUser').addClass('invisible');
+		}
+}");
+
 $form->add_fields("",array(
 		new form_field("CFG_EXTENSION","Virtuelle Extension",request_value("CFG_EXTENSION",CFG_EXTENSION)),
 		new form_field("hauptmenue","Hauptmenü",request_value("hauptmenue",$hauptmenue),'text',"Pfad zur Hauptmenü-PHP"),
@@ -132,6 +157,12 @@ define('ROOT_HTTP_CORE', '$ROOT_HTTP_CORE');
 define('ROOT_HTTP_MODULES', '$ROOT_HTTP_MODULES');
 define('ROOT_HTTP_SKINS', '$ROOT_HTTP_SKINS');
 define('ROOT_HTTP_DATA', '$ROOT_HTTP_DATA');
+
+/*
+ * Benutzerverwaltung
+ */
+define('CFG_LOGON_TYPE','$CFG_LOGON_TYPE');
+define('LOGON_NONE_DEF_USER','$LOGON_NONE_DEF_USER');
 
 /*
  * Datenbank

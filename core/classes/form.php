@@ -111,8 +111,12 @@ class form_field{
 	var $value;
 	var $title;
 	var $options;
+	var $id;
+
+	var $onChange=null;
+	var $outer_id=null;
 	
-	function __construct($name,$label=null,$value="[REQ]",$type="TEXT",$title=null,$options=null){
+	function __construct($name,$label=null,$value="[REQ]",$type="TEXT",$title=null,$options=null,$id=null){
 		if ($label===null) $label=$name;
 		$this->label=$label;
 		$this->name=$name;
@@ -136,12 +140,16 @@ class form_field{
 		$this->value=$value;
 		$this->title=$title;
 		$this->options=$options;
+		$this->id=$id;
 	}
 	
 	function toHTML(){
 		$input="";
 		if ($this->type!="SELECT_MULTIPLE")
 		$thisvalue=escape_html($this->value);
+		$onChange=($this->onChange?" onChange=\"$this->onChange\"":"");
+		$id=($this->id?" id=\"$this->id\"":"");
+		$outer_id=($this->outer_id?" id=\"$this->outer_id\"":"");
 		if ($this->type=="CHECKBOX"){
 			$input=html_checkbox($this->name,$thisvalue);
 		}else if ($this->type=="SELECT"||$this->type=="SELECT_MULTIPLE"){
@@ -155,16 +163,16 @@ class form_field{
 				}
 				$options.="\n\t<option$selected value=\"$key\">$value</option>";
 			}
-			$input="<select name=\"".$this->name."\"".($this->type=="SELECT_MULTIPLE"?" multiple":"").""
+			$input="<select$id$onChange name=\"".$this->name."\"".($this->type=="SELECT_MULTIPLE"?" multiple":"").""
 					.($this->type=="SELECT_MULTIPLE"?" class=\"chosen\"":"")
 					.">$options\n</select>";
 		}else if ($this->type=="PASSWORD"){
-			$input="<input type=\"password\" name=\"".$this->name."\" value=\"$thisvalue\" />";
+			$input="<input$id type=\"password\" name=\"".$this->name."\" value=\"$thisvalue\" />";
 		}else{
-			$input="<input type=\"text\" name=\"".$this->name."\" value=\"$thisvalue\" />";
+			$input="<input$id type=\"text\" name=\"".$this->name."\" value=\"$thisvalue\" />";
 		}
 		$title=($this->title?" title=\"".encode_html($this->title)."\"":"");
-		return "<div class=\"form_field\"><label for=\"".$this->name."\"$title>".$this->label."</label>$input</div>";
+		return "<div class=\"form_field\"$outer_id><label for=\"".$this->name."\"$title>".$this->label."</label>$input</div>";
 	}
 	
 }

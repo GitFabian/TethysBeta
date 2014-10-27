@@ -55,8 +55,18 @@ if ($version<4){
 	dbio_query("ALTER TABLE `core_settings`
   ADD CONSTRAINT `core_settings_ibfk_1` FOREIGN KEY (`user`) REFERENCES `core_users` (`id`);");
 }
+if ($version<5){dbio_query("CREATE TABLE IF NOT EXISTS `core_logons` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user` int(11) NOT NULL,
+  `cookie` varchar(26) COLLATE utf8_bin NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user` (`user`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;");
+dbio_query("ALTER TABLE `core_logons`
+  ADD CONSTRAINT `core_logons_ibfk_1` FOREIGN KEY (`user`) REFERENCES `core_users` (`id`);");}
+#if ($version<){dbio_query("");}
 
-$current_version=4;
+$current_version=5;
 //=================================================================================================
 dbio_query("UPDATE `core_meta_dbversion` SET `version` = '$current_version' WHERE `modul_uc` = 'CORE';");
 //=================================================================================================

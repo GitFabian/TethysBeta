@@ -3,8 +3,7 @@ include_once '../../config_start.php';
 
 $page->init('tethys_ftp','Tethys-FTP-Repo');
 
-
-$page->add_html(html_iframe_fullsize("http://tethys-framework.de/ftp/"));
+$page->add_html(html_iframe_fullsize("http://tethys-framework.de/ftp/",""));
 
 $page->send();
 exit;//============================================================================================

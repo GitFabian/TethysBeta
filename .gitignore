@@ -8,4 +8,5 @@
 /config_*.php
 /core/admin/import.php
 /FTP/
-*.cmd
+/*.cmd
+/.htaccess

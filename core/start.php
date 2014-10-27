@@ -4,6 +4,13 @@ $devel_zeitmessung_start=microtime(true);
 $devel_performance_query_counter=0;
 
 /*
+ * Abwärtskompatibilität
+ */
+//2014-10
+if (!defined('CFG_LOGON_TYPE')) define('CFG_LOGON_TYPE','none');
+if (!defined('LOGON_NONE_DEF_USER')) define('LOGON_NONE_DEF_USER','1');
+
+/*
  * Includes
  */
 
@@ -70,6 +77,13 @@ foreach ($modules as $mod_id => $module) {
 	if (file_exists($css_hdd."/mod_$mod_id.css")){
 		$page->add_stylesheet($css_http."/mod_$mod_id.css");
 	}
+}
+
+/*
+ * Nochmal Login
+ */
+if (CFG_LOGON_TYPE!='none' && !USER_ID && CFG_LOGON_TYPE!='http'){
+	login_form();
 }
 
 //===============================================================================================

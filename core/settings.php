@@ -13,9 +13,6 @@ function init_settings(){
 	define('CFG_SKIN',trim(setting_get(null,'CFG_SKIN')));
 	define('CFG_CSS_VERSION',setting_get(null,'CFG_CSS_VERSION'));
 	define('CFG_MODULES',setting_get(null,'CFG_MODULES'));
-	define('FEATURE_BETA',setting_get(null,'FEATURE_BETA'));
-
-	#define('SET_PGSEL_SETTINGS',setting_get_user(null,'SET_PGSEL_SETTINGS'));
 }
 
 /**
@@ -43,13 +40,12 @@ function setting_get_default($modul,$key){
 			if ($key=='CFG_SKIN') return "demo";
 			if ($key=='CFG_CSS_VERSION') return "";
 			if ($key=='CFG_MODULES') return "tethys,demo";
-			if ($key=='FEATURE_BETA') return "0";
 			if ($key=='SET_PGSEL_SETTINGS') return "core";
 			if ($key=='SET_PGSEL_USERSETS') return "core";
 			if ($key=='HM_ICONS') return "0";
 			if ($key=='HM_TEXT') return "1";
 			if ($key=='DEPRECATED_HMLICLASS') return "0";
-			if (USER_ADMIN) echo "Kein Default-Value für \"$key\"! /core/settings.php:51";
+			if (USER_ADMIN) echo "Kein Default-Value für \"$key\"! /core/settings.php:48";
 		}
 		return $r;
 	}else{

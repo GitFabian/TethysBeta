@@ -1,0 +1,4 @@
+AuthType Basic
+AuthName "Anmeldung erforderlich"
+AuthUserFile "C:\Program Files (x86)\Apache Software Foundation\Apache2.2\security\users"
+Require valid-user

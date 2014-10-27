@@ -93,9 +93,6 @@ $form->add_field( new form_field("HM_TEXT","Haupmenü Text",setting_get(null, 'H
 $form->add_fields("Module",null);
 $form->add_field( new form_field("CFG_MODULES[]","Module",$modules,'SELECT_MULTIPLE',null,$module) );
 
-$form->add_fields("Features",null);
-settings_add_field($form,"FEATURE_BETA","BETA-Features",'CHECKBOX');
-
 $form->add_fields("Abwärtskompatibilität",null);
 $form->add_field( new form_field("DEPRECATED_HMLICLASS","div.mainmenu li div.menutopic",setting_get(null, 'DEPRECATED_HMLICLASS'),'CHECKBOX') );
 
@@ -113,12 +110,8 @@ function core_settings_update2($modul){
 	$n=0;
 	unset($_REQUEST['view']);
 	request_extract_booleans2();
-	if ($modul===null){
-		if (setting_save(null, 'HM_ICONS', request_unset('HM_ICONS'), false)) $n++;
-		if (setting_save(null, 'HM_TEXT', request_unset('HM_TEXT'), false)) $n++;
-	}
 	foreach ($_REQUEST as $key => $value) {
-		if ($key=='CFG_MODULES')$value=implode(",", $value);
+		if ($modul===null&&$key=='CFG_MODULES')$value=implode(",", $value);
 		if (setting_save($modul, $key, $value, false)) $n++;
 	}
 	ajax_refresh("Speichere Konfiguration...", "settings.".CFG_EXTENSION."?view=$view&cmd=updated&n=$n");
