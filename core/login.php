@@ -53,6 +53,8 @@ function login(){
 							$login_candidates[$row['id']]=login_user_line($row);
 						}
 					}
+				}else{
+					$fehler=true;
 				}
 			
 			}

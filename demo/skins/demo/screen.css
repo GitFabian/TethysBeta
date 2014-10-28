@@ -23,7 +23,7 @@ body{
 	background:black;
 	color:#85dea5;
 }
-body,input,pre,select{
+body,input,pre,select,textarea{
 	font-family:"AnonymousPro";
 	font-size:14px;
 }
@@ -198,6 +198,9 @@ ul.views_menu li{
 /*==================================================================
     TABELLEN,LISTEN
 ==================================================================*/
+
+div.table_wrapper{
+}
 
 table{
 	border-collapse:collapse;
