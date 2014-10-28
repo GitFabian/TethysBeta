@@ -195,6 +195,7 @@ function login_form(){
 	$page->say($form);
 	$page->say(setting_get(null, 'LOGON_MSG'));
 	
+	$page->init("logon", "Login");
 	$page->send();
 	exit;
 }
