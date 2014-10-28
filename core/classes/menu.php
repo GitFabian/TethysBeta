@@ -96,6 +96,12 @@ function menu_get_default($page_id){
 		new menu_topic($usermenu,"core_user_logoff",$page_id, "Abmelden", url_core_admin("user","cmd=logoff") );
 	}
 	
+	menu_add_default_admin($menu, $page_id);
+
+	return $menu;
+}
+
+function menu_add_default_admin($menu,$page_id){
 	if(USER_ADMIN){
 		$menu_admin=new menu($menu,"core_admin",$page_id,"Admin");
 		new menu_topic($menu_admin,"core_rights",$page_id,"Rechte",url_core_admin("rights"));
@@ -104,8 +110,6 @@ function menu_get_default($page_id){
 			new menu_topic($menu_admin,"core_import",$page_id,"Import",url_core_admin("import"));
 		new menu_topic($menu_admin,"core_update",$page_id,"Update",ROOT_HTTP_CORE."/demo/database/update.".CFG_EXTENSION);
 	}
-
-	return $menu;
 }
 
 ?>
