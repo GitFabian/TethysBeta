@@ -26,7 +26,7 @@ if ($view=="core"){
 	 * Persönliche Daten
 	 */
 	$persoenlich=array();
-	if (berechtigung('RIGHT_EDIT_NICK')){
+	if (setting_get(null,'CFG_EDIT_NICK')){
 		$persoenlich[]=new form_field("nick","Nutzername",USER_NICK);
 	}
 	if ($persoenlich) $form->add_fields("Persönliche Daten", $persoenlich);
@@ -40,7 +40,7 @@ if ($view=="core"){
 $page->send();
 exit;//============================================================================================
 function core_user_update(){
-	if (berechtigung('RIGHT_EDIT_NICK')&&request_value("nick")){
+	if (setting_get(null,'CFG_EDIT_NICK')&&request_value("nick")){
 		dbio_UPDATE("core_users", "id=".USER_ID, array("nick"=>request_value("nick")));
 	}
 	ajax_refresh("Speichere Daten...", "user.".CFG_EXTENSION."?cmd=updated");

@@ -102,14 +102,21 @@ function menu_get_default($page_id){
 }
 
 function menu_add_default_admin($menu,$page_id){
+	$menu_admin=new menu(null,"core_admin",$page_id,"Admin");
+	if(berechtigung('RIGHT_USERMGMT')){
+		new menu_topic($menu_admin,"core_users",$page_id,"Benutzer",url_core_admin("users"));
+	}
 	if(USER_ADMIN){
-		$menu_admin=new menu($menu,"core_admin",$page_id,"Admin");
 		new menu_topic($menu_admin,"core_rights",$page_id,"Rechte",url_core_admin("rights"));
 		new menu_topic($menu_admin,"core_settings",$page_id,"Konfig",url_core_admin("settings"));
 		if (file_exists(ROOT_HDD_CORE."/core/admin/import.php"))
 			new menu_topic($menu_admin,"core_import",$page_id,"Import",url_core_admin("import"));
 		new menu_topic($menu_admin,"core_update",$page_id,"Update",ROOT_HTTP_CORE."/demo/database/update.".CFG_EXTENSION);
 	}
+	if ($menu_admin->topics){
+		$menu->add($menu_admin);
+		if ($menu_admin->highlight){ $menu->highlight(); }
+	}	
 }
 
 ?>

@@ -94,6 +94,9 @@ $form->add_field( new form_field("HM_TEXT","Haupmenü Text",setting_get(null, 'H
 $form->add_fields("Module",null);
 $form->add_field( new form_field("CFG_MODULES[]","Module",$modules,'SELECT_MULTIPLE',null,$module) );
 
+$form->add_fields("Benutzer",null);
+$form->add_field( new form_field("CFG_EDIT_NICK","Eigenen Nick bearbeiten",setting_get(null, 'CFG_EDIT_NICK'),'CHECKBOX') );
+
 $form->add_fields("Abwärtskompatibilität",null);
 $form->add_field( new form_field("DEPRECATED_HMLICLASS","div.mainmenu li div.menutopic",setting_get(null, 'DEPRECATED_HMLICLASS'),'CHECKBOX') );
 

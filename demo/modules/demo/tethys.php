@@ -65,7 +65,7 @@ class modul_demo extends module{
 	function get_rights(){
 		include_once ROOT_HDD_CORE.'/core/classes/rights.php';
 		return array(
-				"DEMO01"=>new right("Name", "Beschreibung"),
+				"RIGHT_DEMO"=>new right("Demo-Berechtigung", "Flang flub cakewhack, boo quabble roo shnuzzle."),
 		);
 	}
 	
