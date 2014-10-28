@@ -168,6 +168,8 @@ class form_field{
 					.">$options\n</select>";
 		}else if ($this->type=="PASSWORD"){
 			$input="<input$id type=\"password\" name=\"".$this->name."\" value=\"$thisvalue\" />";
+		}else if ($this->type=="TEXTAREA"){
+			$input="<textarea$id name=\"".$this->name."\">$thisvalue</textarea>";
 		}else{
 			$input="<input$id type=\"text\" name=\"".$this->name."\" value=\"$thisvalue\" />";
 		}

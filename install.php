@@ -22,12 +22,8 @@ if(file_exists('config_start.php')){
 	include_once 'core/classes/page.php';
 	include_once 'core/classes/menu.php';
 	include_once 'core/toolbox.php';
-	function setting_get($modul,$key){
-		if ($modul===null && $key=='HM_ICONS') return "0";
-		if ($modul===null && $key=='HM_TEXT') return "1";
-		echo "Setting nicht definiert: $key (".($modul?$modul:"CORE").")";
-		return null;
-	}
+	include_once 'core/settings.php';
+	function get_default_setting($key){ return null; }
 	define('ROOT_HTTP_CORE','.');
 	define('USER_ADMIN','0');
 	define('CFG_CSS_VERSION','');
@@ -89,8 +85,8 @@ $form->add_fields("Benutzerverwaltung",array(
 		$defUser=new form_field("LOGON_NONE_DEF_USER","Default User",request_value("LOGON_NONE_DEF_USER",LOGON_NONE_DEF_USER)),
 ));
 $logonType->onChange="update_form();";
-$page->onload_JS.="update_form();";
 $defUser->outer_id="id_defUser";
+$page->onload_JS.="update_form();";
 $page->add_inline_script("function update_form(){
 		type=document.getElementById('id_logonType').options[document.getElementById('id_logonType').selectedIndex].value;
 		//Default User:

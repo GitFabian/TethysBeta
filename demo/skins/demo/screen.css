@@ -141,12 +141,12 @@ div.mainmenu > ul > li > div.submenulabel + ul{
 div.mainmenu > ul > li:hover > div.submenulabel + ul{
 	display:block;
 }
-li.menutopic.core_user,
+li.menutopic.core_user_,
 li.menutopic.core_admin{
 	padding-left:10px;
 	float:right;
 }
-li.menutopic.core_user ul{
+li.menutopic.core_user_ ul{
 	position:relative;
 	right:0px;
 	text-align:right;
@@ -298,7 +298,8 @@ div.dataTables_filter{
 ==================================================================*/
 
 input,
-select{
+select,
+textarea{
 	color:#85dea5;
 	background:#174d9d;
 }
@@ -310,12 +311,14 @@ form label{
 input[type='text'],
 input[type='password'],
 input[type='search'],
-select{
+select,
+textarea{
 	border:none;
 }
 form select,
 form input[type='text'],
-form input[type='password']{
+form input[type='password'],
+form textarea{
 	vertical-align:bottom;
 	width:500px;
 }
@@ -360,6 +363,12 @@ form fieldset div.form_field:last-child{
 form fieldset legend{
 	padding:0px;
 	border-bottom:1px solid #e7cd5e;
+}
+
+/*----------------------- Logon -----------------------*/
+
+form.logon label{
+	min-width:100px;
 }
 
 /*==================================================================

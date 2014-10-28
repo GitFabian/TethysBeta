@@ -112,8 +112,8 @@ function url_mod_pg($modul,$page){
 	return ROOT_HTTP_MODULES."/$modul/$page.".CFG_EXTENSION;
 }
 
-function url_core_admin($page){
-	return ROOT_HTTP_CORE."/core/admin/$page.".CFG_EXTENSION;
+function url_core_admin($page,$request=null){
+	return ROOT_HTTP_CORE."/core/admin/$page.".CFG_EXTENSION.($request?"?$request":"");
 }
 
 function encode_query_to_utf8($query){
@@ -239,6 +239,27 @@ function html_a($html,$href,$class=null,$external=false){
 }
 function html_a_button($html,$href,$class=null){
 	return html_a($html, $href, "button $class");
+}
+
+function string_random_pass_aa0000(){
+	return string_random(2,"PASSalpha")
+		.string_random(4,"PASSNUM");
+}
+function string_random($length,$key){
+	
+	if ($key=="GERKEYS"){ $key="ß^°!\"§%&/()=?´`²³{[]}\\äöüÄÖÜ-.,_:;#'+*~<>@€|µABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789éèÉÈáàÁÀíìÍÌóòÓÒúùÚÙýÝâêîôû"; }
+	else if ($key=="PASSALPHA"){ $key=("ABDEFGHJKLNPQRT"); }
+	else if ($key=="PASSalpha"){ $key=("abdefghijnpqrt"); }
+	else if ($key=="PASSNUM"){ $key=("23456789"); }
+	
+	$len=strlen(utf8_decode($key))-1;
+	
+	$string="";
+	for ($i = 0; $i < $length; $i++) {
+		$string.=mb_substr($key,rand(0,$len),1,'UTF-8');
+	}
+
+	return $string;
 }
 
 ?>

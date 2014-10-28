@@ -83,6 +83,7 @@ settings_add_field($form,"CFG_TITLE","Titel",'TEXT');
 settings_add_field($form,"CFG_HOME_LABEL","Startseite-Menüeintrag",'TEXT');
 settings_add_field($form,"CFG_HOME_URL","Startseite-URL",'TEXT');
 settings_add_field($form,"CFG_HOME_TITLE","Index-Titel",'TEXT');
+$form->add_field( new form_field("LOGON_MSG","Logon Message",setting_get(null, 'LOGON_MSG'),'TEXTAREA') );
 
 $form->add_fields("Aussehen",null);
 $form->add_field( new form_field("CFG_SKIN","Skin",setting_value('CFG_SKIN'),'SELECT',null,$skins) );

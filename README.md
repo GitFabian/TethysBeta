@@ -1,15 +1,15 @@
 Tethys (Beta)
 =============
 
-Version: 0.12.1
+Version: 0.13.0
 
-Database-Version: 4
+Database-Version: 7
 
 TODO:
 * Generic Edit, Insert
 * Messages
 * Widgets
-* Login
+* LDAP-Authentifizierung
 * Logs
 * Setcard-Klassen
 * eMails

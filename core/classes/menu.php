@@ -89,7 +89,12 @@ function menu_get_default($page_id){
 		$menu->add($module->get_menu($page_id));
 	}
 	
-	if(USER_ID)new menu_topic($menu,"core_user",$page_id, USER_NICK, url_core_admin("user") );
+	if(USER_ID){
+		$usermenu=new menu($menu,"core_user_",$page_id, USER_NICK );
+		new menu_topic($usermenu,"core_user",$page_id, "Einstellungen", url_core_admin("user") );
+		if (CFG_LOGON_TYPE=='cookie')
+		new menu_topic($usermenu,"core_user_logoff",$page_id, "Abmelden", url_core_admin("user","cmd=logoff") );
+	}
 	
 	if(USER_ADMIN){
 		$menu_admin=new menu($menu,"core_admin",$page_id,"Admin");

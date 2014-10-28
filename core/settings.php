@@ -45,6 +45,7 @@ function setting_get_default($modul,$key){
 			if ($key=='HM_ICONS') return "0";
 			if ($key=='HM_TEXT') return "1";
 			if ($key=='DEPRECATED_HMLICLASS') return "0";
+			if ($key=='LOGON_MSG') return "Benutzername = Vorname<br>Account beantragen in Büro 321";
 			if (USER_ADMIN) echo "Kein Default-Value für \"$key\"! /core/settings.php:48";
 		}
 		return $r;
