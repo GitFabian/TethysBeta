@@ -14,6 +14,12 @@ function rights_init(){
 	return $rights;
 }
 
+function berechtigung_or_quit($right){
+	if (!berechtigung($right)){
+		page_send_exit("Keine Berechtigung! (\"$right\")");
+	}
+}
+
 function berechtigung($right){
 	global $rights;
 	return (isset($rights[$right]));
