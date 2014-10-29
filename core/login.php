@@ -195,7 +195,7 @@ function login_form(){
 	$page->focus="#id_focus";
 	$form->add_field(new form_field("pass","Passwort","[REQ]",'PASSWORD'));
 	$page->say($form);
-	$page->say(setting_get(null, 'LOGON_MSG'));
+	$page->say("<div class=\"logon_msg\">".setting_get(null, 'LOGON_MSG')."</div>");
 	
 	$page->init("logon", "Login");
 	$page->send();
