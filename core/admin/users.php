@@ -3,6 +3,8 @@ include_once '../../config_start.php';
 
 $page->init('core_users','Benutzerverwaltung');
 
+if (!berechtigung('RIGHT_USERMGMT')) page_send_exit("Keine Berechtigung!");
+
 include_once ROOT_HDD_CORE.'/core/classes/table.php';
 
 $query=dbio_SELECT("core_users");

@@ -65,8 +65,27 @@ class modul_demo extends module{
 	function get_rights(){
 		include_once ROOT_HDD_CORE.'/core/classes/rights.php';
 		return array(
-				"RIGHT_DEMO"=>new right("Demo-Berechtigung", "Flang flub cakewhack, boo quabble roo shnuzzle."),
+				"RIGHT_DEMOMGMT"=>new right("Demo-Administration", "Flang flub cakewhack, boo quabble roo shnuzzle."),
 		);
+	}
+	
+	function get_edit_right($table,$id){
+		if ($table=='demo_lorumipsum'){
+			return berechtigung('RIGHT_DEMOMGMT');
+		}
+		if (USER_ADMIN) echo"Kein edit_right für $table!";
+		return false;
+	}
+
+	function get_edit_form($form,$table,$id){
+		if ($table=='demo_lorumipsum'){
+			$query=dbio_SELECT_SINGLE($table,$id);
+			$this::edit_form_field($form,$query,'flubtangle',"Flubtangle",'TEXTAREA');
+			$this::edit_form_field($form,$query,'abracadabra',"Abracadabra",'TEXTAREA');
+			return true;
+		}
+		if (USER_ADMIN) echo"Kein edit_form für $table!";
+		return false;
 	}
 	
 }

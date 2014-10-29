@@ -13,7 +13,14 @@ if ($version<2){
 (2, '\"Shizzle boo yip slop.\"', 'Roo slap bläng crongle duh blung-waggle...');");
 }
 
+if ($version<3){
+// 	if (dbio_SELECT_SINGLE("core_users", LOGON_NONE_DEF_USER))
+// 		dbio_query("INSERT INTO `core_user_right`
+// 		( `user` , `right` )
+// 	VALUES (  '".LOGON_NONE_DEF_USER."', 'RIGHT_DEMOMGMT' );");
+}
+
 //=================================================================================================
-dbio_query("UPDATE `core_meta_dbversion` SET `version` = '2' WHERE `modul_uc` = 'DEMO';");
+dbio_query("UPDATE `core_meta_dbversion` SET `version` = '3' WHERE `modul_uc` = 'DEMO';");
 //=================================================================================================
 ?>

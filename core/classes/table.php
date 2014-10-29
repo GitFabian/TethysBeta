@@ -36,8 +36,10 @@ class table{
 	}
 	
 	function set_options($new,$edit,$delete,$db,$idkey='id'){
+		include_once ROOT_HDD_CORE.'/core/edit_rights.php'; 
 		$this->options="";
 		$this->options2=null;
+		if (!edit_rights2($db, null)) return;
 		$idkeyquery=($idkey=='id'?"":"&idkey=$idkey");
 		if ($edit){
 			$this->options.=html_a_button("Bearbeiten", ROOT_HTTP_CORE."/core/edit.".CFG_EXTENSION."?db=$db&id=[ID:$idkey]$idkeyquery", "tbl_option tbl_edit");

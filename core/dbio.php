@@ -119,4 +119,28 @@ class dbio_leftjoin{
 
 }
 
+function dbio_table_exists($tbl){
+	return (mysql_num_rows(dbio_query("SHOW TABLES LIKE '".sqlEscape($tbl)."'"))==1);
+}
+
+/**
+ * <code>
+	$col_info=dbio_info_columns("demo_lorumipsum");
+	echo "id.Type=".$col_info['id']['Type'];
+	echo "id.Null=".$col_info['id']['Null'];
+	echo "id.Key=".$col_info['id']['Key'];
+	echo "id.Default=".$col_info['id']['Default'];
+	echo "id.Extra=".$col_info['id']['Extra'];
+	echo "flubtangle.Type=".$col_info['flubtangle']['Type'];
+ * </code>
+ */
+function dbio_info_columns($table){
+	$columns=dbio_query_to_array("SHOW COLUMNS FROM `$table`");
+	$list=array();
+	foreach ($columns as $col) {
+		$list[$col['Field']]=$col;
+	}
+	return $list;
+}
+
 ?>

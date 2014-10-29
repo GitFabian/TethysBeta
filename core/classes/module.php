@@ -30,7 +30,19 @@ class module{
 	function get_rights(){
 		return null;
 	}
+	
+	function get_edit_form($form,$table,$id){
+		return false;
+	}
 
+	function get_edit_right($table,$id){
+		if (USER_ADMIN) echo("Nicht implementiert: Funktion \"".__FUNCTION__."\" in Modul \"".$this->modul_name."\"!");
+		return false;
+	}
+	
+	static function edit_form_field($form,$query,$key,$label=null,$type='TEXT'){
+		$form->add_field(new form_field($key,$label,request_value($key,$query[$key]),$type));
+	}
 }
 
 function new_form_field($modul,$key,$label,$type){
