@@ -165,6 +165,19 @@ function include_chosen(){
 	if (file_exists($hdd_css)) $page->add_stylesheet($http_css);
 	if($ok)$page->onload_JS.="$('select.chosen').chosen();";
 }
+function chosen_select_multi($name,$options,$selecteds=null,$id=null,$onChange=null){
+	$onChange=($onChange?" onChange=\"$onChange\"":"");
+	$id=($id?" id=\"$id\"":"");
+	
+	$options_html="";
+	foreach ($options as $key=>$value) {
+		$selected=($selecteds&&isset($selecteds[$key])?" selected":"");
+		$options_html.="\n\t<option$selected value=\"$key\">$value</option>";
+	}
+	return "\n<select$id$onChange name=\"$name\" multiple"
+			." class=\"chosen\""
+			.">$options_html\n</select>";
+}
 
 function html_checkbox($name=null,$checked=false,$js=null){
 	$name=($name?" name=\"$name\"":"");
