@@ -13,6 +13,10 @@ $idkey=request_value("idkey","id");
 $db=request_value("db");
 $id=request_value("id");
 
+if (!$db){
+	page_send_exit();
+}
+
 if (!dbio_table_exists($db)){
 	page_send_exit("Datensatz nicht gefunden!");
 }

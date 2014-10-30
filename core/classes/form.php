@@ -103,6 +103,19 @@ class form_group{
 	}
 }
 
+class form_field_info extends form_field{
+
+	function __construct($name,$label,$value,$title=null){
+		parent::__construct($name,$label,$value,'TEXT',$title);
+	}
+
+	function toHTML(){
+		$title=($this->title?" title=\"".encode_html($this->title)."\"":"");
+		return "<div class=\"form_field\"><label for=\"".$this->name."\"$title>".$this->label."</label>$this->value</div>";
+	}
+
+}
+
 class form_field{
 	
 	var $label;
