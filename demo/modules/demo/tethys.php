@@ -76,16 +76,15 @@ class modul_demo extends module{
 		if (USER_ADMIN) echo"Kein edit_right für $table!";
 		return false;
 	}
+	
+	function save_data($table,$id){
+		include_once ROOT_HDD_CORE.'/demo/modules/demo/edit_forms.php';
+		return save_form($table, $id);
+	}
 
 	function get_edit_form($form,$table,$id){
-		if ($table=='demo_lorumipsum'){
-			$query=dbio_SELECT_SINGLE($table,$id);
-			$this::edit_form_field($form,$query,'flubtangle',"Flubtangle",'TEXTAREA');
-			$this::edit_form_field($form,$query,'abracadabra',"Abracadabra",'TEXTAREA');
-			return true;
-		}
-		if (USER_ADMIN) echo"Kein edit_form für $table!";
-		return false;
+		include_once ROOT_HDD_CORE.'/demo/modules/demo/edit_forms.php';
+		return edit_form($form, $table, $id);
 	}
 	
 }

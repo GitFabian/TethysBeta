@@ -39,6 +39,9 @@ class module{
 		if (USER_ADMIN) echo("Nicht implementiert: Funktion \"".__FUNCTION__."\" in Modul \"".$this->modul_name."\"!");
 		return false;
 	}
+
+	function save_data($table,$id){
+	}
 	
 	static function edit_form_field($form,$query,$key,$label=null,$type='TEXT'){
 		$form->add_field(new form_field($key,$label,request_value($key,$query[$key]),$type));

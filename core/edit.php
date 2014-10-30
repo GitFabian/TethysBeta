@@ -35,6 +35,12 @@ if (request_command("do")){
 	unset($_REQUEST['db']);
 	unset($_REQUEST['idkey']);
 	
+	if ($modul=='core'){
+		//TODO
+	}else{
+		$modules[$modul]->save_data($db, $id);
+	}
+	
 	dbio_UPDATE($db, "`$idkey`='$id'", $_REQUEST);
 	
 	if ($return){
