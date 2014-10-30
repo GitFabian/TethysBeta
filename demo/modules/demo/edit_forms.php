@@ -10,7 +10,6 @@ function edit_form($form,$table,$id){
 		$query_users=dbio_SELECT("core_users");
 		$users=array();
 		foreach ($query_users as $user) {
-			$gid=$user['id'];
 			$users[$user['id']]=$user['vorname']." ".$user['nachname'];
 		}
 		

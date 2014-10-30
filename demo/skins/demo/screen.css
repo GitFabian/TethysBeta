@@ -374,6 +374,16 @@ form.logon label{
 	min-width:100px;
 }
 
+/*----------------------- members_direct -----------------------*/
+
+table.members_direct select{
+	width:500px;
+}
+table.members_direct ul.chosen-choices{
+	background:none;
+}
+
+
 /*==================================================================
     IFRAMES
 ==================================================================*/

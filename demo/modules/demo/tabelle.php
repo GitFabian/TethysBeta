@@ -3,6 +3,7 @@ include_once '../../config_start.php';
 $page->init('demo_tabelle','Tabelle');
 include_once ROOT_HDD_CORE.'/core/classes/table.php';
 include_once ROOT_HDD_CORE.'/core/classes/form.php';
+include_chosen();
 
 /*
  * Tabelle 1
@@ -51,7 +52,7 @@ $tbl2=array(
 );
 $tabelle2=new table($tbl2,"wide demo_tbl2",false);
 $tabelle2->col_highlight=true;
-$page->focus="input[type=search]";
+#$page->focus="input[type=search]";
 $page->say($tabelle2);
 
 /*
@@ -83,6 +84,45 @@ foreach ($query_lorumipsum as $row) {
 $table=new table($data);
 $table->set_options(true, true, true, "demo_lorumipsum");
 $page->say($table);
+
+/*
+ * Tabelle 4
+ */
+$page->say(html_header1("Tabelle 4"));
+
+$query_users=dbio_SELECT("demo_flubtangle_user",null,"demo_flubtangle_user.id,demo_flubtangle_user.flubtangle,u.vorname,u.nachname",array(
+	new dbio_leftjoin("user", "core_users", "u"),
+));
+$members=array();
+foreach ($query_users as $user) {
+	$gid=$user['flubtangle'];
+	if (!isset($members[$gid]))$members[$gid]=array();
+	$members[$gid][$user['id']]=true;
+}
+
+$query_users=dbio_SELECT("core_users");
+$users=array();
+foreach ($query_users as $user) {
+	$users[$user['id']]=$user['vorname']." ".$user['nachname'];
+}
+
+$data=array();
+foreach ($query_lorumipsum as $row) {
+	$gid=$row['id'];
+	
+	$selected=(isset($members[$gid])?$members[$gid]:null);
+	$m=chosen_select_multi("tmp0", $users, $selected);//TODO:AJAX!
+	
+	$data[]=array(
+			"Gruppe"=>$row['flubtangle'],
+			"Mitglieder"=>$m,
+	);
+}
+
+$table=new table($data,"members_direct",false);
+$table->set_options(true, false, false, "demo_lorumipsum");
+$page->say($table);
+
 
 $page->send();
 exit;//============================================================================================
