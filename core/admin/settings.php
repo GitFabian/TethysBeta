@@ -88,6 +88,7 @@ $form->add_field( new form_field("LOGON_MSG","Logon Message",setting_get(null, '
 $form->add_fields("Aussehen",null);
 $form->add_field( new form_field("CFG_SKIN","Skin",setting_value('CFG_SKIN'),'SELECT',null,$skins) );
 settings_add_field($form,"CFG_CSS_VERSION","CSS-Version",'TEXT');
+$form->add_field( new form_field("CFG_HAUPTMENUE","Haupmenü",setting_get(null, 'CFG_HAUPTMENUE') ) );
 $form->add_field( new form_field("HM_ICONS","Haupmenü Icons",setting_get(null, 'HM_ICONS'),'CHECKBOX') );
 $form->add_field( new form_field("HM_TEXT","Haupmenü Text",setting_get(null, 'HM_TEXT'),'CHECKBOX') );
 

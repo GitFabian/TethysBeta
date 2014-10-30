@@ -14,10 +14,6 @@ if(file_exists('config_start.php')){
 	$sql_server=$matches[1];
 	$sql_user=$matches[2];
 	$sql_pass=$matches[3];
-	
-	preg_match("/\\n\\/\\*HM=\\*\\/include_once '(.*?)';/", $content, $matches);
-	$hauptmenue=$matches[1];
-	$hauptmenue=preg_replace("/\\\\\\\\/", "\\\\", $hauptmenue);
 }else{
 	include_once 'core/classes/page.php';
 	include_once 'core/classes/menu.php';
@@ -49,7 +45,6 @@ if(file_exists('config_start.php')){
 	$sql_server="localhost";#$_SERVER["SERVER_NAME"];
 	$sql_user="";
 	$sql_pass="";
-	$hauptmenue=$mydir."\configExample.php";
 }
 $page->init("core_admin", "Server-Konfiguration");
 if(request_command("run"))run($update);
@@ -99,7 +94,6 @@ $page->add_inline_script("function update_form(){
 
 $form->add_fields("",array(
 		new form_field("CFG_EXTENSION","Virtuelle Extension",request_value("CFG_EXTENSION",CFG_EXTENSION)),
-		new form_field("hauptmenue","Hauptmenü",request_value("hauptmenue",$hauptmenue),'text',"Pfad zur Hauptmenü-PHP"),
 ));
 
 $page->say(html_header1(($update?"Server-Konfiguration":"Installation")));
@@ -131,7 +125,6 @@ function run($update){
 	$ROOT_HDD_MODULES=preg_replace("/\\\\/", "\\\\\\\\", $ROOT_HDD_MODULES);
 	$ROOT_HDD_SKINS=preg_replace("/\\\\/", "\\\\\\\\", $ROOT_HDD_SKINS);
 	$ROOT_HDD_DATA=preg_replace("/\\\\/", "\\\\\\\\", $ROOT_HDD_DATA);
-	$hauptmenue=preg_replace("/\\\\/", "\\\\\\\\", $hauptmenue);
 	$config_file=<<<ENDE
 /*
  * Server-Konfiguration
@@ -166,11 +159,6 @@ define('LOGON_NONE_DEF_USER','$LOGON_NONE_DEF_USER');
 define('TETHYSDB', '$TETHYSDB');
 mysql_connect('$sql_server','$sql_user','$sql_pass');
 mysql_select_db(TETHYSDB);
-
-/*
- * Hauptmenü
- */
-/*HM=*/include_once '$hauptmenue';
 
 /*
  * Default Settings

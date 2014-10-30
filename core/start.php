@@ -57,6 +57,11 @@ $user_settings=array();
 init_settings();
 
 /*
+ * Hauptmenü
+ */
+include_once setting_get(null,'CFG_HAUPTMENUE');
+
+/*
  * Module
  */
 include_once ROOT_HDD_CORE.'/core/classes/module.php';
