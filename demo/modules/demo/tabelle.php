@@ -4,6 +4,7 @@ $page->init('demo_tabelle','Tabelle');
 include_once ROOT_HDD_CORE.'/core/classes/table.php';
 include_once ROOT_HDD_CORE.'/core/classes/form.php';
 include_chosen();
+include_once ROOT_HDD_CORE.'/core/alertify.php';
 
 /*
  * Tabelle 1
@@ -97,7 +98,9 @@ $members=array();
 foreach ($query_users as $user) {
 	$gid=$user['flubtangle'];
 	if (!isset($members[$gid]))$members[$gid]=array();
-	$members[$gid][$user['id']]=true;
+	//$members[$gid][$user['id']]=true;
+	//Für den Fall, daß Tabelle Read-Only ist:
+	$members[$gid][$user['id']]=$user['vorname']." ".$user['nachname'];
 }
 
 $query_users=dbio_SELECT("core_users");
@@ -106,12 +109,25 @@ foreach ($query_users as $user) {
 	$users[$user['id']]=$user['vorname']." ".$user['nachname'];
 }
 
+$page->add_inline_script("function update_members(id,e){
+		ids=new Array();
+		$(e).find(':selected').each(function(){
+			ids.push($(this).val());
+		});
+		ids=ids.join(',');
+		".ajax("update_member&id=\"+id+\"&ids=\"+ids+\"","demo","alertify_ajax_response(response);")."
+}");
+
 $data=array();
 foreach ($query_lorumipsum as $row) {
 	$gid=$row['id'];
 	
-	$selected=(isset($members[$gid])?$members[$gid]:null);
-	$m=chosen_select_multi("tmp0", $users, $selected);//TODO:AJAX!
+	if (berechtigung("RIGHT_DEMOMGMT")){
+		$selected=(isset($members[$gid])?$members[$gid]:null);
+		$m=chosen_select_multi("tmp0", $users, $selected, null, "update_members($gid,this);");
+	}else{
+		$m=(isset($members[$gid])?implode(", ", $members[$gid]):"-/-");
+	}
 	
 	$data[]=array(
 			"Gruppe"=>$row['flubtangle'],

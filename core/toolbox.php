@@ -190,7 +190,11 @@ function ajax($cmd,$modul=null,$function=null,$escape=false){
 	if ($modul==null){
 		$page=ROOT_HTTP_CORE."/core/ajax.".CFG_EXTENSION;
 	}else{
-		$page=ROOT_HTTP_MODULES."/$modul/ajax.".CFG_EXTENSION;
+		if ($modul=='demo'){
+			$page=ROOT_HTTP_CORE."/demo/modules/demo/ajax.".CFG_EXTENSION;
+		}else{
+			$page=ROOT_HTTP_MODULES."/$modul/ajax.".CFG_EXTENSION;
+		}
 	}
 	$quot=($escape?"&quot;":"\"");
 	return "tethys_ajax($quot$page?cmd=$cmd$quot,$quot$function$quot);";
