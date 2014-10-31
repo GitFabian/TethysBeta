@@ -57,11 +57,6 @@ $user_settings=array();
 init_settings();
 
 /*
- * Hauptmenü
- */
-include_once setting_get(null,'CFG_HAUPTMENUE');
-
-/*
  * Module
  */
 include_once ROOT_HDD_CORE.'/core/classes/module.php';
@@ -83,6 +78,11 @@ foreach ($modules as $mod_id => $module) {
 		$page->add_stylesheet($css_http."/mod_$mod_id.css");
 	}
 }
+
+/*
+ * Hauptmenü
+ */
+include_once setting_get(null,'CFG_HAUPTMENUE');
 
 /*
  * Nochmal Login
