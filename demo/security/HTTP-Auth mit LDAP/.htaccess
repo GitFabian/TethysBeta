@@ -1,0 +1,15 @@
+ 
+AuthType Basic
+AuthName "Autorisation mit Deinem LDAP-Account"
+
+AuthBasicProvider ldap
+AuthzLDAPAuthoritative off
+AuthLDAPBindDN "cn=xxxxxxxDCADMINUSERxxxxxxxxx,cn=Users,dc=xxxxxxxDCNAMExxxxxx,dc=xxxxxxxDCTOPLEVELxxxxxx"
+ 
+AuthLDAPBindPassword "xxxxxxxDCADMINPASSxxxxxxxxx"
+
+#Probiert zwei Domaincontroller:
+AuthLDAPURL "ldap://xxxxxxxDC1URLxxxxxx:xxxxxxxDC1PORTxxxxxx/?sAMAccountName?sub"
+AuthLDAPURL "ldap://xxxxxxxDC2URLxxxxxx:xxxxxxxDC2PORTxxxxxx/?sAMAccountName?sub"
+
+Require valid-user
