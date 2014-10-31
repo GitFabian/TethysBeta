@@ -90,7 +90,7 @@ $page->say($table);
  */
 $page->say(html_header1("Tabelle 4"));
 
-$query_users=dbio_SELECT("demo_flubtangle_user",null,"demo_flubtangle_user.id,demo_flubtangle_user.flubtangle,u.vorname,u.nachname",array(
+$query_users=dbio_SELECT("demo_flubtangle_user",null,"u.id,demo_flubtangle_user.flubtangle,u.vorname,u.nachname",array(
 	new dbio_leftjoin("user", "core_users", "u"),
 ));
 $members=array();
