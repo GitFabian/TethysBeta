@@ -45,7 +45,9 @@ if (request_command("do")){
 		$modules[$modul]->save_data($db, $id);
 	}
 	
-	dbio_UPDATE($db, "`$idkey`='$id'", $_REQUEST);
+	if ($id!="NEW"){
+		dbio_UPDATE($db, "`$idkey`='$id'", $_REQUEST);
+	}
 	
 	if ($return){
 		ajax_refresh("Speichere Datensatz...", $return);
@@ -58,16 +60,28 @@ if (!edit_rights($modul, $db, $id)){
 	page_send_exit("Keine Berechtigung! ($db,#$id)");
 }
 
-$query=dbio_SELECT_SINGLE($db, $id, $idkey);
-if (!$query){
-	page_send_exit("Datensatz nicht gefunden!");
+if ($id=="NEW"){
+	$col_info=dbio_info_columns($db);
+	$query=array();
+	foreach ($col_info as $key => $dummy) {
+		$query[$key]="";
+	}
+}else{
+	$query=dbio_SELECT_SINGLE($db, $id, $idkey);
+	if (!$query){
+		page_send_exit("Datensatz nicht gefunden!");
+	}
 }
 
 /*
  * Ausgabe
  */
 
-$page->say(html_header1("Datensatz bearbeiten"));
+if ($id=="NEW"){
+	$page->say(html_header1("Datensatz erstellen"));
+}else{
+	$page->say(html_header1("Datensatz bearbeiten"));
+}
 
 $referer=request_value("return",(isset($_SERVER['HTTP_REFERER'])?$_SERVER['HTTP_REFERER']:null));
 
@@ -86,16 +100,16 @@ function edit_add_fields($form,$modul,$db,$query,$id,$idkey){
 	global $modules;
 	if ($modul=='core'){
 		include_once 'edit_forms.php';
-		$edit_form=get_edit_form($form,$db,$id);
+		$edit_form=get_edit_form($form,$db,$id,$query);
 	}else{
-		$edit_form=$modules[$modul]->get_edit_form($form,$db,$id);
+		$edit_form=$modules[$modul]->get_edit_form($form,$db,$id,$query);
 	}
 	if ($edit_form===false) edit_default_form($form,$query,$db,$idkey);
 }
 function edit_default_form($form,$query,$db,$idkey){
-	$col_info=dbio_info_columns($db);
-	#echo $col_info['active']['Type'];
 	foreach ($query as $key => $value) {
+		$col_info=dbio_info_columns($db);
+		#echo $col_info['active']['Type'];
 		if ($key!=$idkey){
 			
 			/*
@@ -110,5 +124,8 @@ function edit_default_form($form,$query,$db,$idkey){
 		}
 	}
 	return true;
+}
+function edit_get_empty_table($table){
+	
 }
 ?>

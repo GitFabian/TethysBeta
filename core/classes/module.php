@@ -31,7 +31,7 @@ class module{
 		return null;
 	}
 	
-	function get_edit_form($form,$table,$id){
+	function get_edit_form($form,$table,$id,$query){
 		return false;
 	}
 

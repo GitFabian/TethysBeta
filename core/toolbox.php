@@ -99,7 +99,11 @@ function sqlEscape($text){
 function ajax_refresh($msg,$url){
 	global $page;
 	$page->content=$msg;
-	$page->onload_JS.="location.href='$url';";
+	if (USER_ADMIN){
+		$page->say(html_div(html_a_button("Zurück", $url)));
+	}else{
+		$page->onload_JS.="location.href='$url';";
+	}
 	page_send_exit();
 }
 

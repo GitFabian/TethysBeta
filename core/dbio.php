@@ -43,6 +43,17 @@ function dbio_DELETE($db,$where){
 	dbio_query($anfrage);
 }
 
+function dbio_NEW_FROM_REQUEST($db,$idkey="id"){
+	$col_info=dbio_info_columns($db);
+	$data=array();
+	foreach ($col_info as $key => $dummy) {
+		$data[$key]=request_value($key);
+	}
+	unset($data[$idkey]);
+	dbio_INSERT($db, $data);
+	return mysql_insert_id();
+}
+
 function dbio_INSERT($db,$data){
 
 	$values=array();

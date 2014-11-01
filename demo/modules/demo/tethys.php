@@ -82,9 +82,9 @@ class modul_demo extends module{
 		return save_form($table, $id);
 	}
 
-	function get_edit_form($form,$table,$id){
+	function get_edit_form($form,$table,$id,$query){
 		include_once ROOT_HDD_CORE.'/demo/modules/demo/edit_forms.php';
-		return edit_form($form, $table, $id);
+		return edit_form($form, $table, $id, $query);
 	}
 	
 }

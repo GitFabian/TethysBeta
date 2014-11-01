@@ -48,7 +48,7 @@ class table{
 			$this->options.=html_a_button("Löschen", ROOT_HTTP_CORE."/core/edit.".CFG_EXTENSION."?cmd=delete&db=$db&id=[ID:$idkey]$idkeyquery", "tbl_option tbl_delete");
 		}
 		if ($new){
-			$this->options2=html_div(html_a_button("Neuer Eintrag", ROOT_HTTP_CORE."/core/edit.".CFG_EXTENSION."?cmd=new&db=$db"),"tbl_new");
+			$this->options2=html_div(html_a_button("Neuer Eintrag", ROOT_HTTP_CORE."/core/edit.".CFG_EXTENSION."?id=NEW&db=$db"),"tbl_new");
 		}
 	}
 	

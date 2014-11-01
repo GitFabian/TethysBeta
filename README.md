@@ -1,12 +1,12 @@
 Tethys (Beta)
 =============
 
-Version: 0.13.5
+Version: 0.14.0
 
 Database-Version: 8
 
 TODO:
-* Generic Insert, Delete
+* Generic Delete
 * Messages
 * Widgets
 * LDAP-Authentifizierung
