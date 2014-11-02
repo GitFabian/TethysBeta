@@ -41,6 +41,7 @@ class module{
 	}
 
 	function save_data($table,$id){
+		return false;
 	}
 	
 	static function edit_form_field($form,$query,$key,$label=null,$type='TEXT'){

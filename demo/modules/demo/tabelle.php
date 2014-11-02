@@ -130,13 +130,18 @@ foreach ($query_lorumipsum as $row) {
 	}
 	
 	$data[]=array(
-			"Gruppe"=>$row['flubtangle'],
-			"Mitglieder"=>$m,
+			"id"=>$row['id'],
+			"flubtangle"=>$row['flubtangle'],
+			"members"=>$m,
 	);
 }
 
 $table=new table($data,"members_direct",false);
-$table->set_options(true, false, false, "demo_lorumipsum");
+$table->set_header(array(
+		"flubtangle"=>"Gruppe",
+		"members"=>"Mitglieder",
+));
+$table->set_options(true, true, true, "demo_lorumipsum");
 $page->say($table);
 
 

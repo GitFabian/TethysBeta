@@ -40,19 +40,22 @@ if (request_command("do")){
 	unset($_REQUEST['idkey']);
 	
 	if ($modul=='core'){
+		$new_handeled=false;
 		//TODO
 	}else{
-		$modules[$modul]->save_data($db, $id);
+		$new_handeled=$modules[$modul]->save_data($db, $id);
 	}
 	
-	if ($id!="NEW"){
+	if ($id=="NEW"){
+		if (!$new_handeled) $id=dbio_NEW_FROM_REQUEST($db);
+	}else{
 		dbio_UPDATE($db, "`$idkey`='$id'", $_REQUEST);
 	}
 	
 	if ($return){
-		ajax_refresh("Speichere Datensatz...", $return);
+		ajax_refresh("Speichere Datensatz #$id...", $return);
 	}else{
-		page_send_exit("Datensatz gespeichert.");
+		page_send_exit("Datensatz #$id gespeichert.");
 	}
 }
 

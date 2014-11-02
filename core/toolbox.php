@@ -100,7 +100,9 @@ function ajax_refresh($msg,$url){
 	global $page;
 	$page->content=$msg;
 	if (USER_ADMIN){
-		$page->say(html_div(html_a_button("Zurück", $url)));
+		$page->say(html_div(html_a_button("Zurück", $url, "admin_back")));
+		include_jquery();
+		$page->focus="a.admin_back";
 	}else{
 		$page->onload_JS.="location.href='$url';";
 	}

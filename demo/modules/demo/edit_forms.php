@@ -3,7 +3,6 @@
 function edit_form($form,$table,$id,$query){
 	if ($table=='demo_lorumipsum'){
 		include_chosen();
-		//$query=dbio_SELECT_SINGLE($table,$id);
 		module::edit_form_field($form,$query,'flubtangle',"Flubtangle",'TEXTAREA');
 		module::edit_form_field($form,$query,'abracadabra',"Abracadabra",'TEXTAREA');
 		
@@ -27,16 +26,11 @@ function save_form($table,$id){
 		if ($id=="NEW"){
 			$id=dbio_NEW_FROM_REQUEST("demo_lorumipsum");
 		}
-		dbio_DELETE("demo_flubtangle_user", "flubtangle=$id");
-		if (isset($_REQUEST['members']))
-		foreach ($_REQUEST['members'] as $member) {
-			dbio_INSERT("demo_flubtangle_user", array(
-				"flubtangle"=>$id,
-				"user"=>$member,
-			));
-		}
+		dbio_UPDATE_groupMember("demo_flubtangle_user", request_value('members'), "flubtangle", $id);
 		unset($_REQUEST['members']);
+		return true;
 	}
+	return false;
 }
 
 ?>

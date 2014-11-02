@@ -86,6 +86,35 @@ function dbio_UPDATE($db,$where,$data){
 	dbio_query($anfrage);
 }
 
+function dbio_UPDATE_groupMember($db,$new,$group,$gid,$user="user"){
+	$query_users=dbio_SELECT_keyValueArray($db, $user, 'id', "`$group`=$gid");
+
+	if ($new){
+		$dazu=array_diff($new, $query_users);
+		$hinfort=array_diff($query_users, $new);
+	}else{
+		$dazu=array();
+		$hinfort=$query_users;
+	}
+
+	$msg=array();
+
+	foreach ($dazu as $id) {
+		dbio_INSERT($db, array(
+		$group=>$gid,
+		$user=>$id,
+		));
+		$msg[]="Hinzugefügt: #$id";
+	}
+
+	foreach ($hinfort as $id) {
+		dbio_DELETE($db, "`$group`=$gid AND $user=$id");
+		$msg[]="Entfernt: #$id";
+	}
+
+	return $msg;
+}
+
 function dbio_query_to_array($anfrage,$link_identifier=null,$assoc_key=null){
 	$result=dbio_query($anfrage,$link_identifier);
 	if (!$result) return array();

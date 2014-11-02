@@ -13,26 +13,9 @@ function update_member(){
 	$gid=request_value("id");
 	$ids=request_value("ids");
 	
-	$query_users=dbio_SELECT_keyValueArray("demo_flubtangle_user", 'user', 'id', "flubtangle=$gid");
-	$users_new=explode(",", $ids);
+	$users_new=($ids?explode(",", $ids):null);
 	
-	$dazu=array_diff($users_new, $query_users);
-	$hinfort=array_diff($query_users, $users_new);
-	
-	$msg=array();
-	
-	foreach ($dazu as $id) {
-		dbio_INSERT("demo_flubtangle_user", array(
-			"flubtangle"=>$gid,
-			"user"=>$id,
-		));
-		$msg[]="Hinzugefügt: #$id";
-	}
-
-	foreach ($hinfort as $id) {
-		dbio_DELETE("demo_flubtangle_user", "flubtangle=$gid AND user=$id");
-		$msg[]="Entfernt: #$id";
-	}
+	$msg=dbio_UPDATE_groupMember("demo_flubtangle_user", $users_new, "flubtangle", $gid);
 	
 	if (!$msg) $msg[]="Keine Änderung.";
 	
