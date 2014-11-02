@@ -43,6 +43,10 @@ class module{
 	function save_data($table,$id){
 		return false;
 	}
+
+	function pre_delete($table,$id){
+		return true;
+	}
 	
 	static function edit_form_field($form,$query,$key,$label=null,$type='TEXT'){
 		$form->add_field(new form_field($key,$label,request_value($key,$query[$key]),$type));

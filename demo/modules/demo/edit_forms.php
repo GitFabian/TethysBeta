@@ -33,4 +33,15 @@ function save_form($table,$id){
 	return false;
 }
 
+function demo_pre_delete($table,$id){
+	if ($table=='core_users'){
+		if (!berechtigung('RIGHT_DEMOMGMT')) return false;
+		dbio_DELETE("demo_flubtangle_user", "`user`=$id");
+	}
+	if ($table=='demo_lorumipsum'){
+		dbio_DELETE("demo_flubtangle_user", "`flubtangle`=$id");
+	}
+	return true;
+}
+
 ?>

@@ -3,6 +3,7 @@ include_once '../config_start.php';
 $page->init("core_edit", "Datensatz bearbeiten");
 include_once ROOT_HDD_CORE.'/core/classes/form.php';
 include_once ROOT_HDD_CORE.'/core/edit_rights.php';
+include_jquery();
 
 request_extract_booleans2();
 
@@ -58,6 +59,34 @@ if (request_command("do")){
 		page_send_exit("Datensatz #$id gespeichert.");
 	}
 }
+if (request_command("delete")){
+	
+	if ($modul=='core'){
+		include_once 'edit_forms.php';
+		pre_delete($db,$id);
+	}
+	
+	$fehler=null;
+	foreach ($modules as $module) {
+		$modok=$module->pre_delete($db, $id);
+		if (!$modok&&!$fehler) $fehler=$module->modul_name;
+	}
+
+	$return=(isset($_SERVER['HTTP_REFERER'])?$_SERVER['HTTP_REFERER']:null);
+	
+	if (!$fehler){
+		dbio_DELETE($db, "`$idkey`='$id'");
+	}else{
+		if ($return) $page->say(html_div(html_a_button("Zurück", $return)));
+		page_send_exit("Verhindert durch Modul \"$fehler\".");
+	}
+	
+	if ($return){
+		ajax_refresh("Lösche Datensatz #$id...", $return);
+	}else{
+		page_send_exit("Datensatz #$id gelöscht.");
+	}
+}
 
 if (!edit_rights($modul, $db, $id)){
 	page_send_exit("Keine Berechtigung! ($db,#$id)");
@@ -97,6 +126,7 @@ $form->add_hidden($idkey, $id);
 edit_add_fields($form,$modul,$db,$query,$id,$idkey);
 
 $page->say($form);
+$page->focus="label:first-child + *";
 
 page_send_exit();//=======================================================================================
 function edit_add_fields($form,$modul,$db,$query,$id,$idkey){

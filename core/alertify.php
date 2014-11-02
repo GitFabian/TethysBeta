@@ -2,6 +2,8 @@
 
 /*
 include_once ROOT_HDD_CORE.'/core/alertify.php';
+
+http://fabien-d.github.io/alertify.js/
  */
 
 //INCLUDE:

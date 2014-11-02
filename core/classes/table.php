@@ -45,7 +45,10 @@ class table{
 			$this->options.=html_a_button("Bearbeiten", ROOT_HTTP_CORE."/core/edit.".CFG_EXTENSION."?db=$db&id=[ID:$idkey]$idkeyquery", "tbl_option tbl_edit");
 		}
 		if ($delete){
-			$this->options.=html_a_button("Löschen", ROOT_HTTP_CORE."/core/edit.".CFG_EXTENSION."?cmd=delete&db=$db&id=[ID:$idkey]$idkeyquery", "tbl_option tbl_delete");
+			#include_once ROOT_HDD_CORE.'/core/alertify.php';
+			$url=ROOT_HTTP_CORE."/core/edit.".CFG_EXTENSION."?cmd=delete&db=$db&id=[ID:$idkey]$idkeyquery";
+			#$this->options.=html_a_button("Löschen", $url, "tbl_option tbl_delete");
+			$this->options.=html_a_button("Löschen", "", "tbl_option tbl_delete","ask_delete('$url');");
 		}
 		if ($new){
 			$this->options2=html_div(html_a_button("Neuer Eintrag", ROOT_HTTP_CORE."/core/edit.".CFG_EXTENSION."?id=NEW&db=$db"),"tbl_new");

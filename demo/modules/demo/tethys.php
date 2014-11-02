@@ -87,6 +87,11 @@ class modul_demo extends module{
 		return edit_form($form, $table, $id, $query);
 	}
 	
+	function pre_delete($table,$id){
+		include_once ROOT_HDD_CORE.'/demo/modules/demo/edit_forms.php';
+		return demo_pre_delete($table, $id);
+	}
+	
 }
 
 function url_demo($page){

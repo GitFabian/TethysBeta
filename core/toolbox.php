@@ -252,16 +252,17 @@ function html_button($value,$class=null,$onClick=null){
 			"onclick"=>$onClick,
 	));
 }
-function html_a($html,$href,$class=null,$external=false){
+function html_a($html,$href,$class=null,$external=false,$onclick=null){
 	$pars=array(
 			"href"=>$href,
 			"class"=>$class,
 	);
 	if ($external) $pars["target"]="_blank";
+	if ($onclick) $pars["onclick"]=$onclick;
 	return htmlEntity('a', $html, $pars);
 }
-function html_a_button($html,$href,$class=null){
-	return html_a($html, $href, "button $class");
+function html_a_button($html,$href,$class=null,$onclick=null){
+	return html_a($html, $href, "button $class", false, $onclick);
 }
 
 function string_random_pass_aa0000(){
