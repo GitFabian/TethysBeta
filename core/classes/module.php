@@ -48,8 +48,8 @@ class module{
 		return true;
 	}
 	
-	static function edit_form_field($form,$query,$key,$label=null,$type='TEXT'){
-		$form->add_field(new form_field($key,$label,request_value($key,$query[$key]),$type));
+	static function edit_form_field($form,$query,$key,$label=null,$type='TEXT',$options=null){
+		$form->add_field(new form_field($key,$label,request_value($key,$query[$key]),$type,null,$options));
 	}
 }
 

@@ -35,23 +35,23 @@ class table{
 		return $this->toHTML();
 	}
 	
-	function set_options($new,$edit,$delete,$db,$idkey='id'){
+	function set_options($new,$edit,$delete,$db,$idkey='id',$datensatz=null){
 		include_once ROOT_HDD_CORE.'/core/edit_rights.php'; 
 		$this->options="";
 		$this->options2=null;
 		if (!edit_rights2($db, null)) return;
 		$idkeyquery=($idkey=='id'?"":"&idkey=$idkey");
 		if ($edit){
-			$this->options.=html_a_button("Bearbeiten", ROOT_HTTP_CORE."/core/edit.".CFG_EXTENSION."?db=$db&id=[ID:$idkey]$idkeyquery", "tbl_option tbl_edit");
+			$this->options.=html_a_button("Bearbeiten", ROOT_HTTP_CORE."/core/edit.".CFG_EXTENSION."?db=$db&id=[ID:$idkey]$idkeyquery&datensatz=$datensatz", "tbl_option tbl_edit");
 		}
 		if ($delete){
-			#include_once ROOT_HDD_CORE.'/core/alertify.php';
+			include_once ROOT_HDD_CORE.'/core/alertify.php';
 			$url=ROOT_HTTP_CORE."/core/edit.".CFG_EXTENSION."?cmd=delete&db=$db&id=[ID:$idkey]$idkeyquery";
 			#$this->options.=html_a_button("Löschen", $url, "tbl_option tbl_delete");
-			$this->options.=html_a_button("Löschen", "", "tbl_option tbl_delete","ask_delete('$url');");
+			$this->options.=html_a_button("Löschen", "", "tbl_option tbl_delete","ask_delete('$url','$datensatz');");
 		}
 		if ($new){
-			$this->options2=html_div(html_a_button("Neuer Eintrag", ROOT_HTTP_CORE."/core/edit.".CFG_EXTENSION."?id=NEW&db=$db"),"tbl_new");
+			$this->options2=html_div(html_a_button("Neuer Eintrag", ROOT_HTTP_CORE."/core/edit.".CFG_EXTENSION."?id=NEW&db=$db&datensatz=$datensatz"),"tbl_new");
 		}
 	}
 	
@@ -170,10 +170,14 @@ class table_row{
 			}
 		}
 		if ($options){
-			preg_match("/\\[ID\\:(.*?)\\]/", $options, $matches);
-			$idkey=$matches[1];
-			$value=$this->data[$idkey];
-			$tr.="\n\t\t\t<td>".preg_replace("/\\[ID\\:$idkey\\]/", $value, $options)."</td>";
+			preg_match_all("/\\[ID\\:(.*?)\\]/", $options, $matches);
+			$line=$options;
+			for ($i = 0; $i < count($matches); $i++) {
+				$idkey=$matches[1][$i];
+				$value=$this->data[$idkey];
+				$line=preg_replace("/\\[ID\\:$idkey\\]/", $value, $line);
+			}
+			$tr.="\n\t\t\t<td>$line</td>";
 		}
 		return "\n\t\t<tr>$tr\n\t\t</tr>";
 	}

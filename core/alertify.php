@@ -7,6 +7,7 @@ http://fabien-d.github.io/alertify.js/
  */
 
 //INCLUDE:
+global $page;
 $page->add_library(ROOT_HTTP_CORE."/core/html/alertify.js-shim-0.3.8/alertify.min.js");
 $page->add_stylesheet(ROOT_HTTP_CORE."/core/html/alertify.js-shim-0.3.8/themes/alertify.core.css");
 $page->add_stylesheet(ROOT_HTTP_CORE."/core/html/alertify.js-shim-0.3.8/themes/alertify.default.css");

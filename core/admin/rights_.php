@@ -12,7 +12,7 @@ function all_rights(){
 	global $modules;
 	$all_rights=array(
 		"RIGHT_ADMIN"=>new right("Administrator/Entwickler","Vorsicht! ALLE Rechte. Auch instabile BETA-Features und Entwickler-Ausgaben!"),
-		"RIGHT_USERMGMT"=>new right("Personalverwaltung","Neuen Benutzer anlegen"),
+		"RIGHT_USERMGMT"=>new right("Personalverwaltung","Benutzer anlegen, bearbeiten und löschen"),
 	);
 	/*
 	 * Modulspezifische Rechte

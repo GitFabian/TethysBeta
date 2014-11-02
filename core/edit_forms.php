@@ -18,8 +18,10 @@ function get_edit_form($form,$db,$id,$query){
 
 function pre_delete($table,$id){
 	if ($table=='core_users'){
+		if ($id==USER_ID) return false;
 		dbio_DELETE("core_user_right", "`user`=$id");
 	}
+	return true;
 }
 
 ?>

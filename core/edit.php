@@ -39,6 +39,10 @@ if (request_command("do")){
 	unset($_REQUEST['return']);
 	unset($_REQUEST['db']);
 	unset($_REQUEST['idkey']);
+// 	if (isset($_REQUEST['new_id'])){
+// 		$_REQUEST['idkey']=$_REQUEST['new_id'];
+// 	}else{
+// 	}
 	
 	if ($modul=='core'){
 		$new_handeled=false;
@@ -48,7 +52,7 @@ if (request_command("do")){
 	}
 	
 	if ($id=="NEW"){
-		if (!$new_handeled) $id=dbio_NEW_FROM_REQUEST($db);
+		if (!$new_handeled) $id=dbio_NEW_FROM_REQUEST($db,$idkey);
 	}else{
 		dbio_UPDATE($db, "`$idkey`='$id'", $_REQUEST);
 	}
@@ -60,13 +64,20 @@ if (request_command("do")){
 	}
 }
 if (request_command("delete")){
+	$id=request_value($idkey);
 	
-	if ($modul=='core'){
-		include_once 'edit_forms.php';
-		pre_delete($db,$id);
+	if (!edit_rights($modul, $db, $id)){
+		page_send_exit("Keine Berechtigung! ($db,#$id)");
 	}
 	
 	$fehler=null;
+	
+	if ($modul=='core'){
+		include_once 'edit_forms.php';
+		$modok=pre_delete($db,$id);
+		if (!$modok) $fehler="CORE";
+	}
+	
 	foreach ($modules as $module) {
 		$modok=$module->pre_delete($db, $id);
 		if (!$modok&&!$fehler) $fehler=$module->modul_name;
@@ -92,16 +103,21 @@ if (!edit_rights($modul, $db, $id)){
 	page_send_exit("Keine Berechtigung! ($db,#$id)");
 }
 
+$new_with_id=null;
+if ($id!="NEW"){
+	$query=dbio_SELECT_SINGLE($db, $id, $idkey);
+	if (!$query){
+		$new_with_id=$id;
+		$id="NEW";
+		#page_send_exit("Datensatz nicht gefunden!");
+	}
+}
+
 if ($id=="NEW"){
 	$col_info=dbio_info_columns($db);
 	$query=array();
 	foreach ($col_info as $key => $dummy) {
 		$query[$key]="";
-	}
-}else{
-	$query=dbio_SELECT_SINGLE($db, $id, $idkey);
-	if (!$query){
-		page_send_exit("Datensatz nicht gefunden!");
 	}
 }
 
@@ -109,10 +125,13 @@ if ($id=="NEW"){
  * Ausgabe
  */
 
+$datensatz=request_value("datensatz");
+if (!$datensatz) $datensatz="Datensatz";
+
 if ($id=="NEW"){
-	$page->say(html_header1("Datensatz erstellen"));
+	$page->say(html_header1("$datensatz erstellen"));
 }else{
-	$page->say(html_header1("Datensatz bearbeiten"));
+	$page->say(html_header1("$datensatz bearbeiten"));
 }
 
 $referer=request_value("return",(isset($_SERVER['HTTP_REFERER'])?$_SERVER['HTTP_REFERER']:null));
@@ -122,7 +141,9 @@ $form->add_hidden("return", $referer);
 $form->add_hidden("db", $db);
 $form->add_hidden("idkey", $idkey);
 $form->add_hidden($idkey, $id);
-
+if ($new_with_id)
+$form->add_hidden("new_id", $new_with_id);
+	
 edit_add_fields($form,$modul,$db,$query,$id,$idkey);
 
 $page->say($form);

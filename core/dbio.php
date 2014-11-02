@@ -30,7 +30,7 @@ function dbio_SELECT_SINGLE($db,$id,$id_key="id"){
 }
 
 function dbio_SELECT_keyValueArray($db,$field,$key="id",$where=null){
-	$query=dbio_SELECT($db,$where,"$field,$key");
+	$query=dbio_SELECT($db,$where,"`$field`,`$key`");
 	$list=array();
 	foreach ($query as $row) {
 		$list[$row[$key]]=$row[$field];
@@ -49,7 +49,11 @@ function dbio_NEW_FROM_REQUEST($db,$idkey="id"){
 	foreach ($col_info as $key => $dummy) {
 		$data[$key]=request_value($key);
 	}
-	unset($data[$idkey]);
+	if (isset($_REQUEST['new_id'])){
+		$data[$idkey]=$_REQUEST['new_id'];
+	}else{
+		unset($data[$idkey]);
+	}
 	dbio_INSERT($db, $data);
 	return mysql_insert_id();
 }

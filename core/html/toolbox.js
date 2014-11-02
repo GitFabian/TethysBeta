@@ -42,8 +42,9 @@ function alertify_ajax_response(response){
 	else alertify.success(response);
 }
 
-function ask_delete(target){
-	alertify.confirm("Datensatz löschen?", function (e) {
+function ask_delete(target,datensatz){
+	if (!datensatz) datensatz="Datensatz";
+	alertify.confirm(datensatz+" löschen?", function (e) {
 	    if (e) {
 	        location.href=target;
 	    }
