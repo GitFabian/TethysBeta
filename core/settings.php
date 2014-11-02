@@ -48,7 +48,8 @@ function setting_get_default($modul,$key){
 			if ($key=='LOGON_MSG') return "Benutzername = Vorname<br>Account beantragen in Büro 321";
 			if ($key=='CFG_EDIT_NICK') return "0";
 			if ($key=='CFG_HAUPTMENUE') return ROOT_HDD_CORE."\\configExample.php";
-			if (USER_ADMIN) echo "Kein Default-Value für \"$key\"! /core/settings.php:51";
+			if ($key=='CFG_MAX_USERS') return "1";
+			if (USER_ADMIN) echo "Kein Default-Value für \"$key\"! /core/settings.php:52";
 		}
 		return $r;
 	}else{

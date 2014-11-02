@@ -6,6 +6,18 @@ include_once ROOT_HDD_CORE.'/core/edit_rights.php';
 
 function edit_rights_core($db,$id){
 	if ($db=="core_users"){
+		if ($id=="NEW"){
+			$max=setting_get(null, 'CFG_MAX_USERS');
+			if ($max){
+				$count=dbio_SELECT("core_users");
+				$count=count($count);
+				if ($max<=$count){
+					#global $page;
+					#$page->say("--- Maximale Anzahl an Benutzern erreicht! ---");
+					return false;
+				}
+			}
+		}
 		return berechtigung('RIGHT_USERMGMT');
 	}
 	if (USER_ADMIN) echo"Kein edit_rights für $db!";
