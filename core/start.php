@@ -68,7 +68,7 @@ module_read();
  */
 $css_hdd=ROOT_HDD_SKINS."/".CFG_SKIN;
 $css_http=ROOT_HTTP_SKINS."/".CFG_SKIN;
-if (strcasecmp(CFG_SKIN,"demo")==0){
+if (strcasecmp(CFG_SKIN,"demo")==0||strcasecmp(CFG_SKIN,"terminal")==0){
 	$css_hdd=ROOT_HDD_CORE."/demo/skins/".CFG_SKIN;
 	$css_http=ROOT_HTTP_CORE."/demo/skins/".CFG_SKIN;
 }

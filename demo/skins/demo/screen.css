@@ -4,6 +4,10 @@
     FONTS
 ==================================================================*/
 @font-face {
+	font-family: 'bitwise';
+	src: local('bitwise'), url(bitwise.ttf) format('truetype');
+}
+@font-face {
 	font-family: 'AnonymousPro';
 	src: local('AnonymousPro'), url(AnonymousPro.woff) format('woff');
 }
@@ -52,8 +56,9 @@ hr{
 ==================================================================*/
 
 h1{
-	font-size:21px;
-	font-weight:bold;
+	font-family:bitwise;
+	font-size:23px;
+	font-weight:normal;
 	border-bottom:1px solid #e7cd5e;
 	margin:10px 0px;
 }

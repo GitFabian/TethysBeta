@@ -1,14 +1,15 @@
 <?php
-include_once '../../config_start.php';
-$page->init('demo_formular','Formular');
+if(!isset($page)){echo"Seite existiert nicht.";exit;}
+$page->init('demo_formular','Formulare');
 include_once ROOT_HDD_CORE.'/core/classes/form.php';
 include_chosen();
 
 if(request_command("update"))update_demoformular();
 
-$page->say(html_header1("Formular"));
+$page->say(html_header1("Formular 1"));
 
 $form=new form("update",null,"Shnozzle");
+$form->add_hidden("view", "three");
 $form->add_hidden("id", USER_ID);
 $form->add_fields(null, array(
 		new form_field("cringle"),

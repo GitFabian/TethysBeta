@@ -34,7 +34,6 @@ function edit_rights2($db,$id){
 }
 
 function edit_rights($modul,$db,$id){
-	
 	if ($modul=='core'){
 		return edit_rights_core($db,$id);
 	}else{

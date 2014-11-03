@@ -1,6 +1,6 @@
 <?php
-include_once '../../config_start.php';
-$page->init('demo_tabelle','Tabelle');
+if(!isset($page)){echo"Seite existiert nicht.";exit;}
+$page->init('demo_tabelle','Tabellen');
 include_once ROOT_HDD_CORE.'/core/classes/table.php';
 include_once ROOT_HDD_CORE.'/core/classes/form.php';
 include_chosen();

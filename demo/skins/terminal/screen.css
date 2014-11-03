@@ -1,0 +1,265 @@
+@CHARSET "utf-8";
+
+/*==================================================================
+    FONTS
+==================================================================*/
+@font-face {
+	font-family: 'bitwise';
+	src: local('bitwise'), url(bitwise.ttf) format('truetype');
+}
+@font-face {
+	font-family: 'SFPixelate';
+	src: local('SFPixelate'), url(SFPixelate.ttf) format('truetype');
+}
+/*
+@font-face {
+	font-family: 'PressStart2P';
+	src: local('PressStart2P'), url(PressStart2P.ttf) format('truetype');
+}
+@font-face {
+	font-family: 'Lucznik1303Plus';
+	src: local('Lucznik1303Plus'), url(Lucznik1303Plus.ttf) format('truetype');
+}
+@font-face {
+	font-family: 'GURU0';
+	src: local('GURU0'), url(GURU0.ttf) format('truetype');
+}
+@font-face {
+	font-family: 'D3Digibitmapism';
+	src: local('D3Digibitmapism'), url(D3Digibitmapism.TTF) format('truetype');
+}
+/*
+@font-face {
+	font-family: '';
+	src: local(''), url(.ttf) format('truetype');
+}
+*/
+
+/*==================================================================
+    DYNAMIC DEVELOPMENT
+==================================================================*/
+div.css_version_141009{
+	display:none;
+}
+div.font1{ font-family:"GURU0";xfont-size:15px; }
+div.font1 h1{ font-family:"D3Digibitmapism";font-size:22px; }
+div.font1 h1:after{ content:" (D3Digibitmapism, GURU0)"; }
+
+div.font2{ font-family:"PressStart2P";font-size:12px; }
+div.font2 h1{ font-family:"Lucznik1303Plus";font-size:25px; }
+div.font2 h1:after{ content:" (Lucznik1303Plus, PressStart2P)"; }
+
+div.font3{ font-family:"SFPixelate";font-size:15px; }
+div.font3 h1{ font-family:"bitwise";font-size:25px; }
+div.font3 h1:after{ content:" (bitwise, SFPixelate)"; }
+
+/*==================================================================
+    BODY,TEXT
+==================================================================*/
+
+body,input,select,textarea{
+	background:black;
+	color:#07c0ef;
+}
+body,input,pre,select,textarea{
+	font-family:SFPixelate,monospace;
+	font-size:15px;
+}
+
+div.innerbody{
+	background:#1f2831;
+	padding:20px;
+	margin:20px auto;
+	border:2px solid #004f70;
+	border-radius:4px;
+	box-shadow:2px 2px 2px black inset,2px 2px 2px #004f70;
+	max-width:1200px;
+	background:linear-gradient(to top, #1f2831 0px, #2d3844 60px, #2d3844 90px, #1f2831 250px);
+}
+
+/*==================================================================
+    BUTTONS,LINKS
+==================================================================*/
+
+a{
+	color:#49eddc;
+	color:#77e4ff;
+	text-decoration:none;
+}
+input[type=submit],
+input[type=button],
+a.button{
+	border:none;
+	background:none;
+	color:#77e4ff;
+	padding:0px 0px;
+	cursor:pointer;
+}
+input[type=submit]:hover,
+input[type=button]:hover,
+a:hover{
+	text-shadow:0px 0px 2px #77e4ff;
+}
+
+/*==================================================================
+    TABELLEN,LISTEN
+==================================================================*/
+
+div.table_wrapper{
+	margin:10px 0px;
+}
+
+table th{
+	font-weight:normal;
+	text-align:left;
+	vertical-align:bottom;
+	color:#77e4ff;
+	text-shadow:0px 0px 2px #77e4ff;
+}
+
+table td,
+table th{
+	padding-right:10px;
+}
+table td{
+	vertical-align:top;
+}
+
+/*----------------------- datatables -----------------------*/
+div.dataTables_wrapper th:hover{
+	cursor:pointer;
+}
+div.dataTables_filter label span.suche{
+	color:#006b98;
+	display:inline-block;
+	vertical-align:top;
+	margin:1px 0px 0px 0px;
+}
+input[type='search']{
+	border:none;
+	background:url(img/core/input_bg_narrow.png) no-repeat;
+	background-position:0px 3px;
+	padding:1px 10px;
+	margin:0px;
+	width:221px;
+	padding-right:13px;
+	vertical-align:bottom;
+}
+div.dataTables_info{
+	color:#006b98;
+}
+
+/*==================================================================
+    ABSÄTZE
+==================================================================*/
+
+h1{
+	font-family:bitwise;
+	font-size:25px;
+	font-weight:normal;
+	margin:10px 0px;
+	color:#77e4ff;
+	text-shadow:0px 0px 2px #77e4ff;
+	
+}
+hr{
+	color:#07c0ef;
+	border:none;
+	text-align:center;
+	margin:10px 0px 22px 0px;
+}
+hr:after{
+	content:"========================================================================================";
+}
+
+/*==================================================================
+    FORMULARE
+==================================================================*/
+
+form{
+	margin:10px 0px;
+}
+form label{
+	display:inline-block;
+	margin-top:1px;
+	vertical-align:top;
+	color:#006b98;
+}
+form label:after{
+	content:":";
+}
+div.form_buttons label:after{
+	content:none;
+}
+form input[type='text'],
+form input[type='password'],
+form select,
+form textarea{
+	border:none;
+	padding-left:10px;
+}
+form input[type='text'],
+form input[type='password']{
+	background:url(img/core/input_bg_wide.png) no-repeat;
+	background-position:0px 3px;
+	padding:1px 10px;
+	margin:0px 10px;
+	width:510px;
+	padding-right:13px;
+	vertical-align:bottom;
+}
+form textarea{
+	background:url(img/core/textarea_bg_large.png) no-repeat;
+	background-position:0px 3px;
+	padding:1px 10px;
+	padding-right:13px;
+	margin:0px 10px;
+	width:515px;
+	height:120px;
+}
+form select{
+	background:none;
+	padding:0 0 0 2px;
+}
+input[type=checkbox]{
+	width:20px;
+	height:13px;
+	position:relative;
+	left:5px;
+	top:1px;
+	z-index:1;
+	opacity:0;
+}
+input[type=checkbox] + div.checkbox_ghost{
+	display:inline-block;
+	height:13px;
+	width:22px;
+	position:relative;
+	left:-20px;
+	margin-right:-20px;
+	z-index:0;
+	color:#77e4ff;
+}
+input[type=checkbox]:hover + div.checkbox_ghost{
+	text-shadow:0px 0px 2px #77e4ff;
+}
+input[type=checkbox] + div.checkbox_ghost:after{
+	content:"[ ]";
+}
+input[type=checkbox]:checked + div.checkbox_ghost:after{
+	content:"[X]";
+}
+form fieldset{
+	border:none;
+	margin:0px 0px;
+	padding:0px 0px;
+}
+form fieldset legend{
+	padding:0px;
+	margin:10px 0px 5px 0px;
+	color:#77e4ff;
+	text-shadow:0px 0px 2px #77e4ff;
+}
+div.form_buttons{
+	margin-top:5px;
+}
