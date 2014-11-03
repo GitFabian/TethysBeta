@@ -2,7 +2,7 @@
 $configOnly=true;
 include_once '../../config_start.php';
 include_once ROOT_HDD_CORE.'/core/start_standalone.php';
-start_standalone('terminal');
+start_standalone(request_value('skin','terminal'));
 $page->init('demo_fonts','Fonts');
 function hauptmenue($page_id){return null;}
 

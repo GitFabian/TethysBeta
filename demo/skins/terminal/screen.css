@@ -95,6 +95,7 @@ a.button{
 	padding:0px 0px;
 	cursor:pointer;
 }
+/*Merkwürdiges Phänomen:*/input[type=submit],input[type=button]{ margin:0px -3px; }
 input[type=submit]:hover,
 input[type=button]:hover,
 a:hover{
