@@ -150,6 +150,7 @@ div.mainmenu > ul > li{
 	height:63px;
 	padding-top:20px;
 }
+div.mainmenu > ul > li > a,
 div.mainmenu > ul > li > div.submenulabel{
 	font-family:bitwise;
 	vertical-align:top;
@@ -159,6 +160,7 @@ div.mainmenu > ul > li > div.submenulabel{
 	color:#77e4ff;
 	text-shadow:0px 0px 2px #77e4ff;
 }
+div.mainmenu > ul > li.highlight > a,
 div.mainmenu > ul > li.highlight > div.submenulabel,
 div.mainmenu > ul > li.highlight > div.submenulabel a{
 	color:#77ffdd;
