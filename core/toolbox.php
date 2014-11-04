@@ -237,6 +237,11 @@ function html_header1($html,$class=null){
 			"class"=>$class,
 		));
 }
+function html_header2($html,$class=null){
+	return "\n".htmlEntity('h2', $html, array(
+			"class"=>$class,
+		));
+}
 function html_pre($html,$class=null){
 	return "\n".htmlEntity('pre', $html, array(
 			"class"=>$class,

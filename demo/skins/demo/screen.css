@@ -58,6 +58,13 @@ h1{
 	margin:10px 0px;
 }
 
+h2{
+	font-size:20px;
+	font-weight:normal;
+	border-bottom:1px dashed #e7cd5e;
+	margin:10px 0px;
+}
+
 /*----------------------- Codeblock -----------------------*/
 
 pre.code{

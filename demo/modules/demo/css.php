@@ -15,6 +15,8 @@ if ($view=="three"){ include 'formular.php'; }
 
 
 $page->say(html_header1("Header 1"));
+$page->say(html_div("Dee zip Boba Fett razzleshnoz!"));
+$page->say(html_header2("Header 2"));
 $page->say(html_div("Nip ha flap flop blapping jongely jangle quibblerazz? Shizzle bleep bloobity duh boozangle???
 		Yap da Lisa wibbleblop! Nip flang nip dang dangely zanglequibble, zap kanoodle plop doo zunkity tanglewiggle flobble.
 		\"Hum woogle ha?\" oodle Smithers. \"Yip woggle dee?\" hizzy blipwubble. \"Da bang zip?\" shizzle oodleboo.
