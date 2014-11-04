@@ -100,7 +100,7 @@ function menu_add_default_user($menu,$page_id){
 		$usermenu=new menu($menu,"core_user_",$page_id, USER_NICK );
 		new menu_topic($usermenu,"core_user",$page_id, "Einstellungen", url_core_admin("user") );
 		if (CFG_LOGON_TYPE=='cookie')
-			new menu_topic($usermenu,"core_user_logoff",$page_id, "Abmelden", "?cmd=logoff" );
+			new menu_topic($usermenu,"core_user_logoff",$page_id, "Abmelden", (CFG_HOME_URL?CFG_HOME_URL:ROOT_HTTP_CORE."/index.".CFG_EXTENSION)."?cmd=logoff" );
 	}
 }
 function menu_add_default_admin($menu,$page_id){
