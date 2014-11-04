@@ -22,7 +22,7 @@ class menu extends menu_topic{
 			$sub="";
 			foreach ($this->topics as $topic) {
 				if ($topic)
-					$sub.="\n\t<li class=\"menutopic ".$topic->page_id."\">".$topic->toHTML()."</li>";
+					$sub.="\n\t<li class=\"menutopic ".$topic->page_id." ".($topic->highlight?"highlight":"")."\">".$topic->toHTML()."</li>";
 			}
 			$html.="\n<ul>$sub\n</ul>";
 		}

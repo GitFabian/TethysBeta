@@ -11,7 +11,6 @@
 	font-family: 'SFPixelate';
 	src: local('SFPixelate'), url(SFPixelate.ttf) format('truetype');
 }
-/*
 @font-face {
 	font-family: 'PressStart2P';
 	src: local('PressStart2P'), url(PressStart2P.ttf) format('truetype');
@@ -41,17 +40,34 @@
 div.css_version_141009{
 	display:none;
 }
-div.font1{ font-family:"GURU0";xfont-size:15px; }
-div.font1 h1{ font-family:"D3Digibitmapism";font-size:22px; }
-div.font1 h1:after{ content:" (D3Digibitmapism, GURU0)"; }
+div.font1,
+div.font1 h1{ font-family:"D3Digibitmapism"; }
+div.font1 h1:after{ content:" (D3Digibitmapism)"; }
 
-div.font2{ font-family:"PressStart2P";font-size:12px; }
-div.font2 h1{ font-family:"Lucznik1303Plus";font-size:25px; }
-div.font2 h1:after{ content:" (Lucznik1303Plus, PressStart2P)"; }
+div.font2,
+div.font2 h1{ font-family:"GURU0"; }
+div.font2 h1:after{ content:" (GURU0)"; }
 
-div.font3{ font-family:"SFPixelate";font-size:15px; }
-div.font3 h1{ font-family:"bitwise";font-size:25px; }
-div.font3 h1:after{ content:" (bitwise, SFPixelate)"; }
+div.font3,
+div.font3 h1{ font-family:"PressStart2P"; }
+div.font3 h1:after{ content:" (PressStart2P)"; }
+
+div.font4,
+div.font4 h1{ font-family:"Lucznik1303Plus"; }
+div.font4 h1:after{ content:" (Lucznik1303Plus)"; }
+
+div.font5,
+div.font5 h1{ font-family:"SFPixelate"; }
+div.font5 h1:after{ content:" (SFPixelate)"; }
+
+div.font6,
+div.font6 h1{ font-family:"bitwise"; }
+div.font6 h1:after{ content:" (bitwise)"; }
+
+div.font7{ display:none; }
+div.font8{ display:none; }
+div.font9{ display:none; }
+div.font10{ display:none; }
 
 /*==================================================================
     BODY,TEXT
@@ -66,6 +82,10 @@ body,input,pre,select,textarea{
 	font-size:15px;
 }
 
+body{
+	margin-bottom:53px;
+}
+
 div.innerbody{
 	background:#1f2831;
 	padding:20px;
@@ -76,6 +96,143 @@ div.innerbody{
 	max-width:1200px;
 	background:linear-gradient(to top, #1f2831 0px, #2d3844 60px, #2d3844 90px, #1f2831 250px);
 }
+
+/*==================================================================
+    MENÜ
+==================================================================*/
+div.mainmenu{
+	position:fixed;
+	bottom:0;
+	left:50%;
+	width:1300px;
+	margin-left:-650px;
+	background:white;
+	color:black;
+	z-index:1;
+	margin-bottom:-10px;
+	transition:.8s;
+	background:url(img/core/mm_bg1f.png);
+	background-repeat:repeat-x;
+	height:63px;
+}
+div.mainmenu:hover{
+	margin-bottom:0px;
+}
+/* Links: */
+div.mainmenu > ul > li:first-child{
+	background:url(img/core/mm_bg1l.png) no-repeat;
+	padding-left:34px;
+}
+/* Rechts: */
+div.mainmenu > ul > li:last-child{
+	background:url(img/core/mm_bg1r.png) no-repeat;
+	background-position:right 0px;
+	padding-right:38px;
+}
+div.mainmenu_footer{
+	float:right;
+	height:63px;
+	width:86px;
+	background:url(img/core/mm_bg1c.png) no-repeat;
+	background-position:right 0px;
+}
+
+/* Menü: */
+div.mainmenu > ul{
+	display:inline-block;
+	margin:0px;
+	padding:0px;
+	background:url(img/core/mm_bg1.png) repeat-x;
+}
+/* Menüpunkte: */
+div.mainmenu > ul > li{
+	display:inline-block;
+	height:63px;
+	padding-top:20px;
+}
+div.mainmenu > ul > li > div.submenulabel{
+	font-family:bitwise;
+	vertical-align:top;
+	display:inline-block;
+	padding:0px 5px;
+	font-size:20px;
+	color:#77e4ff;
+	text-shadow:0px 0px 2px #77e4ff;
+}
+div.mainmenu > ul > li.highlight > div.submenulabel,
+div.mainmenu > ul > li.highlight > div.submenulabel a{
+	color:#77ffdd;
+	text-shadow:0px 0px 2px #77ffdd;
+}
+/* Unter-Menüs: */
+div.mainmenu > ul > li > div.submenulabel + ul{
+	padding:0px;
+	position:absolute;
+	bottom:0;
+	left:0;
+	margin:0px 0px 63px 30px;
+	opacity:0;
+	height:0;
+	transition:.5s;
+	overflow:hidden;
+	background:url(img/core/mm_bg2.png) no-repeat;
+	width:1203px;
+	padding-left:15px;
+}
+/*Untermenüpunkte:*/
+div.mainmenu > ul > li > div.submenulabel + ul > li{
+	display:inline-block;
+	padding-top:12px;
+	padding-left:2px;
+}
+div.mainmenu > ul > li > div.submenulabel + ul > li,
+div.mainmenu > ul > li > div.submenulabel + ul > li a{
+	color:#b2ffff;
+	text-shadow:1px 1px 1px #013368;
+}
+div.mainmenu > ul > li > div.submenulabel + ul > li a:hover{
+x	color:red;
+}
+div.mainmenu > ul > li > div.submenulabel + ul > li:before{
+	content:"| ";
+}
+div.mainmenu > ul > li > div.submenulabel + ul > li:first-child:before{
+	content:none;
+}
+div.mainmenu > ul > li:hover > div.submenulabel + ul{
+	opacity:1;
+	height:42px;
+}
+
+/*==================================================================
+    VIEWS-MENÜ
+==================================================================*/
+ul.views_menu{
+	position:fixed;
+	top:0px;
+	left:50%;
+	margin-left:-602px;
+	padding-left:5px;
+	background:url(img/core/mm_bg2.png) no-repeat;
+	width:1203px;
+	height:42px;
+}
+ul.views_menu li{
+	display:inline-block;
+	font-family:bitwise;
+	padding:12px 0px 0px 0px;
+	font-size:20px;
+}
+ul.views_menu li:before{
+	content:"... ";
+}
+ul.views_menu li:last-child:after{
+	content:" ...";
+}
+ul.views_menu li.view_highlight a{
+	text-shadow:0px 0px 2px #77e4ff;
+}
+
 
 /*==================================================================
     BUTTONS,LINKS
@@ -98,7 +255,9 @@ a.button{
 /*Merkwürdiges Phänomen:*/input[type=submit],input[type=button]{ margin:0px -3px; }
 input[type=submit]:hover,
 input[type=button]:hover,
-a:hover{
+a:hover,
+div.mainmenu > ul > li > div.submenulabel + ul > li a:hover,
+div.mainmenu > ul > li > div.submenulabel + ul > li.highlight a{
 	text-shadow:0px 0px 2px #77e4ff;
 }
 
@@ -161,7 +320,6 @@ h1{
 	margin:10px 0px;
 	color:#77e4ff;
 	text-shadow:0px 0px 2px #77e4ff;
-	
 }
 hr{
 	color:#07c0ef;

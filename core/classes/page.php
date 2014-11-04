@@ -62,7 +62,7 @@ class page{
 		$views="";
 		if ($this->views){
 			foreach ($this->views as $view) {
-				$views.="\n\t<li>".$view->toHTML()."</li>";
+				$views.="\n\t<li".($view->highlight?" class=\"view_highlight\"":"").">".$view->toHTML()."</li>";
 			}
 			$views="\n<ul class=\"views_menu\">$views\n</ul>";
 		}
@@ -70,6 +70,11 @@ class page{
 		$mm_class="";
 		if (setting_get(null, 'HM_ICONS')) $mm_class.=" icons";
 		if (!setting_get(null, 'HM_TEXT')) $mm_class.=" notext";
+		
+		$menu=($menu?"<div class=\"mainmenu$mm_class\">
+				$menu
+				<div class=\"mainmenu_footer\"></div>
+			</div>":"");
 		
 		echo <<<ENDE
 <!DOCTYPE HTML>
@@ -83,9 +88,7 @@ class page{
 <body id="$this->page_id"$onload>
 	<div class="outerbody">
 		$dynamic_css_development
-		<div class="mainmenu$mm_class">
-			$menu
-		</div>
+		$menu
 		$views
 		<div class="innerbody$checkContent">
 			$content
