@@ -13,6 +13,16 @@ function init_settings(){
 	define('CFG_SKIN',trim(setting_get(null,'CFG_SKIN')));
 	define('CFG_CSS_VERSION',setting_get(null,'CFG_CSS_VERSION'));
 	define('CFG_MODULES',setting_get(null,'CFG_MODULES'));
+	
+	
+	if (CFG_SKIN=='demo'||CFG_SKIN=='terminal'){
+		define('CFG_SKINDIR',ROOT_HDD_CORE."/demo/skins/".CFG_SKIN);
+		define('CFG_SKINPATH',ROOT_HTTP_CORE."/demo/skins/".CFG_SKIN);
+	}else{
+		define('CFG_SKINDIR',ROOT_HDD_SKINS."/".CFG_SKIN);
+		define('CFG_SKINPATH',ROOT_HTTP_SKINS."/".CFG_SKIN);
+	}
+	
 }
 
 /**

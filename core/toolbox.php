@@ -162,13 +162,7 @@ function include_chosen(){
 	global $page;
 	$ok=$page->add_library(ROOT_HTTP_CORE."/core/html/chosen_v1.2.0/chosen.jquery.min.js");
 	$page->add_stylesheet(ROOT_HTTP_CORE."/core/html/chosen_v1.2.0/chosen.min.css");
-	$hdd_css=ROOT_HDD_SKINS."/".CFG_SKIN."/chosen.css";
-	$http_css=ROOT_HTTP_SKINS."/".CFG_SKIN."/chosen.css";
-	if (CFG_SKIN=='demo'||CFG_SKIN=='terminal'){
-		$hdd_css=ROOT_HDD_CORE."/demo/skins/".CFG_SKIN."/chosen.css";
-		$http_css=ROOT_HTTP_CORE."/demo/skins/".CFG_SKIN."/chosen.css";
-	}
-	if (file_exists($hdd_css)) $page->add_stylesheet($http_css);
+	if (file_exists(CFG_SKINDIR."/chosen.css")) $page->add_stylesheet(CFG_SKINPATH."/chosen.css");
 	if($ok)$page->onload_JS.="$('select.chosen').chosen();";
 }
 function chosen_select_multi($name,$options,$selecteds=null,$id=null,$onChange=null){

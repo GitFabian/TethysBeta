@@ -2,6 +2,7 @@
 include_once '../../config_start.php';
 $page->init('demo_css','CSS');
 include_jquery();
+include_once ROOT_HDD_CORE.'/core/alertify.php';
 
 $views=array(
 		new menu_topic2("one", "CSS"),
@@ -33,6 +34,13 @@ $page->say(html_div("Yip hum quabble ".html_a("external link","http://tethys-fra
 
 $page->say(html_header1("html_iframe_fullsize(\$url)"));
 $page->say(html_iframe_fullsize("http://sprichwortgenerator.de/","demo_css"));
+
+$page->say(html_header1("Alertify"));
+$page->say(html_button("Dialog","","alertify.confirm(&quot;Message?&quot;,function(e){});"));
+$page->say(html_button("Alert","",alertify_alert("Alert")));
+#$page->onload_JS.=alertify_alert("Alert");
+$page->say(html_button("Success","",alertify_success("Success")));
+$page->say(html_button("Error","",alertify_error("Error")));
 
 $page->send();
 exit;//============================================================================================
