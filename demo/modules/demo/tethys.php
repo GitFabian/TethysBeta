@@ -92,6 +92,16 @@ class modul_demo extends module{
 		return demo_pre_delete($table, $id);
 	}
 	
+	function get_set_card($name,$data){
+		if ($name=="user"){
+			$set_card=new set_card($data['vorname']." ".$data['nachname'],"",$data['picture']);
+			$set_card->add_data(new set_card_data("nick", "Benutzername", $data['nick']));
+			$set_card->add_data(new set_card_data("http_auth", "HTTP-Auth", $data['http_auth']));
+			return $set_card;
+		}
+		return set_card::get_default($name,$data);
+	}
+	
 }
 
 function url_demo($page){

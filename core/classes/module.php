@@ -48,6 +48,10 @@ class module{
 		return true;
 	}
 	
+	function get_set_card($name,$data){
+		return set_card::get_default($name,$data);
+	}
+	
 	static function edit_form_field($form,$query,$key,$label=null,$type='TEXT',$options=null){
 		$form->add_field(new form_field($key,$label,request_value($key,$query[$key]),$type,null,$options));
 	}

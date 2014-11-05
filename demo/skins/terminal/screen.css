@@ -287,6 +287,11 @@ table td{
 	vertical-align:top;
 }
 
+/*----------------------- tbl_option -----------------------*/
+a.tbl_option{
+	margin-right:10px;
+}
+
 /*----------------------- datatables -----------------------*/
 div.dataTables_wrapper th:hover{
 	cursor:pointer;
@@ -310,6 +315,116 @@ input[type='search']{
 div.dataTables_info{
 	color:#006b98;
 }
+a.paginate_button{
+	margin-right:10px;
+}
+a.paginate_button.disabled{
+	display:none;
+}
+
+/*==================================================================
+    DATASHEETS
+==================================================================*/
+
+ul.datasheet{
+	display:table;
+	padding:0;
+}
+ul.datasheet li{
+	display:table-row;
+}
+ul.datasheet li div{
+	display:table-cell;
+	padding-right:10px;
+}
+ul.datasheet li div.data_label{
+	color:#006b98;	
+}
+ul.datasheet li div.data_label:after{
+	content:":";
+}
+
+/*==================================================================
+    SET-CARDS, SETS
+==================================================================*/
+
+div.t_set{
+	margin-top:10px;
+}
+div.set_card{
+x	border:1px solid red;
+	vertical-align:top;
+x	height:200px;
+	display:inline-block;
+	width:370px;
+	margin-right:20px;
+}
+div.set_card div.picture_wrapper{
+	float:left;
+x	margin-right:15px;
+x	margin-left:-110px;
+x	border:1px solid red;
+	width:100px;
+	max-height:100px;
+	overflow:hidden;
+	border:2px outset #2a97ea;
+	border-radius:4px;
+	box-shadow:0px 0px 4px black;
+}
+div.set_card div.picture_wrapper.leer{
+	height:100px;
+	background:url(img/nopic.png) no-repeat;
+}
+div.set_card div.picture_wrapper img{
+	width:100px;
+	/*Bugfix Merkwürdiger Fehler:*/margin-bottom:-3px;
+}
+div.set_card div.set_head{
+	height:104px;
+	overflow:auto;
+x	border:1px solid green;
+	padding-left:15px;
+}
+div.set_card h3{
+	font-family:bitwise;
+	font-size:20px;
+	color:#77e4ff;
+	text-shadow:0px 0px 2px #77e4ff;
+	margin-bottom:5px;
+x	padding-left:115px;
+}
+div.set_card h3:before{
+	content:none;
+}
+div.set_card div.infotext{
+x	padding-left:115px;
+x	color:#77e4ff;
+x	text-shadow:0px 0px 2px #77e4ff;
+}
+div.set_card ul.data{
+x	border:1px solid red;
+	display:inline-block;
+	width:340px;
+	padding:15px;
+	list-style:none;
+	overflow-x:hidden;
+	overflow-y:auto;
+	height:70px;
+x	display:table;
+}
+div.set_card ul.data li.set_card_data{
+	display:table-row;
+}
+li.set_card_data div{
+	display:table-cell;
+}
+li.set_card_data div.title{
+	color:#006b98;
+	padding-right:10px;
+}
+li.set_card_data div.title:after{
+	content:":";
+}
 
 /*==================================================================
     ABSÄTZE
@@ -323,15 +438,6 @@ h1{
 	color:#77e4ff;
 	text-shadow:0px 0px 2px #77e4ff;
 }
-hr{
-	color:#07c0ef;
-	border:none;
-	text-align:center;
-	margin:10px 0px 22px 0px;
-}
-hr:after{
-	content:"========================================================================================";
-}
 h2{
 	font-weight:normal;
 	font-size:15px;
@@ -344,6 +450,21 @@ h2:before{
 }
 h2:after{
 	content:" ==";
+}
+h3{
+	font-weight:normal;
+	font-size:15px;
+	margin-top:10px;
+}
+h3:before{ content:":: "; }
+hr{
+	color:#07c0ef;
+	border:none;
+	text-align:center;
+	margin:10px 0px 22px 0px;
+}
+hr:after{
+	content:"========================================================================================";
 }
 
 /*==================================================================

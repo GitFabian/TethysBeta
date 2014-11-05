@@ -77,9 +77,11 @@ if ($version<8){
 // 	VALUES (  '".LOGON_NONE_DEF_USER."', 'RIGHT_USERMGMT' );");
 }
 
+if ($version<9){dbio_query("ALTER TABLE `core_users` ADD `picture` VARCHAR( 500 ) NULL ;");}
+
 #if ($version<){dbio_query("");}
 
-$current_version=8;
+$current_version=9;
 //=================================================================================================
 dbio_query("UPDATE `core_meta_dbversion` SET `version` = '$current_version' WHERE `modul_uc` = 'CORE';");
 //=================================================================================================

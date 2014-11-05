@@ -4,10 +4,19 @@ include_once '../config_start.php';
 
 $cmd=request_value("cmd");
 if ($cmd=="update_rights") update_rights();
+if ($cmd=="lorumipsum") lorumipsum();
 
 echo "!Unbekanntes AJAX-Kommando \"$cmd\"!";
 exit;//===========================================================================================
 
+function lorumipsum(){
+	$length=request_value("length");
+	$content = file_get_contents("http://loripsum.net/api/1/$length/plaintext");
+	//Ersten Satz abschneiden:
+	$content=substr($content, strpos($content, ".")+1);
+	$content=trim($content);
+	ajax_exit($content);
+}
 function update_rights(){
 	if (!USER_ADMIN) ajax_exit("!Keine Berechtigung!");
 	include_once ROOT_HDD_CORE.'/core/admin/rights_.php';

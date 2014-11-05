@@ -3,6 +3,7 @@ include_once '../../config_start.php';
 $page->init('demo_css','CSS');
 include_jquery();
 include_once ROOT_HDD_CORE.'/core/alertify.php';
+include_once ROOT_HDD_CORE.'/core/classes/set.php';
 
 $views=array(
 		new menu_topic2("one", "CSS"),
@@ -18,6 +19,8 @@ if ($view=="three"){ include 'formular.php'; }
 $page->say(html_header1("Header 1"));
 $page->say(html_div("Dee zip Boba Fett razzleshnoz!"));
 $page->say(html_header2("Header 2"));
+$page->say(html_div("Duh doo yap Cartman flapizzle. Nip flippity wobble flooble wibble loo zingle."));
+$page->say(html_header3("Header 3"));
 $page->say(html_div("Nip ha flap flop blapping jongely jangle quibblerazz? Shizzle bleep bloobity duh boozangle???
 		Yap da Lisa wibbleblop! Nip flang nip dang dangely zanglequibble, zap kanoodle plop doo zunkity tanglewiggle flobble.
 		\"Hum woogle ha?\" oodle Smithers. \"Yip woggle dee?\" hizzy blipwubble. \"Da bang zip?\" shizzle oodleboo.
@@ -36,11 +39,22 @@ $page->say(html_header1("html_iframe_fullsize(\$url)"));
 $page->say(html_iframe_fullsize("http://sprichwortgenerator.de/","demo_css"));
 
 $page->say(html_header1("Alertify"));
-$page->say(html_button("Dialog","","alertify.confirm(&quot;Message?&quot;,function(e){});"));
-$page->say(html_button("Alert","",alertify_alert("Alert")));
+$page->say("\n".html_button("Dialog","","alertify.confirm(&quot;Message?&quot;,function(e){});"));
+$page->say("\n".html_button("Alert","",alertify_alert("Alert")));
 #$page->onload_JS.=alertify_alert("Alert");
-$page->say(html_button("Success","",alertify_success("Success")));
-$page->say(html_button("Error","",alertify_error("Error")));
+$page->say("\n".html_button("Success","",alertify_success("Success")));
+$page->say("\n".html_button("Error","",alertify_error("Error")));
+
+$page->say(html_header1("Set-Cards"));
+$set=new set();
+$set->add_card($card1=new set_card("Karte 1","Dizzle flong ho whack da razz",ROOT_HTTP_CORE."/demo/DATA/core_users/person1.png"));
+$card1->add_data(new set_card_data("name", "Name", "Chef"));
+$card1->add_data(new set_card_data("hobbies", "Hobbys", "Quibblenip-bloobing, Zingity"));
+$set->add_card($card1=new set_card("Karte 2","Jingle da zang! Zap ho Maggie ingleblang! Yip bam bizzlerizzle bam duh ting, nip ting a loo dang zip.",
+		ROOT_HTTP_CORE."/demo/DATA/core_users/person2.png"));
+$card1->add_data(new set_card_data("name", "Name", "Lisa"));
+$card1->add_data(new set_card_data("hobbies", "Hobby", "Dee flang"));
+$page->say($set);
 
 $page->send();
 exit;//============================================================================================

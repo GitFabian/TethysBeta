@@ -5,16 +5,16 @@ function edit_form($form,$table,$id,$query){
 		include_chosen();
 		module::edit_form_field($form,$query,'flubtangle',"Flubtangle",'TEXTAREA');
 		module::edit_form_field($form,$query,'abracadabra',"Abracadabra",'TEXTAREA');
-		
-		$query_users=dbio_SELECT("core_users");
-		$users=array();
-		foreach ($query_users as $user) {
-			$users[$user['id']]=$user['vorname']." ".$user['nachname'];
-		}
-		
-		$members=($id=="NEW"?null:dbio_SELECT_keyValueArray("demo_flubtangle_user", "id", "user", "flubtangle=$id"));
 
-		$form->add_field(new form_field('members[]',"Mitglieder",request_value("members",$members),'SELECT_MULTIPLE',null,$users));
+		if ($form->class!='datasheet'){
+			$query_users=dbio_SELECT("core_users");
+			$users=array();
+			foreach ($query_users as $user) {
+				$users[$user['id']]=$user['vorname']." ".$user['nachname'];
+			}
+			$members=($id=="NEW"?null:dbio_SELECT_keyValueArray("demo_flubtangle_user", "id", "user", "flubtangle=$id"));
+			$form->add_field(new form_field('members[]',"Mitglieder",request_value("members",$members),'SELECT_MULTIPLE',null,$users));
+		}
 		return true;
 	}
 	if (USER_ADMIN) echo"Kein edit_form für $table!";

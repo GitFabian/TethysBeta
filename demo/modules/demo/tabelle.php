@@ -12,7 +12,14 @@ include_once ROOT_HDD_CORE.'/core/alertify.php';
 $page->say(html_header1("Tabelle 1"));
 $query_lorumipsum=dbio_SELECT("demo_lorumipsum");
 $tabelle=new table($query_lorumipsum);
+// $tabelle->set_header(array(
+// 	"flubtangle"=>"Flubtangle",
+// 	"abracadabra"=>"Abracadabra",
+// ));
 $tabelle->set_options(true, true, true, 'demo_lorumipsum');
+$tabelle->options=html_a_button("Details",
+		ROOT_HTTP_CORE."/demo/modules/demo/flubtangle.".CFG_EXTENSION."?id=[ID:id]",
+		"tbl_option tbl_details").$tabelle->options;
 $page->say($tabelle);
 
 /*

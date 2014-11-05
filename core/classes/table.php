@@ -42,7 +42,9 @@ class table{
 		if (!edit_rights2($db, null)) return;
 		$idkeyquery=($idkey=='id'?"":"&idkey=$idkey");
 		if ($edit){
-			$this->options.=html_a_button("Bearbeiten", ROOT_HTTP_CORE."/core/edit.".CFG_EXTENSION."?db=$db&id=[ID:$idkey]$idkeyquery&datensatz=$datensatz", "tbl_option tbl_edit");
+			$this->options.=html_a_button("Bearbeiten",
+					ROOT_HTTP_CORE."/core/edit.".CFG_EXTENSION."?db=$db&id=[ID:$idkey]$idkeyquery&datensatz=$datensatz",
+					"tbl_option tbl_edit");
 		}
 		if ($delete){
 			include_once ROOT_HDD_CORE.'/core/alertify.php';
