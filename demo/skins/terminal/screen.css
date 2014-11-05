@@ -352,18 +352,13 @@ div.t_set{
 	margin-top:10px;
 }
 div.set_card{
-x	border:1px solid red;
 	vertical-align:top;
-x	height:200px;
 	display:inline-block;
 	width:370px;
 	margin-right:20px;
 }
 div.set_card div.picture_wrapper{
 	float:left;
-x	margin-right:15px;
-x	margin-left:-110px;
-x	border:1px solid red;
 	width:100px;
 	max-height:100px;
 	overflow:hidden;
@@ -382,7 +377,6 @@ div.set_card div.picture_wrapper img{
 div.set_card div.set_head{
 	height:104px;
 	overflow:auto;
-x	border:1px solid green;
 	padding-left:15px;
 }
 div.set_card h3{
@@ -391,18 +385,11 @@ div.set_card h3{
 	color:#77e4ff;
 	text-shadow:0px 0px 2px #77e4ff;
 	margin-bottom:5px;
-x	padding-left:115px;
 }
 div.set_card h3:before{
 	content:none;
 }
-div.set_card div.infotext{
-x	padding-left:115px;
-x	color:#77e4ff;
-x	text-shadow:0px 0px 2px #77e4ff;
-}
 div.set_card ul.data{
-x	border:1px solid red;
 	display:inline-block;
 	width:340px;
 	padding:15px;
@@ -410,7 +397,6 @@ x	border:1px solid red;
 	overflow-x:hidden;
 	overflow-y:auto;
 	height:70px;
-x	display:table;
 }
 div.set_card ul.data li.set_card_data{
 	display:table-row;

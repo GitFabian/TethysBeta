@@ -1,0 +1,31 @@
+@CHARSET "utf-8";
+
+/*==================================================================
+    KUNDEN
+==================================================================*/
+
+div.set_card div.set_head{
+	border:1px solid red;
+	position:absolute;
+	width:255px;
+	padding-left:115px;
+	padding-top:20px;
+	margin-top:-20px;
+}
+div.set_card div.sprache{
+	display:inline-block;
+	background-repeat:no-repeat;
+	padding-left:30px;
+	margin-left:-30px;
+	padding-top:15px;
+	margin-top:-15px;
+	background-position:left 0px;
+	position:relative;
+	z-index:100;
+}
+div.set_card div.sprache.deutsch{
+	background-image:url(img/kunden/sprache_deutsch.png);
+}
+div.set_card div.sprache.international{
+	background-image:url(img/kunden/sprache_international.png);
+}
