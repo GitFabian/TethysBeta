@@ -1,0 +1,19 @@
+@CHARSET "utf-8";
+
+/*==================================================================
+    TICKETS
+==================================================================*/
+div.t_set.miniticket.ticket div.set_card{
+	display:block;
+	width:inherit;
+}
+div.t_set.miniticket.ticket div.set_card:after{
+	display:block;
+}
+div.t_set.miniticket.ticket div.set_card div.picture_wrapper.leer{
+	display:none;
+}
+div.t_set.miniticket.ticket div.set_card ul.data{
+	width:inherit;
+	height:inherit;
+}
