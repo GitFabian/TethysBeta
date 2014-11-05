@@ -7,8 +7,15 @@ div.t_set.miniticket.ticket div.set_card{
 	display:block;
 	width:inherit;
 }
-div.t_set.miniticket.ticket div.set_card:after{
+div.t_set.miniticket.ticket div.set_card:before{
 	display:block;
+	content:"--------------------------------------------------------------------";
+}
+div.t_set.miniticket.ticket div.set_card div.set_head{
+	height:inherit;
+}
+div.t_set.miniticket.ticket span.time_delta:before{
+	content:" - ";
 }
 div.t_set.miniticket.ticket div.set_card div.picture_wrapper.leer{
 	display:none;

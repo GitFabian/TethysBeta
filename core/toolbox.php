@@ -291,4 +291,30 @@ function string_random($length,$key){
 	return $string;
 }
 
+$wochentage=array("So","Mo","Di","Mi","Do","Fr","Sa");
+
+/**
+ * So, 02.11.14 15:19
+ */
+function format_Wochentag_Uhrzeit($time=null){
+	global $wochentage;
+	if ($time===null) $time=time();
+	return $wochentage[date("w",$time)].date(", d.m.y H:s",$time);
+}
+
+function time_delta($time){
+	$delta=time()-$time;
+	if ($delta>0){
+		$vz="vor";
+	}else{
+		$delta=-$delta;
+		$vz="noch";
+	}
+	if ($delta>907200) return "$vz ".(round($delta/604800))." Wochen";
+	if ($delta>129600) return "$vz ".(round($delta/86400))." ".($vz=='noch'?"Tage":"Tagen");
+	if ($delta>5400) return "$vz ".(round($delta/3600))." Stunden";
+	if ($delta>90) return "$vz ".(round($delta/60))." Minuten";
+	return "$vz $delta Sekunden";
+}
+
 ?>
