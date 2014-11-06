@@ -1,0 +1,186 @@
+@CHARSET "utf-8";
+
+/*==================================================================
+    FONTS
+==================================================================*/
+@font-face {
+	font-family: 'Lato';
+	src: local('Lato'), url(Lato.woff) format('woff');
+}
+
+/*==================================================================
+    BODY,TEXT
+==================================================================*/
+
+body{
+	background:white;
+	color:black;
+	padding:5px;
+}
+body,input,pre,select,textarea{
+	font-family:"Lato";
+	font-size:14px;
+}
+
+/*==================================================================
+    BUTTONS,LINKS
+==================================================================*/
+
+a{
+	color:black;
+	text-decoration:underline;
+}
+input[type=submit],
+input[type=button],
+a.button{
+	border:1px solid black;
+	background:none;
+	border-radius:3px;
+	padding:0px 5px;
+	text-decoration:none;
+	cursor:pointer;
+}
+a[target=_blank]{
+	background-image:url('external-link.png');
+	background-repeat:no-repeat;
+	background-position:left;
+	padding-left:12px;
+	margin-left:2px;
+}
+
+/*==================================================================
+    MENÜ
+==================================================================*/
+div.mainmenu{
+	margin-bottom:5px;
+}
+div.mainmenu > ul{
+	padding:0px;
+	list-style:none;
+	display:table;
+	border-collapse:collapse;
+}
+div.mainmenu > ul > li{
+	display:table-cell;
+	vertical-align:top;
+	border:1px solid black;
+	padding:5px;
+}
+
+/*==================================================================
+    VIEWS-MENÜ
+==================================================================*/
+ul.views_menu{
+	list-style:none;
+	padding:5px;
+}
+ul.views_menu li{
+	display:inline-block;
+	margin-right:5px;
+}
+
+/*==================================================================
+    ABSÄTZE
+==================================================================*/
+
+h1{
+	font-size:22px;
+	font-weight:normal;
+	margin:5px 0px;
+}
+
+/*----------------------- Codeblock -----------------------*/
+
+pre.code{
+	font-family:courier new,monospace;
+}
+
+/*==================================================================
+    TABELLEN,LISTEN
+==================================================================*/
+
+div.table_wrapper{
+	margin:5px 0px;
+}
+table{
+	margin:5px 0px;
+	border-collapse:collapse;
+	border:1px solid black;
+}
+table th{
+	font-weight:normal;
+	text-align:left;
+	border-left:1px solid black;
+}
+table td,
+table th{
+	border-bottom:1px solid black;
+	padding:0px 5px;
+}
+div.tbl_new{
+	margin-top:5px;
+}
+/*----------------------- table.wide -----------------------*/
+table.wide{
+	border:none;
+}
+table.wide th{
+	border-left:none;
+	border-right:none;
+}
+
+/*----------------------- datatables -----------------------*/
+div.dataTables_filter{
+	text-align:right;
+}
+
+/*==================================================================
+    FORMULARE
+==================================================================*/
+
+form{
+	width:710px;
+}
+form label{
+	display:inline-block;
+	vertical-align:top;
+	margin-top:3px;
+	min-width:200px;
+}
+form label:after{
+	content:":";
+}
+input[type='text'],
+input[type='password'],
+input[type='search'],
+select,
+textarea{
+	border:none;
+	border-bottom:1px solid black;
+	border-left:1px solid black;
+}
+form select,
+form input[type='text'],
+form input[type='password'],
+form textarea{
+	vertical-align:bottom;
+	width:500px;
+}
+form div.form_field{
+	margin-bottom:5px;
+}
+form div.form_buttons label:after{
+	content:none;
+}
+form fieldset{
+	border:1px dashed black;
+	margin:5px 0px;
+	padding:5px 5px 0px 5px;
+}
+form fieldset label{
+	min-width:195px;
+}
+form fieldset legend{
+	padding:0px 5px;
+}
+

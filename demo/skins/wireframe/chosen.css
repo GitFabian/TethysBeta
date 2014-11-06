@@ -1,0 +1,12 @@
+@CHARSET "utf-8";
+
+/*==================================================================
+    CHOSEN
+==================================================================*/
+
+.chosen-container-multi .chosen-choices {
+	background:none;
+	border:none;
+	border-bottom:1px solid black;
+	border-left:1px solid black;
+}
