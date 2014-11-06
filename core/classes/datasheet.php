@@ -36,7 +36,7 @@ class datasheet{
 		if ($edit) $buttons[]=html_a_button("Bearbeiten",ROOT_HTTP_CORE."/core/edit.".CFG_EXTENSION."?db=".$this->db."&id=".$this->id);
 		$btn_html=($buttons?"\n<div class=\"ds_btns\">\n\t".implode("\n\t", $buttons)."\n</div>":"");
 		
-		return "\n<div class=\"datasheet\">\n<ul class=\"datasheet\">$data\n</ul>$btn_html\n</div>";
+		return "\n<div class=\"datasheet $this->modul $this->db\">\n<ul class=\"datasheet\">$data\n</ul>$btn_html\n</div>";
 	}
 	
 	static function from_db($modul, $db, $id, $query=null){
@@ -69,7 +69,7 @@ class datasheet_data{
 		$this->value=$value;
 	}
 	function toHTML(){
-		return "\n\t<li><div class=\"data_label\">$this->label</div><div class=\"data_value\">$this->value</div></li>";
+		return "\n\t<li><div class=\"data_label $this->idname\">$this->label</div><div class=\"data_value\">$this->value</div></li>";
 	}
 }
 
