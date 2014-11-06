@@ -15,7 +15,8 @@ function init_settings(){
 	define('CFG_MODULES',setting_get(null,'CFG_MODULES'));
 	
 	
-	if (CFG_SKIN=='demo'||CFG_SKIN=='terminal'){
+	if (CFG_SKIN=='wireframe'
+			||CFG_SKIN=='terminal'){
 		define('CFG_SKINDIR',ROOT_HDD_CORE."/demo/skins/".CFG_SKIN);
 		define('CFG_SKINPATH',ROOT_HTTP_CORE."/demo/skins/".CFG_SKIN);
 	}else{
@@ -47,9 +48,9 @@ function setting_get_default($modul,$key){
 			if ($key=='CFG_HOME_TITLE') return "Startseite";
 			if ($key=='CFG_HOME_URL') return "";
 			if ($key=='CFG_HOME_LABEL') return "Start";
-			if ($key=='CFG_SKIN') return "demo";
+			if ($key=='CFG_SKIN') return "terminal";
 			if ($key=='CFG_CSS_VERSION') return "";
-			if ($key=='CFG_MODULES') return "tethys,demo";
+			if ($key=='CFG_MODULES') return "demo";
 			if ($key=='SET_PGSEL_SETTINGS') return "core";
 			if ($key=='SET_PGSEL_USERSETS') return "core";
 			if ($key=='HM_ICONS') return "0";

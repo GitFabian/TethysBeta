@@ -66,16 +66,10 @@ module_read();
 /*
  * Benutzerkonfiguration
  */
-$css_hdd=ROOT_HDD_SKINS."/".CFG_SKIN;
-$css_http=ROOT_HTTP_SKINS."/".CFG_SKIN;
-if (strcasecmp(CFG_SKIN,"demo")==0||strcasecmp(CFG_SKIN,"terminal")==0){
-	$css_hdd=ROOT_HDD_CORE."/demo/skins/".CFG_SKIN;
-	$css_http=ROOT_HTTP_CORE."/demo/skins/".CFG_SKIN;
-}
-$page->add_stylesheet($css_http."/screen.css");
+$page->add_stylesheet(CFG_SKINPATH."/screen.css");
 foreach ($modules as $mod_id => $module) {
-	if (file_exists($css_hdd."/mod_$mod_id.css")){
-		$page->add_stylesheet($css_http."/mod_$mod_id.css");
+	if (file_exists(CFG_SKINDIR."/mod_$mod_id.css")){
+		$page->add_stylesheet(CFG_SKINPATH."/mod_$mod_id.css");
 	}
 }
 
