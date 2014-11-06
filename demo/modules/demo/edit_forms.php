@@ -3,6 +3,8 @@
 function edit_form($form,$table,$id,$query){
 	if ($table=='demo_lorumipsum'){
 		include_chosen();
+		$_REQUEST['view_url']=ROOT_HTTP_CORE."/demo/modules/demo/flubtangle.".CFG_EXTENSION."?id=$id";
+		
 		module::edit_form_field($form,$query,'flubtangle',"Flubtangle",'TEXTAREA');
 		module::edit_form_field($form,$query,'abracadabra',"Abracadabra",'TEXTAREA');
 

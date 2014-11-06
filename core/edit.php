@@ -4,6 +4,7 @@ $page->init("core_edit", "Datensatz bearbeiten");
 include_once ROOT_HDD_CORE.'/core/classes/form.php';
 include_once ROOT_HDD_CORE.'/core/edit_rights.php';
 include_jquery();
+include_once "edit_.php";
 
 request_extract_booleans2();
 
@@ -39,10 +40,6 @@ if (request_command("do")){
 	unset($_REQUEST['return']);
 	unset($_REQUEST['db']);
 	unset($_REQUEST['idkey']);
-// 	if (isset($_REQUEST['new_id'])){
-// 		$_REQUEST['idkey']=$_REQUEST['new_id'];
-// 	}else{
-// 	}
 	
 	if ($modul=='core'){
 		$new_handeled=false;
@@ -109,7 +106,6 @@ if ($id!="NEW"){
 	if (!$query){
 		$new_with_id=$id;
 		$id="NEW";
-		#page_send_exit("Datensatz nicht gefunden!");
 	}
 }
 
@@ -146,40 +142,11 @@ $form->add_hidden("new_id", $new_with_id);
 	
 edit_add_fields($form,$modul,$db,$query,$id,$idkey);
 
+$view_url=request_value('view_url');
+if ($view_url) $form->buttons.=html_button("Details",null,"location.href='$view_url';");
+
 $page->say($form);
 $page->focus="label:first-child + *";
 
 page_send_exit();//=======================================================================================
-function edit_add_fields($form,$modul,$db,$query,$id,$idkey){
-	global $modules;
-	if ($modul=='core'){
-		include_once 'edit_forms.php';
-		$edit_form=get_edit_form($form,$db,$id,$query);
-	}else{
-		$edit_form=$modules[$modul]->get_edit_form($form,$db,$id,$query);
-	}
-	if ($edit_form===false) edit_default_form($form,$query,$db,$idkey);
-}
-function edit_default_form($form,$query,$db,$idkey){
-	foreach ($query as $key => $value) {
-		$col_info=dbio_info_columns($db);
-		#echo $col_info['active']['Type'];
-		if ($key!=$idkey){
-			
-			/*
-			 * Datentyp
-			 */
-			$typ='TEXT';
-			$type=$col_info[$key]['Type'];
-			if ($type=='text') $typ='TEXTAREA';
-			if ($type=='tinyint(1)') $typ='CHECKBOX';
-			
-			$form->add_field(new form_field($key,null,request_value($key,$value),$typ));
-		}
-	}
-	return true;
-}
-function edit_get_empty_table($table){
-	
-}
 ?>

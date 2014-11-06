@@ -44,9 +44,8 @@ function dbio_DELETE($db,$where){
 }
 
 function dbio_NEW_FROM_REQUEST($db,$idkey="id"){
-	$col_info=dbio_info_columns($db);
 	$data=array();
-	foreach ($col_info as $key => $dummy) {
+	foreach ($_REQUEST as $key => $dummy) {
 		$data[$key]=request_value($key);
 	}
 	if (isset($_REQUEST['new_id'])){

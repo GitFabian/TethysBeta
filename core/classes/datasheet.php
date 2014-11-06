@@ -39,7 +39,7 @@ class datasheet{
 		return "\n<div class=\"datasheet $this->modul $this->db\">\n<ul class=\"datasheet\">$data\n</ul>$btn_html\n</div>";
 	}
 	
-	static function from_db($modul, $db, $id, $query=null){
+	static function from_db($modul, $db, $id, $query=null, $idkey='id'){
 		global $modules;
 		include_once ROOT_HDD_CORE.'/core/classes/form.php';
 		if ($query===null) $query=dbio_SELECT_SINGLE($db, $id);
@@ -47,7 +47,11 @@ class datasheet{
 		$datasheet=new datasheet($modul, $db, $id);
 		
 		$form=new form(null,null,null,"datasheet");
-		$modules[$modul]->get_edit_form($form, $db, $id, $query);
+		$ok=$modules[$modul]->get_edit_form($form, $db, $id, $query);
+		if ($ok===false){
+			include_once ROOT_HDD_CORE.'/core/edit_.php';
+			edit_default_form($form,$query,$db,$idkey);
+		}
 		
 		foreach ($form->field_groups as $g) {
 			foreach ($g->fields as $field) {
