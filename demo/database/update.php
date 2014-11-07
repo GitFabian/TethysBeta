@@ -79,9 +79,18 @@ if ($version<8){
 
 if ($version<9){dbio_query("ALTER TABLE `core_users` ADD `picture` VARCHAR( 500 ) NULL ;");}
 
+if ($version<10){dbio_query("CREATE TABLE IF NOT EXISTS `core_logs` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `time` int(11) NOT NULL,
+  `ip` varchar(15) COLLATE utf8_bin NOT NULL,
+  `keyword` varchar(50) COLLATE utf8_bin NOT NULL,
+  `pars` text COLLATE utf8_bin NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;");}
+
 #if ($version<){dbio_query("");}
 
-$current_version=9;
+$current_version=10;
 //=================================================================================================
 dbio_query("UPDATE `core_meta_dbversion` SET `version` = '$current_version' WHERE `modul_uc` = 'CORE';");
 //=================================================================================================
