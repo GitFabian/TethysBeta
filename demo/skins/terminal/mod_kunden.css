@@ -1,7 +1,7 @@
 @CHARSET "utf-8";
 
 /*==================================================================
-    KUNDEN
+    SETCARDS
 ==================================================================*/
 div.t_set.kunden.kunde_person div.set_card div.set_head{
 	position:absolute;
@@ -26,4 +26,22 @@ div.t_set.kunden.kunde_person div.set_card div.sprache.deutsch{
 }
 div.t_set.kunden.kunde_person div.set_card div.sprache.international{
 	background-image:url(img/kunden/sprache_international.png);
+}
+
+div.t_set.kunden.kunde_person div.infotext span.flags{
+	display:inline-block;
+	height:25px;
+	width:0px;
+	overflow:hidden;
+	padding-left:32px;
+	background-repeat:no-repeat;
+}
+div.t_set.kunden.kunde_person div.infotext span.flags.forum{
+	background-image:url(img/kunden/userforum.png); }
+div.t_set.kunden.kunde_person div.infotext span.flags.xmas{
+	background-image:url(img/kunden/xmas.png); }
+div.t_set.kunden.kunde_person div.infotext span.flags.um{
+	background-image:url(img/kunden/usermeeting.png); }
+div.t_set.kunden.kunde_person div.infotext span.flags.strike{
+	opacity:.2;
 }
