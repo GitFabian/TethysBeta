@@ -10,16 +10,22 @@ include_once ROOT_HDD_CORE.'/core/alertify.php';
  * Tabelle 1
  */
 $page->say(html_header1("Tabelle 1"));
-$query_lorumipsum=dbio_SELECT("demo_lorumipsum");
-$tabelle=new table($query_lorumipsum);
+$query_lorumipsum=dbio_SELECT("demo_lorumipsum","");
+$data=array();
+foreach ($query_lorumipsum as $row) {
+	$row['flubtangle']="<pre>".escape_html($row['flubtangle'])."</pre>";
+	$row['abracadabra']="<pre>".escape_html($row['abracadabra'])."</pre>";
+	$data[$row['id']]=$row;
+}
+$tabelle=new table($data);
 // $tabelle->set_header(array(
 // 	"flubtangle"=>"Flubtangle",
 // 	"abracadabra"=>"Abracadabra",
 // ));
 $tabelle->set_options(true, true, true, 'demo_lorumipsum');
-$tabelle->options=html_a_button("Details",
+array_unshift($tabelle->options, html_a_button("Details",
 		ROOT_HTTP_CORE."/demo/modules/demo/flubtangle.".CFG_EXTENSION."?id=[ID:id]",
-		"tbl_option tbl_details").$tabelle->options;
+		"tbl_option tbl_details") );
 $page->say($tabelle);
 
 /*

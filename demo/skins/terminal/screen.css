@@ -292,6 +292,14 @@ a.tbl_option{
 	margin-right:10px;
 }
 
+/*----------------------- tbl_buttons -----------------------*/
+div.tbl_buttons a.button:after{
+	content:" |";
+}
+div.tbl_buttons a.button:last-child:after{
+	content:none;
+}
+
 /*----------------------- datatables -----------------------*/
 div.dataTables_wrapper th:hover{
 	cursor:pointer;
@@ -543,4 +551,7 @@ form fieldset legend{
 }
 div.form_buttons{
 	margin-top:5px;
+}
+div.form_buttons input{
+	margin-right:10px;
 }

@@ -16,6 +16,7 @@ class table{
 	var $col_highlight=false;
 	var $options=null;
 	var $options2=null;
+	var $export_csv=true;
 	
 	function __construct($query=null,$class=null,$datatable=true,$id=null){
 		$this->rows=array();
@@ -35,14 +36,14 @@ class table{
 		return $this->toHTML();
 	}
 	
-	function set_options($new,$edit,$delete,$db,$idkey='id',$datensatz=null){
+	function set_options($new,$edit,$delete,$db,$idkey='id',$datensatz=null,$export_id=null){
 		include_once ROOT_HDD_CORE.'/core/edit_rights.php'; 
-		$this->options="";
-		$this->options2=null;
+		$this->options=array();
+		$this->options2="";
 		if (!edit_rights2($db, null)) return;
 		$idkeyquery=($idkey=='id'?"":"&idkey=$idkey");
 		if ($edit){
-			$this->options.=html_a_button("Bearbeiten",
+			$this->options[]=html_a_button("Bearbeiten",
 					ROOT_HTTP_CORE."/core/edit.".CFG_EXTENSION."?db=$db&id=[ID:$idkey]$idkeyquery&datensatz=$datensatz",
 					"tbl_option tbl_edit");
 		}
@@ -50,11 +51,15 @@ class table{
 			include_once ROOT_HDD_CORE.'/core/alertify.php';
 			$url=ROOT_HTTP_CORE."/core/edit.".CFG_EXTENSION."?cmd=delete&db=$db&id=[ID:$idkey]$idkeyquery";
 			#$this->options.=html_a_button("Löschen", $url, "tbl_option tbl_delete");
-			$this->options.=html_a_button("Löschen", "", "tbl_option tbl_delete","ask_delete('$url','$datensatz');");
+			$this->options[]=html_a_button("Löschen", "", "tbl_option tbl_delete","ask_delete('$url','$datensatz');");
 		}
 		if ($new){
-			$this->options2=html_div(html_a_button("Neuer Eintrag", ROOT_HTTP_CORE."/core/edit.".CFG_EXTENSION."?id=NEW&db=$db&datensatz=$datensatz"),"tbl_new");
+			$this->options2.="\n\t".html_a_button("Neuer Eintrag", ROOT_HTTP_CORE."/core/edit.".CFG_EXTENSION."?id=NEW&db=$db&datensatz=$datensatz","tbl_new");
 		}
+		if ($this->export_csv){
+			$this->options2.="\n\t".html_a_button("CSV-Export", ROOT_HTTP_CORE."/core/export_csv.".CFG_EXTENSION."?db=$db&id=$export_id","tbl_export export_csv");
+		}
+		if ($this->options2) $this->options2=html_div($this->options2."\n","tbl_buttons");
 	}
 	
 	function add_query($query){
@@ -172,8 +177,8 @@ class table_row{
 			}
 		}
 		if ($options){
-			preg_match_all("/\\[ID\\:(.*?)\\]/", $options, $matches);
-			$line=$options;
+			$line="\n\t\t\t\t".implode("\n\t\t\t\t", $options)."\n\t\t\t";
+			preg_match_all("/\\[ID\\:(.*?)\\]/", $line, $matches);
 			for ($i = 0; $i < count($matches); $i++) {
 				$idkey=$matches[1][$i];
 				$value=$this->data[$idkey];

@@ -102,6 +102,14 @@ class modul_demo extends module{
 		return set_card::get_default($name,$data);
 	}
 	
+	function export_csv($table, $identifier){
+		if ($table=='demo_lorumipsum'){
+			$query=dbio_SELECT("demo_lorumipsum");
+			csv_out($query,"demo_lorumipsum.csv");
+		}
+		return false;
+	}
+	
 }
 
 function url_demo($page){

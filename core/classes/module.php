@@ -52,6 +52,11 @@ class module{
 		return set_card::get_default($name,$data);
 	}
 	
+	function export_csv($table, $identifier){
+		if (USER_ADMIN) echo("Nicht implementiert: Funktion \"".__FUNCTION__."\" in Modul \"".$this->modul_name."\"!");
+		return false;
+	}
+	
 	static function edit_form_field($form,$query,$key,$label=null,$type='TEXT',$options=null){
 		$form->add_field(new form_field($key,$label,request_value($key,$query[$key]),$type,null,$options));
 	}
