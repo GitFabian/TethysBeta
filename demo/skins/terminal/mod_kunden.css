@@ -3,6 +3,8 @@
 /*==================================================================
     SETCARDS
 ==================================================================*/
+
+/*----------------------- Person -----------------------*/
 div.t_set.kunden.kunde_person div.set_card div.set_head{
 	position:absolute;
 	width:255px;
@@ -35,6 +37,7 @@ div.t_set.kunden.kunde_person div.infotext span.flags{
 	overflow:hidden;
 	padding-left:32px;
 	background-repeat:no-repeat;
+	margin-top:10px;
 }
 div.t_set.kunden.kunde_person div.infotext span.flags.forum{
 	background-image:url(img/kunden/userforum.png); }
@@ -45,3 +48,23 @@ div.t_set.kunden.kunde_person div.infotext span.flags.um{
 div.t_set.kunden.kunde_person div.infotext span.flags.strike{
 	opacity:.2;
 }
+
+/*----------------------- Niederlassung -----------------------*/
+
+div.t_set.kunden.kurz div.set_card{
+	margin-top:10px;
+}
+div.t_set.kunden.kurz div.picture_wrapper{
+	display:none;
+}
+div.t_set.kunden.kurz div.set_head{
+	height:inherit;
+	padding-left:0px;
+}
+div.t_set.kunden.kurz ul.data{
+	padding-left:0;
+}
+div.t_set.kunden.kurz ul.data div.title{
+	display:none;
+}
+

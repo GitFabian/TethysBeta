@@ -17,6 +17,7 @@ class set{
 			$cards[]=$card->toHTML();
 		}
 		$cards=implode("", $cards);
+		
 		return "\n<div class=\"t_set $this->class\">$cards\n</div>";
 	}
 	function add_card($card){
@@ -39,10 +40,14 @@ class set_card{
 	var $picture;
 	var $data=array();
 	var $buttons=array();
-	function __construct($title,$infotext="",$picture=""){
+	var $edit;
+	var $details;
+	function __construct($title,$infotext="",$picture="",$edit=null,$details=null){
 		$this->header3=$title;
 		$this->infotext=$infotext;
 		$this->picture=$picture;
+		$this->edit=$edit;
+		$this->details=$details;
 	}
 	function add_data($data){
 		$this->data[]=$data;
@@ -65,7 +70,12 @@ class set_card{
 		
 		$infotext="\n\t\t\t<div class=\"infotext\">$this->infotext</div>";
 		
-		return "\n\t<div class=\"set_card\">$picture\n\t\t<div class=\"set_head\">$title$infotext\n\t\t</div>$data</div>";
+		$buttons=$this->buttons;
+		if ($this->edit){array_unshift($buttons,html_a_button("Bearbeiten", ROOT_HTTP_CORE."/core/edit.".CFG_EXTENSION."?".$this->edit));}
+		if ($this->details){array_unshift($buttons,html_a_button("Details", $this->details));}
+		$buttons=($buttons?"\n<div class=\"buttons\">".(implode("", $buttons))."</div>":"");
+		
+		return "\n\t<div class=\"set_card\">$picture\n\t\t<div class=\"set_head\">$title$infotext\n\t\t</div>$data$buttons</div>";
 	}
 	static function get_default($name,$data){
 		$card=new set_card($name);

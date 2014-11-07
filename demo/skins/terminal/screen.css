@@ -405,7 +405,8 @@ div.set_card ul.data{
 	list-style:none;
 	overflow-x:hidden;
 	overflow-y:auto;
-	height:70px;
+	max-height:70px;
+	padding-bottom:0;
 }
 div.set_card ul.data li.set_card_data{
 	display:table-row;
@@ -419,6 +420,18 @@ li.set_card_data div.title{
 }
 li.set_card_data div.title:after{
 	content:":";
+}
+div.set_card div.buttons{
+	margin-top:5px;
+}
+div.set_card a.button{
+	margin-right:10px;
+}
+div.set_buttons{
+	margin-top:10px;
+}
+div.set_buttons a.button{
+	margin-right:10px;
 }
 
 /*==================================================================
@@ -494,7 +507,7 @@ form input[type='password']{
 	background-position:0px 3px;
 	padding:1px 10px;
 	margin:0px 10px;
-	width:510px;
+	width:550px;/*???*/
 	padding-right:13px;
 	vertical-align:bottom;
 }
