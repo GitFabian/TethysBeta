@@ -3,14 +3,14 @@
 /*==================================================================
     KUNDEN
 ==================================================================*/
-div.t_set.kunden.person div.set_card div.set_head{
+div.t_set.kunden.kunde_person div.set_card div.set_head{
 	position:absolute;
 	width:255px;
 	padding-left:115px;
 	padding-top:20px;
 	margin-top:-20px;
 }
-div.t_set.kunden.person div.set_card div.sprache{
+div.t_set.kunden.kunde_person div.set_card div.sprache{
 	display:inline-block;
 	background-repeat:no-repeat;
 	padding-left:30px;
@@ -21,9 +21,9 @@ div.t_set.kunden.person div.set_card div.sprache{
 	position:relative;
 	z-index:100;
 }
-div.t_set.kunden.person div.set_card div.sprache.deutsch{
+div.t_set.kunden.kunde_person div.set_card div.sprache.deutsch{
 	background-image:url(img/kunden/sprache_deutsch.png);
 }
-div.t_set.kunden.person div.set_card div.sprache.international{
+div.t_set.kunden.kunde_person div.set_card div.sprache.international{
 	background-image:url(img/kunden/sprache_international.png);
 }

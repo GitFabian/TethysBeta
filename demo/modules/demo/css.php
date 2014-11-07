@@ -46,7 +46,7 @@ $page->say("\n".html_button("Success","",alertify_success("Success")));
 $page->say("\n".html_button("Error","",alertify_error("Error")));
 
 $page->say(html_header1("Set-Cards"));
-$set=new set();
+$set=new set("");
 $set->add_card($card1=new set_card("Karte 1","Dizzle flong ho whack da razz",ROOT_HTTP_CORE."/demo/DATA/core_users/person1.png"));
 $card1->add_data(new set_card_data("name", "Name", "Chef"));
 $card1->add_data(new set_card_data("hobbies", "Hobbys", "Quibblenip-bloobing, Zingity"));

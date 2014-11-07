@@ -356,14 +356,12 @@ ul.datasheet li div.data_label:after{
     SET-CARDS, SETS
 ==================================================================*/
 
-div.t_set{
-	margin-top:10px;
-}
 div.set_card{
 	vertical-align:top;
 	display:inline-block;
 	width:370px;
 	margin-right:20px;
+	margin-top:20px;
 }
 div.set_card div.picture_wrapper{
 	float:left;
