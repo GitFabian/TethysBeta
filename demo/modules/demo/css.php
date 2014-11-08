@@ -41,7 +41,7 @@ $page->say(html_iframe_fullsize("http://sprichwortgenerator.de/","demo_css"));
 $page->say(html_header1("Alertify"));
 $page->say("\n".html_button("Dialog","","alertify.confirm(&quot;Message?&quot;,function(e){});"));
 $page->say("\n".html_button("Alert","",alertify_alert("Alert")));
-#$page->onload_JS.=alertify_alert("Alert");
+#$page->onload_JS.="alertify.confirm(&quot;Message?&quot;,function(e){});";
 $page->say("\n".html_button("Success","",alertify_success("Success")));
 $page->say("\n".html_button("Error","",alertify_error("Error")));
 

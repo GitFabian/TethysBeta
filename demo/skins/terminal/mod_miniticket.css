@@ -21,6 +21,22 @@ div.t_set.miniticket.ticket div.set_card div.picture_wrapper.leer{
 	display:none;
 }
 div.t_set.miniticket.ticket div.set_card ul.data{
-	width:inherit;
-	height:inherit;
+	width:550px;
+	max-height:inherit;
+}
+div.t_set.miniticket.ticket.neu div.set_card div.set_head h3{
+	color:#e78686;
+	text-shadow:0px 0px 2px #e78686;
+}
+
+/*==================================================================
+    Bearbeitungs-Liste
+==================================================================*/
+
+table.inbearbeitung tr.done,
+table.inbearbeitung tr.done a{
+	color:#006b98;
+}
+table.inbearbeitung tr.done td:last-child{
+	color:#07c0ef;
 }

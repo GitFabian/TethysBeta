@@ -247,6 +247,7 @@ a{
 	color:#49eddc;
 	color:#77e4ff;
 	text-decoration:none;
+	cursor:pointer;
 }
 input[type=submit],
 input[type=button],
@@ -288,11 +289,6 @@ table th{
 }
 table td{
 	vertical-align:top;
-}
-
-/*----------------------- tbl_option -----------------------*/
-a.tbl_option{
-	margin-right:10px;
 }
 
 /*----------------------- tbl_buttons -----------------------*/

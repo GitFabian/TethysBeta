@@ -112,6 +112,9 @@ function ajax_refresh($msg,$url){
 function escape_html($text){
 	return htmlentities(utf8_decode($text));
 }
+function escape_inline_js($text){
+	return preg_replace("/'/", "\\'", $text);
+}
 
 function url_mod_pg($modul,$page){
 	if ($modul=='demo'||$modul=='tethys') return ROOT_HTTP_CORE."/demo/modules/$modul/$page.".CFG_EXTENSION;

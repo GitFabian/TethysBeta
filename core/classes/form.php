@@ -7,7 +7,12 @@ http://tethys-framework.de/wiki/?title=Formular
 bzw. http://localhost/tethys/demo/modules/demo/formular.php
  */
 
-if (USER_ADMIN){global $page;include_jquery();$page->add_library(ROOT_HTTP_CORE."/core/html/lorumipsum.js");}
+if (USER_ADMIN){
+	global $page;
+	include_jquery();
+	$page->add_library(ROOT_HTTP_CORE."/core/html/lorumipsum.js");
+	$page->add_inline_script("lorumipsum_start('".ROOT_HTTP_CORE."','".CFG_EXTENSION."');");
+}
 
 class form{
 	

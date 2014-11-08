@@ -4,6 +4,12 @@
     ALERTIFY
 ==================================================================*/
 
-section.alertify{
-x	background:black;
+div.alertify-dialog{
+	background:#082c4c;
+	border:4px ridge #2a97ea;
+}
+
+nav.alertify-buttons a.alertify-button{
+	font-family:bitwise;
+	font-size:18px;
 }
