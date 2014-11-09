@@ -72,6 +72,9 @@ foreach ($modules as $mod_id => $module) {
 		$page->add_stylesheet(CFG_SKINPATH."/mod_$mod_id.css");
 	}
 }
+if (isset($page->libraries[ROOT_HTTP_CORE."/core/html/alertify.js-shim-0.3.8/alertify.min.js"])){
+	if (file_exists(CFG_SKINDIR."/alertify.css")) $page->add_stylesheet(CFG_SKINPATH."/alertify.css");
+}
 
 /*
  * Hauptmenü

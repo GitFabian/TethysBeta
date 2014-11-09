@@ -11,7 +11,6 @@ global $page;
 $page->add_library(ROOT_HTTP_CORE."/core/html/alertify.js-shim-0.3.8/alertify.min.js");
 $page->add_stylesheet(ROOT_HTTP_CORE."/core/html/alertify.js-shim-0.3.8/themes/alertify.core.css");
 $page->add_stylesheet(ROOT_HTTP_CORE."/core/html/alertify.js-shim-0.3.8/themes/alertify.default.css");
-if (file_exists(CFG_SKINDIR."/alertify.css")) $page->add_stylesheet(CFG_SKINPATH."/alertify.css");
 
 function alertify_alert($text){
 	return "alertify.alert(&quot;$text&quot;);";
