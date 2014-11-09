@@ -8,7 +8,14 @@ $id=request_value("id");
 
 $modul=substr($db, 0, strpos($db, "_"));
 
-$ok=$modules[$modul]->export_csv($db, $id);
+if ($modul=='core'){
+	if ($db=="core_users"){
+		csv_out(dbio_SELECT($db),$db.".csv");
+	}
+	$ok=false;
+}else{
+	$ok=$modules[$modul]->export_csv($db, $id);
+}
 
 if (!$ok) page_send_exit("Export fehlgeschlagen!");
 
