@@ -269,8 +269,8 @@ function html_a($html,$href,$class=null,$external=false,$onclick=null){
 	if ($onclick) $pars["onclick"]=$onclick;
 	return htmlEntity('a', $html, $pars);
 }
-function html_a_button($html,$href,$class=null,$onclick=null){
-	return html_a($html, $href, "button $class", false, $onclick);
+function html_a_button($html,$href,$class=null,$onclick=null,$extern=false){
+	return html_a($html, $href, "button $class", $extern, $onclick);
 }
 
 function string_random_pass_aa0000(){

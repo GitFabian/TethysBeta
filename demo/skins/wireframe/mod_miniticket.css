@@ -1,0 +1,66 @@
+@CHARSET "utf-8";
+
+/*==================================================================
+    TICKETS
+==================================================================*/
+div.t_set.miniticket.ticket div.set_card{
+	display:block;
+	position:relative;
+}
+div.t_set.miniticket.ticket div.set_card div.set_head{
+	min-height:inherit;
+}
+div.t_set.miniticket.ticket div.set_head span.status{
+	display:none;
+}
+div.t_set.miniticket.ticket div.set_head span.status.neu{
+	display:block;
+	position:absolute;
+	right:0;
+	top:0;
+	margin:5px 10px;
+}
+div.t_set.miniticket.ticket span.time_delta:before{
+	content:" - ";
+}
+div.t_set.miniticket.ticket div.set_card div.picture_wrapper.leer{
+	display:none;
+}
+div.t_set.miniticket.ticket div.set_card div.picture_wrapper.leer + div.set_head{
+	padding-left:10px;
+}
+div.t_set.miniticket.ticket li.set_card_data div.title{
+	display:none;
+}
+div.t_set.miniticket.ticket li.set_card_data div.val_absender{
+	text-align:right;
+	font-style:italic;
+	padding-top:5px;
+}
+div.t_set.miniticket.ticket ul.data{
+x	padding:5px 10px;
+x	list-style:none;
+}
+div.t_set.miniticket.ticket ul.data li.set_card_data{
+	display:block;
+}
+div.t_set.miniticket.ticket div{
+	display:block;
+}
+
+/*==================================================================
+    FORMULARE
+==================================================================*/
+
+/*----------------------- Neue Nachricht -----------------------*/
+
+form.miniticket_new label{
+	min-width:100px;
+}
+form.miniticket_new textarea[name=msg]{
+	height:200px;
+}
+
+body#miniticket_neu table.inbearbeitung th:nth-child(3){
+	width:400px;
+}

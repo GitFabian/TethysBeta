@@ -96,7 +96,7 @@ class set_card_data{
 		$this->value=$value;
 	}
 	function toHTML(){
-		return "\n\t\t\t<li class=\"set_card_data\"><div class=\"title\">$this->title</div><div class=\"value\">$this->value</div></li>";
+		return "\n\t\t\t<li class=\"set_card_data\"><div class=\"title\">$this->title</div><div class=\"value val_$this->id\">$this->value</div></li>";
 	}
 }
 

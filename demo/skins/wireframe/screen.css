@@ -88,11 +88,27 @@ h1{
 	font-weight:normal;
 	margin:5px 0px;
 }
+h2{
+	font-size:20px;
+	font-weight:normal;
+	margin:5px 0px;
+}
+h3{
+	font-size:18px;
+	font-weight:normal;
+	margin:5px 0px;
+}
+hr{
+	border:none;
+	border-bottom:1px solid black;
+	margin:5px 0px;
+}
 
 /*----------------------- Codeblock -----------------------*/
 
 pre.code{
 	font-family:courier new,monospace;
+	margin:5px 0;
 }
 
 /*==================================================================
@@ -117,7 +133,17 @@ table th{
 	border-bottom:1px solid black;
 	padding:0px 5px;
 }
+table td{
+	vertical-align:top;
+}
+table th{
+	vertical-align:bottom;
+}
 div.tbl_new{
+	margin-top:5px;
+}
+/*----------------------- tbl_buttons -----------------------*/
+div.tbl_buttons{
 	margin-top:5px;
 }
 /*----------------------- table.wide -----------------------*/
@@ -130,9 +156,19 @@ table.wide th{
 }
 
 /*----------------------- datatables -----------------------*/
+div.dataTables_wrapper{
+	display:inline-block;
+}
 div.dataTables_filter{
 	text-align:right;
 }
+a.paginate_button{
+	margin-right:5px;
+}
+a.paginate_button.disabled{
+	display:none;
+}
+
 
 /*==================================================================
     FORMULARE
@@ -184,3 +220,55 @@ form fieldset legend{
 	padding:0px 5px;
 }
 
+/*==================================================================
+    SET-CARDS, SETS
+==================================================================*/
+
+div.set_card{
+	vertical-align:top;
+	display:inline-block;
+	width:370px;
+	margin-right:10px;
+	margin-top:10px;
+	border:1px dashed black;
+}
+div.set_card div.picture_wrapper{
+	float:left;
+	width:100px;
+	max-height:100px;
+	overflow:hidden;
+}
+div.set_card div.picture_wrapper.leer{
+	height:100px;
+	background:url(nopic.png) no-repeat;
+}
+div.set_card div.picture_wrapper img{
+	width:100px;
+}
+div.set_card div.set_head{
+	min-height:100px;
+	padding-left:110px;
+}
+div.set_card ul.data{
+	padding:5px 10px;
+	list-style:none;
+}
+div.set_card ul.data li.set_card_data{
+	display:table-row;
+}
+li.set_card_data div{
+	display:table-cell;
+}
+li.set_card_data div.title{
+	padding-right:10px;
+	text-align:right;
+}
+li.set_card_data div.title:after{
+	content:":";
+}
+div.set_card div.buttons{
+	margin:5px;
+}
+div.set_card div.buttons a.button{
+	margin-right:5px;
+}

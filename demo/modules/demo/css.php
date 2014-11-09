@@ -50,10 +50,12 @@ $set=new set("");
 $set->add_card($card1=new set_card("Karte 1","Dizzle flong ho whack da razz",ROOT_HTTP_CORE."/demo/DATA/core_users/person1.png"));
 $card1->add_data(new set_card_data("name", "Name", "Chef"));
 $card1->add_data(new set_card_data("hobbies", "Hobbys", "Quibblenip-bloobing, Zingity"));
-$set->add_card($card1=new set_card("Karte 2","Jingle da zang! Zap ho Maggie ingleblang! Yip bam bizzlerizzle bam duh ting, nip ting a loo dang zip.",
+$card1->buttons[]=html_a_button("Homepage", "http://qnote.de",null,null,true);
+$set->add_card($card2=new set_card("Karte 2","Jingle da zang! Zap ho Maggie ingleblang! Yip bam bizzlerizzle bam duh ting, nip ting a loo dang zip.",
 		ROOT_HTTP_CORE."/demo/DATA/core_users/person2.png"));
-$card1->add_data(new set_card_data("name", "Name", "Lisa"));
-$card1->add_data(new set_card_data("hobbies", "Hobby", "Dee flang"));
+$card2->add_data(new set_card_data("name", "Name", "Lisa"));
+$card2->add_data(new set_card_data("hobbies", "Hobby", "Dee flang"));
+$card2->buttons[]=html_a_button("Homepage", "http://sourcecode-snippets.de",null,null,true);
 $page->say($set);
 
 $page->send();

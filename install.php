@@ -27,7 +27,7 @@ if(file_exists('config_start.php')){
 	function hauptmenue($page_id){return null;}
 	$page=new page();
 	header('Content-type: text/html; charset=UTF-8');
-	$page->add_stylesheet("demo/skins/demo/screen.css");
+	$page->add_stylesheet("demo/skins/terminal/screen.css");
 	$extension=substr($_SERVER['SCRIPT_NAME'], strrpos($_SERVER['SCRIPT_NAME'], '.')+1);
 	define('CFG_EXTENSION', $extension);
 	$mydir=getcwd();
