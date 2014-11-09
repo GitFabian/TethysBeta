@@ -111,6 +111,7 @@ function menu_add_default_admin($menu,$page_id){
 	if(USER_ADMIN){
 		new menu_topic($menu_admin,"core_rights",$page_id,"Rechte",url_core_admin("rights"));
 		new menu_topic($menu_admin,"core_settings",$page_id,"Konfig",url_core_admin("settings"));
+		new menu_topic($menu_admin,"core_createModul",$page_id,"Neues&nbsp;Modul",ROOT_HTTP_CORE."/demo/modules/blanko/create.".CFG_EXTENSION);
 		if (file_exists(ROOT_HDD_CORE."/core/admin/import.php"))
 			new menu_topic($menu_admin,"core_import",$page_id,"Import",url_core_admin("import"));
 		new menu_topic($menu_admin,"core_update",$page_id,"Update",ROOT_HTTP_CORE."/demo/database/update.".CFG_EXTENSION);
