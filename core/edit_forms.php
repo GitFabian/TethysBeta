@@ -10,7 +10,10 @@ function get_edit_form($form,$db,$id,$query){
 		module::edit_form_field($form,$query,'active',"Aktiv",'CHECKBOX');
 		module::edit_form_field($form,$query,'nick',"Nick");
 		module::edit_form_field($form,$query,'http_auth');
-		module::edit_form_field($form,$query,'password',"Passwort");
+		$pass_field=module::edit_form_field($form,$query,'password',"Passwort");
+		if ($id=="NEW"){
+			if(!$pass_field->value)$pass_field->value=string_random_pass_aa0000();
+		}
 		return true;
 	}
 	return false;

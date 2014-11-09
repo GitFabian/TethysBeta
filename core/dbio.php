@@ -50,6 +50,7 @@ function dbio_NEW_FROM_REQUEST($db,$idkey="id"){
 	}
 	if (isset($_REQUEST['new_id'])){
 		$data[$idkey]=$_REQUEST['new_id'];
+		unset($data['new_id']);
 	}else{
 		unset($data[$idkey]);
 	}

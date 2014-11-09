@@ -58,7 +58,7 @@ if (!file_exists(ROOT_HDD_MODULES)){
 	echo "Verzeichnis \"".ROOT_HDD_MODULES."\" nicht gefunden!";
 	exit;
 }
-$module=array("demo"=>"demo","tethys"=>"tethys");
+$module=array("demo"=>"demo");
 $modules_dir=opendir(ROOT_HDD_MODULES);
 while (false !== ($file = readdir($modules_dir))) {
 	if ($file!='.'&&$file!='..'){
