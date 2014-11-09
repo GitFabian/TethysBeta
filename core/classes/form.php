@@ -25,7 +25,7 @@ class form{
 	var $booleans;
 	var $buttons="";
 	
-	function __construct($cmd,$target=null,$submit_msg=null,$class=null){
+	function __construct($cmd,$target="?",$submit_msg=null,$class=null){
 		$this->method=(USER_ADMIN?"get":"post");
 		$this->field_groups=array();
 		$this->submit_msg=$submit_msg;
