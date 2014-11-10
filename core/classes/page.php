@@ -64,7 +64,8 @@ class page{
 			foreach ($this->views as $view) {
 				$views.="\n\t<li".($view->highlight?" class=\"view_highlight\"":"").">".$view->toHTML()."</li>";
 			}
-			$views="\n<ul class=\"views_menu\">$views\n</ul>";
+			$dev=(USER_ADMIN?" onclick=\"style.display='none';\"":"");
+			$views="\n<ul$dev class=\"views_menu\">$views\n</ul>";
 		}
 		
 		$mm_class="";

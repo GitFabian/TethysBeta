@@ -14,12 +14,15 @@ if(file_exists('config_start.php')){
 	$sql_server=$matches[1];
 	$sql_user=$matches[2];
 	$sql_pass=$matches[3];
+	
+	preg_match("/\\nfunction setting_override\\(\\\$modul,\\\$key\\){\\r\\n(.*?)\\treturn null;\\r\\n}\\/\\*OE\\*\\//s", $content, $matches);
+	$override=$matches[1];
+	
 }else{
 	include_once 'core/classes/page.php';
 	include_once 'core/classes/menu.php';
 	include_once 'core/toolbox.php';
 	include_once 'core/settings.php';
-	function get_default_setting($key){ return null; }
 	define('ROOT_HTTP_CORE','.');
 	define('USER_ADMIN','0');
 	define('CFG_CSS_VERSION','');
@@ -45,6 +48,7 @@ if(file_exists('config_start.php')){
 	$sql_server="localhost";#$_SERVER["SERVER_NAME"];
 	$sql_user="";
 	$sql_pass="";
+	$override="#if(\$modul==null&&\$key=='FEATURE_PRERELEASE')return \"1\";\n";
 }
 $page->init("core_admin", "Server-Konfiguration");
 if(request_command("run"))run($update);
@@ -94,6 +98,7 @@ $page->add_inline_script("function update_form(){
 
 $form->add_fields("",array(
 		new form_field("CFG_EXTENSION","Virtuelle Extension",request_value("CFG_EXTENSION",CFG_EXTENSION)),
+		new form_field("override","Server-spezifische Konfiguration",request_value("override",$override),'TEXTAREA'),
 ));
 
 $page->say(html_header1(($update?"Server-Konfiguration":"Installation")));
@@ -161,13 +166,12 @@ mysql_connect('$sql_server','$sql_user','$sql_pass');
 mysql_select_db(TETHYSDB);
 
 /*
- * Default Settings
+ * Server-spezifische Konfiguration
  */
-function get_default_setting(\$key){
-	#if (\$key=='CFG_SKIN') return "demo";
-	return null;
-}
-
+function setting_override(\$modul,\$key){
+$override	return null;
+}/*OE*/
+		
 /*
  * Start
  */
@@ -184,7 +188,8 @@ ENDE;
 	
 	$page->say(html_div("Konfigurationsdatei erstellt."));
 	if (!mysql_select_db($TETHYSDB)||!$update)
-	$page->say(html_a_button("Datenbank initialisieren", "demo/database/update.".$CFG_EXTENSION.($update?"":"?install")));
+		$page->say(html_a_button("Datenbank initialisieren", "demo/database/update.".$CFG_EXTENSION.($update?"":"?install")));
+	$page->say(" ".html_a("Zur Konfiguration", ROOT_HTTP_CORE."/core/admin/settings.".CFG_EXTENSION));
 // 	$page->say(html_button("config_start.php","","$('#cfg_file_content').toggle('invisible');"));
 // 	$page->say(html_div(html_pre(encode_html($config_file),"code"),"invisible","cfg_file_content"));
 	page_send_exit();

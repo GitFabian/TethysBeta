@@ -9,6 +9,8 @@ $devel_performance_query_counter=0;
 //2014-10
 if (!defined('CFG_LOGON_TYPE')) define('CFG_LOGON_TYPE','none');
 if (!defined('LOGON_NONE_DEF_USER')) define('LOGON_NONE_DEF_USER','1');
+//2014-11
+if (!function_exists('setting_override')){function setting_override($modul,$key){return null;}}
 
 /*
  * Includes

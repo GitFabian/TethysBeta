@@ -34,6 +34,7 @@ function setting_value($key){
 }
 
 function setting_get($modul,$key){
+	if(($override=setting_override($modul,$key))!==null){return $override;}
 	global $settings;
 	if (!$modul) $modul="-CORE-";
 	if (!isset($settings[$modul])||!isset($settings[$modul][$key])) return setting_get_default($modul,$key);
@@ -42,27 +43,25 @@ function setting_get($modul,$key){
 
 function setting_get_default($modul,$key){
 	if ($modul=='-CORE-'){
-		$r=get_default_setting($key);
-		if ($r===null){
-			if ($key=='CFG_TITLE') return "MyTethys";
-			if ($key=='CFG_HOME_TITLE') return "Startseite";
-			if ($key=='CFG_HOME_URL') return "";
-			if ($key=='CFG_HOME_LABEL') return "Start";
-			if ($key=='CFG_SKIN') return "terminal";
-			if ($key=='CFG_CSS_VERSION') return "";
-			if ($key=='CFG_MODULES') return "demo";
-			if ($key=='SET_PGSEL_SETTINGS') return "core";
-			if ($key=='SET_PGSEL_USERSETS') return "core";
-			if ($key=='HM_ICONS') return "0";
-			if ($key=='HM_TEXT') return "1";
-			if ($key=='DEPRECATED_HMLICLASS') return "0";
-			if ($key=='LOGON_MSG') return "Benutzername = Vorname<br>Account beantragen in Büro 321";
-			if ($key=='CFG_EDIT_NICK') return "0";
-			if ($key=='CFG_HAUPTMENUE') return ROOT_HDD_CORE."\\configExample.php";
-			if ($key=='CFG_MAX_USERS') return "1";
-			if (USER_ADMIN) echo "Kein Default-Value für \"$key\"! /core/settings.php:52";
-		}
-		return $r;
+		if ($key=='CFG_TITLE') return "MyTethys";
+		if ($key=='CFG_HOME_TITLE') return "Startseite";
+		if ($key=='CFG_HOME_URL') return "";
+		if ($key=='CFG_HOME_LABEL') return "Start";
+		if ($key=='CFG_SKIN') return "terminal";
+		if ($key=='CFG_CSS_VERSION') return "";
+		if ($key=='CFG_MODULES') return "demo";
+		if ($key=='SET_PGSEL_SETTINGS') return "core";
+		if ($key=='SET_PGSEL_USERSETS') return "core";
+		if ($key=='HM_ICONS') return "0";
+		if ($key=='HM_TEXT') return "1";
+		if ($key=='DEPRECATED_HMLICLASS') return "0";
+		if ($key=='LOGON_MSG') return "Benutzername = Vorname<br>Account beantragen in Büro 321";
+		if ($key=='CFG_EDIT_NICK') return "0";
+		if ($key=='CFG_HAUPTMENUE') return ROOT_HDD_CORE."\\configExample.php";
+		if ($key=='CFG_MAX_USERS') return "1";
+		if ($key=='FEATURE_PRERELEASE') return "1";
+		if (USER_ADMIN) echo "Kein Default-Value für \"$key\"! /core/settings.php:63";
+		return null;
 	}else{
 		global $modules;
 		if (!isset($modules[$modul])){

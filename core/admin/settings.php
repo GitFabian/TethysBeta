@@ -100,7 +100,8 @@ $form->add_field( new form_field("CFG_EDIT_NICK","Eigenen Nick bearbeiten",setti
 $form->add_field( new form_field("CFG_MAX_USERS","Maximale Benutzeranzahl",setting_get(null, 'CFG_MAX_USERS'),'TEXT',"setting_get(null,'CFG_MAX_USERS')") );
 
 $form->add_fields("Abwärtskompatibilität",null);
-$form->add_field( new form_field("DEPRECATED_HMLICLASS","div.mainmenu li div.menutopic",setting_get(null, 'DEPRECATED_HMLICLASS'),'CHECKBOX') );
+$form->add_field( new form_field("FEATURE_PRERELEASE","Pre-Release",setting_get(null, 'FEATURE_PRERELEASE'),'CHECKBOX',"setting_get(null,'FEATURE_PRERELEASE')") );
+$form->add_field( new form_field("DEPRECATED_HMLICLASS","div.mainmenu li div.menutopic",setting_get(null, 'DEPRECATED_HMLICLASS'),'CHECKBOX',"setting_get(null,'DEPRECATED_HMLICLASS')") );
 
 $page->say("Zur ".html_a("Server-Konfiguration", ROOT_HTTP_CORE."/install.".CFG_EXTENSION).".");
 $page->say($form->toHTML());
