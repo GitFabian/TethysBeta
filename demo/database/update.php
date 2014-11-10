@@ -88,9 +88,13 @@ if ($version<10){dbio_query("CREATE TABLE IF NOT EXISTS `core_logs` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;");}
 
+if ($version<11){dbio_query("ALTER TABLE `core_users` ADD `durchwahl` VARCHAR( 100 ) NULL ,
+ADD `handy` VARCHAR( 100 ) NULL ,
+ADD `raum` VARCHAR( 100 ) NULL ;");}
+
 #if ($version<){dbio_query("");}
 
-$current_version=10;
+$current_version=11;
 //=================================================================================================
 dbio_query("UPDATE `core_meta_dbversion` SET `version` = '$current_version' WHERE `modul_uc` = 'CORE';");
 //=================================================================================================

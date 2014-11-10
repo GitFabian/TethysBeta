@@ -29,6 +29,12 @@ if ($view=="core"){
 	if (setting_get(null,'CFG_EDIT_NICK')){
 		$persoenlich[]=new form_field("nick","Nutzername",USER_NICK);
 	}
+	if (setting_get(null,'CFG_EDIT_FILE')){
+		$persoenlich[]=new form_field("picture","Foto",$user['picture']);
+		$persoenlich[]=new form_field("durchwahl","Durchwahl",$user['durchwahl']);
+		$persoenlich[]=new form_field("handy","Handy",$user['handy']);
+		$persoenlich[]=new form_field("raum","Raum",$user['raum']);
+	}
 	if ($persoenlich) $form->add_fields("Persönliche Daten", $persoenlich);
 	
 	if ($form->field_groups)
@@ -42,6 +48,14 @@ exit;//=========================================================================
 function core_user_update(){
 	if (setting_get(null,'CFG_EDIT_NICK')&&request_value("nick")){
 		dbio_UPDATE("core_users", "id=".USER_ID, array("nick"=>request_value("nick")));
+	}
+	if (setting_get(null,'CFG_EDIT_FILE')){
+		dbio_UPDATE("core_users", "id=".USER_ID, array(
+			"picture"=>request_value("picture"),
+			"durchwahl"=>request_value("durchwahl"),
+			"handy"=>request_value("handy"),
+			"raum"=>request_value("raum"),
+		));
 	}
 	ajax_refresh("Speichere Daten...", "user.".CFG_EXTENSION."?cmd=updated");
 }

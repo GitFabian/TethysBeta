@@ -83,12 +83,12 @@ settings_add_field($form,"CFG_TITLE","Titel",'TEXT');
 settings_add_field($form,"CFG_HOME_LABEL","Startseite-Menüeintrag",'TEXT');
 settings_add_field($form,"CFG_HOME_URL","Startseite-URL",'TEXT');
 settings_add_field($form,"CFG_HOME_TITLE","Index-Titel",'TEXT');
-$form->add_field( new form_field("LOGON_MSG","Logon Message",setting_get(null, 'LOGON_MSG'),'TEXTAREA') );
+settings_add_field2($form,"LOGON_MSG","Logon Message",'TEXTAREA');
 
 $form->add_fields("Aussehen",null);
-$form->add_field( new form_field("CFG_SKIN","Skin",setting_value('CFG_SKIN'),'SELECT',null,$skins) );
+settings_add_field2($form,"CFG_SKIN","Skin",'SELECT',$skins);
 settings_add_field($form,"CFG_CSS_VERSION","CSS-Version",'TEXT');
-$form->add_field( new form_field("CFG_HAUPTMENUE","Haupmenü",setting_get(null, 'CFG_HAUPTMENUE') ) );
+settings_add_field2($form,"CFG_HAUPTMENUE","Haupmenü");
 $form->add_field( new form_field("HM_ICONS","Haupmenü Icons",setting_get(null, 'HM_ICONS'),'CHECKBOX') );
 $form->add_field( new form_field("HM_TEXT","Haupmenü Text",setting_get(null, 'HM_TEXT'),'CHECKBOX') );
 
@@ -96,12 +96,14 @@ $form->add_fields("Module",null);
 $form->add_field( new form_field("CFG_MODULES[]","Module",$modules,'SELECT_MULTIPLE',null,$module) );
 
 $form->add_fields("Benutzer",null);
-$form->add_field( new form_field("CFG_EDIT_NICK","Eigenen Nick bearbeiten",setting_get(null, 'CFG_EDIT_NICK'),'CHECKBOX') );
+settings_add_field2($form,"CFG_EDIT_NICK","Eigenen Nick bearbeiten",'CHECKBOX');
+settings_add_field2($form,"CFG_EDIT_FILE","Stammdaten bearbeiten",'CHECKBOX');
 $form->add_field( new form_field("CFG_MAX_USERS","Maximale Benutzeranzahl",setting_get(null, 'CFG_MAX_USERS'),'TEXT',"setting_get(null,'CFG_MAX_USERS')") );
 
 $form->add_fields("Abwärtskompatibilität",null);
 $form->add_field( new form_field("FEATURE_PRERELEASE","Pre-Release",setting_get(null, 'FEATURE_PRERELEASE'),'CHECKBOX',"setting_get(null,'FEATURE_PRERELEASE')") );
-$form->add_field( new form_field("DEPRECATED_HMLICLASS","div.mainmenu li div.menutopic",setting_get(null, 'DEPRECATED_HMLICLASS'),'CHECKBOX',"setting_get(null,'DEPRECATED_HMLICLASS')") );
+settings_add_field2($form,"DEPRECATED_HMLICLASS","div.mainmenu li div.menutopic",'CHECKBOX');
+
 
 $page->say("Zur ".html_a("Server-Konfiguration", ROOT_HTTP_CORE."/install.".CFG_EXTENSION).".");
 $page->say($form->toHTML());
@@ -109,7 +111,18 @@ $page->say($form->toHTML());
 $page->send();
 exit;//============================================================================================
 function settings_add_field($form,$cfg,$label,$type){
-	$form->add_field( new form_field($cfg, $label, constant($cfg),$type,$cfg) );
+	if (setting_override(null,$cfg)!==null){
+		$form->add_field( new form_field_info($cfg, $label, "[SERVER OVERRIDE] ".constant($cfg)) );
+	}else{
+		$form->add_field( new form_field($cfg, $label, constant($cfg), $type, $cfg) );
+	}
+}
+function settings_add_field2($form,$cfg,$label,$type='TEXT',$options=null){
+	if (setting_override(null,$cfg)!==null){
+		$form->add_field( new form_field_info($cfg, $label, "[SERVER OVERRIDE] ".setting_get(null,$cfg)) );
+	}else{
+		$form->add_field( new form_field($cfg,$label,setting_get(null,$cfg),$type,"setting_get(null,'$cfg')",$options) );
+	}
 }
 function core_settings_update2($modul){
 	global $view;

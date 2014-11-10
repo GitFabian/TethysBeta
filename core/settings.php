@@ -57,10 +57,11 @@ function setting_get_default($modul,$key){
 		if ($key=='DEPRECATED_HMLICLASS') return "0";
 		if ($key=='LOGON_MSG') return "Benutzername = Vorname<br>Account beantragen in Büro 321";
 		if ($key=='CFG_EDIT_NICK') return "0";
+		if ($key=='CFG_EDIT_FILE') return "1";
 		if ($key=='CFG_HAUPTMENUE') return ROOT_HDD_CORE."\\configExample.php";
 		if ($key=='CFG_MAX_USERS') return "1";
 		if ($key=='FEATURE_PRERELEASE') return "1";
-		if (USER_ADMIN) echo "Kein Default-Value für \"$key\"! /core/settings.php:63";
+		if (USER_ADMIN) echo "Kein Default-Value für \"$key\"! /core/settings.php:64";
 		return null;
 	}else{
 		global $modules;

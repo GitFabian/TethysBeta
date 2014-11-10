@@ -118,7 +118,7 @@ class form_field_info extends form_field{
 
 	function toHTML(){
 		$title=($this->title?" title=\"".encode_html($this->title)."\"":"");
-		return "<div class=\"form_field\"><label for=\"".$this->name."\"$title>".$this->label."</label>$this->value</div>";
+		return "<div class=\"form_field info\"><label for=\"".$this->name."\"$title>".$this->label."</label><pre>$this->value</pre></div>";
 	}
 
 }

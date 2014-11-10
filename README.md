@@ -1,9 +1,9 @@
 Tethys (Beta)
 =============
 
-Version 0.15.15
+Version 0.15.16
 
-Database-Version: 10
+Database-Version: 11
 
 TODO:
 * Messages
