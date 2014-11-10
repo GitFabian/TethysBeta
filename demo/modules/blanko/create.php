@@ -3,6 +3,8 @@ include_once '../../../config_start.php';
 $page->init("core_createModul", "Neues Modul erstellen");
 include_once ROOT_HDD_CORE.'/core/classes/form.php';
 
+if (!USER_ADMIN) page_send_exit("Keine Berechtigung!");
+
 if (request_command("do")){
 	
 	foreach ($_REQUEST as $key => $value) { $$key=$value; }
@@ -49,8 +51,14 @@ page_send_exit();//=============================================================
 	$file=fopen($dir."/$index_id.php", "w");
 		fwrite($file, $index_file);
 	fclose($file);
+
+	$m=array();
+	foreach ($modules as $key => $dummy) { $m[]=$key; }
+	$m[]=$id;
+	dbio_UPDATE("core_settings", "`key`='CFG_MODULES'", array("value"=>implode(",", $m)));
 	
-	$page->say("--- OK ---");
+	$page->say("--- OK ---<br><br>");
+	$page->say(html_a($name, ROOT_HTTP_MODULES."/$id/$index_url.".CFG_EXTENSION));
 	page_send_exit();
 }
 
