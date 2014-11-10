@@ -13,12 +13,12 @@ class table{
 	var $class;
 	var $datatable;
 	var $id;
+	var $export_csv_id;
 	var $col_highlight=false;
 	var $options=null;
 	var $options2=null;
-	var $export_csv=true;
 	
-	function __construct($query=null,$class=null,$datatable=true,$id=null){
+	function __construct($query=null,$class=null,$datatable=true,$id=null,$export_csv_id=null){
 		$this->rows=array();
 		$this->headers=null;
 		$this->class=$class;
@@ -28,6 +28,7 @@ class table{
 		}
 		$this->id=$id;
 		$this->datatable=($datatable===true?new datatable("#".$id):$datatable);
+		$this->export_csv_id=$export_csv_id;
 		
 		if ($query){ $this->add_query($query); }
 	}
@@ -36,7 +37,7 @@ class table{
 		return $this->toHTML();
 	}
 	
-	function set_options($new,$edit,$delete,$db,$idkey='id',$datensatz=null,$export_id=null){
+	function set_options($new,$edit,$delete,$db,$idkey='id',$datensatz=null){
 		include_once ROOT_HDD_CORE.'/core/edit_rights.php'; 
 		$this->options=array();
 		$this->options2="";
@@ -56,10 +57,6 @@ class table{
 		if ($new){
 			$this->options2.="\n\t".html_a_button("Neuer Eintrag", ROOT_HTTP_CORE."/core/edit.".CFG_EXTENSION."?id=NEW&db=$db&datensatz=$datensatz","tbl_new");
 		}
-		if ($this->export_csv){
-			$this->options2.="\n\t".html_a_button("CSV-Export", ROOT_HTTP_CORE."/core/export_csv.".CFG_EXTENSION."?db=$db&id=$export_id","tbl_export export_csv");
-		}
-		if ($this->options2) $this->options2=html_div($this->options2."\n","tbl_buttons");
 	}
 	
 	function add_query($query){
@@ -121,7 +118,11 @@ $table_X->set_header(array(
 // 			$page->add_inline_script("highlight_table_col('#$this->id');");
 		}
 		
-		$options=($this->options2?$this->options2:"");
+		$options=$this->options2;
+		if ($this->export_csv_id){
+			$options.="\n\t".html_a_button("CSV-Export", ROOT_HTTP_CORE."/core/export_csv.".CFG_EXTENSION."?db=".$this->export_csv_id,"tbl_export export_csv");
+		}
+		if ($options) $options=html_div($options."\n","tbl_buttons");
 
 		$html="\n<div class=\"table_wrapper\">"
 				."\n<table$class id=\"$this->id\">"

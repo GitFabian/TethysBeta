@@ -13,8 +13,8 @@ function init_settings(){
 	define('CFG_SKIN',trim(setting_get(null,'CFG_SKIN')));
 	define('CFG_CSS_VERSION',setting_get(null,'CFG_CSS_VERSION'));
 	define('CFG_MODULES',setting_get(null,'CFG_MODULES'));
-	
-	
+	define('FEATURE_PRERELEASE',setting_get(null,'FEATURE_PRERELEASE'));
+		
 	if (CFG_SKIN=='wireframe'
 			||CFG_SKIN=='terminal'){
 		define('CFG_SKINDIR',ROOT_HDD_CORE."/demo/skins/".CFG_SKIN);
