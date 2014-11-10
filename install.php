@@ -15,7 +15,7 @@ if(file_exists('config_start.php')){
 	$sql_user=$matches[2];
 	$sql_pass=$matches[3];
 	
-	preg_match("/\\nfunction setting_override\\(\\\$modul,\\\$key\\){\\r\\n(.*?)\\treturn null;\\r\\n}\\/\\*OE\\*\\//s", $content, $matches);
+	preg_match("/\\nfunction setting_override\\(\\\$modul,\\\$key\\){\\r?\\n(.*?)\\treturn null;\\r?\\n}\\/\\*OE\\*\\//s", $content, $matches);
 	$override=$matches[1];
 	
 }else{
