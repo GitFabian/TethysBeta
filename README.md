@@ -1,7 +1,7 @@
 Tethys (Beta)
 =============
 
-Version 0.15.14
+Version 0.15.15
 
 Database-Version: 10
 
@@ -12,7 +12,6 @@ TODO:
 * Logs
 * eMails
 * Upload
-* Blanko-Modul-Wizard
 * Generische members_direct-Tabelle
 * SMS
 * Excel-Export
