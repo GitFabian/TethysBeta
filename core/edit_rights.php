@@ -28,7 +28,7 @@ function edit_rights2($db,$id){
 	global $modules;
 	$modul=substr($db, 0, strpos($db, "_"));
 	if ($modul!='core'&&!isset($modules[$modul])){
-		if(USER_ADMIN){echo "Modul \"$modul\" nicht gefunden! edit_rights.php:16";return false;}
+		if(USER_ADMIN){echo "Modul \"$modul\" nicht gefunden! edit_rights.php:31";return false;}
 	}
 	return edit_rights($modul, $db, $id);
 }
