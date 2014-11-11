@@ -101,7 +101,7 @@ settings_add_field2($form,"CFG_EDIT_FILE","Stammdaten bearbeiten",'CHECKBOX');
 $form->add_field( new form_field("CFG_MAX_USERS","Maximale Benutzeranzahl",setting_get(null, 'CFG_MAX_USERS'),'TEXT',"setting_get(null,'CFG_MAX_USERS')") );
 
 $form->add_fields("Abwärtskompatibilität",null);
-$form->add_field( new form_field("FEATURE_PRERELEASE","Pre-Release",setting_get(null, 'FEATURE_PRERELEASE'),'CHECKBOX',"setting_get(null,'FEATURE_PRERELEASE')") );
+settings_add_field2($form,"FEATURE_PRERELEASE","Pre-Release",'CHECKBOX');
 settings_add_field2($form,"DEPRECATED_HMLICLASS","div.mainmenu li div.menutopic",'CHECKBOX');
 
 
