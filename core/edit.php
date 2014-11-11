@@ -5,6 +5,7 @@ include_once ROOT_HDD_CORE.'/core/classes/form.php';
 include_once ROOT_HDD_CORE.'/core/edit_rights.php';
 include_jquery();
 include_once "edit_.php";
+include_once ROOT_HDD_CORE.'/core/log.php';
 
 request_extract_booleans2();
 
@@ -49,9 +50,19 @@ if (request_command("do")){
 	}
 	
 	if ($id=="NEW"){
-		if (!$new_handeled) $id=dbio_NEW_FROM_REQUEST($db,$idkey);
+		if ($new_handeled){
+			if ($new_handeled===true){
+				$id=mysql_insert_id();
+			}else{
+				$id=$new_handeled;
+			}
+		}else{
+			$id=dbio_NEW_FROM_REQUEST($db,$idkey);
+		}
+		log_db_new($modul, $db, $id);
 	}else{
 		dbio_UPDATE($db, "`$idkey`='$id'", $_REQUEST);
+		log_db_edit($modul, $db, $id);
 	}
 	
 	if ($return){
@@ -84,6 +95,7 @@ if (request_command("delete")){
 	
 	if (!$fehler){
 		dbio_DELETE($db, "`$idkey`='$id'");
+		log_db_delete($modul, $db, $id);
 	}else{
 		if ($return) $page->say(html_div(html_a_button("Zurück", $return)));
 		page_send_exit("Verhindert durch Modul \"$fehler\".");

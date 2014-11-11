@@ -92,9 +92,25 @@ if ($version<11){dbio_query("ALTER TABLE `core_users` ADD `durchwahl` VARCHAR( 1
 ADD `handy` VARCHAR( 100 ) NULL ,
 ADD `raum` VARCHAR( 100 ) NULL ;");}
 
+if ($version<12){dbio_query("CREATE TABLE IF NOT EXISTS `core_logs_dbedit` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `time` int(11) NOT NULL,
+  `user` int(11) DEFAULT NULL,
+  `modul` varchar(100) COLLATE utf8_bin NOT NULL DEFAULT 'core',
+  `ip` varchar(15) COLLATE utf8_bin NOT NULL,
+  `action` enum('new','edit','del') COLLATE utf8_bin NOT NULL,
+  `tabelle` varchar(100) COLLATE utf8_bin NOT NULL,
+  `zeile` varchar(100) COLLATE utf8_bin NOT NULL,
+  `pars` text COLLATE utf8_bin,
+  PRIMARY KEY (`id`),
+  KEY `user` (`user`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;");
+dbio_query("ALTER TABLE `core_logs_dbedit`
+  ADD CONSTRAINT `core_logs_dbedit_ibfk_1` FOREIGN KEY (`user`) REFERENCES `core_users` (`id`);");}
+
 #if ($version<){dbio_query("");}
 
-$current_version=11;
+$current_version=12;
 //=================================================================================================
 dbio_query("UPDATE `core_meta_dbversion` SET `version` = '$current_version' WHERE `modul_uc` = 'CORE';");
 //=================================================================================================

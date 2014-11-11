@@ -30,7 +30,7 @@ function save_form($table,$id){
 		}
 		dbio_UPDATE_groupMember("demo_flubtangle_user", request_value('members'), "flubtangle", $id);
 		unset($_REQUEST['members']);
-		return true;
+		return $id;
 	}
 	return false;
 }
