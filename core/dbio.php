@@ -38,6 +38,31 @@ function dbio_SELECT_keyValueArray($db,$field,$key="id",$where=null){
 	return $list;
 }
 
+/**
+ * $format="[vorname] [nachname]";
+ */
+function dbio_SELECT_asList($db,$format,$where=null,$key="id",$sort=null,$sortAsc=true){
+	preg_match_all("/\\[(.*?)\\]/", $format, $fields);
+	$f=array("`$key`");
+	$patterns=array();
+	foreach ($fields[1] as $field) {
+		$f[]="`$field`";
+		$patterns[]="/\\[$field\\]/";
+	}
+	$f=implode(",", $f);
+	$query=dbio_SELECT($db,$where,$f,null,$sort,$sortAsc);
+	$list=array();
+	foreach ($query as $row) {
+		$replacements=array();
+		foreach ($fields[1] as $field) {
+			$replacements[]=$row[$field];
+		}
+		$value=preg_replace($patterns, $replacements, $format);
+		$list[$row[$key]]=$value;
+	}
+	return $list;
+}
+
 function dbio_DELETE($db,$where){
 	$anfrage="DELETE FROM `$db` WHERE $where;";
 	dbio_query($anfrage);
