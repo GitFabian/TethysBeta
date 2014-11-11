@@ -21,26 +21,28 @@ if (!$ok) page_send_exit("Export fehlgeschlagen!");
 
 page_send_exit();//====================================================================================================
 function csv_out($data,$filename="export.csv"){
+	header('Content-type: text/csv; charset=ISO-8859-1');
 	header("Content-Disposition: attachment; filename=\"$filename\"");
+	#header('Content-type: text/html; charset=ISO-8859-1');echo"<pre>";
 	$row_counter=0;
 	foreach ($data as $row) {
 		$row_counter++;
 		if ($row_counter==1){
+			$keys=array();
 			foreach ($row as $key => $dummy) {
 				$key=utf8_decode($key);
 				$key=preg_replace("/\"/", "\"\"", $key);
-				$key='"'.$key.'"';
-				echo $key."\t";
+				$keys[]='"'.$key.'"';
 			}
-			echo "\r\n";
+			echo implode(",", $keys)."\r\n";
 		}
+		$values=array();
 		foreach ($row as $value) {
 			$value=utf8_decode($value);
 			$value=preg_replace("/\"/", "\"\"", $value);
-			$value='"'.$value.'"';
-			echo $value."\t";
+			$values[]='"'.$value.'"';
 		}
-		echo "\r\n";
+		echo implode(",", $values)."\r\n";
 	}
 	exit;
 }
