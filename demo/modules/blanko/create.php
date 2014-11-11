@@ -27,6 +27,13 @@ class modul_$id extends module{
 		return \$menu;
 	}
 	
+	function export_csv(\$table, \$identifier){
+		if (USER_ADMIN) echo(\"Nicht implementiert: Funktion \\\"\".__FUNCTION__.\"\\\" in Modul \\\"\".\$this->modul_name.\"\\\"!\");
+		#if (\$table=='demo_lorumipsum'){ csv_out(dbio_SELECT(\$table),\"\$table.csv\"); }
+		if (USER_ADMIN) echo(\"Kein CSV-Export für Tabelle: \".\$table);
+		return false;
+	}
+
 }
 
 function url_$id(\$page){
