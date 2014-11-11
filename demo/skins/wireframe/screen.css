@@ -205,6 +205,10 @@ form textarea{
 form div.form_field{
 	margin-bottom:5px;
 }
+form div.form_field.info pre{
+	display:inline-block;
+	margin-top:3px;
+}
 form div.form_buttons label:after{
 	content:none;
 }
