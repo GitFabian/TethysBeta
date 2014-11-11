@@ -188,7 +188,7 @@ class form_field{
 				$options.="\n\t<option$selected value=\"$key\">$value</option>";
 			}
 			$input="<select$id$onChange name=\"".$this->name."\"".($this->type=="SELECT_MULTIPLE"?" multiple":"").""
-					.($this->type=="SELECT_MULTIPLE"?" class=\"chosen\"":"")
+					." class=\"chosen\""//.($this->type=="SELECT_MULTIPLE"?" class=\"chosen\"":"")
 					.">$options\n</select>";
 		}else if ($this->type=="PASSWORD"){
 			$input="<input$id type=\"password\" name=\"".$this->name."\" value=\"$thisvalue\" />";
