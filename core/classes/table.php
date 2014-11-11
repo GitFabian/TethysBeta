@@ -146,7 +146,7 @@ $table_X->set_header(array(
 class datatable{
 	var $selector;
 	var $paginate;
-	function __construct($selector,$paginate=true){
+	function __construct($selector,$paginate=false){
 		$this->selector=$selector;
 		$this->paginate=$paginate;
 	}
