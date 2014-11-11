@@ -18,12 +18,14 @@ class form{
 	
 	var $field_groups;
 	var $submit_msg;
+	var $submit_bool=true;
 	var $class;
 	var $action;
 	var $method;
 	var $hidden_fields;
 	var $booleans;
 	var $buttons="";
+	var $tag="form";
 	
 	function __construct($cmd,$target="?",$submit_msg=null,$class=null){
 		$this->method=(USER_ADMIN?"get":"post");
@@ -80,7 +82,8 @@ class form{
 		}
 		
 		$submit_msg=($this->submit_msg?" value=\"".$this->submit_msg."\"":"");
-		$buttons="\n\t<div class=\"form_buttons\"><label for=\"submit\"></label><input type=\"submit\" name=\"submit\"$submit_msg />$this->buttons</div>";
+		$submit=($this->submit_bool?"<input type=\"submit\" name=\"submit\"$submit_msg />":"");
+		$buttons="\n\t<div class=\"form_buttons\"><label for=\"submit\"></label>$submit$this->buttons</div>";
 		
 		$class=($this->class?" class=\"".$this->class."\"":"");
 		
@@ -95,7 +98,8 @@ class form{
 			$hidden_fields.="\n\t<input type=\"hidden\" name=\"booleans\" value=\"$booleans\" />";
 		}
 		
-		$html="\n<form$class action=\"$this->action\" method=\"$this->method\">$hidden_fields$form$buttons\n</form>";
+		$action=($this->action?" action=\"$this->action\" method=\"$this->method\"":"");
+		$html="\n<$this->tag$class$action>$hidden_fields$form$buttons\n</$this->tag>";
 		return $html;
 	}
 	
