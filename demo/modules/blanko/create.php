@@ -34,6 +34,32 @@ class modul_$id extends module{
 		return false;
 	}
 
+	function get_edit_right(\$table,\$id){
+		if (USER_ADMIN) echo(\"Nicht implementiert: Funktion \\\"\".__FUNCTION__.\"\\\" in Modul \\\"\".\$this->modul_name.\"\\\"!\");
+		#if (\$table=='demo_lorumipsum'){return berechtigung('RIGHT_DEMOMGMT');}
+		if (USER_ADMIN) echo\"Kein edit_right für \$table!\";
+		return false;
+	}
+	
+	function get_rights(){
+		return null;
+		include_once ROOT_HDD_CORE.'/core/classes/rights.php';
+		return array(
+			'RIGHT_DEMOMGMT'=>new right(\"Demo-Administration\", \"Flang flub cakewhack, boo quabble roo shnuzzle.\"),
+		);
+	}
+
+	function get_edit_form(\$form,\$table,\$id,\$query){
+		return false;
+		if (\$table=='demo_lorumipsum'){
+			module::edit_form_field(\$form,\$query,'flubtangle',\"Flubtangle\",'TEXT');
+			module::edit_form_field(\$form,\$query,'abracadabra',\"Abracadabra\",'TEXT');
+			return true;
+		}
+		if (USER_ADMIN) echo\"Kein edit_form für \$table!\";
+		return false;
+	}
+	
 }
 
 function url_$id(\$page){
@@ -50,6 +76,19 @@ include_once '../../config_start.php';
 
 page_send_exit();//===============================================================================
 ?>";
+
+$id_uppercase=strtoupper($id);
+$file_dbUpdate=<<<ENDE
+<?php
+if(!defined('USER_ADMIN')||!USER_ADMIN){echo"Keine Berechtigung!";exit;}
+
+#if (\$version<){dbio_query("");}
+
+//=================================================================================================
+dbio_query("UPDATE `core_meta_dbversion` SET `version` = '1' WHERE `modul_uc` = '$id_uppercase';");
+//=================================================================================================
+?>
+ENDE;
 	
 	mkdir($dir);
 	$file=fopen($dir."/tethys.php", "w");
@@ -58,7 +97,10 @@ page_send_exit();//=============================================================
 	$file=fopen($dir."/$index_id.php", "w");
 		fwrite($file, $index_file);
 	fclose($file);
-
+	$file=fopen($dir."/db_update.php", "w");
+		fwrite($file, $file_dbUpdate);
+	fclose($file);
+	
 	$m=array();
 	foreach ($modules as $key => $dummy) { $m[]=$key; }
 	$m[]=$id;
