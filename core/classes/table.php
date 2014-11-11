@@ -59,6 +59,14 @@ class table{
 		}
 	}
 	
+	function set_sort_values($column,$values){
+		$i=0;
+		foreach ($this->rows as $row) {
+			$row->sort_values[$column]=$values[$i];
+			$i++;
+		}
+	}
+	
 	function add_query($query){
 		foreach ($query as $row) {
 			$this->rows[]=new table_row($row);
@@ -157,6 +165,7 @@ class datatable{
 class table_row{
 	
 	var $data;
+	var $sort_values=array();
 	
 	function __construct($data=null){
 		$this->data=$data;
@@ -165,15 +174,23 @@ class table_row{
 	function toHTML($headers=null,$options=null){
 		$tr="";
 		if (!$headers){
-			foreach ($this->data as $data) {
-				$tr.="\n\t\t\t<td>$data</td>";
+			foreach ($this->data as $th => $data) {
+				$sortValue="";
+				if (isset($this->sort_values[$th])){
+					$sortValue=" data-sort=\"".$this->sort_values[$th]."\"";
+				}
+				$tr.="\n\t\t\t<td$sortValue>$data</td>";
 			}
 		}else{
 			foreach ($headers as $th => $value) {
+				$sortValue="";
+				if (isset($this->sort_values[$th])){
+					$sortValue=" data-sort=\"".$this->sort_values[$th]."\"";
+				}
 				if (isset($this->data[$th])){
-					$tr.="\n\t\t\t<td>".$this->data[$th]."</td>";
+					$tr.="\n\t\t\t<td$sortValue>".$this->data[$th]."</td>";
 				}else{
-					$tr.="\n\t\t\t<td></td>";
+					$tr.="\n\t\t\t<td$sortValue></td>";
 				}
 			}
 		}

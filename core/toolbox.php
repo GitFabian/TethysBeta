@@ -320,4 +320,31 @@ function time_delta($time){
 	return "$vz $delta Sekunden";
 }
 
+$sonderzeichen_regex=array(
+	'/[Ää]/u'=>'ae',
+	'/[Öö]/u'=>'oe',
+	'/[Üü]/u'=>'ue',
+	'/[ÁáÀàÂâ]/u'=>'a',
+	'/[ÉéÈèÊê]/u'=>'e',
+	'/[ÍíÌìÎî]/u'=>'i',
+	'/[ÓóÒòÔô]/u'=>'o',
+	'/[ÚúÙùÛû]/u'=>'u',
+	'/ß/u'=>'ss',
+	'/[Ýý]/u'=>'y',
+);
+$sonderzeichen_regex_patterns=null;
+
+function sort_sonderzeichen($text){
+	global $sonderzeichen_regex,$sonderzeichen_regex_patterns;
+	if (!$sonderzeichen_regex_patterns){
+		$sonderzeichen_regex_patterns=array();
+		foreach ($sonderzeichen_regex as $key => $dummy) {
+			$sonderzeichen_regex_patterns[]=$key;
+		}
+	}
+	$text=strtolower($text);
+	$text=preg_replace($sonderzeichen_regex_patterns, $sonderzeichen_regex, $text);
+	return $text;
+}
+
 ?>
