@@ -217,6 +217,10 @@ function ajax_to_id($cmd,$id,$modul=null,$escape=false){
 	return "tethys_ajax_to_id($quot$page?cmd=$cmd$quot,$quot$id$quot);";
 }
 
+function js_getSelectedValue($id){
+	return "document.getElementById('$id').options[document.getElementById('$id').selectedIndex].value";
+}
+
 function htmlEntity($name,$html,$pars){
 	$pars_html="";
 	if($pars)
