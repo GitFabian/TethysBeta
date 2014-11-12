@@ -15,7 +15,7 @@ if(file_exists('config_start.php')){
 	$sql_user=$matches[2];
 	$sql_pass=$matches[3];
 	
-	preg_match("/\\nfunction setting_override\\(\\\$modul,\\\$key\\){\\r?\\n(.*?)\\treturn null;\\r?\\n}\\/\\*OE\\*\\//s", $content, $matches);
+	preg_match("/\\nfunction setting_override\\(\\\$modul,\\\$key\\){\\r?\\n(.*?)\\s*?return null;\\r?\\n}\\/\\*OE\\*\\//s", $content, $matches);
 	$override=$matches[1];
 	
 }else{
@@ -48,7 +48,7 @@ if(file_exists('config_start.php')){
 	$sql_server="localhost";#$_SERVER["SERVER_NAME"];
 	$sql_user="";
 	$sql_pass="";
-	$override="#if(\$modul==null&&\$key=='FEATURE_PRERELEASE')return \"1\";\n";
+	$override="#if(\$modul==null&&\$key=='FEATURE_PRERELEASE')return \"1\";";
 }
 $page->init("core_admin", "Server-Konfiguration");
 if(request_command("run"))run($update);
@@ -169,7 +169,8 @@ mysql_select_db(TETHYSDB);
  * Server-spezifische Konfiguration
  */
 function setting_override(\$modul,\$key){
-$override	return null;
+$override
+return null;
 }/*OE*/
 		
 /*
