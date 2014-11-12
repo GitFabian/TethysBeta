@@ -155,7 +155,7 @@ $form->add_hidden("new_id", $new_with_id);
 edit_add_fields($form,$modul,$db,$query,$id,$idkey);
 
 $view_url=request_value('view_url');
-if ($view_url) $form->buttons.=html_button("Details",null,"location.href='$view_url';");
+if ($view_url&&$id!="NEW") $form->buttons.=html_button("Details",null,"location.href='$view_url';");
 
 $page->say($form);
 $page->focus="label:first-child + *";
