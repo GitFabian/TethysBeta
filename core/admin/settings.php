@@ -21,9 +21,9 @@ setting_save(null, 'SET_PGSEL_SETTINGS', $view, true);
 if (request_command("updated")){
 	$n=request_value("n");
 	if ($n){
-		$page->say(html_div("--- $n Konfigurationen aktualisiert. ---<br><br>"));
+		$page->message_ok("$n Konfigurationen aktualisiert.");
 	}else{
-		$page->say(html_div("--- (Keine Änderung) ---<br><br>"));
+		$page->message_info("(Keine Änderung)");
 	}
 }
 

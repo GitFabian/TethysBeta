@@ -44,7 +44,7 @@ function update_demoformular(){
 	$fehler=null;
 	if (!request_value("cringle")) $fehler="Bitte Wert für \"cringle\" angeben!";
 	if ($fehler){
-		$page->say("---$fehler---<br><br>");
+		$page->message_error($fehler);
 		return;
 	}
 	#dbio_UPDATE("demo_demo", "`id`='$id'", $_REQUEST);

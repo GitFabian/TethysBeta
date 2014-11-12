@@ -52,7 +52,11 @@ class modul_demo extends module{
 		global $page;
 		$n=0;
 		$n+=$this->update_setting("demosetting");
-		$page->say(html_div("--- $n Settings geändert. ---<br><br>"));
+		if ($n){
+			$page->message_ok("$n Settings geändert.");
+		}else{
+			$page->message_info("Keine Settings geändert.");
+		}
 	}
 	function update_setting($key){
 		$value=request_value($key,null);

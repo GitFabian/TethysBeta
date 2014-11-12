@@ -43,3 +43,29 @@
 .chosen-container-active .chosen-choices {
 	box-shadow:none;
 }
+
+.chosen-container-single .chosen-single {
+	color:#07c0ef;
+	font-size:15px;
+	background:url(img/core/input_bg_wide.png) no-repeat;
+	background-position:0px 6px;
+	border:none;
+	box-shadow:none;
+	width:533px;
+	margin-left:5px;
+	height:20px;
+	top:-3px;
+	border-radius:0;
+}
+
+.chosen-container-single .chosen-drop {
+	width:542px;
+}
+
+.chosen-container .chosen-results li {
+	font-size:15px;
+}
+
+.chosen-container-active.chosen-with-drop .chosen-single {
+	background:none;
+}

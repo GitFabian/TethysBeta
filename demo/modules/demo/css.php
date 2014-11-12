@@ -17,6 +17,10 @@ if ($view=="two"){ include 'tabelle.php'; }
 if ($view=="three"){ include 'formular.php'; }
 if ($view=="datasheets"){ include 'datasheets.php'; }
 
+$page->message_info("Info.");
+$page->message_ask("Frage?");
+$page->message_error("Fehler!");
+$page->message_ok("OK!");
 
 $page->say(html_header1("Header 1"));
 $page->say(html_div("Dee zip Boba Fett razzleshnoz!"));

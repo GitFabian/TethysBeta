@@ -61,11 +61,13 @@ function login(){
 
 		}else{
 			
-			$page->say("--- Anmeldung nicht möglich! ---<br><br>");
+			$page->message_error("Anmeldung nicht möglich!");
 			
 		}
 		
-		if($fehler)$page->say("---Anmeldung fehlgeschlagen. Bitte Benutzername und Passwort überprüfen.---<br><br>");
+		if($fehler){
+			$page->message_info("Anmeldung fehlgeschlagen. Bitte Benutzername und Passwort überprüfen.");
+		}
 		
 	}
 	
@@ -83,7 +85,7 @@ function login(){
 				define('USER_ID', $user['id']);
 			}else{
 				define('USER_ID', 0);
-				$page->say("---Benutzer \"$http_auth\" nicht gefunden!---");
+				$page->message_error("Benutzer \"$http_auth\" nicht gefunden!");
 			}
 			
 		}else{
@@ -129,7 +131,7 @@ function login(){
 	
 	if ($logoff){
 		if ($user || USER_ID){
-			$page->say("--- Abmeldung nicht möglich! ---<br><br>");
+			$page->message_error("Abmeldung nicht möglich!");
 		}else{
 			include_once ROOT_HDD_CORE.'/core/alertify.php';
 			$page->onload_JS.=alertify_success("Auf Wiedersehen!");

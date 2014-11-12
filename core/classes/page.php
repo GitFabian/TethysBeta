@@ -12,6 +12,7 @@ class page{
 	var $views;
 	var $focus;
 	var $focus_delay=500;//ms
+	var $messages=array();
 	
 	function __construct(){
 		$this->content="";
@@ -26,7 +27,6 @@ class page{
 	}
 	
 	function send(){
-		
 		if ($this->title===null && USER_ADMIN) echo"Seite nicht initialisiert!";
 		
 		$content=$this->content;
@@ -64,7 +64,7 @@ class page{
 			foreach ($this->views as $view) {
 				$views.="\n\t<li".($view->highlight?" class=\"view_highlight\"":"").">".$view->toHTML()."</li>";
 			}
-			$dev=(USER_ADMIN?" onclick=\"style.display='none';\"":"");
+			$dev=(USER_ADMIN&&CFG_SKIN=='terminal'?" onclick=\"style.display='none';".js_runLater("style.display='block';", 10)."\"":"");
 			$views="\n<ul$dev class=\"views_menu\">$views\n</ul>";
 		}
 		
@@ -76,6 +76,17 @@ class page{
 				$menu
 				<div class=\"mainmenu_footer\"></div>
 			</div>":"");
+		
+		$messages=array();
+		foreach ($this->messages as $message) {
+			$messages[]=$message->toHTML();
+		}
+		if ($messages){
+			$messages=implode("", $messages);
+			$messages="<div class=\"messages\">$messages</div>";
+		}else{
+			$messages="";
+		}
 		
 		echo <<<ENDE
 <!DOCTYPE HTML>
@@ -92,6 +103,7 @@ class page{
 		$menu
 		$views
 		<div class="innerbody$checkContent">
+			$messages
 			$content
 		</div>
 	</div>
@@ -167,6 +179,23 @@ $view=$page->init_views('xxxxxDEFAULTIDxxxxxxx',array(
 	
 	function add_inline_script($skript){
 		$this->inline_JS.="\n".$skript;
+	}
+	
+	function message_ok($text){
+		include_once ROOT_HDD_CORE.'/core/classes/message.php';
+		$this->messages[]=new message($text,'ok');
+	}
+	function message_info($text){
+		include_once ROOT_HDD_CORE.'/core/classes/message.php';
+		$this->messages[]=new message($text,'info');
+	}
+	function message_error($text){
+		include_once ROOT_HDD_CORE.'/core/classes/message.php';
+		$this->messages[]=new message($text,'error');
+	}
+	function message_ask($text){
+		include_once ROOT_HDD_CORE.'/core/classes/message.php';
+		$this->messages[]=new message($text,'ask');
 	}
 	
 }

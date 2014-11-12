@@ -122,7 +122,7 @@ function run($update){
 	}
 	
 	if ($fehler){
-		$page->say("<div>--- $fehler ---</div>");
+		$page->message_error($fehler);
 		return;
 	}
 	

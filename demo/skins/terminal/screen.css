@@ -238,6 +238,15 @@ ul.views_menu li.view_highlight a{
 	text-shadow:0px 0px 2px #77e4ff;
 }
 
+/*==================================================================
+    MESSAGES
+==================================================================*/
+div.messages div.message:before{
+	content:"--- ";
+}
+div.messages div.message:after{
+	content:" ---";
+}
 
 /*==================================================================
     BUTTONS,LINKS

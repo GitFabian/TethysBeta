@@ -127,7 +127,7 @@ END_AJAX;
 	$m[]=$id;
 	dbio_UPDATE("core_settings", "`key`='CFG_MODULES'", array("value"=>implode(",", $m)));
 	
-	$page->say("--- OK ---<br><br>");
+	$page->message_ok("OK");
 	$page->say(html_a($name, ROOT_HTTP_MODULES."/$id/$index_url.".CFG_EXTENSION));
 	page_send_exit();
 }

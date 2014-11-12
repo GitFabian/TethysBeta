@@ -14,3 +14,14 @@
 	border-bottom:1px solid black;
 	border-left:1px solid black;
 }
+
+.chosen-container-single .chosen-single {
+	background:none;
+	color:black;
+	padding-left:1px;
+	border:none;
+	border-bottom:1px solid black;
+	border-left:1px solid black;
+	box-shadow:none;
+	border-radius:0;
+}

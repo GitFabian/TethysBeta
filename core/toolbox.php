@@ -85,7 +85,7 @@ function request_extract_booleans(){
 
 function page_send_exit($error_message=null){
 	global $page;
-	if ($error_message) $page->content="---$error_message---<br><br>".$page->content;
+	if ($error_message){$page->message_error($error_message);}
 	$page->send();
 	exit;
 }
@@ -385,6 +385,15 @@ function and_return($modul,$page){
 }
 function and_return2($url){
 	return "&return=".urlencode($url);
+}
+
+function js_runLater($code,$delay_seconds,$repeat=false){
+	$delay=round($delay_seconds*1000);
+	if ($repeat){
+		return "setInterval(function(){{$code}},$delay);";
+	}else{
+		return "setTimeout(function(){{$code}},$delay);"; 
+	}
 }
 
 ?>
