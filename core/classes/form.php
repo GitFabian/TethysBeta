@@ -115,14 +115,19 @@ class form_group{
 }
 
 class form_field_info extends form_field{
+	
+	var $submit_value;
 
-	function __construct($name,$label,$value,$title=null){
+	function __construct($name,$label,$value,$title=null,$submit_value=null){
 		parent::__construct($name,$label,$value,'TEXT',$title);
+		$this->submit_value=$submit_value;
 	}
 
 	function toHTML(){
 		$title=($this->title?" title=\"".encode_html($this->title)."\"":"");
-		return "<div class=\"form_field info\"><label for=\"".$this->name."\"$title>".$this->label."</label><pre>$this->value</pre></div>";
+		return "<div class=\"form_field info\"><label for=\"".$this->name."\"$title>".$this->label."</label><pre>$this->value</pre></div>"
+				.($this->submit_value?"<input type=\"hidden\" name=\"$this->name\" value=\"$this->submit_value\">":"")
+				;
 	}
 
 }
