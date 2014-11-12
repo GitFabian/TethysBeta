@@ -22,7 +22,7 @@ $tabelle=new table($data);
 // 	"flubtangle"=>"Flubtangle",
 // 	"abracadabra"=>"Abracadabra",
 // ));
-$tabelle->set_options(true, true, true, 'demo_lorumipsum','id',null,and_return2(ROOT_HTTP_CORE."/demo/modules/demo/css.".CFG_EXTENSION."?view=datasheets&id=[NEWID]"));
+$tabelle->set_options(true, true, true, 'demo_lorumipsum','id',null,and_return("demo","flubtangle"));
 array_unshift($tabelle->options, html_a_button("Details",
 		ROOT_HTTP_CORE."/demo/modules/demo/flubtangle.".CFG_EXTENSION."?id=[ID:id]",
 		"tbl_option tbl_details") );

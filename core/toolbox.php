@@ -376,7 +376,12 @@ function sort_sonderzeichen($text){
 }
 
 function and_return($modul,$page){
-	return "&return=".ROOT_HTTP_MODULES."/$modul/$page.".CFG_EXTENSION."?id=[NEWID]";
+	if ($modul=='demo'){
+		$root=ROOT_HTTP_CORE."/demo/modules/".$modul;
+	}else{
+		$root=ROOT_HTTP_MODULES."/".$modul;
+	}
+	return "&return=$root/$page.".CFG_EXTENSION."?id=[NEWID]";
 }
 function and_return2($url){
 	return "&return=".urlencode($url);
