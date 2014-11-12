@@ -78,7 +78,7 @@ page_send_exit();//=============================================================
 ?>";
 
 $id_uppercase=strtoupper($id);
-$file_dbUpdate=<<<ENDE
+$file_dbUpdate=<<<END_DBUPDATE
 <?php
 if(!defined('USER_ADMIN')||!USER_ADMIN){echo"Keine Berechtigung!";exit;}
 
@@ -88,7 +88,25 @@ if(!defined('USER_ADMIN')||!USER_ADMIN){echo"Keine Berechtigung!";exit;}
 dbio_query("UPDATE `core_meta_dbversion` SET `version` = '1' WHERE `modul_uc` = '$id_uppercase';");
 //=================================================================================================
 ?>
-ENDE;
+END_DBUPDATE;
+
+$file_ajax=<<<END_AJAX
+<?php
+
+include_once '../../config_start.php';
+
+\$cmd=request_value("cmd");
+#if (\$cmd=="xxxxxxxxxx") xxxxxxxxxx();
+
+echo "!Unbekanntes AJAX-Kommando \"\$cmd\"!";
+exit;//===========================================================================================
+
+function ajax_exit(\$msg){
+	echo \$msg;exit;
+}
+
+?>
+END_AJAX;
 	
 	mkdir($dir);
 	$file=fopen($dir."/tethys.php", "w");
@@ -99,6 +117,9 @@ ENDE;
 	fclose($file);
 	$file=fopen($dir."/db_update.php", "w");
 		fwrite($file, $file_dbUpdate);
+	fclose($file);
+	$file=fopen($dir."/ajax.php", "w");
+		fwrite($file, $file_ajax);
 	fclose($file);
 	
 	$m=array();
