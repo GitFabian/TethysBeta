@@ -80,6 +80,7 @@ function db_import($db_id){
 				"kurzname"=>$kurzname,
 				"url"=>$data['Website'],
 			));
+			log_new("kunden_personen");
 		}
 	}else if ($db_id=="xxxxxxDBIDxxxxxxx"){//==========================================================================
 		//...
@@ -88,6 +89,18 @@ function db_import($db_id){
 	}
 
 	$status.=($fehler?"FEHLER<br>".$fehler:"OK");
+}
+function log_new($tabelle){
+	dbio_INSERT("core_logs_dbedit", array(
+	"time"=>time(),
+	"user"=>null,
+	"modul"=>"core",
+	"ip"=>$_SERVER['REMOTE_ADDR'],
+	"action"=>"new",
+	"tabelle"=>$tabelle,
+	"zeile"=>mysql_insert_id(),
+	"pars"=>"IMPORT,".USER_ID,
+	));
 }
 function db_query_source($db_source,$correct_encoding=true){
 	global $sql_source;
