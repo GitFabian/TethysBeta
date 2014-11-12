@@ -221,6 +221,16 @@ function js_getSelectedValue($id){
 	return "document.getElementById('$id').options[document.getElementById('$id').selectedIndex].value";
 }
 
+function html_select_options($data,$selected=null){
+	$html=array();
+	foreach ($data as $key => $value) {
+		$html[]="<option"
+				.($selected&&$key==$selected?" selected":"")
+				." value=\"$key\">$value</option>";
+	}
+	return implode("", $html);
+}
+
 function htmlEntity($name,$html,$pars){
 	$pars_html="";
 	if($pars)
