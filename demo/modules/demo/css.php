@@ -9,11 +9,13 @@ $views=array(
 		new menu_topic2("one", "CSS"),
 		new menu_topic2("two", "Tabellen"),
 		new menu_topic2("three", "Formulare"),
+		new menu_topic2("datasheets", "Datenblätter"),
 );
 $view=$page->init_views("one",$views);
 
 if ($view=="two"){ include 'tabelle.php'; }
 if ($view=="three"){ include 'formular.php'; }
+if ($view=="datasheets"){ include 'datasheets.php'; }
 
 
 $page->say(html_header1("Header 1"));

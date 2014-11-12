@@ -68,10 +68,13 @@ function dbio_DELETE($db,$where){
 	dbio_query($anfrage);
 }
 
-function dbio_NEW_FROM_REQUEST($db,$idkey="id"){
+function dbio_NEW_FROM_REQUEST($db,$idkey="id",$unsets=null){
 	$data=array();
 	foreach ($_REQUEST as $key => $dummy) {
 		$data[$key]=request_value($key);
+	}
+	if($unsets)foreach ($unsets as $unset_key) {
+		unset($data[$unset_key]);
 	}
 	if (isset($_REQUEST['new_id'])){
 		$data[$idkey]=$_REQUEST['new_id'];

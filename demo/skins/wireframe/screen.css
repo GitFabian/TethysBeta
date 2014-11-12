@@ -276,3 +276,26 @@ div.set_card div.buttons{
 div.set_card div.buttons a.button{
 	margin-right:5px;
 }
+
+/*==================================================================
+    DATASHEETS
+==================================================================*/
+
+div.datasheet{
+	margin:5px 0px 10px 0px;
+}
+ul.datasheet{
+	display:table;
+	padding:0;
+	margin-bottom:5px;
+}
+ul.datasheet li{
+	display:table-row;
+}
+ul.datasheet li div{
+	display:table-cell;
+	padding-right:10px;
+}
+ul.datasheet li div.data_label:after{
+	content:":";
+}

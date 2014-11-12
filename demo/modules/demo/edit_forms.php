@@ -26,7 +26,7 @@ function edit_form($form,$table,$id,$query){
 function save_form($table,$id){
 	if ($table=='demo_lorumipsum'){
 		if ($id=="NEW"){
-			$id=dbio_NEW_FROM_REQUEST("demo_lorumipsum");
+			$id=dbio_NEW_FROM_REQUEST("demo_lorumipsum",'id',array("members"));
 		}
 		dbio_UPDATE_groupMember("demo_flubtangle_user", request_value('members'), "flubtangle", $id);
 		unset($_REQUEST['members']);

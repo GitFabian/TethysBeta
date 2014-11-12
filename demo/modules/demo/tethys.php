@@ -7,16 +7,15 @@ class modul_demo extends module{
 	
 	function __construct($modul_name){
 		parent::__construct($modul_name);
-		$this->has_user_page=true;
+		$this->has_user_page=(USER_ADMIN);
 	}
 	
 	function get_menu($page_id){
 		$menu=new menu(null,"demo",$page_id,"Demo");
 		new menu_topic($menu,"demo_css",$page_id,"CSS",url_demo('css'));
-		#new menu_topic($menu,"demo_views",$page_id,"Views",url_demo('views'));
 		new menu_topic($menu,"demo_tabelle",$page_id,"Tabellen",url_demo('css')."?view=two");
 		new menu_topic($menu,"demo_formular",$page_id,"Formulare",url_demo('css')."?view=three");
-		#new menu_topic($menu,"demo_",$page_id,"",url_demo(''));
+		new menu_topic($menu,"demo_datasheets",$page_id,"Datenblätter",url_demo('css')."?view=datasheets");
 		return $menu;
 	}
 	
