@@ -37,7 +37,7 @@ class table{
 		return $this->toHTML();
 	}
 	
-	function set_options($new,$edit,$delete,$db,$idkey='id',$datensatz=null){
+	function set_options($new,$edit,$delete,$db,$idkey='id',$datensatz=null,$and_return=null){
 		include_once ROOT_HDD_CORE.'/core/edit_rights.php'; 
 		$this->options=array();
 		$this->options2="";
@@ -55,7 +55,12 @@ class table{
 			$this->options[]=html_a_button("Löschen", "", "tbl_option tbl_delete","ask_delete('$url','$datensatz');");
 		}
 		if ($new){
-			$this->options2.="\n\t".html_a_button("Neuer Eintrag", ROOT_HTTP_CORE."/core/edit.".CFG_EXTENSION."?id=NEW&db=$db&datensatz=$datensatz","tbl_new");
+			$this->options2.="\n\t".html_a_button("Neuer Eintrag", ROOT_HTTP_CORE."/core/edit.".CFG_EXTENSION
+					."?id=NEW"
+					."&db=$db"
+					."&datensatz=$datensatz"
+					.$and_return
+				,"tbl_new");
 		}
 	}
 	

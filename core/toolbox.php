@@ -375,4 +375,11 @@ function sort_sonderzeichen($text){
 	return $text;
 }
 
+function and_return($modul,$page){
+	return "&return=".ROOT_HTTP_MODULES."/$modul/$page.".CFG_EXTENSION."?id=[NEWID]";
+}
+function and_return2($url){
+	return "&return=".urlencode($url);
+}
+
 ?>

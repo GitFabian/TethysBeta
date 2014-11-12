@@ -65,6 +65,8 @@ if (request_command("do")){
 		log_db_edit($modul, $db, $id);
 	}
 	
+	$return=preg_replace("/\\[NEWID\\]/", $id, $return);
+	
 	if ($return){
 		ajax_refresh("Speichere Datensatz #$id...", $return);
 	}else{
