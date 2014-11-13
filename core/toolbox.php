@@ -422,4 +422,17 @@ function debug_out($variable){
 	if(USER_ADMIN){echo"<pre>";print_r($variable);}
 }
 
+function get_next_id(){
+	global $global_id_counter;
+	return "id_".($global_id_counter++);
+}
+
+function autofill_password($target_id){
+	return "<a class=\"autofill password\" onClick=\"autofill_password('$target_id');\"> (erstellen)</a>";
+}
+
+function autofill_manuell($function){
+	return "<a class=\"autofill password\" onClick=\"$function\"> (erstellen)</a>";
+}
+
 ?>

@@ -61,6 +61,7 @@ function setting_get_default($modul,$key){
 		if ($key=='CFG_HAUPTMENUE') return ROOT_HDD_CORE."\\configExample.php";
 		if ($key=='CFG_MAX_USERS') return "1";
 		if ($key=='FEATURE_PRERELEASE') return "1";
+		if ($key=='CFG_AUTHPATTERN') return "nachname+\"_\"+vorname";
 		if (USER_ADMIN) echo "Kein Default-Value für \"$key\"! /core/settings.php:64";
 		return null;
 	}else{

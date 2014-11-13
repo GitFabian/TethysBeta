@@ -99,6 +99,7 @@ $form->add_fields("Benutzer",null);
 settings_add_field2($form,"CFG_EDIT_NICK","Eigenen Nick bearbeiten",'CHECKBOX');
 settings_add_field2($form,"CFG_EDIT_FILE","Stammdaten bearbeiten",'CHECKBOX');
 $form->add_field( new form_field("CFG_MAX_USERS","Maximale Benutzeranzahl",setting_get(null, 'CFG_MAX_USERS'),'TEXT',"setting_get(null,'CFG_MAX_USERS')") );
+settings_add_field2($form,"CFG_AUTHPATTERN","HTTP-Auth-Pattern",'TEXT');
 
 $form->add_fields("Abwärtskompatibilität",null);
 settings_add_field2($form,"FEATURE_PRERELEASE","Pre-Release",'CHECKBOX');

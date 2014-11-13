@@ -2,15 +2,28 @@
 
 function get_edit_form($form,$db,$id,$query){
 	if ($db=='core_users'){
+		global $page;
 		if ($id=="NEW"){
 			$query['active']="1";
 		}
-		module::edit_form_field($form,$query,'vorname',"Vorname");
-		module::edit_form_field($form,$query,'nachname',"Nachname");
+		$ff=module::edit_form_field($form,$query,'vorname',"Vorname");
+		$ff->id="id_vorname";
+		$ff=module::edit_form_field($form,$query,'nachname',"Nachname");
+		$ff->id="id_nachname";
 		module::edit_form_field($form,$query,'active',"Aktiv",'CHECKBOX');
 		module::edit_form_field($form,$query,'nick',"Nick");
-		module::edit_form_field($form,$query,'http_auth');
-		$pass_field=module::edit_form_field($form,$query,'password',"Passwort");
+		
+		$ff=module::edit_form_field($form,$query,'http_auth',"HTTP-Auth".(setting_get(null, "CFG_AUTHPATTERN")?autofill_manuell("autofill_auth();"):""));
+		$ff->id=($nid=get_next_id());
+		$page->add_inline_script("function autofill_auth(){
+				vorname=document.getElementById('id_vorname').value.toLowerCase().replace(/[^a-z]/g,'');
+				nachname=document.getElementById('id_nachname').value.toLowerCase().replace(/[^a-z]/g,'');
+				document.getElementById('$nid').value=".setting_get(null, "CFG_AUTHPATTERN").";
+			}");
+		
+		$pass_field=module::edit_form_field($form,$query,'password',"Passwort".autofill_password($nid=get_next_id()));
+		$pass_field->id=$nid;
+		
 		module::edit_form_field($form,$query,'picture',"Bild");
 		module::edit_form_field($form,$query,'durchwahl',"Durchwahl");
 		module::edit_form_field($form,$query,'handy',"Handy");

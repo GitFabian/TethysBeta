@@ -1,26 +1,27 @@
 
-	function highlight_table_col(selector){
-		
-
-		$( selector+" td" ).hover(
-				function() {
-					
-					  $(this).parents('table').find('th:nth-child(' + ($(this).index() + 1) + ')')
-					  .addClass("col_highlight");
-					
-				}, function() {
-
-					  $(this).parents('table').find('th:nth-child(' + ($(this).index() + 1) + ')')
-					  .removeClass("col_highlight");
-
-				}
-				);
-
-  
+function highlight_table_col(selector){
+	$( selector+" td" ).hover(
+		function() {
+			$(this).parents('table').find('th:nth-child(' + ($(this).index() + 1) + ')')
+				.addClass("col_highlight");
+		}, function() {
+			$(this).parents('table').find('th:nth-child(' + ($(this).index() + 1) + ')')
+				.removeClass("col_highlight");
+		}
+	);
 }
 
-	
-	
+var PASSalpha="abdefghijnpqrt";
+var PASSNUM="23456789";
+
+function autofill_password(target_id){
+	var pass="";
+	for( var i=0; i < 2; i++ ) pass += PASSalpha.charAt(Math.floor(Math.random() * PASSalpha.length));
+	for( var i=0; i < 4; i++ ) pass += PASSNUM.charAt(Math.floor(Math.random() * PASSNUM.length));
+	document.getElementById(target_id).value=pass;
+}
+
+
 /**
  * tethys_ajax('.../ajax.php?cmd=...',"alert(response);");
  */
