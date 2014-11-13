@@ -1,6 +1,6 @@
 <?php
 
-function dbio_SELECT($db,$where=null,$fields="*",$leftjoins=null,$order=null,$orderAsc=true,$limit=null,$link_identifier=null){
+function dbio_SELECT($db,$where=null,$fields="*",$leftjoins=null,$order=null,$orderAsc=true,$limit="999",$link_identifier=null){
 
 	$anfrage="SELECT $fields FROM `$db`";
 
