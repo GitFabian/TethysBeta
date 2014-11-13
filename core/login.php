@@ -79,7 +79,8 @@ function login(){
 		if (isset($_SERVER['REMOTE_USER'])){
 			$http_auth=$_SERVER['REMOTE_USER'];
 
-			$user=dbio_SELECT_SINGLE("core_users", $http_auth, "http_auth");
+			$user=dbio_query_to_array("SELECT * FROM `core_users` WHERE `http_auth` COLLATE utf8_general_ci = '$http_auth'");
+			if ($user) $user=$user[0];
 			
 			if ($user){
 				define('USER_ID', $user['id']);
