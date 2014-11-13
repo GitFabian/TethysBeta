@@ -33,7 +33,7 @@ class modul_demo extends module{
 		if ($key=='DEMOFEATURE1') return "1";
 		//User Specific:
 		if ($key=='demosetting') return "Duh bleepity gobble nizzle!";
-		if (USER_ADMIN) echo("Kein Default-Value für \"$key\"! /modules/demo/tethys.php:33");
+		if (USER_ADMIN) echo("Kein Default-Value für \"$key\"! /modules/demo/tethys.php:36");
 		return null;
 	}
 	

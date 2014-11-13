@@ -55,7 +55,10 @@ class page{
 		}
 		$onload=($onload?" onload=\"$onload\"":"");
 		
-		$dynamic_css_development=(CFG_CSS_VERSION?"<div class=\"css_version_".CFG_CSS_VERSION."\">CSS nicht aktuell!</div>":"");
+		if (CFG_CSS_VERSION){
+			include_once ROOT_HDD_CORE.'/core/classes/message.php';
+			$this->messages[]=new message("CSS nicht aktuell! ".html_button("Neu laden",null,"location.reload();"),"error css_version_".CFG_CSS_VERSION);
+		}
 		
 		$devel_zeitmessung=(USER_ADMIN?$this::get_performance():"");
 		
@@ -99,7 +102,6 @@ class page{
 </head>
 <body id="$this->page_id"$onload>
 	<div class="outerbody">
-		$dynamic_css_development
 		$menu
 		$views
 		<div class="innerbody$checkContent">
