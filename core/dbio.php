@@ -1,6 +1,6 @@
 <?php
 
-function dbio_SELECT($db,$where=null,$fields="*",$leftjoins=null,$order=null,$orderAsc=true,$limit=null){
+function dbio_SELECT($db,$where=null,$fields="*",$leftjoins=null,$order=null,$orderAsc=true,$limit=null,$link_identifier=null){
 
 	$anfrage="SELECT $fields FROM `$db`";
 
@@ -20,11 +20,11 @@ function dbio_SELECT($db,$where=null,$fields="*",$leftjoins=null,$order=null,$or
 
 	if ($limit){ $anfrage.=" LIMIT $limit"; }
 
-	return dbio_query_to_array($anfrage);
+	return dbio_query_to_array($anfrage,$link_identifier);
 }
 
-function dbio_SELECT_SINGLE($db,$id,$id_key="id"){
-	$query=dbio_SELECT($db,"`$id_key`='$id'");
+function dbio_SELECT_SINGLE($db,$id,$id_key="id",$link_identifier=null){
+	$query=dbio_SELECT($db,"`$id_key`='$id'","*",null,null,true,null,$link_identifier);
 	if (!$query) return null;
 	return $query[0];
 }
@@ -86,7 +86,7 @@ function dbio_NEW_FROM_REQUEST($db,$idkey="id",$unsets=null){
 	return mysql_insert_id();
 }
 
-function dbio_INSERT($db,$data){
+function dbio_INSERT($db,$data,$link_identifier=null){
 
 	$values=array();
 	$keys=array();
@@ -100,7 +100,7 @@ function dbio_INSERT($db,$data){
 	
 	$anfrage="INSERT INTO `$db` ( $keys ) VALUES ( $values );";
 	
-	dbio_query($anfrage);
+	dbio_query($anfrage,$link_identifier);
 }
 
 function dbio_UPDATE($db,$where,$data){

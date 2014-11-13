@@ -9,8 +9,10 @@ if(file_exists('config_start.php')){
 	$file=fopen("config_start.php", "r");
 	$content=fread($file, 9999);
 	fclose($file);
-	
-	preg_match("/\\n\\s*mysql_connect\\s*\\(\\s*'(.*?)'\\s*,\\s*'(.*?)'\\s*,\\s*'(.*?)'\\s*\\)\\s*;/", $content, $matches);
+
+	//preg_match("/\\n\\s*\\\$sql\\s*=\\s*mysql_connect\\s*\\(\\s*'(.*?)'\\s*,\\s*'(.*?)'\\s*,\\s*'(.*?)'\\s*\\)\\s*;/", $content, $matches);
+	//Abwärtskompatibilität: (11'14)
+	preg_match("/\\n\\s*(?:\\\$sql\\s*=\\s*)?mysql_connect\\s*\\(\\s*'(.*?)'\\s*,\\s*'(.*?)'\\s*,\\s*'(.*?)'\\s*\\)\\s*;/", $content, $matches);
 	$sql_server=$matches[1];
 	$sql_user=$matches[2];
 	$sql_pass=$matches[3];
@@ -162,7 +164,7 @@ define('LOGON_NONE_DEF_USER','$LOGON_NONE_DEF_USER');
  * Datenbank
  */
 define('TETHYSDB', '$TETHYSDB');
-mysql_connect('$sql_server','$sql_user','$sql_pass');
+\$sql=mysql_connect('$sql_server','$sql_user','$sql_pass');
 mysql_select_db(TETHYSDB);
 
 /*

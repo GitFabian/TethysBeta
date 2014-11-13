@@ -396,4 +396,30 @@ function js_runLater($code,$delay_seconds,$repeat=false){
 	}
 }
 
+function sql_openNewConnection($host,$user,$pass,$db){
+	global $sql;
+	
+	//Alte Verbindung:
+	$file=fopen(ROOT_HDD_CORE."/config_start.php", "r");
+	$content=fread($file, 9999);
+	fclose($file);
+	preg_match("/\\n\\s*(?:\\\$sql\\s*=\\s*)?mysql_connect\\s*\\(\\s*'(.*?)'\\s*,\\s*'(.*?)'\\s*,\\s*'(.*?)'\\s*\\)\\s*;/", $content, $matches);
+	$sql_server=$matches[1];
+	$sql_user=$matches[2];
+	$sql_pass=$matches[3];
+	
+	//Neue Verbindung
+	$new=mysql_connect($host,$user,$pass);
+	mysql_select_db($db);
+	
+	//Zurücksetzen auf alte Verbindung:
+	mysql_connect($sql_server,$sql_user,$sql_pass);
+	
+	return $new;
+}
+
+function debug_out($variable){
+	if(USER_ADMIN){echo"<pre>";print_r($variable);}
+}
+
 ?>
