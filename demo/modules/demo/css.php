@@ -4,6 +4,7 @@ $page->init('demo_css','CSS');
 include_jquery();
 include_once ROOT_HDD_CORE.'/core/alertify.php';
 include_once ROOT_HDD_CORE.'/core/classes/set.php';
+include_once ROOT_HDD_CORE.'/core/classes/user.php';
 
 $views=array(
 		new menu_topic2("one", "CSS"),
@@ -63,6 +64,7 @@ $set->add_card($card2=new set_card("Karte 2","Jingle da zang! Zap ho Maggie ingl
 $card2->add_data(new set_card_data("name", "Name", "Lisa"));
 $card2->add_data(new set_card_data("hobbies", "Hobby", "Dee flang"));
 $card2->buttons[]=html_a_button("Homepage", "http://sourcecode-snippets.de",null,null,true);
+$set->add_card(get_user_setcard_CORE());
 $page->say($set);
 
 $page->send();
