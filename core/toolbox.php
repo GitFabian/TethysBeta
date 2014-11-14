@@ -117,7 +117,7 @@ function escape_inline_js($text){
 }
 
 function url_mod_pg($modul,$page){
-	if ($modul=='demo'||$modul=='tethys') return ROOT_HTTP_CORE."/demo/modules/$modul/$page.".CFG_EXTENSION;
+	if ($modul=='demo'||$modul=='fun') return ROOT_HTTP_CORE."/demo/modules/$modul/$page.".CFG_EXTENSION;
 	return ROOT_HTTP_MODULES."/$modul/$page.".CFG_EXTENSION;
 }
 
@@ -193,8 +193,8 @@ function ajax($cmd,$modul=null,$function=null,$escape=false){
 	if ($modul==null){
 		$page=ROOT_HTTP_CORE."/core/ajax.".CFG_EXTENSION;
 	}else{
-		if ($modul=='demo'){
-			$page=ROOT_HTTP_CORE."/demo/modules/demo/ajax.".CFG_EXTENSION;
+		if ($modul=='demo'||$modul=='fun'){
+			$page=ROOT_HTTP_CORE."/demo/modules/$modul/ajax.".CFG_EXTENSION;
 		}else{
 			$page=ROOT_HTTP_MODULES."/$modul/ajax.".CFG_EXTENSION;
 		}
@@ -203,11 +203,16 @@ function ajax($cmd,$modul=null,$function=null,$escape=false){
 	return "tethys_ajax($quot$page?cmd=$cmd$quot,$quot$function$quot);";
 }
 
+function ajax_to_alertify($cmd,$modul=null,$escape=false){
+	include_once ROOT_HDD_CORE.'/core/alertify.php';
+	return ajax($cmd,$modul,"alertify_ajax_response(response);",$escape);
+}
+
 function ajax_to_id($cmd,$id,$modul=null,$escape=false){
 	if ($modul==null){
 		$page=ROOT_HTTP_CORE."/core/ajax.".CFG_EXTENSION;
 	}else{
-		if ($modul=='demo'){
+		if ($modul=='demo'||$modul=='fun'){
 			$page=ROOT_HTTP_CORE."/demo/modules/$modul/ajax.".CFG_EXTENSION;
 		}else{
 			$page=ROOT_HTTP_MODULES."/$modul/ajax.".CFG_EXTENSION;

@@ -11,11 +11,14 @@ class modul_demo extends module{
 	}
 	
 	function get_menu($page_id){
+		global $modules;
 		$menu=new menu(null,"demo",$page_id,"Demo");
 		new menu_topic($menu,"demo_css",$page_id,"CSS",url_demo('css'));
 		new menu_topic($menu,"demo_tabelle",$page_id,"Tabellen",url_demo('css')."?view=two");
 		new menu_topic($menu,"demo_formular",$page_id,"Formulare",url_demo('css')."?view=three");
 		new menu_topic($menu,"demo_datasheets",$page_id,"Datenblätter",url_demo('css')."?view=datasheets");
+		if (isset($modules['fun']))
+			new menu_topic($menu,"fun_demo",$page_id,"Fun",url_fun("demo"));
 		return $menu;
 	}
 	
