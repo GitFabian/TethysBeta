@@ -26,8 +26,13 @@ class set{
 	static function from_db($modul_id,$name,$query){
 		$set=new set($modul_id." ".$name);
 		global $modules;
+		if ($modul_id=='core'){include_once ROOT_HDD_CORE.'/core/classes/user.php';}
 		foreach ($query as $row) {
-			$card=$modules[$modul_id]->get_set_card($name, $row);
+			if ($modul_id=='core'){
+				$card=get_user_setcard_CORE($row['id']);
+			}else{
+				$card=$modules[$modul_id]->get_set_card($name, $row);
+			}
 			$set->add_card($card);
 		}
 		return $set;
