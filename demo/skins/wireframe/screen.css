@@ -29,6 +29,7 @@ body,input,pre,select,textarea{
 a{
 	color:black;
 	text-decoration:underline;
+	cursor:pointer;
 }
 input[type=submit],
 input[type=button],

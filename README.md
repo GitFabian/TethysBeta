@@ -1,8 +1,7 @@
 Tethys (Beta)
 =============
 
-Version 0.16.3
-- Sprichwortgenerator
+Version 0.16.4
 
 Database-Version: 12
 
