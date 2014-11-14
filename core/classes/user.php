@@ -6,7 +6,7 @@ include_once ROOT_HDD_CORE.'/core/classes/user.php';
 
 function get_user_setcard_CORE($uid=USER_ID){
 	include_once ROOT_HDD_CORE.'/core/classes/set.php';
-	if (function_exists('get_user_setcard')) return get_user_setcard();
+	if (function_exists('get_user_setcard')) return get_user_setcard($uid);
 	
 	$user=dbio_SELECT_SINGLE("core_users", $uid);
 	$infotext=$user["vorname"]." ".$user["nachname"];
@@ -22,6 +22,7 @@ function get_user_setcard_CORE($uid=USER_ID){
 }
 
 function get_user_picture_url($uid=USER_ID){
+	echo ROOT_HDD_DATA."/core_users/person$uid.png:".file_exists(ROOT_HDD_DATA."/core_users/person$uid.png")."<br>";
 	return(file_exists(ROOT_HDD_DATA."/core_users/person$uid.png")?
 			ROOT_HTTP_DATA."/core_users/person$uid.png"
 			:CFG_SKINPATH."/img/nopic.png");
