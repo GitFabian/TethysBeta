@@ -22,7 +22,6 @@ function get_user_setcard_CORE($uid=USER_ID){
 }
 
 function get_user_picture_url($uid=USER_ID){
-	echo ROOT_HDD_DATA."/core_users/person$uid.png:".file_exists(ROOT_HDD_DATA."/core_users/person$uid.png")."<br>";
 	return(file_exists(ROOT_HDD_DATA."/core_users/person$uid.png")?
 			ROOT_HTTP_DATA."/core_users/person$uid.png"
 			:CFG_SKINPATH."/img/nopic.png");
