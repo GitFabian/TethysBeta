@@ -258,7 +258,7 @@ div.set_card div.picture_wrapper{
 }
 div.set_card div.picture_wrapper.leer{
 	height:100px;
-	background:url(nopic.png) no-repeat;
+	background:url(img/nopic.png) no-repeat;
 }
 div.set_card div.picture_wrapper img{
 	width:100px;
