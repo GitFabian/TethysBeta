@@ -3,9 +3,9 @@ include_once '../config_start.php';
 $page->init("core_data", "DATA");
 
 $url=request_value("url");
-if (!$url) page_send_exit("Seite existiert nicht!");
+if (!$url) exit_404("Seite existiert nicht!");
 $file=ROOT_HDD_DATA."/".$url;
-if (!file_exists($file)) page_send_exit("Datei nicht gefunden!");
+if (!file_exists($file)){exit_404("Datei nicht gefunden!");}
 
 /*
  * Berechtigung überprüfen
@@ -25,5 +25,9 @@ if ($extension=='png'){
 
 header('Content-type: '.$mime);
 readfile($file);
-exit;
+exit;//============================================================================================
+function exit_404($msg){
+	header("HTTP/1.0 404 Not Found");
+	page_send_exit($msg);
+}
 ?>
