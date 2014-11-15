@@ -180,11 +180,12 @@ if (isset($_REQUEST['install'])){
 
 if (CFG_CSS_VERSION){
 	$page->say(html_header1("CSS"));
+	$page->add_html("<style>div.css_version{display:none;}</style>");
 	if (file_exists(CFG_SKINDIR."/screen.css")){
 		$file=fopen(CFG_SKINDIR."/screen.css", "r");
 		$content=fread($file, 9999);
 		fclose($file);
-		preg_match("/\\n\\w*div\\.css_version_(.*?)\\{/", $content, $matches);
+		preg_match("/\\n\\w*div\\.css_version\\.v(.*?)\\{/", $content, $matches);
 		if (isset($matches[1])){
 			$v=$matches[1];
 			if (CFG_CSS_VERSION!=$v){

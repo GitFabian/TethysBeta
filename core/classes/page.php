@@ -57,7 +57,7 @@ class page{
 		
 		if (CFG_CSS_VERSION){
 			include_once ROOT_HDD_CORE.'/core/classes/message.php';
-			$this->messages[]=new message("CSS nicht aktuell! ".html_button("Neu laden",null,"location.reload();"),"error css_version_".CFG_CSS_VERSION);
+			$this->messages[]=new message("CSS nicht aktuell! ".html_button("Neu laden",null,"location.reload();"),"error css_version v".CFG_CSS_VERSION);
 		}
 		
 		$devel_zeitmessung=(USER_ADMIN?$this::get_performance():"");
