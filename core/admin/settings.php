@@ -105,6 +105,8 @@ $form->add_fields("Abwärtskompatibilität",null);
 settings_add_field2($form,"FEATURE_PRERELEASE","Pre-Release",'CHECKBOX');
 settings_add_field2($form,"DEPRECATED_HMLICLASS","div.mainmenu li div.menutopic",'CHECKBOX');
 
+$form->add_fields("Updates",null);
+settings_add_field2($form,"UPDATE_KOMMANDOS","Update-Kommandos",'TEXTAREA');
 
 $page->say("Zur ".html_a("Server-Konfiguration", ROOT_HTTP_CORE."/install.".CFG_EXTENSION).".");
 $page->say($form->toHTML());

@@ -62,7 +62,8 @@ function setting_get_default($modul,$key){
 		if ($key=='CFG_MAX_USERS') return "1";
 		if ($key=='FEATURE_PRERELEASE') return "1";
 		if ($key=='CFG_AUTHPATTERN') return "nachname+\"_\"+vorname";
-		if (USER_ADMIN) echo "Kein Default-Value für \"$key\"! /core/settings.php:64";
+		if ($key=='UPDATE_KOMMANDOS') return "cd /d \"".ROOT_HDD_CORE."\" && git pull";
+		if (USER_ADMIN) echo "Kein Default-Value für \"$key\"! /core/settings.php:66";
 		return null;
 	}else{
 		global $modules;

@@ -11,6 +11,34 @@ if (!$db_exists){
 $table_exists=(mysql_num_rows(mysql_query("SHOW TABLES LIKE 'core_meta_dbversion'"))==1);
 $version=($table_exists?get_version("CORE"):0);
 
+if ($version){
+	include_once '../../core/start.php';
+	if (!USER_ADMIN) page_send_exit("Keine Berechtigung!");
+	
+	$kommandos=trim(setting_get(null, "UPDATE_KOMMANDOS"));
+	if ($kommandos){
+		$kommandos=explode("\n", $kommandos);
+		$screen="";
+		
+		foreach ($kommandos as $cmd) {
+			$cmd=trim($cmd);
+			$screen.="<span class=\"cmd\">&gt; $cmd</span>\n";
+			
+			#$output=shell_exec("cmd.exe /c chcp 850 && dir");
+			$output=shell_exec($cmd);
+			$output=mb_convert_encoding($output, "UTF-8", "cp850");
+			$output=encode_html($output);
+			
+			$screen.="$output\n";
+		}
+		
+		$page->say(html_header1("Framework &amp; Module"));
+		$page->say(html_code($screen));
+		
+	}
+ 	
+}
+
 if ($version<1){
 	dbio_query("CREATE TABLE IF NOT EXISTS `core_meta_dbversion` (
   `modul_uc` varchar(20) COLLATE utf8_bin NOT NULL COMMENT 'UPPERCASE!',
@@ -116,6 +144,9 @@ dbio_query("UPDATE `core_meta_dbversion` SET `version` = '$current_version' WHER
 //=================================================================================================
 include_once '../../core/start.php';
 $page->init('core_update',"Update");
+
+$page->say(html_header1("Datenbanken"));
+
 $new_version=get_version('CORE');
 if ($new_version>$version){
 	$page->say(html_div("Updated CORE: v$version &rarr; v$new_version"));
@@ -146,6 +177,30 @@ if (isset($_REQUEST['install'])){
 	$page->say(html_div("Zum Testen alle <a href=\"".ROOT_HTTP_CORE."/core/admin/rights.".CFG_EXTENSION."\" target=\"_blank\">Berechtigungen</a> setzen!"));
 	$page->say(html_a_button("Konfiguration", ROOT_HTTP_CORE."/core/admin/settings.".CFG_EXTENSION));
 }
+
+if (CFG_CSS_VERSION){
+	$page->say(html_header1("CSS"));
+	if (file_exists(CFG_SKINDIR."/screen.css")){
+		$file=fopen(CFG_SKINDIR."/screen.css", "r");
+		$content=fread($file, 9999);
+		fclose($file);
+		preg_match("/\\n\\w*div\\.css_version_(.*?)\\{/", $content, $matches);
+		if (isset($matches[1])){
+			$v=$matches[1];
+			if (CFG_CSS_VERSION!=$v){
+				setting_save(null, "CFG_CSS_VERSION", $v, false);
+				$page->say("Aktualisiert. Version: ".$v);
+			}else{
+				$page->say("(Keine Änderung)");
+			}
+		}else{
+			$page->say("Tag nicht gefunden!");
+		}
+	}else{
+		$page->say("CSS-Datei nicht gefunden!");
+	}
+}
+
 page_send_exit();//-----------------------------------------------------------
 function get_version($modul){
 	$query_version=dbio_SELECT_SINGLE("core_meta_dbversion", strtoupper($modul), "modul_uc");
