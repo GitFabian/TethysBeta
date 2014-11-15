@@ -129,10 +129,10 @@ function run($update){
 		return;
 	}
 	
-	$ROOT_HDD_CORE=preg_replace("/\\\\/", "\\\\\\\\", $ROOT_HDD_CORE);
-	$ROOT_HDD_MODULES=preg_replace("/\\\\/", "\\\\\\\\", $ROOT_HDD_MODULES);
-	$ROOT_HDD_SKINS=preg_replace("/\\\\/", "\\\\\\\\", $ROOT_HDD_SKINS);
-	$ROOT_HDD_DATA=preg_replace("/\\\\/", "\\\\\\\\", $ROOT_HDD_DATA);
+	$ROOT_HDD_CORE2=preg_replace("/\\\\/", "\\\\\\\\", $ROOT_HDD_CORE);
+	$ROOT_HDD_MODULES2=preg_replace("/\\\\/", "\\\\\\\\", $ROOT_HDD_MODULES);
+	$ROOT_HDD_SKINS2=preg_replace("/\\\\/", "\\\\\\\\", $ROOT_HDD_SKINS);
+	$ROOT_HDD_DATA2=preg_replace("/\\\\/", "\\\\\\\\", $ROOT_HDD_DATA);
 	$config_file=<<<ENDE
 /*
  * Server-Konfiguration
@@ -145,10 +145,10 @@ function run($update){
  */
 define('CFG_EXTENSION', '$CFG_EXTENSION');
 
-define('ROOT_HDD_CORE', '$ROOT_HDD_CORE');
-define('ROOT_HDD_MODULES', '$ROOT_HDD_MODULES');
-define('ROOT_HDD_SKINS', '$ROOT_HDD_SKINS');
-define('ROOT_HDD_DATA', '$ROOT_HDD_DATA');
+define('ROOT_HDD_CORE', '$ROOT_HDD_CORE2');
+define('ROOT_HDD_MODULES', '$ROOT_HDD_MODULES2');
+define('ROOT_HDD_SKINS', '$ROOT_HDD_SKINS2');
+define('ROOT_HDD_DATA', '$ROOT_HDD_DATA2');
 
 define('ROOT_HTTP_CORE', '$ROOT_HTTP_CORE');
 define('ROOT_HTTP_MODULES', '$ROOT_HTTP_MODULES');
@@ -187,8 +187,8 @@ ENDE;
 	fwrite($file, $config_file);
 	fclose($file);
 	
-	if (!file_exists(ROOT_HDD_SKINS)){ mkdir(ROOT_HDD_SKINS); }
-	if (!file_exists(ROOT_HDD_MODULES)){ mkdir(ROOT_HDD_MODULES); }
+	if (!file_exists($ROOT_HDD_SKINS)){ mkdir($ROOT_HDD_SKINS); }
+	if (!file_exists($ROOT_HDD_MODULES)){ mkdir($ROOT_HDD_MODULES); }
 	
 	$page->say(html_div("Konfigurationsdatei erstellt."));
 	if (!mysql_select_db($TETHYSDB)||!$update)
@@ -196,6 +196,72 @@ ENDE;
 	$page->say(" ".html_a("Zur Konfiguration", ROOT_HTTP_CORE."/core/admin/settings.".CFG_EXTENSION));
 // 	$page->say(html_button("config_start.php","","$('#cfg_file_content').toggle('invisible');"));
 // 	$page->say(html_div(html_pre(encode_html($config_file),"code"),"invisible","cfg_file_content"));
+
+	/*
+	 * Apache-Konfiguration
+	 */
+	$page->say(html_header1("Apache-Konfiguration"));
+	$ROOT_HDD_CORE3=preg_replace("/\\\\/", "/", $ROOT_HDD_CORE);
+	$ROOT_HDD_MODULES3=preg_replace("/\\\\/", "/", $ROOT_HDD_MODULES);
+	$ROOT_HDD_SKINS3=preg_replace("/\\\\/", "/", $ROOT_HDD_SKINS);
+	
+	$aliasse=<<<END_ALIAS
+Alias $ROOT_HTTP_CORE "$ROOT_HDD_CORE3"
+<Directory "$ROOT_HDD_CORE3">
+	Allow from all
+	AllowOverride All
+</Directory>
+END_ALIAS;
+	
+	if (substr($ROOT_HDD_MODULES, 0, strlen($ROOT_HDD_CORE))!=$ROOT_HDD_CORE
+			||substr($ROOT_HTTP_MODULES, 0, strlen($ROOT_HTTP_CORE))!=$ROOT_HTTP_CORE
+			||substr($ROOT_HDD_MODULES3, strlen($ROOT_HDD_CORE))!=substr($ROOT_HTTP_MODULES, strlen($ROOT_HTTP_CORE))
+			||substr($ROOT_HDD_MODULES3, strlen($ROOT_HDD_CORE), 1)!='/'
+			){
+		$alias_mod=<<<END_ALIAS_MOD
+Alias $ROOT_HTTP_MODULES "$ROOT_HDD_MODULES3"
+<Directory "$ROOT_HDD_MODULES3">
+	Allow from all
+	AllowOverride All
+</Directory>
+END_ALIAS_MOD;
+		$aliasse=$alias_mod."\n\n".$aliasse;
+	}
+
+	if (substr($ROOT_HDD_SKINS, 0, strlen($ROOT_HDD_CORE))!=$ROOT_HDD_CORE
+			||substr($ROOT_HTTP_SKINS, 0, strlen($ROOT_HTTP_CORE))!=$ROOT_HTTP_CORE
+			||substr($ROOT_HDD_SKINS3, strlen($ROOT_HDD_CORE))!=substr($ROOT_HTTP_SKINS, strlen($ROOT_HTTP_CORE))
+			||substr($ROOT_HDD_SKINS3, strlen($ROOT_HDD_CORE), 1)!='/'
+	){
+		$alias_skin=<<<END_ALIAS_MOD
+Alias $ROOT_HTTP_SKINS "$ROOT_HDD_SKINS3"
+<Directory "$ROOT_HDD_SKINS3">
+	Allow from all
+	AllowOverride All
+</Directory>
+END_ALIAS_MOD;
+		$aliasse=$alias_skin."\n\n".$aliasse;
+	}
+
+	$rewrite="";
+	if ($CFG_EXTENSION!='php'){
+		$rewrite=<<<END_REWRITE
+RewriteRule ^$ROOT_HTTP_CORE/(.*)\.$CFG_EXTENSION\$ "$ROOT_HDD_CORE3/\$1.php"
+END_REWRITE;
+	}
+	
+	$info=<<<END_INFO
+LoadModule alias_module modules/mod_alias.so
+LoadModule rewrite_module modules/mod_rewrite.so
+
+$aliasse
+
+RewriteEngine on
+RewriteRule ^$ROOT_HTTP_DATA/(.*)\$ "$ROOT_HDD_CORE3/core/data.php?url=\$1"
+$rewrite
+END_INFO;
+	$page->say(html_code(encode_html($info)));
+	
 	page_send_exit();
 }
 ?>

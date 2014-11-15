@@ -1,6 +1,7 @@
 <?php
 
 /*
+include_once ROOT_HDD_CORE.'/core/alertify.php';
 #global $modules;
 #if (isset($modules['fun']))
 include_once ROOT_HDD_CORE.'/demo/modules/fun/fun.php';

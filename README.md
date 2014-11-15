@@ -1,7 +1,7 @@
 Tethys (Beta)
 =============
 
-Version 0.16.6
+Version 0.16.7
 
 Database-Version: 12
 
@@ -18,4 +18,4 @@ TODO:
 BUGS:
 * Hauptmenü-Datei bei der Installation falsch angegeben->Installer nicht mehr zu retten
 * config_start in shared-verzeichnis!
-* erstellen von modul- und skin- verzeichnis während der installation in falschem verzeichnis?
+* erstellen von modul- und skin- verzeichnis während der installation in falschem verzeichnis? - GEFIXT?
