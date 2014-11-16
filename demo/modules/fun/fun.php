@@ -11,10 +11,10 @@ function fun_sprichwortgenerator($ajax=true,$plain=false){
 	if ($ajax){
 		$id=get_next_id();
 		global $page;
-		$page->add_inline_script("function sprichwortgenerator(){
-			".ajax_to_id("sprichwortgenerator", $id, "fun")."
+		$page->add_inline_script("function sprichwortgenerator(id){
+			".ajax_to_id("sprichwortgenerator", "\"+id+\"", "fun")."
 		}");
-		$page->onload_JS.="sprichwortgenerator();";
+		$page->onload_JS.="sprichwortgenerator('$id');";
 		return "<span id=\"$id\">...</span>";
 	}
 	if ($plain){
