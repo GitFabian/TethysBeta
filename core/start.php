@@ -11,6 +11,7 @@ if (!defined('CFG_LOGON_TYPE')) define('CFG_LOGON_TYPE','none');
 if (!defined('LOGON_NONE_DEF_USER')) define('LOGON_NONE_DEF_USER','1');
 //2014-11
 if (!function_exists('setting_override')){function setting_override($modul,$key){return null;}}
+if (!defined('CFG_LOGON_COOKIE')) define('CFG_LOGON_COOKIE','0');
 
 /*
  * Includes
@@ -86,8 +87,15 @@ include_once setting_get(null,'CFG_HAUPTMENUE');
 /*
  * Nochmal Login
  */
-if (CFG_LOGON_TYPE!='none' && !USER_ID && CFG_LOGON_TYPE!='http'){
-	login_form();
+if ((CFG_LOGON_TYPE!='none' && !USER_ID && CFG_LOGON_TYPE!='http')
+		||CFG_LOGON_COOKIE && request_command("logon")
+		){
+	$ich=pathinfo($_SERVER['SCRIPT_FILENAME'], PATHINFO_BASENAME);
+	if ($ich=="ajax.php"){
+		echo"!AJAX:Fehler beim Login!";exit;
+	}else{
+		login_form();
+	}
 }
 
 //===============================================================================================

@@ -47,6 +47,7 @@ if(file_exists('config_start.php')){
 	define('ROOT_HTTP_DATA', $http_core.'/DATA');
 	define('CFG_LOGON_TYPE', 'none');
 	define('LOGON_NONE_DEF_USER', '1');
+	define('CFG_LOGON_COOKIE', '0');
 	define('TETHYSDB', 'tethys');
 	$sql_server="localhost";#$_SERVER["SERVER_NAME"];
 	$sql_user="";
@@ -85,10 +86,12 @@ $form->add_fields("Benutzerverwaltung",array(
 				"cookie"=>"Cookie",
 		),"id_logonType"),
 		$defUser=new form_field("LOGON_NONE_DEF_USER","Default User",request_value("LOGON_NONE_DEF_USER",LOGON_NONE_DEF_USER)),
+		$logonoverride=new form_field("CFG_LOGON_COOKIE","Logon Override (Cookies)",request_value("CFG_LOGON_COOKIE",CFG_LOGON_COOKIE),"CHECKBOX"),
 ));
 $logonType->onChange="update_form();";
-$defUser->outer_id="id_defUser";
 $page->onload_JS.="update_form();";
+$defUser->outer_id="id_defUser";
+$logonoverride->outer_id="id_logonoverride";
 $page->add_inline_script("function update_form(){
 		type=document.getElementById('id_logonType').options[document.getElementById('id_logonType').selectedIndex].value;
 		//Default User:
@@ -96,6 +99,12 @@ $page->add_inline_script("function update_form(){
 			$('#id_defUser').removeClass('invisible');
 		}else{
 			$('#id_defUser').addClass('invisible');
+		}
+		//Override:
+		if (type=='cookie'){
+			$('#id_logonoverride').addClass('invisible');
+		}else{
+			$('#id_logonoverride').removeClass('invisible');
 		}
 }");
 
@@ -113,6 +122,7 @@ exit;
 function run($update){
 	include_jquery();
 	global $page;
+	request_extract_booleans2();
 	foreach ($_REQUEST as $key => $value) {
 		$$key=$value;
 	}
@@ -160,6 +170,7 @@ define('ROOT_HTTP_DATA', '$ROOT_HTTP_DATA');
  */
 define('CFG_LOGON_TYPE','$CFG_LOGON_TYPE');
 define('LOGON_NONE_DEF_USER','$LOGON_NONE_DEF_USER');
+define('CFG_LOGON_COOKIE', '$CFG_LOGON_COOKIE');
 
 /*
  * Datenbank

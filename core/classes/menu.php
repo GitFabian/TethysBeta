@@ -97,10 +97,14 @@ function menu_get_default($page_id){
 
 function menu_add_default_user($menu,$page_id){
 	if(USER_ID){
-		$usermenu=new menu($menu,"core_user_",$page_id, USER_NICK );
+		global $user;
+		$usermenu=new menu($menu,"core_user_",$page_id, (USER_NICK?:($user['vorname']?:"User")) );
 		new menu_topic($usermenu,"core_user",$page_id, "Einstellungen", url_core_admin("user") );
-		if (CFG_LOGON_TYPE=='cookie')
+		if (CFG_LOGON_TYPE=='cookie' || (CFG_LOGON_COOKIE&&LOGON_COOKIE_OVERR&&!request_command("logoff")) ){
 			new menu_topic($usermenu,"core_user_logoff",$page_id, "Abmelden", (CFG_HOME_URL?CFG_HOME_URL:ROOT_HTTP_CORE."/index.".CFG_EXTENSION)."?cmd=logoff" );
+		}else if (CFG_LOGON_COOKIE){
+			new menu_topic($usermenu,"core_user_logon",$page_id, "Anmelden", "?cmd=logon" );
+		}
 	}
 }
 function menu_add_default_admin($menu,$page_id){

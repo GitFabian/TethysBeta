@@ -10,7 +10,7 @@ function login(){
 
 		$fehler=false;
 		
-		if (CFG_LOGON_TYPE=='cookie'){
+		if (CFG_LOGON_TYPE=='cookie' || CFG_LOGON_COOKIE){
 			$id=request_value("id");
 			$name=request_value("name");
 			$pass=request_value("pass");
@@ -59,6 +59,10 @@ function login(){
 			
 			}
 
+			if (CFG_LOGON_COOKIE && $login_candidates){
+				$_REQUEST['cmd']="logon";
+			}
+
 		}else{
 			
 			$page->message_error("Anmeldung nicht möglich!");
@@ -68,13 +72,41 @@ function login(){
 		if($fehler){
 			$page->message_info("Anmeldung fehlgeschlagen. Bitte Benutzername und Passwort überprüfen.");
 		}
-		
-	}
-	
-	if (CFG_LOGON_TYPE=='none'){
-		
-		define('USER_ID', LOGON_NONE_DEF_USER);
 
+	}
+
+	$LOGON_COOKIE_OVERR=false;
+	if (CFG_LOGON_TYPE=='cookie' || CFG_LOGON_COOKIE){
+		$cookie=login_getCookie();
+		
+		if ($cookie){
+			$trenner=strpos($cookie, ':');
+			if ($trenner){
+				$id=substr($cookie, 0, $trenner);
+				$value=substr($cookie, $trenner+1);
+				$jetzt=time();
+				$query_cookies=dbio_SELECT("core_logons","user='".sqlEscape($id)."' AND cookie='".sqlEscape($value)."' AND expires>$jetzt");
+				if ($query_cookies){
+					$LOGON_COOKIE_OVERR=true;
+					$cookie_id=$query_cookies[0]['id'];
+					if ($logoff){
+						dbio_DELETE("core_logons", "id=$cookie_id");
+						if(!CFG_LOGON_COOKIE){define('USER_ID', 0);}
+					}else{
+						define('USER_ID', $id);
+						login_refreshCookie($cookie_id);
+					}
+				}
+			}
+		}
+	}
+	define("LOGON_COOKIE_OVERR", $LOGON_COOKIE_OVERR);
+	if (defined('USER_ID')){
+		//(Cookie-Login)
+	}else if (CFG_LOGON_TYPE=='cookie'){
+	
+		define('USER_ID', 0);
+	
 	}else if (CFG_LOGON_TYPE=='http'){
 		if (isset($_SERVER['REMOTE_USER'])){
 			$http_auth=$_SERVER['REMOTE_USER'];
@@ -94,35 +126,10 @@ function login(){
 			exit;
 		}
 		
-	}else if (CFG_LOGON_TYPE=='cookie'){
+	}else if (CFG_LOGON_TYPE=='none'){
 		
-		$cookie=login_getCookie();
-		
-		if ($cookie){
-			$trenner=strpos($cookie, ':');
-			if ($trenner){
-				$id=substr($cookie, 0, $trenner);
-				$value=substr($cookie, $trenner+1);
-				$jetzt=time();
-				$query_cookies=dbio_SELECT("core_logons","user='".sqlEscape($id)."' AND cookie='".sqlEscape($value)."' AND expires>$jetzt");
-				if ($query_cookies){
-					$cookie_id=$query_cookies[0]['id'];
-					if ($logoff){
-						dbio_DELETE("core_logons", "id=$cookie_id");
-						define('USER_ID', 0);
-					}else{
-						define('USER_ID', $id);
-						login_refreshCookie($cookie_id);
-					}
-				}
-			}
-		}
-		
-		if (!defined('USER_ID')){
-			$logoff=false;
-			define('USER_ID', 0);
-		}
-		
+		define('USER_ID', LOGON_NONE_DEF_USER);
+
 	}else{
 		
 		echo("Unbekannter Logon-Type!");
@@ -131,7 +138,8 @@ function login(){
 	}
 	
 	if ($logoff){
-		if ($user || USER_ID){
+		if(CFG_LOGON_COOKIE)$_REQUEST['cmd']="logoff";
+		if (($user || USER_ID && !$LOGON_COOKIE_OVERR) ){
 			$page->message_error("Abmeldung nicht möglich!");
 		}else{
 			include_once ROOT_HDD_CORE.'/core/alertify.php';
@@ -139,7 +147,7 @@ function login(){
 		}
 	}
 	
-	if ($login && USER_ID){
+	if ($login && USER_ID &&!$login_candidates){
 		include_once ROOT_HDD_CORE.'/core/alertify.php';
 		$page->onload_JS.=alertify_success("Willkommen!");
 	}
