@@ -17,8 +17,10 @@ function edit_add_fields($form,$modul,$db,$query,$id,$idkey){
 function edit_default_form($form,$query,$db,$idkey){
 	foreach ($query as $key => $value) {
 		$col_info=dbio_info_columns($db);
+		#debug_out($col_info);
 		#echo $col_info['active']['Type'];
 		if ($key!=$idkey){
+			$options=null;
 			
 			/*
 			 * Datentyp
@@ -27,8 +29,16 @@ function edit_default_form($form,$query,$db,$idkey){
 			$type=$col_info[$key]['Type'];
 			if ($type=='text') $typ='TEXTAREA';
 			if ($type=='tinyint(1)') $typ='CHECKBOX';
+			if (substr($type,0,6)=="enum('"){
+				$typ='SELECT';
+				$options=array();
+				foreach (explode(",", substr($type,5,strlen($type)-6)) as $option) {
+					$o=trim($option,"'");
+					$options[$o]=$o;
+				}
+			}
 			
-			$form->add_field(new form_field($key,null,request_value($key,$value),$typ));
+			$form->add_field(new form_field($key,null,request_value($key,$value),$typ,null,$options));
 		}
 	}
 	return true;
