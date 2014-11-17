@@ -293,6 +293,13 @@ function html_button($value,$class=null,$onClick=null){
 			"onclick"=>$onClick,
 	));
 }
+function html_button2($value,$onClick=null){
+	return htmlEntity2('input', array(
+			"type"=>"button",
+			"value"=>$value,
+			"onclick"=>$onClick,
+	));
+}
 function html_a($html,$href,$class=null,$external=false,$onclick=null){
 	$pars=array(
 			"href"=>$href,
