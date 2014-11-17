@@ -196,6 +196,7 @@ if (CFG_CSS_VERSION){
 			}
 		}else{
 			$page->say("Tag nicht gefunden!");
+			setting_save(null, "CFG_CSS_VERSION", "", false);
 		}
 	}else{
 		$page->say("CSS-Datei nicht gefunden!");

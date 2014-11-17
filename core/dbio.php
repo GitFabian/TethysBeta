@@ -215,4 +215,24 @@ function dbio_info_columns($table){
 	return $list;
 }
 
+function dbio_information_schema_constraints($table){
+
+	mysql_select_db("INFORMATION_SCHEMA");
+	$infos=dbio_query_to_array(
+			"select COLUMN_NAME,REFERENCED_TABLE_NAME,REFERENCED_COLUMN_NAME
+			from KEY_COLUMN_USAGE
+			where TABLE_SCHEMA = '".TETHYSDB."'
+				and TABLE_NAME = '$table'
+				and referenced_column_name is not NULL;"
+		);
+	mysql_select_db(TETHYSDB);
+	
+	$list=array();
+	foreach ($infos as $col) {
+		$list[$col['COLUMN_NAME']]=$col;
+	}
+	
+	return $list;
+}
+
 ?>

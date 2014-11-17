@@ -202,7 +202,7 @@ class table_row{
 		if ($options){
 			$line="\n\t\t\t\t".implode("\n\t\t\t\t", $options)."\n\t\t\t";
 			preg_match_all("/\\[ID\\:(.*?)\\]/", $line, $matches);
-			for ($i = 0; $i < count($matches); $i++) {
+			for ($i = 0; $i < count($matches[1]); $i++) {
 				$idkey=$matches[1][$i];
 				$value=$this->data[$idkey];
 				$line=preg_replace("/\\[ID\\:$idkey\\]/", $value, $line);

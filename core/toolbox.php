@@ -447,4 +447,22 @@ function autofill_manuell($function){
 	return "<a class=\"autofill password\" onClick=\"$function\"> (erstellen)</a>";
 }
 
+function format_default_for_column($table,$column){
+	global $modules;
+	$modul=substr($table, 0, strpos($table, "_"));
+	if ($modul=='core'){
+		return format_default_core($table,$column);
+	}
+	if (isset($modules[$modul])){
+		$modul=$modules[$modul];
+		return $modul->format_default_for_column($table,$column);
+	}
+	return "[$column]";
+}
+
+function format_default_core($table,$column){
+	if ($table=='core_users') return "[vorname] [nachname] (#[id])";
+	return "[$column]";
+}
+
 ?>
