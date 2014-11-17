@@ -54,7 +54,4 @@ function edit_default_form($form,$query,$db,$idkey){
 	}
 	return true;
 }
-function edit_get_empty_table($table){
-	
-}
 ?>

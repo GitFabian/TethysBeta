@@ -454,7 +454,7 @@ function format_default_for_column($table,$column){
 }
 
 function format_default_core($table,$column){
-	if ($table=='core_users') return "#[$column] - [vorname] [nachname]";
+	if ($table=='core_users') return "[vorname] [nachname] (#[id])";
 	return "[$column]";
 }
 
