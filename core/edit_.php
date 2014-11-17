@@ -15,10 +15,11 @@ function edit_add_fields($form,$modul,$db,$query,$id,$idkey){
 	if ($edit_form===false) edit_default_form($form,$query,$db,$idkey);
 }
 function edit_default_form($form,$query,$db,$idkey){
+	$infos=dbio_information_schema_constraints($db);
+	#debug_out($infos);
+	$col_info=dbio_info_columns($db);
+	#debug_out($col_info);
 	foreach ($query as $key => $value) {
-		$col_info=dbio_info_columns($db);
-		#debug_out($col_info);
-		#echo $col_info['active']['Type'];
 		if ($key!=$idkey){
 			$options=null;
 			
@@ -36,6 +37,16 @@ function edit_default_form($form,$query,$db,$idkey){
 					$o=trim($option,"'");
 					$options[$o]=$o;
 				}
+			}
+			
+			/*
+			 * Constraints
+			 */
+			if (isset($infos[$key])){
+				$typ='SELECT';
+				$ref_tbl=$infos[$key]['REFERENCED_TABLE_NAME'];
+				$ref_col=$infos[$key]['REFERENCED_COLUMN_NAME'];
+				$options=dbio_SELECT_asList($ref_tbl, format_default_for_column($ref_tbl,$ref_col), null, $ref_col);
 			}
 			
 			$form->add_field(new form_field($key,null,request_value($key,$value),$typ,null,$options));

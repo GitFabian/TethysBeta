@@ -61,6 +61,10 @@ class module{
 		$form->add_field($ff=new form_field($key,$label,request_value($key,$query[$key]),$type,null,$options));
 		return $ff;
 	}
+	
+	function format_default_for_column($table,$column){
+		return "[$column]";
+	}
 }
 
 function new_form_field($modul,$key,$label,$type){
