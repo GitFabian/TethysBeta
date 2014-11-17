@@ -18,7 +18,7 @@ function login(){
 			if ($id){
 					
 				$users=dbio_SELECT_SINGLE("core_users",$id);
-				if ($users){
+				if ($users&&$users['active']){
 			
 					if ($pass==$users['password']){
 						login_setCookie($id);
@@ -35,7 +35,7 @@ function login(){
 				$fehler=true;
 			}else{
 			
-				$users=dbio_SELECT("core_users","vorname='".sqlEscape($name)."'");
+				$users=dbio_SELECT("core_users","vorname='".sqlEscape($name)."' AND active");
 					
 				if ($users){
 			
@@ -111,7 +111,7 @@ function login(){
 		if (isset($_SERVER['REMOTE_USER'])){
 			$http_auth=$_SERVER['REMOTE_USER'];
 
-			$user=dbio_query_to_array("SELECT * FROM `core_users` WHERE `http_auth` COLLATE utf8_general_ci = '$http_auth'");
+			$user=dbio_query_to_array("SELECT * FROM `core_users` WHERE `http_auth` COLLATE utf8_general_ci = '$http_auth' AND active");
 			if ($user) $user=$user[0];
 			
 			if ($user){
