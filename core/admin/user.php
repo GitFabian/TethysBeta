@@ -5,6 +5,8 @@ $page->init('core_user','Benutzereinstellungen');
 
 include_once ROOT_HDD_CORE.'/core/classes/form.php';
 
+if(!USER_ID)page_send_exit("Bitte anmelden!");
+
 /*
  * Module => Views
  */
