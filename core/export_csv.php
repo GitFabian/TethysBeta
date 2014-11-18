@@ -24,9 +24,13 @@ function csv_out($data,$filename="export.csv"){
 	header('Content-type: text/csv; charset=ISO-8859-1');
 	header("Content-Disposition: attachment; filename=\"$filename\"");
 	#header('Content-type: text/html; charset=ISO-8859-1');echo"<pre>";
+	echo "sep=,\r\n";
 	$row_counter=0;
 	foreach ($data as $row) {
 		$row_counter++;
+		/*
+		 * Header
+		 */
 		if ($row_counter==1){
 			$keys=array();
 			foreach ($row as $key => $dummy) {
@@ -36,6 +40,9 @@ function csv_out($data,$filename="export.csv"){
 			}
 			echo implode(",", $keys)."\r\n";
 		}
+		/*
+		 * DATA
+		 */
 		$values=array();
 		foreach ($row as $value) {
 			$value=utf8_decode($value);
