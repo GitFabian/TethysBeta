@@ -20,11 +20,22 @@ global \$modules;
 \$modules['$id']=new modul_$id('$name');
 
 class modul_$id extends module{
+
+	function __construct(\$modul_name){
+		parent::__construct(\$modul_name);
+		#\$this->has_user_page=true;
+	}
 	
 	function get_menu(\$page_id){
 		\$menu=new menu(null,\"$id\",\$page_id,\"$name\");
 		new menu_topic(\$menu,\"${id}_$index_id\",\$page_id,\"$index_name\",url_$id('$index_url'));
 		return \$menu;
+	}
+	
+	function get_user_page(){
+		if (USER_ADMIN) echo(\"Nicht implementiert: Funktion \\\"\".__FUNCTION__.\"\\\" in Modul \\\"\".\$this->modul_name.\"\\\"!\");
+		//Rückgabewert: HTML-String
+		return null;
 	}
 	
 	function export_csv(\$table, \$identifier){
