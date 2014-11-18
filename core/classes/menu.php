@@ -22,7 +22,7 @@ class menu extends menu_topic{
 			$sub="";
 			foreach ($this->topics as $topic) {
 				if ($topic)
-					$sub.="\n\t<li class=\"menutopic ".$topic->page_id." ".($topic->highlight?"highlight":"")."\">".$topic->toHTML()."</li>";
+					$sub.="\n\t<li class=\"menutopic ".$topic->page_id." ".($topic->highlight?"highlight ":"")."tiefe".$topic->tiefe."\">".$topic->toHTML()."</li>";
 			}
 			$html.="\n<ul>$sub\n</ul>";
 		}
@@ -47,6 +47,7 @@ class menu_topic{
 	var $parent_menu;
 	var $external;
 	var $class_a;
+	var $tiefe=0;
 	
 	function __construct($parent_menu,$page_id,$highlight,$label,$link=null,$external=false){
 		$this->page_id=$page_id;
@@ -55,10 +56,17 @@ class menu_topic{
 		$this->highlight=($page_id==$highlight);
 		$this->parent_menu=$parent_menu;
 		if ($parent_menu){
+			$this->set_tiefe(1);
+			#$parent_menu->tiefe=max(array($parent_menu->tiefe,$this->tiefe+1));
 			$parent_menu->add($this);
 			if ($this->highlight){ $parent_menu->highlight(); }
 		}
 		$this->external=$external;
+	}
+	
+	function set_tiefe($min){
+		$this->tiefe=max(array($this->tiefe,$min));
+		if ($this->parent_menu){$this->parent_menu->set_tiefe($this->tiefe+1);}
 	}
 	
 	function toHTML(){
