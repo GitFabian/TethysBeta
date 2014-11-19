@@ -155,15 +155,18 @@ class datatable{
 		$this->selector=$selector;
 		$this->paginate=$paginate;
 	}
-	function execute(){
-		include_datatables();
-		global $page;
+	function get_execute(){
 		$options="'bLengthChange':false,"
 				."'iDisplayLength':15,"
 				."language:{url:'".ROOT_HTTP_CORE."/core/html/jquery.dataTables.German.json'},"
-			;
-		if (!$this->paginate) $options.='"bPaginate":false,';
-		$page->add_inline_script("\$(document).ready(function(){ \$('$this->selector').dataTable({".$options."}); });");
+						;
+						if (!$this->paginate) $options.="'bPaginate':false,";
+		return "\$('$this->selector').dataTable({".$options."});";
+	}
+	function execute(){
+		include_datatables();
+		global $page;
+		$page->add_inline_script("\$(document).ready(function(){ ".$this->get_execute()." });");
 	}
 }
 

@@ -212,7 +212,7 @@ function ajax_to_id($cmd,$id,$modul=null,$escape=false){
 	if ($modul==null){
 		$page=ROOT_HTTP_CORE."/core/ajax.".CFG_EXTENSION;
 	}else{
-		if ($modul=='demo'||$modul=='fun'){
+		if ($modul=='demo'||$modul=='fun'||$modul=='myqueries'){
 			$page=ROOT_HTTP_CORE."/demo/modules/$modul/ajax.".CFG_EXTENSION;
 		}else{
 			$page=ROOT_HTTP_MODULES."/$modul/ajax.".CFG_EXTENSION;
