@@ -5,10 +5,27 @@ include_once '../config_start.php';
 $cmd=request_value("cmd");
 if ($cmd=="update_rights") update_rights();
 if ($cmd=="lorumipsum") lorumipsum();
+if ($cmd=="rolleSetzen") rolleSetzen();
 
 echo "!Unbekanntes AJAX-Kommando \"$cmd\"!";
 exit;//===========================================================================================
 
+function rolleSetzen(){
+	if (!berechtigung('RIGHT_USERMGMT')) ajax_exit("!Keine Berechtigung!");
+	$uid=request_value('uid');
+	$rid=request_value('rid');
+	$checked=(request_value('checked')=='true'?1:0);
+	
+	$rolle=dbio_SELECT_SINGLE("core_rollen", $rid);
+	$user=dbio_SELECT_SINGLE("core_users", $uid);
+	if ($checked){
+		dbio_INSERT("core_user_rolle", array("user"=>$uid,"rolle"=>$rid));
+	}else{
+		dbio_DELETE("core_user_rolle", "user=$uid AND rolle=$rid");
+	}
+	
+	ajax_exit($user['nick'].": ".($checked?$rolle['name']:"<span class=\"strike\">".$rolle['name']."</span>"));
+}
 function lorumipsum(){
 	$length=request_value("length");
 	$content = file_get_contents("http://loripsum.net/api/1/$length/plaintext");
