@@ -15,26 +15,32 @@ if ($version){
 	include_once '../../core/start.php';
 	if (!USER_ADMIN) page_send_exit("Keine Berechtigung!");
 	
-	$kommandos=trim(setting_get(null, "UPDATE_KOMMANDOS"));
-	if ($kommandos){
-		$kommandos=explode("\n", $kommandos);
-		$screen="";
-		
-		foreach ($kommandos as $cmd) {
-			$cmd=trim($cmd);
-			$screen.="<span class=\"cmd\">&gt; $cmd</span>\n";
-			
-			#$output=shell_exec("cmd.exe /c chcp 850 && dir");
-			$output=shell_exec($cmd);
-			$output=mb_convert_encoding($output, "UTF-8", "cp850");
-			$output=encode_html($output);
-			
-			$screen.="$output\n";
-		}
+	if(isset($_REQUEST['PART2'])){
 		
 		$page->say(html_header1("Framework &amp; Module"));
-		$page->say(html_code($screen));
+		$page->say(html_code($_REQUEST['PART2']));
 		
+	}else{
+		$kommandos=trim(setting_get(null, "UPDATE_KOMMANDOS"));
+		if ($kommandos){
+			$kommandos=explode("\n", $kommandos);
+			$screen="";
+		
+			foreach ($kommandos as $cmd) {
+				$cmd=trim($cmd);
+				$screen.="<span class=\"cmd\">&gt; $cmd</span>\n";
+					
+				#$output=shell_exec("cmd.exe /c chcp 850 && dir");
+				$output=shell_exec($cmd);
+				$output=mb_convert_encoding($output, "UTF-8", "cp850");
+				$output=encode_html($output);
+					
+				$screen.="$output\n";
+			}
+		
+			$page->say(html_header1("Framework &amp; Module"));
+			ajax_refresh("Teil2...", "?PART2=".urlencode($screen));
+		}
 	}
  	
 }
