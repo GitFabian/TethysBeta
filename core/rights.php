@@ -36,4 +36,19 @@ function right_set($user,$right,$state){
 	}
 }
 
+$rollen=null;
+
+function rolle($id){
+	if (!USER_ID) return false;
+	global $rollen;
+	if ($rollen===null){
+		$query=dbio_SELECT("core_user_rolle","user=".USER_ID);
+		$rollen=array();
+		foreach ($query as $row) {
+			$rollen[$row['rolle']]=true;
+		}
+	}
+	return isset($rollen[$id]);
+}
+
 ?>

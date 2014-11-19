@@ -1,5 +1,8 @@
 <?php
 
+// define('ROLLE_X','1');
+// define('ROLLE_Y','2');
+
 function hauptmenue($page_id){
 	$menu=menu_get_default($page_id);
 	return $menu->toHTML();
