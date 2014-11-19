@@ -117,7 +117,7 @@ function escape_inline_js($text){
 }
 
 function url_mod_pg($modul,$page){
-	if ($modul=='demo'||$modul=='fun') return ROOT_HTTP_CORE."/demo/modules/$modul/$page.".CFG_EXTENSION;
+	if ($modul=='demo'||$modul=='fun'||$modul=='myqueries') return ROOT_HTTP_CORE."/demo/modules/$modul/$page.".CFG_EXTENSION;
 	return ROOT_HTTP_MODULES."/$modul/$page.".CFG_EXTENSION;
 }
 

@@ -178,7 +178,7 @@ if ($new_version>$version){
 }
 if(!USER_ADMIN){page_send_exit("Keine Updates der Module!");}
 foreach ($modules as $modul_id=>$modul) {
-	if (strcasecmp($modul_id, "demo")==0||strcasecmp($modul_id, "fun")==0){
+	if (strcasecmp($modul_id, "demo")==0||strcasecmp($modul_id, "fun")==0||strcasecmp($modul_id, "myqueries")==0){
 		$php=ROOT_HDD_CORE."/demo/modules/$modul_id/db_update.php";
 	}else{
 		$php=ROOT_HDD_MODULES."/$modul_id/db_update.php";
