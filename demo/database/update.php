@@ -136,9 +136,26 @@ if ($version<12){dbio_query("CREATE TABLE IF NOT EXISTS `core_logs_dbedit` (
 dbio_query("ALTER TABLE `core_logs_dbedit`
   ADD CONSTRAINT `core_logs_dbedit_ibfk_1` FOREIGN KEY (`user`) REFERENCES `core_users` (`id`);");}
 
+if ($version<13){dbio_query("CREATE TABLE IF NOT EXISTS `core_rollen` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) COLLATE utf8_bin NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;");
+dbio_query("CREATE TABLE IF NOT EXISTS `core_user_rolle` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user` int(11) NOT NULL,
+  `rolle` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user` (`user`),
+  KEY `rolle` (`rolle`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;");
+dbio_query("ALTER TABLE `core_user_rolle`
+  ADD CONSTRAINT `core_user_rolle_ibfk_2` FOREIGN KEY (`rolle`) REFERENCES `core_rollen` (`id`),
+  ADD CONSTRAINT `core_user_rolle_ibfk_1` FOREIGN KEY (`user`) REFERENCES `core_users` (`id`);");}
+
 #if ($version<){dbio_query("");}
 
-$current_version=12;
+$current_version=13;
 //=================================================================================================
 dbio_query("UPDATE `core_meta_dbversion` SET `version` = '$current_version' WHERE `modul_uc` = 'CORE';");
 //=================================================================================================
