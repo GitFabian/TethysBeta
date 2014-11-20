@@ -9,6 +9,7 @@ echo "!Unbekanntes AJAX-Kommando \"$cmd\"!";
 exit;//===========================================================================================
 
 function view(){
+	if(!USER_ADMIN)ajax_exit("Keine Berechtigung!");
 	#sleep(1);
 	include_once ROOT_HDD_CORE.'/core/classes/table.php';
 	$query=request_value("query");
