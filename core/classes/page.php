@@ -155,7 +155,8 @@ $view=$page->init_views('xxxxxDEFAULTIDxxxxxxx',array(
 	}
 	
 	function init($page_id,$page_title){
-		$this->title=CFG_TITLE.' - '.$page_title;
+		$this->title=CFG_TITLE;
+		if($page_title)$this->title.=' - '.$page_title;
 		$this->page_id=$page_id;
 	}
 	

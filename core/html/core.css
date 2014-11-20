@@ -67,3 +67,14 @@ table.wide th:first-child{
 	transform:none;
 }
 
+/*==================================================================
+    FRAME
+==================================================================*/
+
+div.iframe_fullscreen iframe{
+	border:none;
+	position:relative;
+	width:100%;
+	height:100%;
+	vertical-align:top;
+}
