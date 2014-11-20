@@ -465,4 +465,8 @@ function format_default_core($table,$column){
 	return "[$column]";
 }
 
+function iframe_link($url,$title=null){
+	return ROOT_HTTP_CORE."/core/frame.".CFG_EXTENSION."?title=".urlencode($title)."&url=".urlencode($url);
+}
+
 ?>
