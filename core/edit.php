@@ -8,6 +8,7 @@ include_once "edit_.php";
 include_once ROOT_HDD_CORE.'/core/log.php';
 
 request_extract_booleans2();
+request_extract_dates();
 
 /*
  * Datentabelle und Datensatz ermitteln

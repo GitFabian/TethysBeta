@@ -49,6 +49,21 @@ function request_unset($key){
 	return $value;
 }
 
+function request_extract_dates(){
+	if (!isset($_REQUEST['t_dates'])) return;
+	$dates=$_REQUEST['t_dates'];
+	unset($_REQUEST['t_dates']);
+	
+	$dates=explode(",", $dates);
+	
+	foreach ($dates as $d) {
+		$value=false;
+		if (isset($_REQUEST[$d])){
+			$_REQUEST[$d]=format_datum_to_sql($_REQUEST[$d]);
+		}
+	}
+}
+
 /**
  * Formular überträgt Checkboxen in Extra-Array, sonst würden nicht aktivierte Checkboxen verlorengehen.
  */
@@ -154,6 +169,13 @@ function include_jquery(){
 	$page->add_library(ROOT_HTTP_CORE."/core/html/jquery-1.10.2.js");
 }
 
+function include_jquery_ui(){
+	include_jquery();
+	global $page;
+	$page->add_library(ROOT_HTTP_CORE."/core/html/jquery-ui-1.11.2/jquery-ui.min.js");
+	$page->add_stylesheet(ROOT_HTTP_CORE."/core/html/jquery-ui-1.11.2/jquery-ui.min.css");
+}
+
 function include_datatables(){
 	include_jquery();
 	global $page;
@@ -180,6 +202,12 @@ function chosen_select_multi($name,$options,$selecteds=null,$id=null,$onChange=n
 	return "\n<select$id$onChange name=\"$name\" multiple"
 			." class=\"chosen\""
 			.">$options_html\n</select>";
+}
+
+function datepicker($id){
+	include_jquery_ui();
+	global $page;
+	$page->onload_JS.="\$('#$id').datepicker();";
 }
 
 function html_checkbox($name=null,$checked=false,$js=null){
@@ -343,6 +371,14 @@ function format_Wochentag_Uhrzeit($time=null){
 	global $wochentage;
 	if ($time===null) $time=time();
 	return $wochentage[date("w",$time)].date(", d.m.y H:i",$time);
+}
+
+function format_datum_to_tmj($string=null){
+	return date("j.n.Y",($string===null?time():strtotime($string)));
+}
+
+function format_datum_to_sql($string=null){
+	return date("Y-m-d",($string===null?time():strtotime($string)));
 }
 
 function time_delta($time){

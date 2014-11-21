@@ -22,6 +22,7 @@ function edit_default_form($form,$query,$db,$idkey){
 	foreach ($query as $key => $value) {
 		if ($key!=$idkey){
 			$options=null;
+			$v=request_value($key,$value);
 			
 			/*
 			 * Datentyp
@@ -38,6 +39,10 @@ function edit_default_form($form,$query,$db,$idkey){
 					$options[$o]=$o;
 				}
 			}
+			if ($type=='date'){
+				$typ='DATUM';
+				$v=format_datum_to_tmj($v);
+			}
 			
 			/*
 			 * Constraints
@@ -49,7 +54,7 @@ function edit_default_form($form,$query,$db,$idkey){
 				$options=dbio_SELECT_asList($ref_tbl, format_default_for_column($ref_tbl,$ref_col), null, $ref_col);
 			}
 			
-			$form->add_field(new form_field($key,null,request_value($key,$value),$typ,null,$options));
+			$form->add_field(new form_field($key,null,$v,$typ,null,$options));
 		}
 	}
 	return true;

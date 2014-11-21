@@ -24,6 +24,7 @@ class form{
 	var $method;
 	var $hidden_fields;
 	var $booleans;
+	var $dates=array();
 	var $buttons="";
 	var $tag="form";
 	
@@ -52,6 +53,9 @@ class form{
 		$this->field_groups[count($this->field_groups)-1]->fields[]=$field;
 		if ($field->type=='CHECKBOX'){
 			$this->booleans[]=$field->name;
+		}
+		if ($field->type=='DATUM'){
+			$this->dates[]=$field->name;
 		}
 	}
 	
@@ -96,6 +100,10 @@ class form{
 		if ($this->booleans){
 			$booleans=implode(",", $this->booleans);
 			$hidden_fields.="\n\t<input type=\"hidden\" name=\"booleans\" value=\"$booleans\" />";
+		}
+		if ($this->dates){
+			$dates=implode(",", $this->dates);
+			$hidden_fields.="\n\t<input type=\"hidden\" name=\"t_dates\" value=\"$dates\" />";
 		}
 		
 		$action=($this->action?" action=\"$this->action\" method=\"$this->method\"":"");
@@ -193,12 +201,16 @@ class form_field{
 				$options.="\n\t<option$selected value=\"$key\">$value</option>";
 			}
 			$input="<select$id$onChange name=\"".$this->name."\"".($this->type=="SELECT_MULTIPLE"?" multiple":"").""
-					." class=\"chosen\""//.($this->type=="SELECT_MULTIPLE"?" class=\"chosen\"":"")
+					." class=\"chosen\""
 					.">$options\n</select>";
 		}else if ($this->type=="PASSWORD"){
 			$input="<input$id type=\"password\" name=\"".$this->name."\" value=\"$thisvalue\" />";
 		}else if ($this->type=="TEXTAREA"){
 			$input="<textarea$id name=\"".$this->name."\">$thisvalue</textarea>";
+		}else if ($this->type=="DATUM"){
+			$id=($this->id?:get_next_id());
+			datepicker($id);
+			$input="<input id=\"$id\" type=\"text\" name=\"".$this->name."\" value=\"$thisvalue\" readonly />";
 		}else{
 			$input="<input$id type=\"text\" name=\"".$this->name."\" value=\"$thisvalue\" />";
 		}
