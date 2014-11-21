@@ -2,7 +2,7 @@
 
 include_once ROOT_HDD_CORE.'/core/toolbox.php';
 
-function start_standalone($skin='demo'){
+function start_standalone($skin='demo',$title='Tethys'){
 	global $page;
 	include_once ROOT_HDD_CORE.'/core/classes/page.php';
 	$page=new page();
@@ -15,7 +15,7 @@ function start_standalone($skin='demo'){
 	}
 	$page->add_stylesheet($css_http."/screen.css");
 	
-	define('CFG_TITLE', 'Tethys');
+	define('CFG_TITLE', $title);
 	define('CFG_CSS_VERSION', '');
 	define('USER_ADMIN', '0');
 }

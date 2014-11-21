@@ -13,6 +13,7 @@ class page{
 	var $focus;
 	var $focus_delay=500;//ms
 	var $messages=array();
+	var $head="";
 	
 	function __construct(){
 		$this->content="";
@@ -99,6 +100,7 @@ class page{
 	$stylesheets
 	$libraries
 	$inline_JS
+	$this->head
 </head>
 <body id="$this->page_id"$onload>
 	<div class="outerbody">

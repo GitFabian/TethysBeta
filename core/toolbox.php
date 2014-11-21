@@ -342,7 +342,7 @@ $wochentage=array("So","Mo","Di","Mi","Do","Fr","Sa");
 function format_Wochentag_Uhrzeit($time=null){
 	global $wochentage;
 	if ($time===null) $time=time();
-	return $wochentage[date("w",$time)].date(", d.m.y H:s",$time);
+	return $wochentage[date("w",$time)].date(", d.m.y H:i",$time);
 }
 
 function time_delta($time){
