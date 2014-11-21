@@ -210,7 +210,7 @@ class form_field{
 		}else if ($this->type=="DATUM"){
 			$id=($this->id?:get_next_id());
 			datepicker($id);
-			$input="<input id=\"$id\" type=\"text\" name=\"".$this->name."\" value=\"$thisvalue\" readonly />";
+			$input="<input$onChange id=\"$id\" type=\"text\" name=\"".$this->name."\" value=\"$thisvalue\" readonly />";
 		}else{
 			$input="<input$id type=\"text\" name=\"".$this->name."\" value=\"$thisvalue\" />";
 		}
