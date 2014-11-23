@@ -63,6 +63,7 @@ function ask_delete(target,datensatz){
 	});
 }
 
-
-
+function js_getSelectedValue(id){
+	return document.getElementById(id).options[document.getElementById(id).selectedIndex].value
+}
 

@@ -13,7 +13,9 @@ class modul_myqueries extends module{
 	}
 	
 	function get_edit_right($table,$id){
-		if ($table=='myqueries_connections'||$table=='myqueries_user_query'){
+		if ($table=='myqueries_connections'
+				||$table=='myqueries_user_query'
+				||$table=='myqueries_admins'){
 			return USER_ADMIN;
 		}
 		if (USER_ADMIN) echo"Kein edit_right für $table!";

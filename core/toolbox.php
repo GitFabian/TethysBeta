@@ -505,4 +505,15 @@ function iframe_link($url,$title=null){
 	return ROOT_HTTP_CORE."/core/frame.".CFG_EXTENSION."?title=".urlencode($title)."&url=".urlencode($url);
 }
 
+function array_htmlentities_pre($arrayarray){
+	$new=array();
+	foreach ($arrayarray as $id => $row) {
+		$new[$id]=array();
+		foreach ($row as $key => $value) {
+			$new[$id][$key]="<pre>".htmlentities(utf8_decode($value))."</pre>";
+		}
+	}
+	return $new;
+}
+
 ?>

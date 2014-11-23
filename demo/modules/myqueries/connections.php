@@ -14,6 +14,15 @@ $table->set_options(true, true, true, "myqueries_connections");
 $page->say($table);
 
 /*
+ * Admins
+ */
+$page->say(html_header1("Admins"));
+$query=dbio_SELECT("myqueries_admins");
+$table=new table($query);
+$table->set_options(true, true, true, "myqueries_admins");
+$page->say($table);
+
+/*
  * Benutzer
  */
 $page->say(html_header1("Freigaben"));

@@ -94,7 +94,8 @@ class form{
 		$hidden_fields="";
 		if ($this->hidden_fields){
 			foreach ($this->hidden_fields as $field) {
-				$hidden_fields.="\n\t<input type=\"hidden\" name=\"$field->name\" value=\"".escape_html($field->value)."\" />";
+				$id=($field->id?" id=\"".$field->id."\"":"");
+				$hidden_fields.="\n\t<input$id type=\"hidden\" name=\"$field->name\" value=\"".escape_html($field->value)."\" />";
 			}
 		}
 		if ($this->booleans){
@@ -152,6 +153,7 @@ class form_field{
 
 	var $onChange=null;
 	var $outer_id=null;
+	var $outer_class="";
 	
 	function __construct($name,$label=null,$value="[REQ]",$type="TEXT",$title=null,$options=null,$id=null){
 		if ($label===null) $label=$name;
@@ -215,7 +217,7 @@ class form_field{
 			$input="<input$id type=\"text\" name=\"".$this->name."\" value=\"$thisvalue\" />";
 		}
 		$title=($this->title?" title=\"".encode_html($this->title)."\"":"");
-		return "<div class=\"form_field\"$outer_id><label for=\"".$this->name."\"$title>".$this->label."</label>$input</div>";
+		return "<div class=\"form_field $this->outer_class\"$outer_id><label for=\"".$this->name."\"$title>".$this->label."</label>$input</div>";
 	}
 	
 }
