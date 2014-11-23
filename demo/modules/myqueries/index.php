@@ -3,7 +3,8 @@ include_once '../../config_start.php';
 $page->init('myqueries_index','Index');
 include_once ROOT_HDD_CORE.'/core/classes/form.php';
 $page->add_library(ROOT_HTTP_CORE."/demo/modules/myqueries/toolbox.js");
-/*?*/include_datatables();
+include_datatables();
+include_once ROOT_HDD_CORE.'/core/alertify.php';
 include_once ROOT_HDD_CORE.'/core/classes/table.php';
 include_once ROOT_HDD_CORE.'/demo/modules/myqueries/index_.php';
 
