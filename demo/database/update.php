@@ -39,6 +39,7 @@ if ($version){
 			}
 		
 			$page->say(html_header1("Framework &amp; Module"));
+			$page->init('core_update',"Update-Teil1");
 			ajax_refresh("Teil2...", "?PART2=".urlencode($screen));
 		}
 	}
@@ -193,7 +194,7 @@ foreach ($modules as $modul_id=>$modul) {
 			$page->say(html_div("Updated $modulnameUC: v$version &rarr; v$new_version"));
 		}
 	}else{
-		if (USER_ADMIN) echo "Keine db_update.php für Modul \"".$modul->modul_name."\"!";
+		#if (USER_ADMIN) echo "Keine db_update.php für Modul \"".$modul->modul_name."\"!";
 	}
 }
 if (isset($_REQUEST['install'])){
