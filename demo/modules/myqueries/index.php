@@ -23,7 +23,7 @@ if(USER_ADMIN){
 }
 $views=array();
 foreach ($query as $row) {
-	$views[]=new menu_topic2($row["id"], $row["name"]);
+	$views[$row["id"]]=new menu_topic2($row["id"], $row["name"]);
 }
 $view=$page->init_views(null, $views);
 
@@ -31,6 +31,14 @@ if ($view){
 	$berechtigung=(USER_ADMIN||dbio_SELECT("myqueries_user_query","user=".USER_ID." AND query=$view"));
 }else{
 	$berechtigung=false;
+}
+
+if(request_command("delete")){
+	if(delete_myc(request_value("view"))){
+		unset($views[$view]);
+		$page->init_views(null, $views);
+		$view=null;
+	}
 }
 
 $page->focus="input[type=text],textarea";
@@ -113,7 +121,7 @@ if($cons){
 		$form->buttons.=html_button2("Speichern","save_create('".ROOT_HTTP_CORE."','".CFG_EXTENSION."');");
 	}
 	if($view){
-// 		$form->buttons.=html_button2("Löschen");
+		$form->buttons.=html_button2("Löschen","location.href='?cmd=delete&view=$view';");
 	}
 }
 if($form->field_groups)#if ($cons||$view)
@@ -137,5 +145,14 @@ function get_view($id){
 	$page->focus="input[type=search]";
 	$html=$table->toHTML();
 	return $html;
+}
+function delete_myc($id){
+	if(!$id)return false;
+	global $page;
+	$query=dbio_SELECT_SINGLE("myqueries_queries", $id);
+	if(!$query||($query['owner']!=USER_ID&&!USER_ADMIN))return false;
+	dbio_DELETE("myqueries_queries", "id=$id");
+	$page->message_ok("Query #$id gelöscht.");
+	return true;
 }
 ?>

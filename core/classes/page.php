@@ -23,7 +23,6 @@ class page{
 		$this->add_library(ROOT_HTTP_CORE."/core/html/toolbox.js");
 		$this->inline_JS="";
 		$this->onload_JS="";
-		$this->views=array();
 		$this->focus=null;
 	}
 	
@@ -128,6 +127,7 @@ $view=$page->init_views('xxxxxDEFAULTIDxxxxxxx',array(
 	 */
 	function init_views($default,$views){
 		$view=(isset($_REQUEST['view'])&&$_REQUEST['view']?$_REQUEST['view']:$default);
+		$this->views=array();
 		foreach ($views as $topic) {
 			$topic->highlight=($view==$topic->page_id);
 			if(!$topic->link)$topic->link="?view=".$topic->page_id;

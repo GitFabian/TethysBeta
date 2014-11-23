@@ -46,9 +46,12 @@ dbio_query("ALTER TABLE `myqueries_admins`
   ADD CONSTRAINT `myqueries_admins_ibfk_2` FOREIGN KEY (`con`) REFERENCES `myqueries_connections` (`id`),
   ADD CONSTRAINT `myqueries_admins_ibfk_1` FOREIGN KEY (`user`) REFERENCES `core_users` (`id`);");}
 
+if ($version<5){dbio_query("ALTER TABLE `myqueries_queries` ADD `owner` INT NULL ,ADD INDEX ( `owner` ) ;");
+dbio_query("ALTER TABLE `myqueries_queries` ADD FOREIGN KEY ( `owner` ) REFERENCES `core_users` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT ;");}
+
 #if ($version<){dbio_query("");}
 
 //=================================================================================================
-dbio_query("UPDATE `core_meta_dbversion` SET `version` = '4' WHERE `modul_uc` = 'MYQUERIES';");
+dbio_query("UPDATE `core_meta_dbversion` SET `version` = '5' WHERE `modul_uc` = 'MYQUERIES';");
 //=================================================================================================
 ?>
