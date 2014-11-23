@@ -459,6 +459,7 @@ function sql_openNewConnection($host,$user,$pass,$db){
 	//Neue Verbindung
 	$new=mysql_connect($host,$user,$pass);
 	mysql_select_db($db);
+	mysql_query ('SET NAMES utf8');
 	
 	//Zurücksetzen auf alte Verbindung:
 	mysql_connect($sql_server,$sql_user,$sql_pass);
