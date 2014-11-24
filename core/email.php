@@ -26,6 +26,9 @@ function email_create_schedule_send($to,$title,$body){
 }
 
 function email_send($id){
+	if(!file_exists(BLAT_EXE)){if(USER_ADMIN)echo"BLAT nicht gefunden!";return;}
+	$server=setting_get(null, 'MAIL_SERVER');
+	if(!$server){if(USER_ADMIN)echo"Mails nicht konfiguriert!";return;}
 	
 	$msg=dbio_SELECT_SINGLE("core_mails", $id);
 	
@@ -44,7 +47,7 @@ function email_send($id){
 	
 	$commandline.=' -to "'.blat_escape($msg['an']).'"';
 	$commandline.=' -subject "'.blat_escape($msg['subject']).'"';
-	$commandline.=' -server '.setting_get(null, 'MAIL_SERVER');
+	$commandline.=' -server '.$server;
 	$commandline.=' -f "'.blat_escape(setting_get(null, 'MAIL_FROM')).'"';
 	$commandline.=' -u '.setting_get(null, 'MAIL_USER');
 	$commandline.=' -pw "'.blat_escape(setting_get(null, 'MAIL_PASS')).'"';
