@@ -1,15 +1,14 @@
 Tethys (Beta)
 =============
 
-Version 0.16.13
+Version 0.17.0
 
-Database-Version: 13
+Database-Version: 16
 
 TODO:
 * Widgets
 * LDAP-Authentifizierung
 * Logs
-* eMails
 * Upload
 * Generische members_direct-Tabelle
 * SMS

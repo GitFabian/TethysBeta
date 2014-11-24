@@ -6,10 +6,18 @@ $cmd=request_value("cmd");
 if ($cmd=="update_rights") update_rights();
 if ($cmd=="lorumipsum") lorumipsum();
 if ($cmd=="rolleSetzen") rolleSetzen();
+if ($cmd=="sendmail") sendmail();
 
 echo "!Unbekanntes AJAX-Kommando \"$cmd\"!";
 exit;//===========================================================================================
 
+function sendmail(){
+	$id=request_value("id");
+	if (!$id) ajax_exit("!E-Mail nicht verschickt.");
+	include_once ROOT_HDD_CORE.'/core/email.php';
+	email_send($id);
+	ajax_exit("E-Mail verschickt.".(USER_ADMIN?" #$id":""));
+}
 function rolleSetzen(){
 	if (!berechtigung('RIGHT_USERMGMT')) ajax_exit("!Keine Berechtigung!");
 	$uid=request_value('uid');

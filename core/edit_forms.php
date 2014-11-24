@@ -28,6 +28,7 @@ function get_edit_form($form,$db,$id,$query){
 		module::edit_form_field($form,$query,'durchwahl',"Durchwahl");
 		module::edit_form_field($form,$query,'handy',"Handy");
 		module::edit_form_field($form,$query,'raum',"Raum");
+		module::edit_form_field($form,$query,'email',"E-Mail");
 		if ($id=="NEW"){
 			if(!$pass_field->value)$pass_field->value=string_random_pass_aa0000();
 		}

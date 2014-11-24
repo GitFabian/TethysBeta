@@ -160,9 +160,24 @@ dbio_query("ALTER TABLE `core_user_rolle`
   ADD CONSTRAINT `core_user_rolle_ibfk_2` FOREIGN KEY (`rolle`) REFERENCES `core_rollen` (`id`),
   ADD CONSTRAINT `core_user_rolle_ibfk_1` FOREIGN KEY (`user`) REFERENCES `core_users` (`id`);");}
 
+if ($version<14){dbio_query("ALTER TABLE `core_users` ADD `email` VARCHAR( 200 ) NULL ;");}
+
+if ($version<15){dbio_query("CREATE TABLE IF NOT EXISTS `core_mails` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `erstellt` int(11) NOT NULL,
+  `an` varchar(1000) COLLATE utf8_bin NOT NULL,
+  `message` text COLLATE utf8_bin NOT NULL,
+  `sent` int(11) DEFAULT NULL,
+  `subject` varchar(500) COLLATE utf8_bin NOT NULL,
+  `attachment` varchar(500) COLLATE utf8_bin DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;");}
+
+if ($version<16){dbio_query("ALTER TABLE `core_mails` ADD `replyto` VARCHAR( 200 ) NULL ;");}
+
 #if ($version<){dbio_query("");}
 
-$current_version=13;
+$current_version=16;
 //=================================================================================================
 dbio_query("UPDATE `core_meta_dbversion` SET `version` = '$current_version' WHERE `modul_uc` = 'CORE';");
 //=================================================================================================
