@@ -6,7 +6,7 @@ include_once ROOT_HDD_CORE.'/core/email.php';
 
 define('BLAT_EXE',ROOT_HDD_CORE.'/core/email/blat.exe');
 
-function email_create_schedule_send($to,$title,$body){
+function email_create_schedule_send($to,$title,$body,$sender=null){
 	global $page;
 	if (!$to){
 		include_once ROOT_HDD_CORE.'/core/alertify.php';
@@ -20,15 +20,16 @@ function email_create_schedule_send($to,$title,$body){
 		"sent"=>null,
 		"subject"=>$title,
 		"attachment"=>null,
+		"replyto"=>$sender,
 	));
 	$page->onload_JS.=ajax_to_alertify("sendmail&id=".mysql_insert_id(),null,true);
 	return true;
 }
 
 function email_send($id){
-	if(!file_exists(BLAT_EXE)){if(USER_ADMIN)echo"BLAT nicht gefunden!";return;}
+	if(!file_exists(BLAT_EXE)){if(USER_ADMIN)echo"!BLAT nicht gefunden!";return;}
 	$server=setting_get(null, 'MAIL_SERVER');
-	if(!$server){if(USER_ADMIN)echo"Mails nicht konfiguriert!";return;}
+	if(!$server){if(USER_ADMIN)echo"!Mails nicht konfiguriert!";return;}
 	
 	$msg=dbio_SELECT_SINGLE("core_mails", $id);
 	
