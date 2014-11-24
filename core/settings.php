@@ -62,13 +62,14 @@ function setting_get_default($modul,$key){
 		if ($key=='CFG_MAX_USERS') return "0";
 		if ($key=='FEATURE_PRERELEASE') return "1";
 		if ($key=='CFG_AUTHPATTERN') return "nachname+\"_\"+vorname";
+		if ($key=='CFG_MAILPATTERN') return "vorname+\".\"+nachname+\"@mycompany.com\"";
 		if ($key=='UPDATE_KOMMANDOS') return "cd /d \"".ROOT_HDD_CORE."\" 2>&1 && git pull 2>&1";
 		if ($key=='MAIL_FROM') return "";
 		if ($key=='MAIL_SERVER') return "";
 		if ($key=='MAIL_USER') return "";
 		if ($key=='MAIL_PASS') return "";
 		if ($key=='MAIL_BCC') return "";
-		if (USER_ADMIN) echo "Kein Default-Value für \"$key\"! /core/settings.php:66";
+		if (USER_ADMIN) echo "Kein Default-Value für \"$key\"! /core/settings.php:72";
 		return null;
 	}else{
 		global $modules;

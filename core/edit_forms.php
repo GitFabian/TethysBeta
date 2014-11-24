@@ -28,7 +28,15 @@ function get_edit_form($form,$db,$id,$query){
 		module::edit_form_field($form,$query,'durchwahl',"Durchwahl");
 		module::edit_form_field($form,$query,'handy',"Handy");
 		module::edit_form_field($form,$query,'raum',"Raum");
-		module::edit_form_field($form,$query,'email',"E-Mail");
+		
+		$ff=module::edit_form_field($form,$query,'email',"E-Mail".(setting_get(null, "CFG_MAILPATTERN")?autofill_manuell("autofill_mail();"):""));
+		$ff->id=($nid=get_next_id());
+		$page->add_inline_script("function autofill_mail(){
+				vorname=document.getElementById('id_vorname').value.toLowerCase().replace(/[^a-z]/g,'');
+				nachname=document.getElementById('id_nachname').value.toLowerCase().replace(/[^a-z]/g,'');
+				document.getElementById('$nid').value=".setting_get(null, "CFG_MAILPATTERN").";
+			}");
+		
 		if ($id=="NEW"){
 			if(!$pass_field->value)$pass_field->value=string_random_pass_aa0000();
 		}
