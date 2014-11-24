@@ -7,6 +7,7 @@ include_once ROOT_HDD_CORE.'/core/email.php';
 define('BLAT_EXE',ROOT_HDD_CORE.'/core/email/blat.exe');
 
 function email_create_schedule_send($to,$title,$body,$sender=null){
+	if(!setting_get(null, 'MAIL_SERVER'))return false;
 	global $page;
 	if (!$to){
 		include_once ROOT_HDD_CORE.'/core/alertify.php';
