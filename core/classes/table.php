@@ -157,10 +157,11 @@ class datatable{
 	}
 	function get_execute(){
 		$options="'bLengthChange':false,"
+				."'aaSorting':[],"
 				."'iDisplayLength':15,"
 				."language:{url:'".ROOT_HTTP_CORE."/core/html/jquery.dataTables.German.json'},"
-						;
-						if (!$this->paginate) $options.="'bPaginate':false,";
+			;
+		if (!$this->paginate) $options.="'bPaginate':false,";
 		return "\$('$this->selector').dataTable({".$options."});";
 	}
 	function execute(){

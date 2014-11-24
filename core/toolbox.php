@@ -179,7 +179,8 @@ function include_jquery_ui(){
 function include_datatables(){
 	include_jquery();
 	global $page;
-	$page->add_library(ROOT_HTTP_CORE."/core/html/jquery.dataTables.min.1.10.js");
+	#$page->add_library(ROOT_HTTP_CORE."/core/html/jquery.dataTables.min.1.10.js");
+	$page->add_library(ROOT_HTTP_CORE."/core/html/jquery.dataTables.min.1.10.4.js");
 }
 
 function include_chosen(){
