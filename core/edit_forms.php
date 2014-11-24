@@ -25,9 +25,9 @@ function get_edit_form($form,$db,$id,$query){
 		$pass_field->id=$nid;
 		
 		module::edit_form_field($form,$query,'picture',"Bild");
-		module::edit_form_field($form,$query,'durchwahl',"Durchwahl");
-		module::edit_form_field($form,$query,'handy',"Handy");
-		module::edit_form_field($form,$query,'raum',"Raum");
+// 		module::edit_form_field($form,$query,'durchwahl',"Durchwahl");
+// 		module::edit_form_field($form,$query,'handy',"Handy");
+// 		module::edit_form_field($form,$query,'raum',"Raum");
 		
 		$ff=module::edit_form_field($form,$query,'email',"E-Mail".(setting_get(null, "CFG_MAILPATTERN")?autofill_manuell("autofill_mail();"):""));
 		$ff->id=($nid=get_next_id());

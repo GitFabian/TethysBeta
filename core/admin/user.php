@@ -33,9 +33,9 @@ if ($view=="core"){
 	}
 	if (setting_get(null,'CFG_EDIT_FILE')){
 		$persoenlich[]=new form_field("picture","Foto",$user['picture']);
-		$persoenlich[]=new form_field("durchwahl","Durchwahl",$user['durchwahl']);
-		$persoenlich[]=new form_field("handy","Handy",$user['handy']);
-		$persoenlich[]=new form_field("raum","Raum",$user['raum']);
+// 		$persoenlich[]=new form_field("durchwahl","Durchwahl",$user['durchwahl']);
+// 		$persoenlich[]=new form_field("handy","Handy",$user['handy']);
+// 		$persoenlich[]=new form_field("raum","Raum",$user['raum']);
 	}
 	if ($persoenlich) $form->add_fields("Persönliche Daten", $persoenlich);
 	
