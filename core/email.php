@@ -43,7 +43,7 @@ function email_send($id){
 	$history_dir=ROOT_HDD_CORE.'/core/email/history/msg'.$id;
 	mkdir($history_dir);
 	
-	file_put_contents($history_dir.'/msg.txt', $message_body);
+	file_put_contents($history_dir.'/msg.txt', utf8_decode($message_body));
 	$commandline.=' "'.$history_dir.'/msg.txt"';
 	
 	$commandline.=' -to "'.blat_escape($msg['an']).'"';
