@@ -4,7 +4,8 @@
 include_once ROOT_HDD_CORE.'/core/log.php';
  */
 
-function log_db_new($modul,$tabelle,$zeile,$pars=null){
+function log_db_new($modul,$tabelle,$zeile=null,$pars=null){
+	if($zeile===null)$zeile=mysql_insert_id();
 	dbio_INSERT("core_logs_dbedit", array(
 		"time"=>time(),
 		"user"=>USER_ID,

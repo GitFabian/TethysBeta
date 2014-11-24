@@ -17,6 +17,7 @@ class table{
 	var $col_highlight=false;
 	var $options=null;
 	var $options2=null;
+	var $details=false;
 	
 	function __construct($query=null,$class=null,$datatable=true,$id=null,$export_csv_id=null){
 		$this->rows=array();
@@ -37,12 +38,18 @@ class table{
 		return $this->toHTML();
 	}
 	
-	function set_options($new,$edit,$delete,$db,$idkey='id',$datensatz=null,$and_return=null){
+	function set_options($new,$edit,$delete,$db,$idkey='id',$datensatz=null,$and_return=null,$details=false){
 		include_once ROOT_HDD_CORE.'/core/edit_rights.php'; 
 		$this->options=array();
 		$this->options2="";
+		if($details)$this->details=$details;
 		if (!edit_rights2($db, null)) return;
 		$idkeyquery=($idkey=='id'?"":"&idkey=$idkey");
+		if($this->details){
+			$details=$this->details;
+			if($details===true)$details=ROOT_HTTP_CORE."/core/view.".CFG_EXTENSION."?db=$db&id=[ID:$idkey]";
+			$this->options[]=html_a_button("Details",$details,"tbl_option tbl_detail");
+		}
 		if ($edit){
 			$this->options[]=html_a_button("Bearbeiten",
 					ROOT_HTTP_CORE."/core/edit.".CFG_EXTENSION."?db=$db&id=[ID:$idkey]$idkeyquery&datensatz=$datensatz",

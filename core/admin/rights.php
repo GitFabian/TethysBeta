@@ -64,7 +64,7 @@ foreach ($all_rights as $right_id => $right_object) {
 foreach ($query_user_right as $right) {
 	$rights_grid[$right['user']][$right['right']]=rights_checkbox(true,$right['user'],$right['right']);
 }
-$table = new table($rights_grid,'core_rights wide',false);
+$table = new table($rights_grid,'core_rights wide',true);
 $table->set_header($headers);
 $table->col_highlight=true;
 $page->add_html( $table->toHTML() );

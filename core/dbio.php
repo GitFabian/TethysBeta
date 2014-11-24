@@ -86,6 +86,12 @@ function dbio_NEW_FROM_REQUEST($db,$idkey="id",$unsets=null){
 	return mysql_insert_id();
 }
 
+function dbio_INSERT_LOG($modul,$db,$data,$link_identifier=null){
+	include_once ROOT_HDD_CORE.'/core/log.php';
+	dbio_INSERT($db,$data,$link_identifier);
+	log_db_new($modul, $db);
+}
+
 function dbio_INSERT($db,$data,$link_identifier=null){
 
 	$values=array();
