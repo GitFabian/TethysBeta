@@ -171,6 +171,7 @@ function dbio_query_to_array($anfrage,$link_identifier=null,$assoc_key=null){
 }
 
 function dbio_query($anfrage,$link_identifier=null){
+	#echo "<pre>".escape_html($anfrage)."</pre><hr>";
 	global $devel_performance_query_counter;
 	$devel_performance_query_counter++;
 	if ($link_identifier){

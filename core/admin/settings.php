@@ -114,10 +114,12 @@ settings_add_field2($form,"FEATURE_PRERELEASE","Pre-Release",'CHECKBOX');
 settings_add_field2($form,"DEPRECATED_HMLICLASS","div.mainmenu li div.menutopic",'CHECKBOX');//10-14
 
 $form->add_fields("Server",null);
+settings_add_field2($form,"CFG_SERVER","Server",'TEXT');
 settings_add_field2($form,"UPDATE_KOMMANDOS","Update-Kommandos",'TEXTAREA');
 settings_add_field2($form,"APACHE_CSV_ALIAS","Virtueller Export-Pfad",'CHECKBOX');
 
 $page->say(html_div("Zur ".html_a("Server-Konfiguration", ROOT_HTTP_CORE."/install.".CFG_EXTENSION)."."));
+$page->say(html_div("Zu den ".html_a("Date-Settings", ROOT_HTTP_CORE."/core/admin/date_settings.".CFG_EXTENSION)."."));
 $page->say($form->toHTML());
 
 $page->send();

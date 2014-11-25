@@ -70,7 +70,10 @@ function setting_get_default($modul,$key){
 		if ($key=='MAIL_PASS') return "";
 		if ($key=='MAIL_BCC') return "";
 		if ($key=='APACHE_CSV_ALIAS') return "0";
-		if (USER_ADMIN) echo "Kein Default-Value für \"$key\"! /core/settings.php:73";
+		if ($key=='CFG_SERVER') return "http://localhost";
+		#if ($key=='FT_neujahr') return "1";
+		if ($key=='FT_weitere_fest') return "";#"24.12.:Weihnachten\n";
+		if (USER_ADMIN) echo "Kein Default-Value für \"$key\"! /core/settings.php:76";
 		return null;
 	}else{
 		global $modules;

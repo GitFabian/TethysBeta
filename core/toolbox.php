@@ -377,6 +377,21 @@ function format_Wochentag_Uhrzeit($time=null){
 function format_datum_to_tmj($string=null){
 	return date("j.n.Y",($string===null?time():strtotime($string)));
 }
+function format_datum_to_tm_j($string,$j,$Y='Y'){
+	$time=strtotime($string);
+	if($j==date("Y",$time)){
+		$format="j.n.";
+	}else{
+		$format="j.n.$Y";
+	}
+	return date($format,$time);
+}
+
+function format_Wochentag_tm_j($string,$j,$Y='Y'){
+	global $wochentage;
+	$time=strtotime($string);
+	return $wochentage[date("w",$time)].", ".format_datum_to_tm_j($string, $j, $Y);
+}
 
 function format_datum_to_sql($string=null){
 	return date("Y-m-d",($string===null?time():strtotime($string)));
