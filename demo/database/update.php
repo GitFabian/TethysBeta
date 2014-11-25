@@ -40,7 +40,7 @@ if ($version){
 		
 			$page->say(html_header1("Framework &amp; Module"));
 			$page->init('core_update',"Update-Teil1");
-			ajax_refresh("Teil2...", "?PART2=".urlencode($screen));
+			ajax_refresh("Teil2...", "?PART2=".urlencode($screen), false);
 		}
 	}
  	
