@@ -69,7 +69,8 @@ function setting_get_default($modul,$key){
 		if ($key=='MAIL_USER') return "";
 		if ($key=='MAIL_PASS') return "";
 		if ($key=='MAIL_BCC') return "";
-		if (USER_ADMIN) echo "Kein Default-Value für \"$key\"! /core/settings.php:72";
+		if ($key=='APACHE_CSV_ALIAS') return "0";
+		if (USER_ADMIN) echo "Kein Default-Value für \"$key\"! /core/settings.php:73";
 		return null;
 	}else{
 		global $modules;

@@ -259,6 +259,7 @@ END_ALIAS_MOD;
 		$rewrite=<<<END_REWRITE
 RewriteRule ^$ROOT_HTTP_CORE/(.*)\.$CFG_EXTENSION\$ "$ROOT_HDD_CORE3/\$1.php"
 END_REWRITE;
+		$rewrite.="\n";
 	}
 	
 	$info=<<<END_INFO
@@ -269,7 +270,7 @@ $aliasse
 
 RewriteEngine on
 RewriteRule ^$ROOT_HTTP_DATA/(.*)\$ "$ROOT_HDD_CORE3/core/data.php?url=\$1"
-$rewrite
+$rewrite#RewriteRule ^$ROOT_HTTP_CORE/export/(.*)\.csv\$ "$ROOT_HDD_CORE3/core/export_csv.php?db=\$1"
 END_INFO;
 	$page->say(html_code(encode_html($info)));
 	

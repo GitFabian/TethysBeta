@@ -46,6 +46,7 @@ foreach ($rollen as $key => $value) {
 }
 $table->set_header($header);
 #$table->set_options(true, true, true, "core_user_rolle");
+$table->export_csv_id="core_rollen";
 $page->say($table);
 $page->add_inline_script("function rolleSetzen(e,uid,rid){
 		".ajax_to_alertify("rolleSetzen&checked=\"+e.checked+\"&uid=\"+uid+\"&rid=\"+rid+\"")."

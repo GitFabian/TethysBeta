@@ -518,4 +518,9 @@ function array_htmlentities_pre($arrayarray){
 	return $new;
 }
 
+function csv_pfad($csv_id){
+	if (setting_get(null, 'APACHE_CSV_ALIAS')) return ROOT_HTTP_CORE."/export/".$csv_id.".csv";
+	return ROOT_HTTP_CORE."/core/export_csv.".CFG_EXTENSION."?db=".$csv_id;
+}
+
 ?>

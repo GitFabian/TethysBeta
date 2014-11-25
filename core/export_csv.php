@@ -12,6 +12,26 @@ if ($modul=='core'){
 	if ($db=="core_users"){
 		csv_out(dbio_SELECT($db),$db.".csv");
 	}
+	if ($db=="core_rollen"){
+		$rollen=dbio_SELECT_keyValueArray("core_rollen", "name");
+		$users=dbio_SELECT("core_users","active","*",null,"nick");
+		$data=array();
+		foreach ($users as $u) {
+			$uid=$u['id'];
+			$row=array("Name"=>$u['nick']);
+			foreach ($rollen as $rid) {
+				$row[$rid]="";
+			}
+			$data[$uid]=$row;
+		}
+		$query=dbio_SELECT("core_user_rolle");
+		foreach ($query as $row) {
+			$uid=$row['user'];
+			$rid=$rollen[$row['rolle']];
+			$data[$uid][$rid]="X";
+		}
+		csv_out($data,"rollen.csv");
+	}
 	$ok=false;
 }else{
 	$ok=$modules[$modul]->export_csv($db, $id);

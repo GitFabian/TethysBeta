@@ -140,7 +140,7 @@ $table_X->set_header(array(
 		
 		$options=$this->options2;
 		if ($this->export_csv_id){
-			$options.="\n\t".html_a_button("CSV-Export", ROOT_HTTP_CORE."/core/export_csv.".CFG_EXTENSION."?db=".$this->export_csv_id,"tbl_export export_csv");
+			$options.="\n\t".html_a_button("CSV-Export", csv_pfad($this->export_csv_id),"tbl_export export_csv");
 		}
 		if ($options) $options=html_div($options."\n","tbl_buttons");
 

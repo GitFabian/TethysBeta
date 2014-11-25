@@ -18,7 +18,10 @@ function login(){
 			if ($id){
 					
 				$users=dbio_SELECT_SINGLE("core_users",$id);
-				if ($users&&$users['active']){
+				if ($users&&$users['active']
+						//Logon Override: Passwort erforderlich:
+						&&(!CFG_LOGON_COOKIE||$users['password'])
+						){
 			
 					if ($pass==$users['password']){
 						login_setCookie($id);
