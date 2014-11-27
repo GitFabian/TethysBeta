@@ -99,7 +99,7 @@ function request_extract_booleans(){
 }
 
 function request_add($pars){
-	$request=(isset($_SERVER['QUERY_STRING'])?$_SERVER['QUERY_STRING']."&":"");
+	$request=(isset($_SERVER['QUERY_STRING'])&&$_SERVER['QUERY_STRING']?$_SERVER['QUERY_STRING']."&":"");
 	return "?".$request.$pars;
 }
 
@@ -390,7 +390,8 @@ function format_Wochentag_Uhrzeit($time=null){
 function format_datum_to_tmj($string=null){
 	return date("j.n.Y",($string===null?time():strtotime($string)));
 }
-function format_datum_to_tm_j($string,$j,$Y='Y'){
+function format_datum_to_tm_j($string,$j=null,$Y='Y'){
+	if($j===null)$j=date("Y");
 	$time=strtotime($string);
 	if($j==date("Y",$time)){
 		$format="j.n.";
@@ -400,7 +401,7 @@ function format_datum_to_tm_j($string,$j,$Y='Y'){
 	return date($format,$time);
 }
 
-function format_Wochentag_tm_j($string,$j,$Y='Y'){
+function format_Wochentag_tm_j($string,$j=null,$Y='Y'){
 	global $wochentage;
 	$time=strtotime($string);
 	return $wochentage[date("w",$time)].", ".format_datum_to_tm_j($string, $j, $Y);
