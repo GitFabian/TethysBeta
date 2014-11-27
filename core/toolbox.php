@@ -98,6 +98,11 @@ function request_extract_booleans(){
 	return $r;
 }
 
+function request_add($pars){
+	$request=(isset($_SERVER['QUERY_STRING'])?$_SERVER['QUERY_STRING']."&":"");
+	return "?".$request.$pars;
+}
+
 function page_send_exit($error_message=null){
 	global $page;
 	if ($error_message){$page->message_error($error_message);}
