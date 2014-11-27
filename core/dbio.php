@@ -109,6 +109,24 @@ function dbio_INSERT($db,$data,$link_identifier=null){
 	dbio_query($anfrage,$link_identifier);
 }
 
+function dbio_UPDATE_OR_INSERT($db,$id,$data,$idkey='id'){
+	$exists=dbio_SELECT_SINGLE($db, $id, $idkey);
+	if($exists){
+		dbio_UPDATE($db, "`$idkey`='$id'", $data);
+	}else{
+		$data[$idkey]=$id;
+		dbio_INSERT($db, $data);
+	}
+}
+function dbio_UPDATE_OR_INSERT2($db,$where,$data){
+	$exists=dbio_SELECT($db, $where);
+	if($exists){
+		dbio_UPDATE($db, $where, $data);
+	}else{
+		dbio_INSERT($db, $data);
+	}
+}
+
 function dbio_UPDATE($db,$where,$data){
 	$anfrage="UPDATE `$db` SET ";
 

@@ -165,7 +165,7 @@ class datatable{
 	function get_execute(){
 		$options="'bLengthChange':false,"
 				."'aaSorting':[],"
-				."'iDisplayLength':15,"
+// 				."'iDisplayLength':15,"
 				."language:{url:'".ROOT_HTTP_CORE."/core/html/jquery.dataTables.German.json'},"
 			;
 		if (!$this->paginate) $options.="'bPaginate':false,";

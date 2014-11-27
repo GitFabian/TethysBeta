@@ -214,7 +214,7 @@ class form_field{
 			datepicker($id);
 			$input="<input$onChange id=\"$id\" type=\"text\" name=\"".$this->name."\" value=\"$thisvalue\" readonly />";
 		}else{
-			$input="<input$id type=\"text\" name=\"".$this->name."\" value=\"$thisvalue\" />";
+			$input="<input$id$onChange type=\"text\" name=\"".$this->name."\" value=\"$thisvalue\" />";
 		}
 		$title=($this->title?" title=\"".encode_html($this->title)."\"":"");
 		return "<div class=\"form_field $this->outer_class\"$outer_id><label for=\"".$this->name."\"$title>".$this->label."</label>$input</div>";

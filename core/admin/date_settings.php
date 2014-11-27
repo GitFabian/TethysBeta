@@ -28,7 +28,10 @@ function update(){
 	if(isset($modules['azeit'])){
 		dbio_UPDATE("azeit_urlaub", "1", array("werktage"=>null));
 		dbio_query("TRUNCATE `azeit_urlaub_summe`");
-		dbio_query("TRUNCATE `azeit_urlaub_uebertrag`");
+		dbio_query("DELETE azeit_urlaub_uebertrag.*"
+				." FROM `azeit_urlaub_uebertrag`"
+				." LEFT JOIN `azeit_users` ON azeit_urlaub_uebertrag.user=azeit_users.user"
+				." WHERE urlaub_start!=jahr");
 		$page->message_ok("Urlaubstage-Cache zurückgesetzt.");
 	}
 }
