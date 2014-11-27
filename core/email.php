@@ -63,6 +63,8 @@ function email_send($id){
 	
 	$commandline.=' 2>&1 >"'.$history_dir.'/output.txt"';
 	
+	file_put_contents($history_dir.'/command.txt', $commandline);
+	
 	//TEST:
 	#echo "<hr><pre>".htmlentities(preg_replace('/\|/', "\n", $commandline))."</pre><hr>";
 	shell_exec($commandline);
