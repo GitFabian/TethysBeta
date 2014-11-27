@@ -45,6 +45,12 @@ class form{
 		$this->hidden_fields[]=new form_field($name,null,$value);
 	}
 	
+	function set_blind(){
+		$this->tag="div";
+		$this->class="form";
+		$this->submit_bool=false;
+	}
+	
 	/**
 	 * Eingabefeld zur letzten Gruppe hinzufügen
 	 */
