@@ -291,6 +291,14 @@ function html_div($html,$class=null,$id=null,$style=null){
 			"style"=>$style,
 		));
 }
+
+function div_edit($html,$onclick){
+	return "\n".htmlEntity('div', $html, array(
+			"class"=>"edit",
+			"onclick"=>$onclick,
+		));
+}
+
 function html_header1($html,$class=null){
 	return "\n".htmlEntity('h1', $html, array(
 			"class"=>$class,

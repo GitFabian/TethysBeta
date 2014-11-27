@@ -24,4 +24,14 @@ function alertify_error($text){
 	return "alertify.error(&quot;$text&quot;);";
 }
 
+function alertify_prompt($message,$default="",$js_ok="",$js_cancel=""){
+	return "alertify.prompt(\"$message\", function (e, str) {
+		if (e) {
+			$js_ok
+		} else {
+			$js_cancel
+		}
+	}, \"$default\");";
+}
+
 ?>
