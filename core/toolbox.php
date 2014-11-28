@@ -552,4 +552,12 @@ function csv_pfad($csv_id){
 	return ROOT_HTTP_CORE."/core/export_csv.".CFG_EXTENSION."?db=".$csv_id;
 }
 
+function query_from_array($array){
+	$pairs=array();
+	foreach ($array as $key => $value) {
+		$pairs[]=urlencode($key)."=".urlencode($value);
+	}
+	return "?".implode("&", $pairs);
+}
+
 ?>
