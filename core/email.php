@@ -6,7 +6,7 @@ include_once ROOT_HDD_CORE.'/core/email.php';
 
 define('BLAT_EXE',ROOT_HDD_CORE.'/core/email/blat.exe');
 
-function email_create_schedule_send($to,$title,$body,$sender=null){
+function email_create_schedule_send($to,$title,$body,$sender=null,$ajax=false){
 	if(!setting_get(null, 'MAIL_SERVER'))return false;
 	global $page;
 	if (!$to){
@@ -23,7 +23,11 @@ function email_create_schedule_send($to,$title,$body,$sender=null){
 		"attachment"=>null,
 		"replyto"=>$sender,
 	));
-	$page->onload_JS.=ajax_to_alertify("sendmail&id=".mysql_insert_id(),null,true);
+	if($ajax){
+		email_send(mysql_insert_id());
+	}else{
+		$page->onload_JS.=ajax_to_alertify("sendmail&id=".mysql_insert_id(),null,true);
+	}
 	return true;
 }
 
