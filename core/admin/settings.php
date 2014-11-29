@@ -112,6 +112,7 @@ settings_add_field2($form,"MAIL_BCC","BCC",'TEXT');
 $form->add_fields("Abwärtskompatibilität",null);
 settings_add_field2($form,"FEATURE_PRERELEASE","Pre-Release",'CHECKBOX');
 settings_add_field2($form,"DEPRECATED_HMLICLASS","div.mainmenu li div.menutopic",'CHECKBOX');//10-14
+settings_add_field2($form,"DEPRECATED_DSDLCLASS","ul.datasheet li div.data_label",'CHECKBOX');//11-14
 
 $form->add_fields("Server",null);
 settings_add_field2($form,"CFG_SERVER","Server",'TEXT');

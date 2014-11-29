@@ -55,6 +55,7 @@ function setting_get_default($modul,$key){
 		if ($key=='HM_ICONS') return "0";
 		if ($key=='HM_TEXT') return "1";
 		if ($key=='DEPRECATED_HMLICLASS') return "0";
+		if ($key=='DEPRECATED_DSDLCLASS') return "0";
 		if ($key=='LOGON_MSG') return "Benutzername = Vorname<br>Account beantragen in Büro 321";
 		if ($key=='CFG_EDIT_NICK') return "0";
 		if ($key=='CFG_EDIT_FILE') return "1";
@@ -73,7 +74,7 @@ function setting_get_default($modul,$key){
 		if ($key=='CFG_SERVER') return "http://localhost";
 		#if ($key=='FT_neujahr') return "1";
 		if ($key=='FT_weitere_fest') return "";#"24.12.:Weihnachten\n";
-		if (USER_ADMIN) echo "Kein Default-Value für \"$key\"! /core/settings.php:76";
+		if (USER_ADMIN) echo "Kein Default-Value für \"$key\"! /core/settings.php:77";
 		return null;
 	}else{
 		global $modules;

@@ -73,7 +73,8 @@ class datasheet_data{
 		$this->value=$value;
 	}
 	function toHTML(){
-		return "\n\t<li><div class=\"data_label $this->idname\">$this->label</div><div class=\"data_value\">$this->value</div></li>";
+		$divclass=(setting_get(null, 'DEPRECATED_DSDLCLASS')?" $this->idname":"");
+		return "\n\t<li class=\"$this->idname\"><div class=\"data_label$divclass\">$this->label</div><div class=\"data_value\">$this->value</div></li>";
 	}
 }
 
