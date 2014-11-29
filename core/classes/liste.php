@@ -39,11 +39,11 @@ class liste{
 	function __toString(){
 		$html="";
 		if($this->prev_url){
-			$html.="<a class=\"prev\" href=\"".$this->prev_url."\">".$this->prev_html."</a>";
+			$html.="<a class=\"prev\" href=\"".$this->prev_url."\" title=\"".$this->prev_html."\">".$this->prev_html."</a>";
 		}
 		$html.="<i class=\"name\">".$this->name."</i>";
 		if($this->next_url){
-			$html.="<a class=\"next\" href=\"".$this->next_url."\">".$this->next_html."</a>";
+			$html.="<a class=\"next\" href=\"".$this->next_url."\" title=\"".$this->next_html."\">".$this->next_html."</a>";
 		}
 		$html="<div class=\"liste\">$html</div>";
 		return $html;
