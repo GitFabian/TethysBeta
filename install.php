@@ -215,6 +215,7 @@ ENDE;
 	$ROOT_HDD_CORE3=preg_replace("/\\\\/", "/", $ROOT_HDD_CORE);
 	$ROOT_HDD_MODULES3=preg_replace("/\\\\/", "/", $ROOT_HDD_MODULES);
 	$ROOT_HDD_SKINS3=preg_replace("/\\\\/", "/", $ROOT_HDD_SKINS);
+	$ROOT_HDD_DATA3=preg_replace("/\\\\/", "/", $ROOT_HDD_DATA);
 	
 	$aliasse=<<<END_ALIAS
 Alias $ROOT_HTTP_CORE "$ROOT_HDD_CORE3"
@@ -254,6 +255,15 @@ END_ALIAS_MOD;
 		$aliasse=$alias_skin."\n\n".$aliasse;
 	}
 
+	$alias_data=<<<END_ALIAS_DATA
+Alias $ROOT_HTTP_DATA "$ROOT_HDD_DATA3"
+<Directory "$ROOT_HDD_DATA3">
+	Allow from all
+	AllowOverride All
+</Directory>
+END_ALIAS_DATA;
+	$aliasse.="\n\n".$alias_data;
+	
 	$rewrite="";
 	if ($CFG_EXTENSION!='php'){
 		$rewrite=<<<END_REWRITE
