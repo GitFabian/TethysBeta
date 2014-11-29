@@ -603,3 +603,31 @@ div.form_buttons{
 div.form_buttons input{
 	margin-right:10px;
 }
+
+/*==================================================================
+    LISTEN
+==================================================================*/
+div.liste{
+	text-align:center;
+}
+div.liste i.name{
+	padding:0 10px;
+}
+div.liste a.prev:after{
+	content:" <";
+}
+div.liste a.next:before{
+	content:"> ";
+}
+div.liste a.prev{
+	display:inline-block;
+	text-align:right;
+	width:400px;
+	vertical-align:top;
+}
+div.liste a.next{
+	display:inline-block;
+	text-align:left;
+	width:400px;
+	vertical-align:top;
+}

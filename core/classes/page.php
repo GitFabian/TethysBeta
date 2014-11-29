@@ -91,6 +91,12 @@ class page{
 			$messages="";
 		}
 		
+		$liste="";
+		if(isset($_REQUEST['tethys_liste'])){
+			include_once ROOT_HDD_CORE.'/core/classes/liste.php';
+			$liste=liste::load($_REQUEST['tethys_liste']);
+		}
+		
 		echo <<<ENDE
 <!DOCTYPE HTML>
 <html>
@@ -104,6 +110,7 @@ class page{
 <body id="$this->page_id"$onload>
 	<div class="outerbody">
 		$menu
+		$liste
 		$views
 		<div class="innerbody$checkContent">
 			$messages
