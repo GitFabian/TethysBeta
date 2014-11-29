@@ -37,6 +37,7 @@ class liste{
 	}
 	
 	function __toString(){
+		if (!$this->prev_url && !$this->next_url) return "";
 		$html="";
 		if($this->prev_url){
 			$html.="<a class=\"prev\" href=\"".$this->prev_url."\" title=\"".$this->prev_html."\">".$this->prev_html."</a>";
