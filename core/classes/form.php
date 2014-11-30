@@ -219,6 +219,15 @@ class form_field{
 			$id=($this->id?:get_next_id());
 			datepicker($id);
 			$input="<input$onChange id=\"$id\" type=\"text\" name=\"".$this->name."\" value=\"$thisvalue\" readonly />";
+		}else if ($this->type=="RADIO"){
+			if($this->options){
+				$input.="<ul class=\"radio\">";
+				foreach ($this->options as $key=>$value) {
+					$selected=($this->value==$key?" checked":"");
+					$input.="\n<li><input type=\"radio\"$selected name=\"".$this->name."\" value=\"$key\" /><span class=\"label radio\">$value</span></li>";
+				}
+				$input.="</ul>";
+			}
 		}else{
 			$input="<input$id$onChange type=\"text\" name=\"".$this->name."\" value=\"$thisvalue\" />";
 		}

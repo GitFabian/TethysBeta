@@ -17,6 +17,10 @@ $form->add_fields(null, array(
 ));
 $form->add_fields("Hum wiggle zip", array(
 		new form_field("noodle","Noodle",request_value("noodle","1"),"CHECKBOX"),
+		new form_field("radio","Radio",request_value("radio"),"RADIO",null,array(
+				"one"=>"One",
+				"two"=>"Two",
+		)),
 		new form_field("zippity","Zippity",request_value("zippity","ts"),"SELECT",null,array(
 				"ms"=>"Mr. Slave",
 				"ts"=>"Tony Soprano",

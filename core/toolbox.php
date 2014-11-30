@@ -560,4 +560,18 @@ function query_from_array($array){
 	return "?".implode("&", $pairs);
 }
 
+function parse_url_modul_and_file($url){
+	$dir=pathinfo($url,PATHINFO_DIRNAME);
+	$modul=substr($dir, strrpos($dir, "/")+1);
+	$file=pathinfo($url,PATHINFO_FILENAME);
+	return $modul."/".$file;
+}
+
+function parse_url_query($url,$key='id'){
+	$url=parse_url($url);
+	$query=$url['query'];
+	parse_str($query,$pars);
+	return $pars[$key];
+}
+
 ?>
