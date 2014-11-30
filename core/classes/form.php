@@ -266,7 +266,7 @@ class form_radio_option_ajax extends form_radio_option{
 		$this->placeholder=$placeholder;
 	}
 	function toHTML($name,$selected=null){
-		return "\n<li class=\"ajax\" id=\"$this->id\">$this->placeholder</li>";
+		return "\n<div id=\"$this->id\"><li class=\"ajax\">$this->placeholder</li></div>";
 	}
 }
 
