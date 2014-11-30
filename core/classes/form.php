@@ -47,7 +47,7 @@ class form{
 	
 	function set_blind(){
 		$this->tag="div";
-		$this->class="form";
+		$this->class="form ".($this->class);
 		$this->submit_bool=false;
 	}
 	
