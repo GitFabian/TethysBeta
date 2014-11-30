@@ -576,7 +576,6 @@ function parse_url_query($url,$key='id'){
 
 function html_to_plain($html){
 	$plain=preg_replace("/\\<.*?\\>/s", "", $html);
-	$plain=html_entity_decode($plain);
 	$plain=trim($plain);
 	return $plain;
 }
