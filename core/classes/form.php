@@ -228,6 +228,14 @@ class form_field{
 				}
 				$input.="</ul>";
 			}
+		}else if ($this->type=="RADIO+"){
+			if($this->options){
+				$input.="<ul class=\"radio\">";
+				foreach ($this->options as $o) {
+					$input.=$o->toHTML($this->name,$this->value);
+				}
+				$input.="</ul>";
+			}
 		}else{
 			$input="<input$id$onChange type=\"text\" name=\"".$this->name."\" value=\"$thisvalue\" />";
 		}
@@ -235,6 +243,31 @@ class form_field{
 		return "<div class=\"form_field $this->outer_class\"$outer_id><label for=\"".$this->name."\"$title>".$this->label."</label>$input</div>";
 	}
 	
+}
+
+class form_radio_option{
+	var $key;
+	var $value;
+	function __construct($key,$value){
+		$this->key=$key;
+		$this->value=$value;
+	}
+	function toHTML($name,$selected=null){
+		$selected=($this->key==$selected?" checked":"");
+		return "\n<li><input type=\"radio\"$selected name=\"$name\" value=\"$this->key\" /><span class=\"label radio\">$this->value</span></li>";
+	}
+}
+
+class form_radio_option_ajax extends form_radio_option{
+	var $id;
+	var $placeholder;
+	function __construct($id, $placeholder){
+		$this->id=$id;
+		$this->placeholder=$placeholder;
+	}
+	function toHTML($name,$selected=null){
+		return "\n<li class=\"ajax\" id=\"$this->id\">$this->placeholder</li>";
+	}
 }
 
 ?>
