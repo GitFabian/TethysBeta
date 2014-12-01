@@ -8,7 +8,7 @@ function hauptmenue($page_id){
 	return $menu->toHTML();
 }
 
-// function get_user_setcard($uid=USER_ID){
+// function get_user_setcard($uid=USER_ID,$query){
 // 	$setcard=new set_card("(TODO)");
 // 	return $setcard;
 // }

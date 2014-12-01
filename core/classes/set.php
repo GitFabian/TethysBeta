@@ -29,7 +29,7 @@ class set{
 		if ($modul_id=='core'){include_once ROOT_HDD_CORE.'/core/classes/user.php';}
 		foreach ($query as $row) {
 			if ($modul_id=='core'){
-				$card=get_user_setcard_CORE($row['id']);
+				$card=get_user_setcard_CORE($row['id'],$row);
 			}else{
 				$card=$modules[$modul_id]->get_set_card($name, $row);
 			}
