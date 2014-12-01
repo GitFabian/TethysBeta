@@ -41,7 +41,7 @@ function edit_default_form($form,$query,$db,$idkey){
 			}
 			if ($type=='date'){
 				$typ='DATUM';
-				$v=format_datum_to_tmj($v);
+				$v=($v?format_datum_to_tmj($v):"");
 			}
 			
 			/*
