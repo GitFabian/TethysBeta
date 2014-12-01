@@ -71,6 +71,11 @@ class modul_$id extends module{
 		return false;
 	}
 	
+	function format_default_for_column(\$table,\$column){
+		#if(\$table=='xxxxxxxxxx')return\"[xxxxxxxxxxx] (#[id])\";
+		return \"[\$column]\";
+	}
+	
 }
 
 function url_$id(\$page){
