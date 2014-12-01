@@ -153,6 +153,12 @@ table td{
 table th{
 	vertical-align:bottom;
 }
+table tr:hover{
+	background:#eee;
+}
+table th.col_highlight{
+	color:red;
+}
 div.tbl_new{
 	margin-top:5px;
 }
