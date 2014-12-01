@@ -21,6 +21,7 @@ $query=dbio_SELECT("core_users",null,
 		,$joins);
 $table=new table($query);
 $table->set_options(edit_rights_core("core_users","NEW"), true, true, "core_users");
+$table->export_csv_id="core_users";
 $page->say($table);
 
 $page->focus="input[type=search]";
