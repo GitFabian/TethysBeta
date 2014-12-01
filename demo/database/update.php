@@ -183,9 +183,11 @@ if ($version<17){dbio_query("CREATE TABLE IF NOT EXISTS `core_listen` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;");}
 
+if ($version<18){dbio_query("ALTER TABLE `core_users` DROP `durchwahl`, DROP `handy`, DROP `raum`;");}
+
 #if ($version<){dbio_query("");}
 
-$current_version=17;
+$current_version=18;
 //=================================================================================================
 dbio_query("UPDATE `core_meta_dbversion` SET `version` = '$current_version' WHERE `modul_uc` = 'CORE';");
 //=================================================================================================
