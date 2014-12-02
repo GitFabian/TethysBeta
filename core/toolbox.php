@@ -411,19 +411,47 @@ function format_datum_to_sql($string=null){
 	return date("Y-m-d",($string===null?time():strtotime($string)));
 }
 
-function time_delta($time){
+function time_delta($time,$futur='noch'){
 	$delta=time()-$time;
 	if ($delta>0){
 		$vz="vor";
 	}else{
 		$delta=-$delta;
-		$vz="noch";
+		$vz=$futur;
 	}
+	if ($delta>47304000) return "$vz ".(round($delta/31536000))." ".($vz=='noch'?"Jahre":"Jahren");
+	if ($delta>3952800) return "$vz ".(round($delta/2635200))." ".($vz=='noch'?"Monate":"Monaten");
 	if ($delta>907200) return "$vz ".(round($delta/604800))." Wochen";
 	if ($delta>129600) return "$vz ".(round($delta/86400))." ".($vz=='noch'?"Tage":"Tagen");
 	if ($delta>5400) return "$vz ".(round($delta/3600))." Stunden";
 	if ($delta>90) return "$vz ".(round($delta/60))." Minuten";
 	return "$vz $delta Sekunden";
+}
+
+function time_delta_days($then,$now=null){
+	return floor((($now?strtotime($now):time())-strtotime($then))/86400);
+}
+
+function date_sql($time=null){
+	if($time) return date("Y-m-d",$time);
+	return date("Y-m-d");
+}
+
+function html_progress($fortschritt_normiert){
+	$percent=floor($fortschritt_normiert*100)."%";
+	$percent="<div class=\"tprogress\"><div class=\"tprogressbar\" style=\"width:$percent;\"><span class=\"tp_number\">$percent</span></div></div>";
+	return $percent;
+}
+
+function format_days_delta($delta){
+	if($delta<0){
+		$delta=-$delta;
+		$vz="vor";
+	}else{
+		$vz="in";
+	}
+	if ($delta>10) return "$vz ".round($delta/7)." Wochen";
+	return "$vz $delta Tagen";
 }
 
 $sonderzeichen_regex=array(

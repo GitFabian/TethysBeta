@@ -78,3 +78,14 @@ div.iframe_fullscreen iframe{
 	height:100%;
 	vertical-align:top;
 }
+
+/*==================================================================
+    PROGRESS BAR
+==================================================================*/
+div.tprogress{
+	border:1px solid black;
+}
+div.tprogressbar{
+	border-right:1px solid black;
+	display:inline-block;
+}
