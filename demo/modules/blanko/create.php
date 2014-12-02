@@ -76,6 +76,26 @@ class modul_$id extends module{
 		return \"[\$column]\";
 	}
 	
+	function global_settings(\$form){
+		return false;
+		if (\$form){
+			\$form->add_fields(\"\",array(
+				new_form_field('$id', \"DEMOFEATURE1\", \"Abracadabra Bananarama\", 'CHECKBOX'),
+			));
+		}
+		return true;
+	}
+	
+	function get_default_setting(\$key){
+		if (USER_ADMIN) echo(\"Nicht implementiert: Funktion \\\"\".__FUNCTION__.\"\\\" in Modul \\\"\".\$this->modul_name.\"\\\"!\");
+		//Global:
+		#if (\$key=='DEMOFEATURE1') return \"1\";
+		//User Specific:
+		#if (\$key=='demosetting') return \"Duh bleepity gobble nizzle!\";
+		if (USER_ADMIN) echo(\"Kein Default-Value für \\\"\$key\\\"! /modules/$id/tethys.php:95\");
+		return null;
+	}
+	
 }
 
 function url_$id(\$page){
