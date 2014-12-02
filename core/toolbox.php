@@ -443,6 +443,18 @@ function html_progress($fortschritt_normiert){
 	return $percent;
 }
 
+function noch_n_werktage($datestring){
+	include_once ROOT_HDD_CORE.'/core/toolbox_dates.php';
+	$epd=-time_delta_days($datestring);
+	if($epd>0&&$epd<18){
+		$wt=werktage(date_sql(), $datestring)-1;
+		$bisdahin="in $wt ".($wt==1?"Werktag":"Werktagen");
+	}else{
+		$bisdahin=format_days_delta($epd);
+	}
+	return "$bisdahin (".format_Wochentag_tm_j($datestring).")";
+}
+
 function format_days_delta($delta){
 	if($delta<0){
 		$delta=-$delta;
