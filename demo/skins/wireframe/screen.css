@@ -153,7 +153,7 @@ table td{
 table th{
 	vertical-align:bottom;
 }
-table tr:hover{
+table tbody tr:hover{
 	background:#eee;
 }
 table th.col_highlight{
