@@ -6,7 +6,7 @@
 /shared/
 /DATA/
 /config_*.php
-/core/admin/import.php
+/core/admin/import*
 /FTP/
 /*.cmd
 /.htaccess
