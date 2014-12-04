@@ -438,6 +438,8 @@ function date_sql($time=null){
 }
 
 function html_progress($fortschritt_normiert){
+	if($fortschritt_normiert<0)$fortschritt_normiert=0;
+	else if($fortschritt_normiert>1)$fortschritt_normiert=1;
 	$percent=floor($fortschritt_normiert*100)."%";
 	$percent="<div class=\"tprogress\"><div class=\"tprogressbar\" style=\"width:$percent;\"><span class=\"tp_number\">$percent</span></div></div>";
 	return $percent;
