@@ -448,7 +448,7 @@ function html_progress($fortschritt_normiert){
 function noch_n_werktage($datestring){
 	include_once ROOT_HDD_CORE.'/core/toolbox_dates.php';
 	$epd=-time_delta_days($datestring);
-	if($epd>0&&$epd<18){
+	if($epd>1&&$epd<18){
 		$wt=werktage(date_sql(), $datestring)-1;
 		$bisdahin="in $wt ".($wt==1?"Werktag":"Werktagen");
 	}else{
@@ -459,9 +459,12 @@ function noch_n_werktage($datestring){
 
 function format_days_delta($delta){
 	if($delta<0){
+		if($delta==-1) return "gestern";
 		$delta=-$delta;
 		$vz="vor";
 	}else{
+		if($delta==0) return "heute";
+		if($delta==1) return "morgen";
 		$vz="in";
 	}
 	if ($delta>10) return "$vz ".round($delta/7)." Wochen";
