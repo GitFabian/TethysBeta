@@ -133,17 +133,8 @@ if ($id=="NEW"){
 }
 
 /*
- * Ausgabe
+ * Formular
  */
-
-$datensatz=request_value("datensatz");
-if (!$datensatz) $datensatz="Datensatz";
-
-if ($id=="NEW"){
-	$page->say(html_header1("$datensatz erstellen"));
-}else{
-	$page->say(html_header1("$datensatz bearbeiten"));
-}
 
 $referer=request_value("return",(isset($_SERVER['HTTP_REFERER'])?$_SERVER['HTTP_REFERER']:null));
 
@@ -159,6 +150,18 @@ edit_add_fields($form,$modul,$db,$query,$id,$idkey);
 
 $view_url=request_value('view_url');
 if ($view_url&&$id!="NEW") $form->buttons.=html_button("Details",null,"location.href='$view_url';");
+
+/*
+ * Ausgabe
+ */
+
+$datensatz=request_value("datensatz");
+if (!$datensatz) $datensatz="Datensatz";
+if ($id=="NEW"){
+	$page->say(html_header1("$datensatz erstellen"));
+}else{
+	$page->say(html_header1("$datensatz bearbeiten"));
+}
 
 $page->say($form);
 $page->focus="label:first-child + *";
