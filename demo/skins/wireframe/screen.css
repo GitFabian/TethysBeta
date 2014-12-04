@@ -35,11 +35,16 @@ input[type=submit],
 input[type=button],
 a.button{
 	border:1px solid black;
-	background:none;
+	background:white;
 	border-radius:3px;
 	padding:0px 5px;
 	text-decoration:none;
 	cursor:pointer;
+}
+input[type=submit]:hover,
+input[type=button]:hover,
+a.button:hover{
+	background:#eee;
 }
 a[target=_blank]{
 	background-image:url('external-link.png');
