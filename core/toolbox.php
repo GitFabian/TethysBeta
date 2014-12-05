@@ -242,7 +242,7 @@ function ajax_to_alertify($cmd,$modul=null,$escape=false){
 	return ajax($cmd,$modul,"alertify_ajax_response(response);",$escape);
 }
 
-function ajax_to_id($cmd,$id,$modul=null,$escape=false){
+function ajax_to_id($cmd,$id,$modul=null,$escape=false,$function=null){
 	if ($modul==null){
 		$page=ROOT_HTTP_CORE."/core/ajax.".CFG_EXTENSION;
 	}else{
@@ -253,11 +253,15 @@ function ajax_to_id($cmd,$id,$modul=null,$escape=false){
 		}
 	}
 	$quot=($escape?"&quot;":"\"");
-	return "tethys_ajax_to_id($quot$page?cmd=$cmd$quot,$quot$id$quot);";
+	return "tethys_ajax_to_id2($quot$page?cmd=$cmd$quot,$quot$id$quot,$quot$function$quot);";
 }
 
 function js_getSelectedValue($id){
 	return "document.getElementById('$id').options[document.getElementById('$id').selectedIndex].value";
+}
+
+function js_document_ready($function){
+	return "$( document ).ready(function() { $function });";
 }
 
 function html_select_options($data,$selected=null){

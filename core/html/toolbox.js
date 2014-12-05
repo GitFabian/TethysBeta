@@ -49,6 +49,20 @@ function tethys_ajax_to_id(query,id){
 	xmlhttp.send();
 }
 
+function tethys_ajax_to_id2(query,id,Funktion){
+	var xmlhttp=new XMLHttpRequest();
+	xmlhttp.open("GET",query,true);
+	xmlhttp.onreadystatechange=function(){
+		if (xmlhttp.readyState==4 && xmlhttp.status==200){
+			document.getElementById(id).innerHTML=xmlhttp.responseText;
+			if (Funktion){
+				new Function("response",Funktion)(xmlhttp.responseText);
+			}
+		}
+	};
+	xmlhttp.send();
+}
+
 function alertify_ajax_response(response){
 	if (response.substr(0,1)=='!') alertify.error(response.substr(1));
 	else alertify.success(response);
@@ -67,3 +81,11 @@ function js_getSelectedValue(id){
 	return document.getElementById(id).options[document.getElementById(id).selectedIndex].value
 }
 
+function datatable_init(selector,ROOT_HTTP_CORE){
+	$(selector).dataTable({
+		'bLengthChange':false,
+		'aaSorting':[],
+//		'bPaginate':false,
+		language:{url:ROOT_HTTP_CORE+'/core/html/jquery.dataTables.German.json'},
+	});
+}
