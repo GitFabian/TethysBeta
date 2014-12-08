@@ -29,9 +29,13 @@ function edit_default_form($form,$query,$db,$idkey){
 			 */
 			$typ='TEXT';
 			$type=$col_info[$key]['Type'];
-			if ($type=='text') $typ='TEXTAREA';
-			if ($type=='tinyint(1)') $typ='CHECKBOX';
-			if (substr($type,0,6)=="enum('"){
+			if ($type=='text'){
+				$typ='TEXTAREA';
+			}
+			else if ($type=='tinyint(1)'){
+				$typ='CHECKBOX';
+			}
+			else if (substr($type,0,6)=="enum('"){
 				$typ='SELECT';
 				$options=array();
 				foreach (explode(",", substr($type,5,strlen($type)-6)) as $option) {
@@ -39,7 +43,7 @@ function edit_default_form($form,$query,$db,$idkey){
 					$options[$o]=$o;
 				}
 			}
-			if ($type=='date'){
+			else if ($type=='date'){
 				$typ='DATUM';
 				$v=($v?format_datum_to_tmj($v):"");
 			}
@@ -54,7 +58,14 @@ function edit_default_form($form,$query,$db,$idkey){
 				$options=dbio_SELECT_asList($ref_tbl, format_default_for_column($ref_tbl,$ref_col), null, $ref_col);
 			}
 			
-			$form->add_field(new form_field($key,null,$v,$typ,null,$options));
+			$form->add_field($ff=new form_field($key,null,$v,$typ,null,$options));
+			
+			//Maxlength
+			if (substr($type,0,8)=="varchar("){
+				$len=substr($type,8,strlen($type)-9);
+				$ff->maxlength=$len;
+			}
+				
 		}
 	}
 	return true;

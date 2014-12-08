@@ -156,7 +156,8 @@ class form_field{
 	var $title;
 	var $options;
 	var $id;
-
+	
+	var $maxlength=0;
 	var $onChange=null;
 	var $outer_id=null;
 	var $outer_class="";
@@ -195,6 +196,7 @@ class form_field{
 		$onChange=($this->onChange?" onChange=\"$this->onChange\"":"");
 		$id=($this->id?" id=\"$this->id\"":"");
 		$outer_id=($this->outer_id?" id=\"$this->outer_id\"":"");
+		$maxlength=($this->maxlength?" maxlength=\"".$this->maxlength."\"":"");
 		if ($this->type=="CHECKBOX"){
 			$input=html_checkbox($this->name,$thisvalue);
 		}else if ($this->type=="SELECT"||$this->type=="SELECT_MULTIPLE"){
@@ -237,7 +239,7 @@ class form_field{
 				$input.="</ul>";
 			}
 		}else{
-			$input="<input$id$onChange type=\"text\" name=\"".$this->name."\" value=\"$thisvalue\" />";
+			$input="<input$id$onChange$maxlength type=\"text\" name=\"".$this->name."\" value=\"$thisvalue\" />";
 		}
 		$title=($this->title?" title=\"".encode_html($this->title)."\"":"");
 		return "<div class=\"form_field $this->outer_class\"$outer_id><label for=\"".$this->name."\"$title>".$this->label."</label>$input</div>";

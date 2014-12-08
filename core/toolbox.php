@@ -346,6 +346,14 @@ function html_button2($value,$onClick=null){
 			"onclick"=>$onClick,
 	));
 }
+
+function html_url($link,$text=null,$external=false){
+	if(!$text)$text=$link;
+	$protocol=parse_url($link,PHP_URL_SCHEME);
+	if(!$protocol)$link="http://".$link;
+	return html_a($text, $link, null, $external);
+}
+
 function html_a($html,$href,$class=null,$external=false,$onclick=null){
 	$pars=array(
 			"href"=>$href,
