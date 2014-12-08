@@ -380,6 +380,13 @@ function string_random($length,$key){
 	return $string;
 }
 
+function string_kuerzen($string,$maxlen){
+	if($string&&strlen($string)>$maxlen){
+		return substr($string, 0, $maxlen-3)."...";
+	}
+	return $string;
+}
+
 $wochentage=array("So","Mo","Di","Mi","Do","Fr","Sa");
 
 /**
