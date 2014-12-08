@@ -1,25 +1,7 @@
 <?php
 
 function dbio_SELECT($db,$where=null,$fields="*",$leftjoins=null,$order=null,$orderAsc=true,$limit="999",$link_identifier=null){
-
-	$anfrage="SELECT $fields FROM `$db`";
-
-	if ($leftjoins){
-		foreach ($leftjoins as $join) {
-			if ($join->as){
-				$anfrage.=" LEFT JOIN `".$join->table."` AS ".$join->as." ON `$db`.".$join->field."=".$join->as.".".$join->id;
-			}else{
-				$anfrage.=" LEFT JOIN `".$join->table.                 "` ON `$db`.".$join->field."=".              $join->id;
-			}
-		}
-	}
-
-	if ($where) $anfrage.=" WHERE ".$where;
-
-	if ($order){ $anfrage.=" ORDER BY `$order` ".($orderAsc?"ASC":"DESC"); }
-
-	if ($limit){ $anfrage.=" LIMIT $limit"; }
-
+	$anfrage=query::SELECT($db,$where,$fields,$leftjoins,$order,$orderAsc,$limit);
 	return dbio_query_to_array($anfrage,$link_identifier);
 }
 
@@ -198,6 +180,46 @@ function dbio_query($anfrage,$link_identifier=null){
 		$query = mysql_query( $anfrage                  ) or die ( error_die(mysql_error()."<br><code>".$anfrage."</code>") );
 	}
 	return $query;
+}
+
+class query{
+	
+	var $query;
+	var $link_identifier;
+	var $headers;
+	
+	function __construct($query,$headers=null,$link_identifier=null){
+		$this->query=$query;
+		$this->link_identifier=$link_identifier;
+		$this->headers=$headers;
+	}
+	
+	function __toString(){
+		return $this->query;
+	}
+	
+	static function SELECT($db,$where=null,$fields="*",$leftjoins=null,$order=null,$orderAsc=true,$limit="999"){
+		$anfrage="SELECT $fields FROM `$db`";
+	
+		if ($leftjoins){
+			foreach ($leftjoins as $join) {
+				if ($join->as){
+					$anfrage.=" LEFT JOIN `".$join->table."` AS ".$join->as." ON `$db`.".$join->field."=".$join->as.".".$join->id;
+				}else{
+					$anfrage.=" LEFT JOIN `".$join->table.                 "` ON `$db`.".$join->field."=".              $join->id;
+				}
+			}
+		}
+	
+		if ($where) $anfrage.=" WHERE ".$where;
+	
+		if ($order){ $anfrage.=" ORDER BY `$order` ".($orderAsc?"ASC":"DESC"); }
+	
+		if ($limit){ $anfrage.=" LIMIT $limit"; }
+	
+		return $anfrage;
+	}
+	
 }
 
 class dbio_leftjoin{
