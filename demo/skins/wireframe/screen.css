@@ -85,6 +85,9 @@ div.mainmenu > ul > li{
 	border:1px solid black;
 	padding:5px;
 }
+div.mainmenu li.highlight.tiefe1 a{
+	font-weight:bold;
+}
 
 /*==================================================================
     VIEWS-MENÜ
@@ -96,6 +99,9 @@ ul.views_menu{
 ul.views_menu li{
 	display:inline-block;
 	margin-right:5px;
+}
+ul.views_menu li.view_highlight a{
+	font-weight:bold;
 }
 
 /*==================================================================

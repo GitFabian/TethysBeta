@@ -95,13 +95,16 @@ class set_card_data{
 	var $id;
 	var $title;
 	var $value;
-	function __construct($id,$title,$value){
+	var $edit;
+	function __construct($id,$title,$value,$edit=false){
 		$this->id=$id;
 		$this->title=$title;
 		$this->value=$value;
+		$this->edit=$edit;
 	}
 	function toHTML(){
-		return "\n\t\t\t<li class=\"set_card_data\"><div class=\"title\">$this->title</div><div class=\"value val_$this->id\">$this->value</div></li>";
+		$edit=($this->edit?" a_edit":"");
+		return "\n\t\t\t<li class=\"set_card_data\"><div class=\"title\">$this->title</div><div class=\"value val_$this->id$edit\">$this->value</div></li>";
 	}
 }
 
