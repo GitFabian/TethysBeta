@@ -114,7 +114,7 @@ function dbio_UPDATE($db,$where,$data){
 
 	$sets="";
 	foreach ($data as $key => $value) {
-		if ($value===null) $sets.=", `".$key."`=NULL"; else
+		if ($value===null||$value==='null') $sets.=", `".$key."`=NULL"; else
 			$sets.=", `".$key."`='".sqlEscape($value)."'";
 	}
 	$anfrage.=substr($sets,2);
