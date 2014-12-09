@@ -644,4 +644,11 @@ function html_to_plain($html){
 	return $plain;
 }
 
+function array_unshift_assoc($array,$key,$value){
+	$array=array_reverse($array,true);
+	$array[$key]=$value;
+	$array=array_reverse($array,true);
+	return $array;
+}
+
 ?>
