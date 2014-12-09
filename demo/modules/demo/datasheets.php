@@ -1,6 +1,6 @@
 <?php
 if(!isset($page)){echo"Seite existiert nicht.";exit;}
-$page->init('demo_datasheets','Datenblätter');
+$page->init('demo_bsp','Datenblätter');
 #include_once ROOT_HDD_CORE.'/core/classes/form.php';
 #include_chosen();
 include_once ROOT_HDD_CORE.'/core/classes/datasheet.php';

@@ -1,6 +1,6 @@
 <?php
 if(!isset($page)){echo"Seite existiert nicht.";exit;}
-$page->init('demo_formular','Formulare');
+$page->init('demo_bsp','Formulare');
 include_once ROOT_HDD_CORE.'/core/classes/form.php';
 include_chosen();
 

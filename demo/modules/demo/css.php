@@ -1,6 +1,6 @@
 <?php
 include_once '../../config_start.php';
-$page->init('demo_css','CSS');
+$page->init('demo_bsp','CSS');
 include_jquery();
 include_once ROOT_HDD_CORE.'/core/alertify.php';
 include_once ROOT_HDD_CORE.'/core/classes/set.php';
