@@ -55,7 +55,7 @@ $page->say("\n".html_button("Error","",alertify_error("Error")));
 
 $page->say(html_header1("Set-Cards"));
 $set=new set("");
-$set->add_card($card1=new set_card("Karte 1","Dizzle flong ho whack da razz",ROOT_HTTP_CORE."/demo/DATA/core_users/person1.png"));
+$set->add_card($card1=new set_card("Karte 1","Dizzle flong ho whack da razz",null));
 $card1->add_data(new set_card_data("name", "Name", "Chef"));
 $card1->add_data(new set_card_data("hobbies", "Hobbys", "Quibblenip-bloobing, Zingity"));
 $card1->buttons[]=html_a_button("Homepage", "http://qnote.de",null,null,true);
