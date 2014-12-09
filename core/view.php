@@ -1,5 +1,6 @@
 <?php
 include_once '../config_start.php';
+if(!USER_ADMIN)page_send_exit("Keine Berechtigung!");
 $page->init("core_view", "Datensatz Details");
 include_once ROOT_HDD_CORE.'/core/edit_.php';
 include_once ROOT_HDD_CORE.'/core/classes/form.php';
