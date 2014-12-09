@@ -4,7 +4,7 @@
 include_once ROOT_HDD_CORE.'/core/classes/user.php';
  */
 
-function get_user_setcard_CORE($uid=USER_ID,$query){
+function get_user_setcard_CORE($uid=USER_ID,$query=null){
 	include_once ROOT_HDD_CORE.'/core/classes/set.php';
 	if (function_exists('get_user_setcard')) return get_user_setcard($uid,$query);
 	
