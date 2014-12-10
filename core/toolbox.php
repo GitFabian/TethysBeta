@@ -133,7 +133,24 @@ function escape_html($text){
 	return htmlentities(utf8_decode($text));
 }
 function escape_inline_js($text){
-	return preg_replace("/'/", "\\'", $text);
+	$text=escape_html($text);
+	$text=preg_replace("/'/", "\\'", $text);
+	$text=preg_replace("/[\\n\\r]/", " ", $text);
+	return $text;
+}
+
+function string_kuerzen2($string, $maxlen, $escape=true, $teaser="[mehr...]"){
+	if (strlen($string)>$maxlen){
+		global $global_id_counter;
+		$text=substr($string,0,$maxlen-1-strlen($teaser));
+		return "<div id=\"n".($global_id_counter)."\">"
+				.($escape?escape_html($text):$text)
+				." <a onclick=\""
+						."document.getElementById('n".($global_id_counter++)."').innerHTML='".escape_inline_js(($escape?escape_html($string):$string))."';"
+					."\">$teaser</a>"
+			."</div>";
+	}
+	return ($escape?escape_html($string):$string);
 }
 
 function url_mod_pg($modul,$page){
