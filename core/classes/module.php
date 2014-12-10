@@ -67,8 +67,8 @@ class module{
 	}
 }
 
-function new_form_field($modul,$key,$label,$type){
-	return new form_field($key,$label,setting_get($modul,$key),$type,"setting_get('$modul','$key')");
+function new_form_field($modul,$key,$label,$type,$options=null){
+	return new form_field($key,$label,setting_get($modul,$key),$type,"setting_get('$modul','$key')",$options);
 }
 
 function module_read(){
