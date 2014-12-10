@@ -104,7 +104,7 @@ class set_card_data{
 	}
 	function toHTML(){
 		$edit=($this->edit?" a_edit":"");
-		return "\n\t\t\t<li class=\"set_card_data\"><div class=\"title\">$this->title</div><div class=\"value val_$this->id$edit\">$this->value</div></li>";
+		return "\n\t\t\t<li class=\"set_card_data $this->id\"><div class=\"title\">$this->title</div><div class=\"value val_$this->id$edit\">$this->value</div></li>";
 	}
 }
 
