@@ -89,3 +89,28 @@ function datatable_init(selector,ROOT_HTTP_CORE){
 		language:{url:ROOT_HTTP_CORE+'/core/html/jquery.dataTables.German.json'},
 	});
 }
+
+function time_delta_start(delay){
+	setInterval(function(){{
+		$('.td_ajax').each(function(){
+			$(this).html(time_delta($(this).data('timestamp')));
+		});
+	}},delay*1000);
+}
+function time_delta(timestamp){
+	now=Math.round(Date.now()/1000);
+	delta=now-timestamp;
+	if (delta>0){
+		vz="vor";
+	}else{
+		delta=-delta;
+		vz='noch';
+	}
+	if (delta>47304000) return vz+" "+(Math.round(delta/31536000))+" "+(vz=='noch'?"Jahre":"Jahren");
+	if (delta>3952800) return vz+" "+(Math.round(delta/2635200))+" "+(vz=='noch'?"Monate":"Monaten");
+	if (delta>907200) return vz+" "+(Math.round(delta/604800))+" Wochen";
+	if (delta>129600) return vz+" "+(Math.round(delta/86400))+" "+(vz=='noch'?"Tage":"Tagen");
+	if (delta>5400) return vz+" "+(Math.round(delta/3600))+" Stunden";
+	if (delta>90) return vz+" "+(Math.round(delta/60))+" Minuten";
+	return vz+" "+delta+" Sekunden";
+}

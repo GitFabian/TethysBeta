@@ -651,4 +651,16 @@ function array_unshift_assoc($array,$key,$value){
 	return $array;
 }
 
+/**
+ * <code>
+$then=time();
+"<span class=\"td_ajax\" data-timestamp=\"".$then."\">".time_delta($then)."</span>"
+ * </code>
+ */
+function include_time_delta($seconds=1){
+	global $page;
+	include_jquery();
+	$page->onload_JS.="time_delta_start($seconds);";
+}
+
 ?>
