@@ -3,10 +3,6 @@
 /*==================================================================
     DYNAMIC DEVELOPMENT
 ==================================================================*/
-div.invisible,
-span.invisible{
-	display:none;
-}
 /*CSS Developer:
 .invisible{background:url('img/devel_bg.png');}
 div.invisible{display:block;}
@@ -41,6 +37,14 @@ span.strike{
 
 pre{
 	white-space:pre-wrap;
+}
+
+/*==================================================================
+    VISIBILITY,TRANSITION
+==================================================================*/
+div.invisible,
+span.invisible{
+	display:none;
 }
 
 /*==================================================================

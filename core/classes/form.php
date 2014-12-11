@@ -200,7 +200,7 @@ class form_field{
 		$outer_class=$this->outer_class;
 		if ($this->type=="CHECKBOX"){
 			$outer_class.=" checkbox";
-			$input=html_checkbox($this->name,$thisvalue,null,$this->id);
+			$input=html_checkbox($this->name,$thisvalue,null,$this->id,$this->onChange);
 		}else if ($this->type=="SELECT"||$this->type=="SELECT_MULTIPLE"){
 			$options="";
 			if($this->options)foreach ($this->options as $key=>$value) {

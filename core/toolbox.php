@@ -233,12 +233,13 @@ function datepicker($id){
 	$page->onload_JS.="\$('#$id').datepicker();";
 }
 
-function html_checkbox($name=null,$checked=false,$js=null,$id=null){
+function html_checkbox($name=null,$checked=false,$js=null,$id=null,$onChange=null){
 	$name=($name?" name=\"$name\"":"");
 	$checked=($checked?" checked":"");
 	$js=($js?" onChange=\"$js\"":"");
 	$id=($id?" id=\"$id\"":"");
-	return "<input$id type=\"checkbox\"$name$checked$js /><div class=\"checkbox_ghost\"></div>";
+	$onChange=($onChange?" onChange=\"$onChange\"":"");
+	return "<input$id$onChange type=\"checkbox\"$name$checked$js /><div class=\"checkbox_ghost\"></div>";
 }
 
 function ajax($cmd,$modul=null,$function=null,$escape=false){
