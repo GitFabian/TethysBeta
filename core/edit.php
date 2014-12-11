@@ -37,9 +37,6 @@ if (request_command("do")){
 		page_send_exit("Keine Berechtigung! ($db,#$id)");
 	}
 		
-	$return=request_value('return');
-	
-	unset($_REQUEST['return']);
 	unset($_REQUEST['db']);
 	unset($_REQUEST['idkey']);
 	
@@ -49,6 +46,9 @@ if (request_command("do")){
 	}else{
 		$new_handeled=$modules[$modul]->save_data($db, $id);
 	}
+
+	$return=request_value('return');
+	unset($_REQUEST['return']);
 	
 	if ($id=="NEW"){
 		if ($new_handeled){
