@@ -588,11 +588,11 @@ function get_next_id(){
 }
 
 function autofill_password($target_id){
-	return "<a class=\"autofill password\" onClick=\"autofill_password('$target_id');\"> (erstellen)</a>";
+	return " <a class=\"autofill password\" onClick=\"autofill_password('$target_id');\">(erstellen)</a>";
 }
 
 function autofill_manuell($function){
-	return "<a class=\"autofill password\" onClick=\"$function\"> (erstellen)</a>";
+	return " <a class=\"autofill password\" onClick=\"$function\">(erstellen)</a>";
 }
 
 function format_default_for_column($table,$column){
