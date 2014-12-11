@@ -80,7 +80,7 @@ function dbio_INSERT($db,$data,$link_identifier=null){
 	$keys=array();
 	foreach ($data as $key => $value) {
 		$keys[]="`$key`";
-		if ($value===null) $values[]="NULL"; else
+		if ($value===null||$value==='null') $values[]="NULL"; else
 			$values[]="'".sqlEscape($value)."'";
 	}
 	$values=implode(", ", $values);
