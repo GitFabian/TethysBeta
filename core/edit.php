@@ -148,7 +148,7 @@ if ($id=="NEW"){
 
 $referer=request_value("return",(isset($_SERVER['HTTP_REFERER'])?$_SERVER['HTTP_REFERER']:null));
 
-$form=new form("do");
+$form=new form("do","?",null,$db);
 $form->add_hidden("return", $referer);
 $form->add_hidden("db", $db);
 $form->add_hidden("idkey", $idkey);
