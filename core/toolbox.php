@@ -588,8 +588,8 @@ function get_next_id(){
 	return "id_".($global_id_counter++);
 }
 
-function autofill_password($target_id){
-	return " <a class=\"autofill password\" onClick=\"autofill_password('$target_id');\">(erstellen)</a>";
+function autofill_password($target_id,$more_on_click=""){
+	return " <a class=\"autofill password\" onClick=\"autofill_password('$target_id');$more_on_click\">(erstellen)</a>";
 }
 
 function autofill_manuell($function){
