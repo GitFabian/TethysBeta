@@ -35,12 +35,20 @@ function rolleSetzen(){
 	ajax_exit($user['nick'].": ".($checked?$rolle['name']:"<span class=\"strike\">".$rolle['name']."</span>"));
 }
 function lorumipsum(){
-	$length=request_value("length");
-	$content = file_get_contents("http://loripsum.net/api/1/$length/plaintext");
-	//Ersten Satz abschneiden:
-	$content=substr($content, strpos($content, ".")+1);
+	$content=file_get_contents("http://bff.orangehairedboy.com/?paragraphs=1&sentences=4&caps=no&action=generate");
+	#ajax_exit($content);
+	preg_match("/<h1>Your Blippity Fling-Flang<\\/h1>.*?<blockquote>(.*?)<\\/blockquote>/s", $content, $matches);
+	#print_r($matches);exit;
+	$content=$matches[1];
 	$content=trim($content);
 	ajax_exit($content);
+	
+// 	$length=request_value("length");
+// 	$content = file_get_contents("http://loripsum.net/api/1/$length/plaintext");
+// 	//Ersten Satz abschneiden:
+// 	$content=substr($content, strpos($content, ".")+1);
+// 	$content=trim($content);
+// 	ajax_exit($content);
 }
 function update_rights(){
 	if (!USER_ADMIN) ajax_exit("!Keine Berechtigung!");
