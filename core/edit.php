@@ -62,8 +62,18 @@ if (request_command("do")){
 		}
 		log_db_new($modul, $db, $id);
 	}else{
-		dbio_UPDATE($db, "`$idkey`='$id'", $_REQUEST);
-		log_db_edit($modul, $db, $id);
+		$old=dbio_SELECT_SINGLE($db, $id, $idkey);
+		$new=$_REQUEST;
+		$delta=array();
+		foreach ($new as $key => $value) {
+			if($old[$key]!=$value&&!(($value===null||$value=='null')&&$old[$key]=='')){
+				$delta[$key]=$value;
+			}
+		}
+		if($delta){
+			dbio_UPDATE($db, "`$idkey`='$id'", $delta);
+			log_db_edit($modul, $db, $id, json_encode($delta));
+		}
 	}
 	
 	$return=preg_replace("/\\[NEWID\\]/", $id, $return);
