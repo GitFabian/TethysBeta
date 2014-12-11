@@ -244,7 +244,7 @@ class form_field{
 			$input="<input$id$onChange$maxlength type=\"text\" name=\"".$this->name."\" value=\"$thisvalue\" />";
 		}
 		$title=($this->title?" title=\"".encode_html($this->title)."\"":"");
-		return "<div class=\"form_field $outer_class\"$outer_id><label for=\"".$this->name."\"$title>".$this->label."</label>$input</div>";
+		return "<div class=\"form_field $outer_class $this->name\"$outer_id><label for=\"".$this->name."\"$title>".$this->label."</label>$input</div>";
 	}
 	
 }
