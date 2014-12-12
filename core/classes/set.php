@@ -82,7 +82,7 @@ class set_card{
 			if($this->delete){
 				include_once ROOT_HDD_CORE.'/core/alertify.php';
 				$url=ROOT_HTTP_CORE."/core/edit.".CFG_EXTENSION."?cmd=delete&".$this->edit;
-				$buttons[]=html_a_button("Löschen", "", "","ask_delete('$url','$this->header3');");
+				$buttons[]=html_a_button("Löschen", "", "","ask_delete('$url','".html_to_plain($this->header3)."');");
 			}
 		}
 		if ($this->details){array_unshift($buttons,html_a_button("Details", $this->details));}
