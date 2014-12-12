@@ -8,6 +8,7 @@ class suche{
 	
 	var $modul;
 	var $ajax_cmd;
+	var $initial_html="";
 	
 	function __construct($modul=null,$ajax_cmd="such"){
 		$this->modul=$modul;
@@ -46,7 +47,7 @@ class suche{
 			)
 		);
 		
-		return $form->toHTML().html_div("",null,"results");
+		return $form->toHTML().html_div($this->initial_html,null,"results");
 	}
 	
 }
