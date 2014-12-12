@@ -163,19 +163,23 @@ class datatable{
 		$this->selector=$selector;
 		$this->paginate=$paginate;
 	}
-	function get_execute(){
+	function get_execute($varname=null){
 		$options="'bLengthChange':false,"
 				."'aaSorting':[],"
 // 				."'iDisplayLength':15,"
 				."language:{url:'".ROOT_HTTP_CORE."/core/html/jquery.dataTables.German.json'},"
 			;
 		if (!$this->paginate) $options.="'bPaginate':false,";
-		return "\$('$this->selector').dataTable({".$options."});";
+		$varname=($varname?"$varname=":"");
+		return "$varname\$('$this->selector').dataTable({".$options."});";
 	}
 	function execute(){
 		include_datatables();
 		global $page;
-		$page->add_inline_script("\$(document).ready(function(){ ".$this->get_execute()." });");
+		$page->add_inline_script("\$(document).ready(function(){ "
+				.$this->get_execute("datatable")
+// 				."new $.fn.dataTable.FixedHeader( datatable );"
+			." });");
 	}
 }
 

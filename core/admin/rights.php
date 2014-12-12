@@ -21,11 +21,14 @@ foreach ($all_rights as $key=>$right) {
 	$name=$right->name;
 	$desc=$right->description;
 	$rights_table[]=array(
-		"Berechtigung"=>$name." ($key)",
+		"ID"=>$key,
+		"Berechtigung"=>$name,
+		"Modul"=>$right->modul,
 		"Beschreibung"=>$desc,
 	);
 }
-$table_rights=new table($rights_table,null,false);
+$table_rights=new table($rights_table,null,true);
+$table_rights->datatable->paginate=true;
 $page->add_html($table_rights->toHTML());
 
 
@@ -47,12 +50,22 @@ $page->onload_JS.="bind_click_modifier();";
 $query_users=dbio_SELECT("core_users","active=1","id,nick");
 $query_user_right = dbio_SELECT("core_user_right");
 $rights_grid=array();
+$user_sort_values=array();
+$table = new table(null,'core_rights wide',true);
 foreach ($query_users as $user) {
+	$row=new table_row();
+	$row_sort=array();
 	$user_rights=array("-USER-"=>$user['nick']." (".$user['id'].")");
+	$row->data["-USER-"]=$user['nick']." (".$user['id'].")";
+	$user_sort_values[]=$user['id'];
 	foreach ($all_rights as $right_id => $dummy) {
 		$user_rights[$right_id]=rights_checkbox(false,$user['id'],$right_id);
+		$row->data[$right_id]=rights_checkbox(false,$user['id'],$right_id);
+		$row_sort[$right_id]=0;
 	}
 	$rights_grid[$user['id']]=$user_rights;
+	$row->sort_values=$row_sort;
+	$table->rows[$user['id']]=$row;
 }
 $headers=array("-USER-"=>"Benutzer");
 foreach ($all_rights as $right_id => $right_object) {
@@ -63,8 +76,16 @@ foreach ($all_rights as $right_id => $right_object) {
 }
 foreach ($query_user_right as $right) {
 	$rights_grid[$right['user']][$right['right']]=rights_checkbox(true,$right['user'],$right['right']);
+	$table->rows[$right['user']]->data[$right['right']]=rights_checkbox(true,$right['user'],$right['right']);
+	$table->rows[$right['user']]->sort_values[$right['right']]=1;
 }
-$table = new table($rights_grid,'core_rights wide',true);
+
+// $table = new table($rights_grid);
+// $page->say($table);
+
+#$table = new table($rights_grid,'core_rights wide',true);
+// $table->set_sort_values("-USER-", $user_sort_values);
+$table->datatable->paginate=true;
 $table->set_header($headers);
 $table->col_highlight=true;
 $page->add_html( $table->toHTML() );

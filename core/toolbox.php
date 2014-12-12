@@ -203,6 +203,7 @@ function include_datatables(){
 	global $page;
 	#$page->add_library(ROOT_HTTP_CORE."/core/html/jquery.dataTables.min.1.10.js");
 	$page->add_library(ROOT_HTTP_CORE."/core/html/jquery.dataTables.min.1.10.4.js");
+// 	$page->add_library(ROOT_HTTP_CORE."/core/html/jquery.dataTables.fixedHeader.js");
 }
 
 function include_chosen(){

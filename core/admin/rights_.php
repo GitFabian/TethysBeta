@@ -11,8 +11,8 @@ function all_rights(){
 	include_once ROOT_HDD_CORE.'/core/classes/rights.php';
 	global $modules;
 	$all_rights=array(
-		"RIGHT_ADMIN"=>new right("Administrator/Entwickler","Vorsicht! ALLE Rechte. Auch instabile BETA-Features und Entwickler-Ausgaben!"),
-		"RIGHT_USERMGMT"=>new right("Personalverwaltung","Benutzer anlegen, bearbeiten und löschen. Rollen zuweisen."),
+		"RIGHT_ADMIN"=>new right("Administrator/Entwickler","Vorsicht! ALLE Rechte. Auch instabile BETA-Features und Entwickler-Ausgaben!","CORE"),
+		"RIGHT_USERMGMT"=>new right("Personalverwaltung","Benutzer anlegen, bearbeiten und löschen. Rollen zuweisen.","CORE"),
 	);
 	/*
 	 * Modulspezifische Rechte
@@ -25,7 +25,8 @@ function all_rights(){
 					if(USER_ADMIN)echo "!!!Berechtigung wurde überschrieben: \"$key\" (".$all_rights[$key]->name.")!!!";
 				}
 				$all_rights[$key]=$right;
-				$right->description.=" (Modul \"".$modul->modul_name."\")";
+				$right->modul=$modul->modul_name;
+				//$right->description.=" (Modul \"".$modul->modul_name."\")";
 			}
 	}
 	
