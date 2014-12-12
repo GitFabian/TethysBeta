@@ -46,12 +46,13 @@ class set_card{
 	var $data=array();
 	var $buttons=array();
 	var $edit;
+	var $delete=true;
 	var $details;
-	function __construct($title,$infotext="",$picture="",$edit=null,$details=null){
+	function __construct($title,$infotext="",$picture="",$edit_db_=null,$details=null){
 		$this->header3=$title;
 		$this->infotext=$infotext;
 		$this->picture=$picture;
-		$this->edit=$edit;
+		$this->edit=$edit_db_;
 		$this->details=$details;
 	}
 	function add_data($data){
@@ -76,7 +77,14 @@ class set_card{
 		$infotext="\n\t\t\t<div class=\"infotext\">$this->infotext</div>";
 		
 		$buttons=$this->buttons;
-		if ($this->edit){array_unshift($buttons,html_a_button("Bearbeiten", ROOT_HTTP_CORE."/core/edit.".CFG_EXTENSION."?".$this->edit));}
+		if ($this->edit){
+			array_unshift($buttons,html_a_button("Bearbeiten", ROOT_HTTP_CORE."/core/edit.".CFG_EXTENSION."?".$this->edit));
+			if($this->delete){
+				include_once ROOT_HDD_CORE.'/core/alertify.php';
+				$url=ROOT_HTTP_CORE."/core/edit.".CFG_EXTENSION."?cmd=delete&".$this->edit;
+				$buttons[]=html_a_button("Löschen", "", "","ask_delete('$url','$this->header3');");
+			}
+		}
 		if ($this->details){array_unshift($buttons,html_a_button("Details", $this->details));}
 		$buttons=($buttons?"\n<div class=\"buttons\">".(implode("", $buttons))."</div>":"");
 		

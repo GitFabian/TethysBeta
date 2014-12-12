@@ -18,6 +18,7 @@ class table{
 	var $options=null;
 	var $options2=null;
 	var $details=false;
+	var $neuer_eintrag="Neuer Eintrag";
 	
 	function __construct($query=null,$class=null,$datatable=true,$id=null,$export_csv_id=null){
 		$this->rows=array();
@@ -62,7 +63,7 @@ class table{
 			$this->options[]=html_a_button("Löschen", "", "tbl_option tbl_delete","ask_delete('$url','$datensatz');");
 		}
 		if ($new){
-			$this->options2.="\n\t".html_a_button("Neuer Eintrag", ROOT_HTTP_CORE."/core/edit.".CFG_EXTENSION
+			$this->options2.="\n\t".html_a_button($this->neuer_eintrag, ROOT_HTTP_CORE."/core/edit.".CFG_EXTENSION
 					."?id=NEW"
 					."&db=$db"
 					."&datensatz=$datensatz"
