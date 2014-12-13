@@ -209,7 +209,12 @@ function login_form(){
 	$page->focus="#id_focus";
 	$form->add_field(new form_field("pass","Passwort","[REQ]",'PASSWORD'));
 // 	$page->say($form);
-	$msg=preg_replace("/\\[LOGON\\]/", $form->toHTML(), setting_get(null, 'LOGON_MSG'));
+	if(function_exists('logon_message')){
+		$msg=logon_message();
+	}else{
+		$msg=setting_get(null, 'LOGON_MSG');
+	}
+	$msg=preg_replace("/\\[LOGON\\]/", $form->toHTML(), $msg);
 	$page->say("<div class=\"logon_msg\">$msg</div>");
 	
 	$page->init("logon", "Login");

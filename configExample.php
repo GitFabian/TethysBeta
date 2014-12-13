@@ -13,4 +13,8 @@ function hauptmenue($page_id){
 // 	return $setcard;
 // }
 
+// function logon_message(){
+// 	return "[LOGON]";
+// }
+
 ?>
