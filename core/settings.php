@@ -56,7 +56,7 @@ function setting_get_default($modul,$key){
 		if ($key=='HM_TEXT') return "1";
 		if ($key=='DEPRECATED_HMLICLASS') return "0";
 		if ($key=='DEPRECATED_DSDLCLASS') return "0";
-		if ($key=='LOGON_MSG') return "Benutzername = Vorname<br>Account beantragen in Büro 321";
+		if ($key=='LOGON_MSG') return "[LOGON]";
 		if ($key=='CFG_EDIT_NICK') return "0";
 		if ($key=='CFG_EDIT_FILE') return "1";
 		if ($key=='CFG_HAUPTMENUE') return ROOT_HDD_CORE."\\configExample.php";
