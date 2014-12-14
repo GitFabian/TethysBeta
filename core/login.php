@@ -38,7 +38,10 @@ function login(){
 				$fehler=true;
 			}else{
 			
-				$users=dbio_SELECT("core_users","vorname='".sqlEscape($name)."' AND active");
+				/*
+				 * Nick
+				 */
+				$users=dbio_query_to_array("SELECT * FROM `core_users` WHERE `nick` COLLATE utf8_general_ci = '".sqlEscape($name)."' AND active");
 					
 				if ($users){
 			

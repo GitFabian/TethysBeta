@@ -13,7 +13,7 @@ $form->add_hidden("view", "three");
 $form->add_hidden("id", USER_ID);
 $form->add_fields(null, array(
 		new form_field("cringle"),
-		new form_field("fraggle"),
+		new form_field_info("fraggle","Fraggle","Hum wacko duh twaddle flopping wobbleblob"),
 ));
 $form->add_fields("Hum wiggle zip", array(
 		new form_field("noodle","Noodle",request_value("noodle","1"),"CHECKBOX"),
