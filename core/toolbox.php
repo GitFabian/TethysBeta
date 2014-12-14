@@ -397,6 +397,7 @@ function string_random($length,$key){
 	else if ($key=="PASSALPHA"){ $key=("ABDEFGHJKLNPQRT"); }
 	else if ($key=="PASSalpha"){ $key=("abdefghijnpqrt"); }
 	else if ($key=="PASSNUM"){ $key=("23456789"); }
+	else if ($key=="hex"){ $key=("0123456789abcdef"); }
 	
 	$len=strlen(utf8_decode($key))-1;
 	
