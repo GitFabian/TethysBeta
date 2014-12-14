@@ -19,7 +19,17 @@ $query=dbio_SELECT("core_users",null,
 		.($modul_inventur?",i.raum":"")
 		.($modul_team?",t.durchwahl,t.handy":"")
 		,$joins);
-$table=new table($query);
+if(USER_ADMIN){
+	$query_exclude=array();
+}else{
+	$query_exclude=dbio_SELECT_asList("core_user_right","[id]","`right`='RIGHT_ADMIN'","user");
+}
+$data=array();
+foreach ($query as $row) {
+	if(!isset($query_exclude[$row['id']]))
+	$data[]=$row;
+}
+$table=new table($data);
 $table->set_options(edit_rights_core("core_users","NEW"), true, true, "core_users");
 $table->export_csv_id="core_users";
 $page->say($table);

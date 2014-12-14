@@ -17,6 +17,9 @@ function edit_rights_core($db,$id){
 					return false;
 				}
 			}
+		}else if(!USER_ADMIN&&$id){
+			$query_exclude=dbio_SELECT("core_user_right","`user`=$id AND `right`='RIGHT_ADMIN'");
+			if($query_exclude)return false;
 		}
 		return berechtigung('RIGHT_USERMGMT');
 	}

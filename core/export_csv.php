@@ -10,7 +10,18 @@ $modul=substr($db, 0, strpos($db, "_"));
 
 if ($modul=='core'){
 	if ($db=="core_users"){
-		csv_out(dbio_SELECT($db),$db.".csv");
+		$query=dbio_SELECT("core_users");
+		if(USER_ADMIN){
+			$query_exclude=array();
+		}else{
+			$query_exclude=dbio_SELECT_asList("core_user_right","[id]","`right`='RIGHT_ADMIN'","user");
+		}
+		$data=array();
+		foreach ($query as $row) {
+			if(!isset($query_exclude[$row['id']]))
+				$data[]=$row;
+		}
+		csv_out($data,"users.csv");
 	}
 	if ($db=="core_rollen"){
 		$rollen=dbio_SELECT_keyValueArray("core_rollen", "name");
