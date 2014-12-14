@@ -12,11 +12,13 @@ class datasheet{
 	var $modul;
 	var $db;
 	var $id;
+	var $datensatz;
 	
-	function __construct($modul, $db, $id){
+	function __construct($modul, $db, $id, $datensatz=null){
 		$this->modul=$modul;
 		$this->db=$db;
 		$this->id=$id;
+		$this->datensatz=$datensatz;
 	}
 	
 	function add_data($data){
@@ -34,12 +36,13 @@ class datasheet{
 		
 		$buttons=array();
 		$edit=($this->edit&&edit_rights($this->modul, $this->db, $this->id));
-		if ($edit) $buttons[]=html_a_button("Bearbeiten",ROOT_HTTP_CORE."/core/edit.".CFG_EXTENSION."?db=".$this->db."&id=".$this->id);
+		$datensatz=($this->datensatz?"&datensatz=".$this->datensatz:"");
+		if ($edit) $buttons[]=html_a_button("Bearbeiten",ROOT_HTTP_CORE."/core/edit.".CFG_EXTENSION."?db=".$this->db."&id=".$this->id.$datensatz);
 		$delete=($this->delete&&edit_rights($this->modul, $this->db, $this->id));
 		if ($delete){
 			include_once ROOT_HDD_CORE.'/core/alertify.php';
 			$url=ROOT_HTTP_CORE."/core/edit.".CFG_EXTENSION."?cmd=delete&db=$this->db&id=".$this->id;
-			$buttons[]=html_a_button("Löschen", "", "","ask_delete('$url','Firma');");
+			$buttons[]=html_a_button("Löschen", "", "","ask_delete('$url','$this->datensatz');");
 		}
 		$btn_html=($buttons?"\n<div class=\"ds_btns\">\n\t".implode("\n\t", $buttons)."\n</div>":"");
 		
