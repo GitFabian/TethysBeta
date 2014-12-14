@@ -582,6 +582,10 @@ function sql_openNewConnection($host,$user,$pass,$db){
 	return $new;
 }
 
+function sql_like($field,$string){
+	return " `$field` COLLATE utf8_general_ci LIKE '$string' ";
+}
+
 function debug_out($variable){
 	if(USER_ADMIN){echo"<pre>";print_r($variable);}
 }
