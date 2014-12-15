@@ -14,7 +14,8 @@ $query=dbio_SELECT_SINGLE($db, $id);
 $form=new form(null,null,null,"datasheet");
 edit_default_form($form,$query,$db,'id');
 
-$datasheet=new datasheet("none", $db, $id);
+$modul=substr($db, 0, strpos($db, "_"));
+$datasheet=new datasheet($modul, $db, $id);
 $datasheet->edit=false;
 
 foreach ($form->field_groups as $g) {
