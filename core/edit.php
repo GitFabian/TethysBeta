@@ -39,6 +39,9 @@ if (request_command("do")){
 		
 	unset($_REQUEST['db']);
 	unset($_REQUEST['idkey']);
+
+	$return=request_value('return');
+	unset($_REQUEST['return']);
 	
 	if ($modul=='core'){
 		$new_handeled=false;
@@ -46,10 +49,9 @@ if (request_command("do")){
 	}else{
 		$new_handeled=$modules[$modul]->save_data($db, $id);
 	}
-
-	$return=request_value('return');
-	unset($_REQUEST['return']);
 	
+	if(isset($_REQUEST['return']))$return=request_value('return');
+
 	if ($id=="NEW"){
 		if ($new_handeled){
 			if ($new_handeled===true){
