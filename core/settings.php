@@ -74,6 +74,8 @@ function setting_get_default($modul,$key){
 		if ($key=='CFG_SERVER') return "http://localhost";
 		#if ($key=='FT_neujahr') return "1";
 		if ($key=='FT_weitere_fest') return "";#"24.12.:Weihnachten\n";
+		if ($key=='FIREFOX_EXCLUSIVE') return "0";
+		if ($key=='FIREFOX_EXCLUSIV_MSG') return "Falscher Browser. Bitte <a href=\"https://www.mozilla.org/de/firefox/new/\">Firefox</a> installieren.";
 		if (USER_ADMIN) echo "Kein Default-Value für \"$key\"! /core/settings.php:77";
 		return null;
 	}else{

@@ -85,6 +85,17 @@ if (isset($page->libraries[ROOT_HTTP_CORE."/core/html/alertify.js-shim-0.3.8/ale
 include_once setting_get(null,'CFG_HAUPTMENUE');
 
 /*
+ * Kompatibilität
+ */
+if(setting_get(null, "FIREFOX_EXCLUSIVE")){
+	include_once ROOT_HDD_CORE.'/core/classes/userAgent.php';
+	if(!userAgent::is_firefox()){
+		$page->init("FIREFOX_EXCLUSIVE", "Falscher Browser");
+		page_send_exit(setting_get(null, "FIREFOX_EXCLUSIV_MSG"));
+	}
+}
+
+/*
  * Nochmal Login
  */
 if ((CFG_LOGON_TYPE!='none' && !USER_ID && CFG_LOGON_TYPE!='http')

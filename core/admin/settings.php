@@ -110,8 +110,10 @@ settings_add_field2($form,"MAIL_USER","Account",'TEXT');
 settings_add_field2($form,"MAIL_PASS","Passwort",'PASSWORD');
 settings_add_field2($form,"MAIL_BCC","BCC",'TEXT');
 
-$form->add_fields("Abwärtskompatibilität",null);
+$form->add_fields("(Abwärts-)Kompatibilität",null);
 settings_add_field2($form,"FEATURE_PRERELEASE","Pre-Release",'CHECKBOX');
+settings_add_field2($form,"FIREFOX_EXCLUSIVE","Firefox Exklusiv",'CHECKBOX');
+settings_add_field2($form,"FIREFOX_EXCLUSIV_MSG","Firefox Exklusiv - Meldung",'TEXTAREA');
 settings_add_field2($form,"DEPRECATED_HMLICLASS","div.mainmenu li div.menutopic",'CHECKBOX');//10-14
 settings_add_field2($form,"DEPRECATED_DSDLCLASS","ul.datasheet li div.data_label",'CHECKBOX');//11-14
 
