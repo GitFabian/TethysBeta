@@ -38,7 +38,7 @@ class datasheet{
 		$edit=($this->edit&&edit_rights($this->modul, $this->db, $this->id));
 		$datensatz=($this->datensatz?"&datensatz=".$this->datensatz:"");
 		if ($edit) $buttons[]=html_a_button("Bearbeiten",ROOT_HTTP_CORE."/core/edit.".CFG_EXTENSION."?db=".$this->db."&id=".$this->id.$datensatz);
-		$delete=($this->delete&&edit_rights($this->modul, $this->db, $this->id));
+		$delete=($edit&&$this->delete);
 		if ($delete){
 			include_once ROOT_HDD_CORE.'/core/alertify.php';
 			$url=ROOT_HTTP_CORE."/core/edit.".CFG_EXTENSION."?cmd=delete&db=$this->db&id=".$this->id;
