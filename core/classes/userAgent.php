@@ -22,7 +22,7 @@ class userAgent{
 		if (preg_match("/Safari/", $agent)) return "Safari";//Mozilla...AppleWebKit...like Gecko...Safari
 		if (preg_match("/Opera/", $agent)) return "Opera";//Opera...Presto... Version/...
 		//IE ab 11:
-// 		if (preg_match("/; rv:.*?\\) like Gecko/", $agent)) return "Internet Explorer";//Mozilla...; rv:...) like Gecko
+		if (preg_match("/; rv:.*?\\) like Gecko/", $agent)) return "Internet Explorer";//Mozilla...; rv:...) like Gecko
 		return null;
 	}
 	
