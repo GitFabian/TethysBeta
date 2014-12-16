@@ -30,8 +30,8 @@ class page{
 		if ($this->title===null && USER_ADMIN) echo"Seite nicht initialisiert!";
 		
 		$favicon="";
-		if(file_exists(CFG_SKINDIR."/img/core/_favicon.gif")){
-			$favicon="<link rel=\"icon\" href=\"".CFG_SKINPATH."/img/core/_favicon.gif\" type=\"image/gif\" />";
+		if(file_exists(ROOT_HDD_DATA."/core/favicon.gif")){
+			$favicon="<link rel=\"icon\" href=\"".ROOT_HTTP_DATA."/core/favicon.gif\" type=\"image/gif\" />";
 		}
 		
 		$content=$this->content;
