@@ -1,5 +1,9 @@
 <?php
 
+/*
+include_once ROOT_HDD_CORE.'/core/classes/liste.php';
+ */
+
 class liste{
 	
 	var $name;
@@ -57,6 +61,21 @@ class liste{
 		$query=dbio_SELECT_SINGLE("core_listen", $id);
 		if(!$query)return null;
 		return new liste($query,$entry);
+	}
+	
+	static function save($title,$data,$haltbarkeit=86400/*=24h*/){
+		$liste=array();
+		foreach ($data as $key => $value) {
+			$liste[]=$key.":".$value;
+		}
+		$liste=implode("\n", $liste);
+		$expires=time()+$haltbarkeit;
+		dbio_INSERT("core_listen", array(
+			"name"=>$title,
+			"expires"=>$expires,
+			"liste"=>$liste,
+		));
+		return mysql_insert_id();
 	}
 }
 
