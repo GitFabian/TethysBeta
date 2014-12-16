@@ -29,6 +29,11 @@ class page{
 	function send(){
 		if ($this->title===null && USER_ADMIN) echo"Seite nicht initialisiert!";
 		
+		$favicon="";
+		if(file_exists(CFG_SKINDIR."/img/core/_favicon.gif")){
+			$favicon="<link rel=\"icon\" href=\"".CFG_SKINPATH."/img/core/_favicon.gif\" type=\"image/gif\" />";
+		}
+		
 		$content=$this->content;
 		$title=$this->title;
 		$menu=hauptmenue($this->page_id);
@@ -106,6 +111,7 @@ class page{
 	$libraries
 	$inline_JS
 	$this->head
+	$favicon
 </head>
 <body id="$this->page_id"$onload>
 	<div class="outerbody">
