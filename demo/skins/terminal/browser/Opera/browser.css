@@ -1,0 +1,10 @@
+@CHARSET "utf-8";
+
+/*==================================================================
+    BODY,TEXT
+==================================================================*/
+
+div.innerbody{
+	background:#1F2831 url(browser.png) no-repeat;
+	background-position:right top;
+}
