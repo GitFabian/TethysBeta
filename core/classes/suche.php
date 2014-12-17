@@ -24,7 +24,7 @@ class suche{
 		include_datatables();
 		global $page;
 
-		$form=new form("such");
+		$form=new form("such","?",null,"suche");
 		$form->add_field(new form_field("such","Suche","","TEXT",null,null,"id_suche"));
 		$form->set_blind();
 		$page->focus="input[type=text]";
