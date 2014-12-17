@@ -658,6 +658,7 @@ function parse_url_modul_and_file($url){
 
 function parse_url_query($url,$key='id'){
 	$url=parse_url($url);
+	if(!isset($url['query'])) return null;
 	$query=$url['query'];
 	parse_str($query,$pars);
 	return $pars[$key];
