@@ -696,4 +696,14 @@ function toolbox_css_position($id){
 	return html_div("...",null,$myid);
 }
 
+function dir_list($path){
+	$dir=opendir($path);
+	$files=array();
+	while (false !== ($file = readdir($dir))) {
+		if($file!='.'&&$file!='..')$files[]=$file;
+	}
+	closedir($dir);
+	return $files;
+}
+
 ?>
