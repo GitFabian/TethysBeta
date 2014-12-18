@@ -689,4 +689,11 @@ function include_time_delta($seconds=1){
 	$page->onload_JS.="time_delta_start($seconds);";
 }
 
+function toolbox_css_position($id){
+	global $page;
+	$myid=get_next_id();
+	$page->onload_JS.="css_position('$id','$myid');";
+	return html_div("...",null,$myid);
+}
+
 ?>

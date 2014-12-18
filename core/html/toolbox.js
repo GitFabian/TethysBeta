@@ -114,3 +114,23 @@ function time_delta(timestamp){
 	if (delta>90) return vz+" "+(Math.round(delta/60))+" Minuten";
 	return vz+" "+delta+" Sekunden";
 }
+
+function css_position(id,target){
+	$('#'+id).draggable({
+		stop: function(event, ui) {
+			stop_css_position(target,this);
+		}
+	});
+	$('#'+id).resizable({
+		stop:function(event,ui){
+			stop_css_position(target,this);
+		}
+	});
+}
+function stop_css_position(id,elem){
+	$('#'+id).html('top:'+$(elem).position().top+'px;'
+			+'<br>left:'+$(elem).position().left+'px;'
+			+'<br>width:'+$(elem).width()+'px;'
+			+'<br>height:'+$(elem).height()+'px;'
+		);
+}
