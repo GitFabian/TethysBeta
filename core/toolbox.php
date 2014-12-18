@@ -359,11 +359,18 @@ function html_button($value,$class=null,$onClick=null){
 			"onclick"=>$onClick,
 	));
 }
-function html_button2($value,$onClick=null){
+function html_button2($value,$onClick=null,$accesskey=null){
+	if($accesskey){
+// 		$original_value=$value;
+// 		$value=preg_replace("/([".strtolower($accesskey).strtoupper($accesskey)."])/", "<u>$1</u>", $value);
+// 		if($value==$original_value)
+			$value.=" [$accesskey]";
+	}
 	return htmlEntity2('input', array(
 			"type"=>"button",
 			"value"=>$value,
 			"onclick"=>$onClick,
+			"accesskey"=>$accesskey,
 	));
 }
 
