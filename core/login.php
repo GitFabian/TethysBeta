@@ -16,13 +16,13 @@ function login(){
 			$pass=request_value("pass");
 			
 			if ($id){
-					
+				
 				$users=dbio_SELECT_SINGLE("core_users",$id);
 				if ($users&&$users['active']
 						//Logon Override: Passwort erforderlich:
-						&&(!CFG_LOGON_COOKIE||$users['password'])
+						&&(!CFG_LOGON_COOKIE||$pass)
 						){
-			
+					
 					if ($pass==$users['password']){
 						login_setCookie($id);
 					}else{
@@ -47,7 +47,10 @@ function login(){
 			
 					if (count($users)==1){
 						
-						if ($pass==$users[0]['password']){
+						if ($pass==$users[0]['password']
+								//Logon Override: Passwort erforderlich:
+								&&(!CFG_LOGON_COOKIE||$pass)
+							){
 							login_setCookie($users[0]['id']);
 						}else{
 							$fehler=true;

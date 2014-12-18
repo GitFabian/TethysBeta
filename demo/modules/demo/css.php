@@ -9,8 +9,8 @@ include_once ROOT_HDD_CORE.'/core/classes/user.php';
 $views=array(
 		new menu_topic2("one", "CSS"),
 		new menu_topic2("two", "Tabellen"),
-		new menu_topic2("three", "Formulare"),
-		new menu_topic2("datasheets", "Datenblätter"),
+		new menu_topic2("three", "Formular"),
+		new menu_topic2("datasheets", "Datenblatt / Set"),
 );
 $view=$page->init_views("one",$views);
 
@@ -43,29 +43,12 @@ $page->say(html_div("Zoom shrubbery ".html_a_button("link-button","css.".CFG_EXT
 $page->say(html_div("Yip hum quabble ".html_a("external link","http://tethys-framework.de",null,true)." zupping crongely."));
 $page->say(html_div(html_a("I'm a link, too!","")));
 
-$page->say(html_header1("html_iframe_fullsize(\$url)"));
-$page->say(html_iframe_fullsize("http://sprichwortgenerator.de/","demo_css"));
-
 $page->say(html_header1("Alertify"));
 $page->say("\n".html_button("Dialog","","alertify.confirm(&quot;Message?&quot;,function(e){});"));
 $page->say("\n".html_button("Alert","",alertify_alert("Alert")));
 #$page->onload_JS.="alertify.confirm(&quot;Message?&quot;,function(e){});";
 $page->say("\n".html_button("Success","",alertify_success("Success")));
 $page->say("\n".html_button("Error","",alertify_error("Error")));
-
-$page->say(html_header1("Set-Cards"));
-$set=new set("");
-$set->add_card($card1=new set_card("Karte 1","Dizzle flong ho whack da razz",null));
-$card1->add_data(new set_card_data("name", "Name", "Chef"));
-$card1->add_data(new set_card_data("hobbies", "Hobbys", "Quibblenip-bloobing, Zingity"));
-$card1->buttons[]=html_a_button("Homepage", "http://qnote.de",null,null,true);
-$set->add_card($card2=new set_card("Karte 2","Jingle da zang! Zap ho Maggie ingleblang! Yip bam bizzlerizzle bam duh ting, nip ting a loo dang zip.",
-		ROOT_HTTP_CORE."/demo/DATA/core_users/person2.png"));
-$card2->add_data(new set_card_data("name", "Name", "Lisa"));
-$card2->add_data(new set_card_data("hobbies", "Hobby", "Dee flang"));
-$card2->buttons[]=html_a_button("Homepage", "http://sourcecode-snippets.de",null,null,true);
-$set->add_card(get_user_setcard_CORE());
-$page->say($set);
 
 $page->send();
 exit;//============================================================================================
