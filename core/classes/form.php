@@ -161,6 +161,7 @@ class form_field{
 	var $onChange=null;
 	var $outer_id=null;
 	var $outer_class="";
+	var $accesskey=null;
 	
 	function __construct($name,$label=null,$value="[REQ]",$type="TEXT",$title=null,$options=null,$id=null){
 		if ($label===null) $label=$name;
@@ -198,6 +199,13 @@ class form_field{
 		$outer_id=($this->outer_id?" id=\"$this->outer_id\"":"");
 		$maxlength=($this->maxlength?" maxlength=\"".$this->maxlength."\"":"");
 		$outer_class=$this->outer_class;
+		$label=$this->label;
+		$accesskey=($this->accesskey?" accesskey=\"$this->accesskey\"":"");
+		if($accesskey){
+			$original_value=$label;
+			$label=preg_replace("/^(.*?)([".strtolower($this->accesskey).strtoupper($this->accesskey)."])(.*)$/", "$1<u>$2</u>$3", $label);
+			if($label==$original_value) $label.=" [$this->accesskey]";
+		}
 		if ($this->type=="CHECKBOX"){
 			$outer_class.=" checkbox";
 			$input=html_checkbox($this->name,$thisvalue,null,$this->id,$this->onChange);
@@ -241,10 +249,10 @@ class form_field{
 				$input.="</ul>";
 			}
 		}else{
-			$input="<input$id$onChange$maxlength type=\"text\" name=\"".$this->name."\" value=\"$thisvalue\" />";
+			$input="<input$id$onChange$maxlength$accesskey type=\"text\" name=\"".$this->name."\" value=\"$thisvalue\" />";
 		}
 		$title=($this->title?" title=\"".encode_html($this->title)."\"":"");
-		return "<div class=\"form_field $outer_class $this->name\"$outer_id><label for=\"".$this->name."\"$title>".$this->label."</label>$input</div>";
+		return "<div class=\"form_field $outer_class $this->name\"$outer_id><label for=\"".$this->name."\"$title>".$label."</label>$input</div>";
 	}
 	
 }
