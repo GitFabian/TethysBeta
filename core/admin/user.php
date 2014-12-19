@@ -54,9 +54,9 @@ function core_user_update(){
 	if (setting_get(null,'CFG_EDIT_FILE')){
 		dbio_UPDATE("core_users", "id=".USER_ID, array(
 			"picture"=>request_value("picture"),
-			"durchwahl"=>request_value("durchwahl"),
-			"handy"=>request_value("handy"),
-			"raum"=>request_value("raum"),
+// 			"durchwahl"=>request_value("durchwahl"),
+// 			"handy"=>request_value("handy"),
+// 			"raum"=>request_value("raum"),
 		));
 	}
 	ajax_refresh("Speichere Daten...", "user.".CFG_EXTENSION."?cmd=updated");
