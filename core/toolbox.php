@@ -700,11 +700,11 @@ function toolbox_css_position($id){
 	return html_div("...",null,$myid);
 }
 
-function dir_list($path){
+function dir_list($path,$utf8=true){
 	$dir=opendir($path);
 	$files=array();
 	while (false !== ($file = readdir($dir))) {
-		if($file!='.'&&$file!='..')$files[]=$file;
+		if($file!='.'&&$file!='..')$files[]=($utf8?utf8_encode($file):$file);
 	}
 	closedir($dir);
 	return $files;
