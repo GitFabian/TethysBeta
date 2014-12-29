@@ -83,7 +83,8 @@ if (request_command("do")){
 	if ($return){
 		ajax_refresh("Speichere Datensatz #$id...", $return);
 	}else{
-		page_send_exit("Datensatz #$id gespeichert.");
+		$page->message_ok("Datensatz #$id gespeichert.");
+		page_send_exit();
 	}
 }
 if (request_command("delete")){
