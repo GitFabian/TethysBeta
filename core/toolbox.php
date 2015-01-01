@@ -710,4 +710,26 @@ function dir_list($path,$utf8=true){
 	return $files;
 }
 
+function update_members_by_request($db,$idKey,$id,$valKey,$request_key){
+	$query_current=dbio_SELECT_asList($db,"[id]","`$idKey`='$id'",$valKey);
+	if(isset($_REQUEST[$request_key])){
+		$values=$_REQUEST[$request_key];
+		foreach ($values as $value) {
+			if(isset($query_current[$value])){
+				//Vorhanden:
+				unset($query_current[$value]);
+			}else{
+				//Dazu:
+				dbio_INSERT($db, array($idKey=>$id,$valKey=>$value));
+			}
+		}
+	}
+	//Hinfort:
+	if($query_current)
+	foreach ($query_current as $value=>$id) {
+		dbio_DELETE($db, "id=$id");
+	}
+	unset($_REQUEST[$request_key]);
+}
+
 ?>
