@@ -193,7 +193,7 @@ class form_field{
 	function toHTML(){
 		$input="";
 		if ($this->type!="SELECT_MULTIPLE")
-		$thisvalue=escape_html($this->value);
+		$thisvalue=escape_html_unicode($this->value);
 		$onChange=($this->onChange?" onChange=\"$this->onChange\"":"");
 		$id=($this->id?" id=\"$this->id\"":"");
 		$outer_id=($this->outer_id?" id=\"$this->outer_id\"":"");

@@ -132,6 +132,12 @@ function ajax_refresh($msg,$url,$break=true){
 function escape_html($text){
 	return htmlentities(utf8_decode($text));
 }
+
+function escape_html_unicode($text){
+	$text=preg_replace("/\"/", "&quot;", $text);
+	return $text;
+}
+
 function escape_inline_js($text){
 	$text=escape_html($text);
 	$text=preg_replace("/'/", "\\'", $text);
