@@ -16,7 +16,7 @@ class suche{
 	}
 	
 	function __toString(){
-		return $this->form();
+		return $this->form()->toHTML().html_div($this->initial_html,null,"results");
 	}
 	
 	function form(){
@@ -47,7 +47,7 @@ class suche{
 			)
 		);
 		
-		return $form->toHTML().html_div($this->initial_html,null,"results");
+		return $form;
 	}
 	
 }
