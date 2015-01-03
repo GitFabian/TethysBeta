@@ -9,6 +9,8 @@ class suche{
 	var $modul;
 	var $ajax_cmd;
 	var $initial_html="";
+	var $options=array();
+	var $options_checked=array();
 	
 	function __construct($modul=null,$ajax_cmd="such"){
 		$this->modul=$modul;
@@ -30,13 +32,25 @@ class suche{
 		$page->focus="input[type=text]";
 		
 		/*
+		 * Options
+		 */
+		$ajax_options=array();
+		foreach ($this->options as $key => $value) {
+			$id=get_next_id();
+			$form->add_field(new form_field($key,$value,(isset($_REQUEST[$key])?$_REQUEST[$key]:(isset($this->options_checked[$key])?$this->options_checked[$key]:"0")),"CHECKBOX",null,null,$id));
+			$ajax_options[]="&$key=\"+$('#$id').is(':checked')+\"";
+		}
+		
+		/*
 		 * AJAX
 		 */
 #$page->onload_JS.="such();";
 		$page->add_inline_script(
 "function such(){
 	query=$('#id_suche').val();
-	".ajax_to_id($this->ajax_cmd."&such=\"+encodeURIComponent(query)+\"", "results", $this->modul, false, "datatable_init('table','".ROOT_HTTP_CORE."');")."
+	".ajax_to_id($this->ajax_cmd."&such=\"+encodeURIComponent(query)+\""
+			.implode("", $ajax_options)
+			, "results", $this->modul, false, "datatable_init('table','".ROOT_HTTP_CORE."');")."
 }"
 			.js_document_ready(
 "$('#id_suche').keydown(function(event) {
