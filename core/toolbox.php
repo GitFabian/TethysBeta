@@ -212,6 +212,9 @@ function include_datatables(){
 // 	$page->add_library(ROOT_HTTP_CORE."/core/html/jquery.dataTables.fixedHeader.js");
 }
 
+/**
+ * $('#id_...').trigger('chosen:updated');
+ */
 function include_chosen(){
 	include_jquery();
 	global $page;
