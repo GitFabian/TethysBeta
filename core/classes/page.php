@@ -14,6 +14,7 @@ class page{
 	var $focus_delay=500;//ms
 	var $messages=array();
 	var $head="";
+	var $waitSpinner=false;
 	
 	function __construct(){
 		$this->content="";
@@ -102,6 +103,11 @@ class page{
 			$liste=liste::load($_REQUEST['tethys_liste']);
 		}
 		
+		$waitSpinner="";
+		if($this->waitSpinner){
+			$waitSpinner="<div id=\"uploadSpinner\"><div class=\"spinnerContent\"><img src=\"".CFG_SKINPATH."/spinner.gif\"><div>Bitte warten...</div></div></div>";
+		}
+		
 		echo <<<ENDE
 <!DOCTYPE HTML>
 <html>
@@ -114,6 +120,7 @@ class page{
 	$favicon
 </head>
 <body id="$this->page_id"$onload>
+	$waitSpinner
 	<div class="outerbody">
 		$menu
 		$liste

@@ -360,12 +360,13 @@ function html_pre($html,$class=null){
 function html_code($html){
 	return html_pre($html,"code");
 }
-function html_button($value,$class=null,$onClick=null){
+function html_button($value,$class=null,$onClick=null,$id=null){
 	return htmlEntity2('input', array(
 			"type"=>"button",
 			"value"=>$value,
 			"class"=>$class,
 			"onclick"=>$onClick,
+			"id"=>$id,
 	));
 }
 function html_button2($value,$onClick=null,$accesskey=null){
@@ -739,6 +740,12 @@ function update_members_by_request($db,$idKey,$id,$valKey,$request_key){
 		dbio_DELETE($db, "id=$id");
 	}
 	unset($_REQUEST[$request_key]);
+}
+
+function waitSpinner(){
+	global $page;
+	$page->waitSpinner=true;
+	return "startSpinner();";
 }
 
 ?>

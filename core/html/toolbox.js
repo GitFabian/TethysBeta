@@ -134,3 +134,7 @@ function stop_css_position(id,elem){
 			+'<br>height:'+$(elem).height()+'px;'
 		);
 }
+
+function startSpinner(){
+	document.getElementById('uploadSpinner').style.display="block";
+}

@@ -12,31 +12,34 @@ $form=new form("update",null,"Shnozzle");
 $form->add_hidden("view", "three");
 $form->add_hidden("id", USER_ID);
 $form->add_fields(null, array(
-		new form_field("cringle"),
-		new form_field_info("fraggle","Fraggle","Hum wacko duh twaddle flopping wobbleblob"),
+		new form_field("wert1"),
+		new form_field_info("fraggle","Info-Feld","Hum wacko duh twaddle flopping wobbleblob"),
 ));
-$form->add_fields("Hum wiggle zip", array(
-		new form_field("noodle","Noodle",request_value("noodle","1"),"CHECKBOX"),
-		new form_field("radio","Radio",request_value("radio"),"RADIO",null,array(
+$form->add_fields("Überschrift / Sektion", array(
+		new form_field("noodle","Checkbox (CHECKBOX)",request_value("noodle","1"),"CHECKBOX"),
+		new form_field("radio","Radio-Buttons (RADIO)",request_value("radio"),"RADIO",null,array(
 				"one"=>"One",
 				"two"=>"Two",
 		)),
-		new form_field("zippity","Zippity",request_value("zippity","ts"),"SELECT",null,array(
+		new form_field("zippity","Dropdown (SELECT)",request_value("zippity","ts"),"SELECT",null,array(
 				"ms"=>"Mr. Slave",
 				"ts"=>"Tony Soprano",
 		)),
-		new form_field("nizzle[]","Nizzle","[REQ]","SELECT_MULTIPLE",null,array(
+		new form_field("nizzle[]","Mehrfachauswahl (SELECT_MULTIPLE)","[REQ]","SELECT_MULTIPLE",null,array(
 				"a"=>"Wobbledingle",
 				"b"=>"Twiddle boo",
 				"c"=>"Crangle",
 				"d"=>"Hizzle-shrubbery",
 		)),
-		new form_field("jinglewoogle","Jinglewoogle",request_value("jinglewoogle","abracadabra"),"PASSWORD"),
-		new form_field("duh","Duh",request_value("duh","Doo nippy do-da tangity")),
-		new form_field("cronglewoob","Crongle-Wooble","[REQ]","TEXTAREA"),
+		new form_field("jinglewoogle","Passwort (PASSWORD)",request_value("jinglewoogle","abracadabra"),"PASSWORD"),
+		new form_field("duh","Text (TEXT)",request_value("duh","Doo nippy do-da tangity")),
+		new form_field("cronglewoob","Textfeld (TEXTAREA)","[REQ]","TEXTAREA"),
+// 		new form_field("datei1","Datei (FILE)","[REQ]","FILE"),
 ));
 #$form->add_fields("",array(new form_field("foo")));
 $form->buttons.=html_a_button("link-button","css.".CFG_EXTENSION);
+$form->onsubmit.=waitSpinner();
+// $form->buttons.=html_button("spinner-test",null,waitSpinner());
 $page->say($form->toHTML());
 
 $page->send();
@@ -46,7 +49,7 @@ function update_demoformular(){
 	request_extract_booleans2();
 	$id=request_unset("id");
 	$fehler=null;
-	if (!request_value("cringle")) $fehler="Bitte Wert für \"cringle\" angeben!";
+	if (!request_value("wert1")) $fehler="Bitte Wert für \"wert1\" angeben!";
 	if ($fehler){
 		$page->message_error($fehler);
 		return;

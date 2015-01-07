@@ -27,6 +27,7 @@ class form{
 	var $dates=array();
 	var $buttons="";
 	var $tag="form";
+	var $onsubmit="";
 	
 	function __construct($cmd,$target="?",$submit_msg=null,$class=null){
 		$this->method=(USER_ADMIN?"get":"post");
@@ -113,8 +114,10 @@ class form{
 			$hidden_fields.="\n\t<input type=\"hidden\" name=\"t_dates\" value=\"$dates\" />";
 		}
 		
+		$onsubmit=($this->onsubmit?" onsubmit=\"$this->onsubmit\"":"");
+		
 		$action=($this->action?" action=\"$this->action\" method=\"$this->method\"":"");
-		$html="\n<$this->tag$class$action>$hidden_fields$form$buttons\n</$this->tag>";
+		$html="\n<$this->tag$class$action$onsubmit>$hidden_fields$form$buttons\n</$this->tag>";
 		return $html;
 	}
 	
@@ -248,6 +251,8 @@ class form_field{
 				}
 				$input.="</ul>";
 			}
+// 		}else if ($this->type=="FILE"){
+// 			$input="<input type=\"text\" name=\"".$this->name."\" value=\"$thisvalue\" />";
 		}else{
 			$input="<input$id$onChange$maxlength$accesskey type=\"text\" name=\"".$this->name."\" value=\"$thisvalue\" />";
 		}
