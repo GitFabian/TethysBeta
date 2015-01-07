@@ -8,7 +8,7 @@ if(request_command("update"))update_demoformular();
 
 $page->say(html_header1("Formular 1"));
 
-$form=new form("update",null,"Shnozzle");
+$form=new form("update","?","Shnozzle");
 $form->add_hidden("view", "three");
 $form->add_hidden("id", USER_ID);
 $form->add_fields(null, array(
@@ -34,11 +34,10 @@ $form->add_fields("Überschrift / Sektion", array(
 		new form_field("jinglewoogle","Passwort (PASSWORD)",request_value("jinglewoogle","abracadabra"),"PASSWORD"),
 		new form_field("duh","Text (TEXT)",request_value("duh","Doo nippy do-da tangity")),
 		new form_field("cronglewoob","Textfeld (TEXTAREA)","[REQ]","TEXTAREA"),
-// 		new form_field("datei1","Datei (FILE)","[REQ]","FILE"),
+		new form_field("datei1","Datei (FILE)",null,"FILE"),
 ));
 #$form->add_fields("",array(new form_field("foo")));
 $form->buttons.=html_a_button("link-button","css.".CFG_EXTENSION);
-$form->onsubmit.=waitSpinner();
 // $form->buttons.=html_button("spinner-test",null,waitSpinner());
 $page->say($form->toHTML());
 
@@ -49,6 +48,8 @@ function update_demoformular(){
 	request_extract_booleans2();
 	$id=request_unset("id");
 	$fehler=null;
+// 	print "getUpload=".
+	getUpload('datei1','demo/uploads/:FILENAME:');
 	if (!request_value("wert1")) $fehler="Bitte Wert für \"wert1\" angeben!";
 	if ($fehler){
 		$page->message_error($fehler);

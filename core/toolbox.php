@@ -748,4 +748,41 @@ function waitSpinner(){
 	return "startSpinner();";
 }
 
+/**
+ * @param string $datapathname Datei-Pfad und -Name (Ursprüngl. Dateiname einfügen: ":FILENAME:"), relativ zum DATA-Verzeichnis
+ */
+function getUpload($name,$datapathname,$override=false){
+	global $page;
+// 	print "<pre>";
+// 	print_r($_FILES);
+	if (isset($_FILES[$name])){
+		$file=$_FILES[$name];
+		if ($file["error"] > 0){
+			if ($file["error"]==4){
+				//(Kein Upload)
+			}else if ($file["error"]==1){
+				$page->message_error("Fehler beim Upload: <b>Datei zu groß!</b>");
+			}else{
+				$page->message_error("Fehler ".$file["error"]." beim Upload!");
+			}
+			return null;
+		}else{
+			$filename=utf8_decode($file["name"]);
+			$datapathname=preg_replace("/:FILENAME:/", $filename, $datapathname);
+			$datapathname=ROOT_HDD_DATA."/".$datapathname;
+			$path=substr($datapathname, 0, strrpos($datapathname, '/'));
+			if (!file_exists($path)) mkdir($path);
+			if (!$override){
+				if (file_exists($datapathname)){
+					$page->message_error("Datei existiert bereits!");
+					return;
+				}
+			}
+			copy($file["tmp_name"], $datapathname);
+			return utf8_encode($filename);
+		}
+	}
+	return null;
+}
+
 ?>

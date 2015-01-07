@@ -28,6 +28,7 @@ class form{
 	var $buttons="";
 	var $tag="form";
 	var $onsubmit="";
+	var $fileUpload=false;
 	
 	function __construct($cmd,$target="?",$submit_msg=null,$class=null){
 		$this->method=(USER_ADMIN?"get":"post");
@@ -64,6 +65,10 @@ class form{
 		if ($field->type=='DATUM'){
 			$this->dates[]=$field->name;
 		}
+		if ($field->type=='FILE'){
+			$this->fileUpload=true;
+			$this->method="post";
+		}
 	}
 	
 	/**
@@ -98,6 +103,13 @@ class form{
 		
 		$class=($this->class?" class=\"".$this->class."\"":"");
 		
+		if($this->fileUpload){
+			$this->onsubmit.=waitSpinner();
+			$class.=" enctype=\"multipart/form-data\"";
+		}
+
+		$onsubmit=($this->onsubmit?" onsubmit=\"$this->onsubmit\"":"");
+		
 		$hidden_fields="";
 		if ($this->hidden_fields){
 			foreach ($this->hidden_fields as $field) {
@@ -113,8 +125,6 @@ class form{
 			$dates=implode(",", $this->dates);
 			$hidden_fields.="\n\t<input type=\"hidden\" name=\"t_dates\" value=\"$dates\" />";
 		}
-		
-		$onsubmit=($this->onsubmit?" onsubmit=\"$this->onsubmit\"":"");
 		
 		$action=($this->action?" action=\"$this->action\" method=\"$this->method\"":"");
 		$html="\n<$this->tag$class$action$onsubmit>$hidden_fields$form$buttons\n</$this->tag>";
@@ -251,8 +261,8 @@ class form_field{
 				}
 				$input.="</ul>";
 			}
-// 		}else if ($this->type=="FILE"){
-// 			$input="<input type=\"text\" name=\"".$this->name."\" value=\"$thisvalue\" />";
+		}else if ($this->type=="FILE"){
+			$input="<input type=\"file\" name=\"$this->name\" />";
 		}else{
 			$input="<input$id$onChange$maxlength$accesskey type=\"text\" name=\"".$this->name."\" value=\"$thisvalue\" />";
 		}
