@@ -1,7 +1,7 @@
 Tethys (Beta)
 =============
 
-Version 0.17.8
+Version 0.17.9
 
 Database-Version: 18
 
