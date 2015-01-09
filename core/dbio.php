@@ -203,10 +203,11 @@ class query{
 	
 		if ($leftjoins){
 			foreach ($leftjoins as $join) {
+				$field=(strpos($join->field,".")===false?"`$db`.".$join->field:$join->field);
 				if ($join->as){
-					$anfrage.=" LEFT JOIN `".$join->table."` AS ".$join->as." ON `$db`.".$join->field."=".$join->as.".".$join->id;
+					$anfrage.=" LEFT JOIN `".$join->table."` AS ".$join->as." ON $field=".$join->as.".".$join->id;
 				}else{
-					$anfrage.=" LEFT JOIN `".$join->table.                 "` ON `$db`.".$join->field."=".              $join->id;
+					$anfrage.=" LEFT JOIN `".$join->table.                 "` ON $field=".              $join->id;
 				}
 			}
 		}
