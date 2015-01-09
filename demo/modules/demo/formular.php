@@ -48,8 +48,8 @@ function update_demoformular(){
 	request_extract_booleans2();
 	$id=request_unset("id");
 	$fehler=null;
-// 	print "getUpload=".
-	getUpload('datei1','demo/uploads/:FILENAME:');
+	$file=getUpload('datei1','demo/uploads/:FILENAME:',true,false);
+	#$page->message_ok($file);
 	if (!request_value("wert1")) $fehler="Bitte Wert für \"wert1\" angeben!";
 	if ($fehler){
 		$page->message_error($fehler);

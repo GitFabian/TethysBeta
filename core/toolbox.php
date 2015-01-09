@@ -751,10 +751,8 @@ function waitSpinner(){
 /**
  * @param string $datapathname Datei-Pfad und -Name (Ursprüngl. Dateiname einfügen: ":FILENAME:"), relativ zum DATA-Verzeichnis
  */
-function getUpload($name,$datapathname,$override=false){
+function getUpload($name,$datapathname,$override=false,$history=true){
 	global $page;
-// 	print "<pre>";
-// 	print_r($_FILES);
 	if (isset($_FILES[$name])){
 		$file=$_FILES[$name];
 		if ($file["error"] > 0){
@@ -772,8 +770,14 @@ function getUpload($name,$datapathname,$override=false){
 			$datapathname=ROOT_HDD_DATA."/".$datapathname;
 			$path=substr($datapathname, 0, strrpos($datapathname, '/'));
 			if (!file_exists($path)) mkdir($path);
-			if (!$override){
-				if (file_exists($datapathname)){
+			if (file_exists($datapathname)){
+				if ($override){
+					if($history){
+						$his_path=$path."/history";
+						if (!file_exists($his_path)) mkdir($his_path);
+						copy($datapathname, $his_path."/".date("Ymd-His_").substr($datapathname, strlen($path)+1) );
+					}
+				}else{
 					$page->message_error("Datei existiert bereits!");
 					return;
 				}

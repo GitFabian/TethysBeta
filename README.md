@@ -1,7 +1,7 @@
 Tethys (Beta)
 =============
 
-Version 0.17.7
+Version 0.17.8
 
 Database-Version: 18
 
@@ -9,7 +9,7 @@ TODO:
 * Widgets
 * LDAP-Authentifizierung
 * Logs
-* Upload
+* Upload-UI
 * Generische members_direct-Tabelle
 * SMS
 * Excel-Export
