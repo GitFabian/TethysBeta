@@ -65,6 +65,7 @@ function core_user_update(){
 // // 			"raum"=>request_value("raum"),
 // 		));
 	}
+	setting_save(null, "MSCSV", request_value("mscsv"), true);
 	ajax_refresh("Speichere Daten...", "user.".CFG_EXTENSION."?cmd=updated");
 }
 ?>
