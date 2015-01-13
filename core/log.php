@@ -20,7 +20,7 @@ function log_db_new2($modul,$tabelle,$zeile,$data){
 }
 
 /**
- * DEPRECATED!
+ * @deprecated seit 01'15
  */
 function log_db_new($modul,$tabelle,$zeile=null,$pars=null){
 	if($zeile===null)$zeile=mysql_insert_id();
