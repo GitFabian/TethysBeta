@@ -8,7 +8,8 @@ $table=new table(dbio_SELECT("core_logs"));
 if($table->rows)
 	$page->say($table);
 
-$table=new table(dbio_SELECT("core_logs_dbedit",null,"*",null,"time",false,500));
+$seite=(isset($_REQUEST['page'])?(($_REQUEST['page']-1)*10).",":"");
+$table=new table(dbio_query_to_array("SELECT * FROM `core_logs_dbedit` ORDER BY `time` DESC LIMIT {$seite} 10"));
 $page->say($table);
 
 $page->send();
