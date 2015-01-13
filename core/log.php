@@ -4,6 +4,24 @@
 include_once ROOT_HDD_CORE.'/core/log.php';
  */
 
+function log_db_new2($modul,$tabelle,$zeile,$data){
+	unset($data['id']);
+	$pars=json_encode($data);
+	dbio_INSERT("core_logs_dbedit", array(
+	"time"=>time(),
+	"user"=>USER_ID,
+	"modul"=>$modul,
+	"ip"=>$_SERVER['REMOTE_ADDR'],
+	"action"=>"new",
+	"tabelle"=>$tabelle,
+	"zeile"=>$zeile,
+	"pars"=>$pars,
+	));
+}
+
+/**
+ * DEPRECATED!
+ */
 function log_db_new($modul,$tabelle,$zeile=null,$pars=null){
 	if($zeile===null)$zeile=mysql_insert_id();
 	dbio_INSERT("core_logs_dbedit", array(

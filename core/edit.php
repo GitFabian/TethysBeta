@@ -62,7 +62,7 @@ if (request_command("do")){
 		}else{
 			$id=dbio_NEW_FROM_REQUEST($db,$idkey);
 		}
-		log_db_new($modul, $db, $id);
+		log_db_new2($modul, $db, $id, $_REQUEST);
 	}else{
 		$old=dbio_SELECT_SINGLE($db, $id, $idkey);
 		$new=$_REQUEST;

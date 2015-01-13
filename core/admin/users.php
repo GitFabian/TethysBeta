@@ -15,7 +15,7 @@ $joins=array();
 if($modul_inventur)$joins[]=new dbio_leftjoin("id", "inventur_user", "i");
 if($modul_team)$joins[]=new dbio_leftjoin("id", "team_user_file", "t");
 $query=dbio_SELECT("core_users",null,
-		"core_users.id,active,nachname,vorname,http_auth,password,nick,picture,email"
+		"core_users.id,active,nachname,vorname,http_auth,nick,email"
 		.($modul_inventur?",i.raum":"")
 		.($modul_team?",t.durchwahl,t.handy":"")
 		,$joins);
