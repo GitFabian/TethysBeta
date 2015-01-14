@@ -27,7 +27,7 @@ class suche{
 		global $page;
 
 		$form=new form("such","?",null,"suche");
-		$form->add_field(new form_field("such","Suche","","TEXT",null,null,"id_suche"));
+		$form->add_field(new form_field("such","Suche","[REQ]","TEXT",null,null,"id_suche"));
 		$form->set_blind();
 		$page->focus="input[type=text]";
 		
