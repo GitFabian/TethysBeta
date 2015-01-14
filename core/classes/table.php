@@ -165,7 +165,7 @@ class datatable{
 	}
 	function get_execute($varname=null){
 		$options="'bLengthChange':false,"
-				."'aaSorting':[],"
+				."'aaSorting':[],"//Initial Sorting/Default Sorting
 // 				."'iDisplayLength':15,"
 				."language:{url:'".ROOT_HTTP_CORE."/core/html/jquery.dataTables.German.json'},"
 			;

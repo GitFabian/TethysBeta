@@ -40,6 +40,10 @@ if ($view=="core"){
 	}
 	if ($persoenlich) $form->add_fields("Persönliche Daten", $persoenlich);
 	
+	$form->add_fields("", array(
+		new form_field("mscsv","CSV für MS",setting_get_user(null, "MSCSV"),"CHECKBOX"),
+	));
+	
 	if ($form->field_groups)
 		$page->add_html($form->toHTML());
 }else if(isset($modules[$view])){
@@ -61,6 +65,7 @@ function core_user_update(){
 // // 			"raum"=>request_value("raum"),
 // 		));
 	}
+	setting_save(null, "MSCSV", request_value("mscsv"), true);
 	ajax_refresh("Speichere Daten...", "user.".CFG_EXTENSION."?cmd=updated");
 }
 ?>

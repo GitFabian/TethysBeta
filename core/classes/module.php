@@ -57,8 +57,9 @@ class module{
 		return false;
 	}
 	
-	static function edit_form_field($form,$query,$key,$label=null,$type='TEXT',$options=null){
+	static function edit_form_field($form,$query,$key,$label=null,$type='TEXT',$options=null,$maxlength=null){
 		$form->add_field($ff=new form_field($key,$label,request_value($key,(isset($query[$key])?$query[$key]:"")),$type,null,$options));
+		if($maxlength!==null)$ff->maxlength=$maxlength;
 		return $ff;
 	}
 	
