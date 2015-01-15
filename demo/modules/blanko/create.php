@@ -28,7 +28,7 @@ class modul_$id extends module{
 	
 	function get_menu(\$page_id){
 		\$menu=new menu(null,\"$id\",\$page_id,\"$name\");
-		new menu_topic(\$menu,\"${id}_$index_id\",\$page_id,\"$index_name\",url_$id('$index_url'));
+		new menu_topic(\$menu,\"{$id}_$index_id\",\$page_id,\"$index_name\",url_$id('$index_url'));
 		return \$menu;
 	}
 	
@@ -47,6 +47,7 @@ class modul_$id extends module{
 
 	function get_edit_right(\$table,\$id){
 		if (USER_ADMIN) echo(\"Nicht implementiert: Funktion \\\"\".__FUNCTION__.\"\\\" in Modul \\\"\".\$this->modul_name.\"\\\"!\");
+		#if (\$table=='{$id}_duhshrubbery'){return USER_ADMIN;}
 		#if (\$table=='demo_lorumipsum'){return berechtigung('RIGHT_DEMOMGMT');}
 		if (USER_ADMIN) echo\"Kein edit_right für \$table!\";
 		return false;
@@ -106,9 +107,20 @@ function url_$id(\$page){
 	
 	$index_file="<?php
 include_once '../../config_start.php';
-\$page->init('${id}_$index_id','$index_name');
+\$page->init('{$id}_$index_id','$index_name');
+include_once ROOT_HDD_CORE.'/core/classes/table.php';
 
+\$query=dbio_SELECT(\"{$id}_duhshrubbery\");
+\$data=array();
+foreach (\$query as \$row) {
+	\$data[]=\$row;
+}
+\$table=new table(\$data);
+\$table->details=true;//ROOT_HTTP_MODULES.\"/$id/duhshrubbery.\".CFG_EXTENSION.\"?id=[ID:id]\";
+\$table->set_options(true, true, true, \"{$id}_duhshrubbery\");
 
+\$page->say(html_header1(\"$index_name\"));
+\$page->say(\$table);
 
 page_send_exit();//===============================================================================
 ?>";
