@@ -150,6 +150,7 @@ function core_settings_update2($modul){
 	request_extract_booleans2();
 	foreach ($_REQUEST as $key => $value) {
 		if ($modul===null&&$key=='CFG_MODULES')$value=implode(",", $value);
+		else if (substr($key,0,7)=='ARRAY1_'){$value=implode(",", $value);}
 		if (setting_save($modul, $key, $value, false)) $n++;
 	}
 	ajax_refresh("Speichere Konfiguration...", "settings.".CFG_EXTENSION."?view=$view&cmd=updated&n=$n");
