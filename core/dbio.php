@@ -203,12 +203,13 @@ class query{
 	
 		if ($leftjoins){
 			foreach ($leftjoins as $join) {
-				$field=(strpos($join->field,".")===false?"`$db`.".$join->field:$join->field);
-				if ($join->as){
-					$anfrage.=" LEFT JOIN `".$join->table."` AS ".$join->as." ON $field=".$join->as.".".$join->id;
-				}else{
-					$anfrage.=" LEFT JOIN `".$join->table.                 "` ON $field=".              $join->id;
-				}
+				$anfrage.=$join->toSQL($db);
+// 				$field=(strpos($join->field,".")===false?"`$db`.".$join->field:$join->field);
+// 				if ($join->as){
+// 					$anfrage.=" LEFT JOIN `".$join->table."` AS ".$join->as." ON $field=".$join->as.".".$join->id;
+// 				}else{
+// 					$anfrage.=" LEFT JOIN `".$join->table.                 "` ON $field=".              $join->id;
+// 				}
 			}
 		}
 	
@@ -235,6 +236,16 @@ class dbio_leftjoin{
 		$this->table=$table;
 		$this->field=$field;
 		$this->id=$id;
+	}
+	
+	function toSQL($db=null){
+		$field=(strpos($this->field,".")===false&&$db?"`$db`.".$this->field:$this->field);
+		if ($this->as){
+			$anfrage=" LEFT JOIN `".$this->table."` AS ".$this->as." ON $field=".$this->as.".".$this->id;
+		}else{
+			$anfrage=" LEFT JOIN `".$this->table.                 "` ON $field=".              $this->id;
+		}
+		return $anfrage." ";
 	}
 
 }
