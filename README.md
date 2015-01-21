@@ -17,4 +17,3 @@ TODO:
 BUGS:
 * Hauptmenü-Datei bei der Installation falsch angegeben->Installer nicht mehr zu retten
 * config_start in shared-verzeichnis!
-* erstellen von modul- und skin- verzeichnis während der installation in falschem verzeichnis? - GEFIXT?
