@@ -34,4 +34,14 @@ function alertify_prompt($message,$default="",$js_ok="",$js_cancel=""){
 	}, \"$default\");";
 }
 
+function alertify_confirm($message,$js_ok="",$js_cancel=""){
+	return "alertify.confirm(\"$message\", function (e) {
+	    if (e) {
+	        $js_ok
+	    } else {
+	        $js_cancel
+	    }
+	});";
+}
+
 ?>
