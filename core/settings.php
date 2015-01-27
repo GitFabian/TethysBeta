@@ -77,7 +77,8 @@ function setting_get_default($modul,$key){
 		if ($key=='FIREFOX_EXCLUSIVE') return "0";
 		if ($key=='FIREFOX_EXCLUSIV_MSG') return "Falscher Browser. Bitte <a href=\"https://www.mozilla.org/de/firefox/new/\">Firefox</a> installieren.";
 		if ($key=='MSCSV') return "0";
-		if (USER_ADMIN) echo "Kein Default-Value für \"$key\"! /core/settings.php:80";
+		if ($key=='MAIL_SUFFIX') return "@company.de";
+		if (USER_ADMIN) echo "Kein Default-Value für \"$key\"! /core/settings.php:81";
 		return null;
 	}else{
 		global $modules;
