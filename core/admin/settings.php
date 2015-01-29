@@ -85,6 +85,7 @@ settings_add_field($form,"CFG_HOME_URL","Startseite-URL",'TEXT');
 settings_add_field($form,"CFG_HOME_TITLE","Index-Titel",'TEXT');
 if(!function_exists('logon_message'))
 settings_add_field2($form,"LOGON_MSG","Logon Message",'TEXTAREA');
+settings_add_field2($form,"MAIL_SUFFIX","E-Mail Suffix",'TEXT');
 
 $form->add_fields("Aussehen",null);
 settings_add_field2($form,"CFG_SKIN","Skin",'SELECT',$skins);
