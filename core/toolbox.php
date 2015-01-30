@@ -360,6 +360,11 @@ function html_pre($html,$class=null){
 function html_code($html){
 	return html_pre($html,"code");
 }
+function html_code_span($html){
+	return htmlEntity('span', $html, array(
+			"class"=>"code",
+		));
+}
 function html_button($value,$class=null,$onClick=null,$id=null){
 	return htmlEntity2('input', array(
 			"type"=>"button",
