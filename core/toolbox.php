@@ -224,6 +224,8 @@ function include_chosen(){
 	if($ok)$page->onload_JS.="$('select.chosen').chosen();";
 }
 function chosen_select_multi($name,$options,$selecteds=null,$id=null,$onChange=null){
+	include_chosen();
+	
 	$onChange=($onChange?" onChange=\"$onChange\"":"");
 	$id=($id?" id=\"$id\"":"");
 	
