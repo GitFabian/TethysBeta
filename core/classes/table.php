@@ -187,6 +187,7 @@ class table_row{
 	
 	var $data;
 	var $sort_values=array();
+	var $highlight=false;
 	
 	function __construct($data=null){
 		$this->data=$data;
@@ -225,7 +226,8 @@ class table_row{
 			}
 			$tr.="\n\t\t\t<td>$line</td>";
 		}
-		return "\n\t\t<tr>$tr\n\t\t</tr>";
+		$highlight=($this->highlight?" class=\"highlight\"":"");
+		return "\n\t\t<tr$highlight>$tr\n\t\t</tr>";
 	}
 	
 }
