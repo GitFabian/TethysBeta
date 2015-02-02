@@ -64,7 +64,7 @@ function log_db_delete($modul,$tabelle,$zeile,$pars=null){
 
 function logs_for_entity($table,$row_id){
 	include_once ROOT_HDD_CORE.'/core/classes/table.php';
-	$query=dbio_SELECT("core_logs_dbedit","tabelle='$table' AND zeile='$row_id'");
+	$query=dbio_SELECT("core_logs_dbedit","tabelle='$table' AND zeile='$row_id'","*",null,"time",false);
 	$table=new table($query);
 	return (USER_ADMIN?html_header1("Verlauf").$table->toHTML():"");
 }
