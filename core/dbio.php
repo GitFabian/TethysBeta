@@ -124,6 +124,12 @@ function dbio_UPDATE($db,$where,$data){
 	dbio_query($anfrage);
 }
 
+function dbio_UPDATE_LOG($modul,$db,$zeile,$where,$data,$link_identifier=null){
+	include_once ROOT_HDD_CORE.'/core/log.php';
+	dbio_UPDATE($db,$where,$data,$link_identifier);
+	log_db_edit($modul, $db, $zeile, json_encode($data));
+}
+
 function dbio_UPDATE_groupMember($db,$new,$group,$gid,$user="user"){
 	$query_users=dbio_SELECT_keyValueArray($db, $user, 'id', "`$group`=$gid");
 
