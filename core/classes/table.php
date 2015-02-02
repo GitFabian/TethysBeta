@@ -79,6 +79,16 @@ class table{
 			$i++;
 		}
 	}
+
+	function set_highlight_ids($keys){
+		$i=0;
+		foreach ($this->rows as $row) {
+			if(isset($keys[$i])){
+				$row->highlight=true;
+			}
+			$i++;
+		}
+	}
 	
 	function add_query($query){
 		foreach ($query as $row) {

@@ -64,8 +64,27 @@ function log_db_delete($modul,$tabelle,$zeile,$pars=null){
 
 function logs_for_entity($table,$row_id){
 	include_once ROOT_HDD_CORE.'/core/classes/table.php';
-	$query=dbio_SELECT("core_logs_dbedit","tabelle='$table' AND zeile='$row_id'","*",null,"time",false);
-	$table=new table($query);
+	$query=dbio_SELECT("core_logs_dbedit","tabelle='$table' AND zeile='$row_id'",
+			"core_logs_dbedit.id,time,ip,action,pars,user"
+			.",u.nick",
+			array(
+				new dbio_leftjoin("user", "core_users", "u"),
+			),
+			"time",false);
+	$data=array();
+	foreach ($query as $row) {
+		$row['time']=preg_replace("/ /", "&nbsp;", format_Wochentag_Uhrzeit($row['time']));
+		$row['nick']=html_a($row['nick'], ROOT_HTTP_CORE."/core/admin/user.".CFG_EXTENSION."?id=".$row['user'])." (".$row['ip'].")";
+		$data[]=$row;
+	}
+	$table=new table($data);
+	$table->set_header(array(
+		"time"=>"time",
+		"nick"=>"nick",
+		"action"=>"action",
+		"pars"=>"pars",
+	));
+	$table->datatable->paginate=true;
 	return (USER_ADMIN?html_header1("Verlauf").$table->toHTML():"");
 }
 

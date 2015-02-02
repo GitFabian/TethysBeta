@@ -249,6 +249,7 @@ class dbio_leftjoin{
 		if ($this->as){
 			$anfrage=" LEFT JOIN `".$this->table."` AS ".$this->as." ON $field=".$this->as.".".$this->id;
 		}else{
+			#$anfrage=" LEFT JOIN `".$this->table.                 "` ON $field=`".$this->table."`.".$this->id;
 			$anfrage=" LEFT JOIN `".$this->table.                 "` ON $field=".              $this->id;
 		}
 		return $anfrage." ";
