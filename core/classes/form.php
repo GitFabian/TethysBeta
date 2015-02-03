@@ -243,7 +243,7 @@ class form_field{
 		}else if ($this->type=="DATUM"){
 			$id=($this->id?:get_next_id());
 			datepicker($id);
-			$input="<input$onChange id=\"$id\" type=\"text\" name=\"".$this->name."\" value=\"$thisvalue\" readonly />";
+			$input="<input$onChange id=\"$id\" type=\"text\" name=\"".$this->name."\" value=\"$thisvalue\" />";
 		}else if ($this->type=="RADIO"){
 			if($this->options){
 				$input.="<ul class=\"radio\">";
