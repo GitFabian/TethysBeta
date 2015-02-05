@@ -56,6 +56,9 @@ function edit_default_form($form,$query,$db,$idkey){
 				$ref_tbl=$infos[$key]['REFERENCED_TABLE_NAME'];
 				$ref_col=$infos[$key]['REFERENCED_COLUMN_NAME'];
 				$options=dbio_SELECT_asList($ref_tbl, format_default_for_column($ref_tbl,$ref_col), null, $ref_col);
+				if($col_info[$key]['Null']=="YES"){
+					$options=array_unshift_assoc($options, "null", "(-/-)");
+				}
 			}
 			
 			$form->add_field($ff=new form_field($key,null,$v,$typ,null,$options));
