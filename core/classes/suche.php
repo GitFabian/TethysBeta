@@ -66,4 +66,8 @@ class suche{
 	
 }
 
+function suche_sql_queriy_like($field,$q){
+	return "`$field` COLLATE utf8_general_ci LIKE '%".sqlEscape($q)."%'";
+}
+
 ?>
