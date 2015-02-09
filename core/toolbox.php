@@ -59,7 +59,7 @@ function request_extract_dates(){
 	foreach ($dates as $d) {
 		$value=false;
 		if (isset($_REQUEST[$d])){
-			$_REQUEST[$d]=format_datum_to_sql($_REQUEST[$d]);
+			$_REQUEST[$d]=$_REQUEST[$d]?format_datum_to_sql($_REQUEST[$d]):null;
 		}
 	}
 }
