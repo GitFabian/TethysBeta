@@ -81,7 +81,7 @@ if (request_command("do")){
 	$return=preg_replace("/\\[NEWID\\]/", $id, $return);
 	
 	if ($return){
-		ajax_refresh("Speichere Datensatz #$id...", $return);
+		ajax_refresh("Speichere Datensatz #$id...", $return, true, 2);
 	}else{
 		$page->message_ok("Datensatz #$id gespeichert.");
 		page_send_exit();
@@ -118,7 +118,7 @@ if (request_command("delete")){
 	}
 	
 	if ($return){
-		ajax_refresh("Lösche Datensatz #$id...", $return);
+		ajax_refresh("Lösche Datensatz #$id...", $return, true, 2);
 	}else{
 		page_send_exit("Datensatz #$id gelöscht.");
 	}

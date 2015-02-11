@@ -116,7 +116,12 @@ function sqlEscape($text){
 	return $text;
 }
 
-function ajax_refresh($msg,$url,$break=true){
+/**
+ * $wait_s
+ * =======
+ * Mail versenden: 2
+ */
+function ajax_refresh($msg,$url,$break=true,$wait_s=0){
 	global $page;
 	$page->content=$msg;
 	if (USER_ADMIN&&$break){
@@ -124,7 +129,11 @@ function ajax_refresh($msg,$url,$break=true){
 		include_jquery();
 		$page->focus="a.admin_back";
 	}else{
-		$page->onload_JS.="location.href='$url';";
+		if($wait_s){
+			$page->onload_JS.=js_runLater("location.href='$url';", $wait_s);
+		}else{
+			$page->onload_JS.="location.href='$url';";
+		}
 	}
 	page_send_exit();
 }
