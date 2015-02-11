@@ -138,3 +138,17 @@ function stop_css_position(id,elem){
 function startSpinner(){
 	document.getElementById('uploadSpinner').style.display="block";
 }
+
+/**
+"tethys_update_members(&quot;".ROOT_HTTP_MODULES."/xxxxMODULxxxx/ajax.".CFG_EXTENSION."&quot;,
+	&quot;update_member&quot;,&quot;xxxxIDxxxx&quot;,this,null);"
+ */
+function tethys_update_members(url,cmd,id,e,func){
+		if(func==null)func="alertify_ajax_response(response);";
+		ids=new Array();
+		$(e).find(':selected').each(function(){
+			ids.push($(this).val());
+		});
+		ids=ids.join(',');
+		tethys_ajax(url+"?cmd="+cmd+"&id="+id+"&ids="+ids,func);
+}
