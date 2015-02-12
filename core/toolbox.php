@@ -404,13 +404,14 @@ function html_url($link,$text=null,$external=false){
 	return html_a($text, $link, null, $external);
 }
 
-function html_a($html,$href,$class=null,$external=false,$onclick=null){
+function html_a($html,$href,$class=null,$external=false,$onclick=null,$title=null){
 	$pars=array(
 			"href"=>$href,
 			"class"=>$class,
 	);
 	if ($external) $pars["target"]="_blank";
 	if ($onclick) $pars["onclick"]=$onclick;
+	if ($title) $pars["title"]=$title;
 	return htmlEntity('a', $html, $pars);
 }
 function html_a_button($html,$href,$class=null,$onclick=null,$extern=false){
