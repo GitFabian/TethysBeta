@@ -814,4 +814,8 @@ function flowplayer($url){
 	return "<div class=\"flowplayer\"><video src=\"$url\"></video></div>";
 }
 
+function anchor($id){
+	return "<div class=\"tethys_anchor\" id=\"$id\"></div>";
+}
+
 ?>
