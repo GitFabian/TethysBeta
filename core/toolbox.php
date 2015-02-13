@@ -474,8 +474,12 @@ function format_datum_to_tm_j($string,$j=null,$Y='Y',$ts=false){
 
 function format_Wochentag_tm_j($string,$j=null,$Y='Y',$ts=false){
 	global $wochentage;
-	if(!$ts)$string=strtotime($string);
-	return $wochentage[date("w",$string)].", ".format_datum_to_tm_j($string, $j, $Y, $ts);
+	if($ts){
+		$time=$string;
+	}else{
+		$time=strtotime($string);
+	}
+	return $wochentage[date("w",$time)].", ".format_datum_to_tm_j($string, $j, $Y, $ts);
 }
 
 function format_datum_to_sql($string=null){
