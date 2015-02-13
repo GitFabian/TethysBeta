@@ -461,21 +461,21 @@ function format_Wochentag_Uhrzeit($time=null){
 function format_datum_to_tmj($string=null){
 	return date("j.n.Y",($string?strtotime($string):time()));
 }
-function format_datum_to_tm_j($string,$j=null,$Y='Y'){
+function format_datum_to_tm_j($string,$j=null,$Y='Y',$ts=false){
 	if($j===null)$j=date("Y");
-	$time=strtotime($string);
-	if($j==date("Y",$time)){
+	if(!$ts)$string=strtotime($string);
+	if($j==date("Y",$string)){
 		$format="j.n.";
 	}else{
 		$format="j.n.$Y";
 	}
-	return date($format,$time);
+	return date($format,$string);
 }
 
-function format_Wochentag_tm_j($string,$j=null,$Y='Y'){
+function format_Wochentag_tm_j($string,$j=null,$Y='Y',$ts=false){
 	global $wochentage;
-	$time=strtotime($string);
-	return $wochentage[date("w",$time)].", ".format_datum_to_tm_j($string, $j, $Y);
+	if(!$ts)$string=strtotime($string);
+	return $wochentage[date("w",$string)].", ".format_datum_to_tm_j($string, $j, $Y, $ts);
 }
 
 function format_datum_to_sql($string=null){
