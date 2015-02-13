@@ -44,6 +44,12 @@ if ($view=="core"){
 		new form_field("mscsv","CSV für MS",setting_get_user(null, "MSCSV"),"CHECKBOX"),
 	));
 	
+	if(setting_get(null, "CFG_UPROF_CMPCTVIEW")){
+		$form->add_field(
+			new form_field("CMPCTVIEW","Compact View",setting_get_user(null, "CMPCTVIEW"),"CHECKBOX")
+		);
+	}
+	
 	if ($form->field_groups)
 		$page->add_html($form->toHTML());
 }else if(isset($modules[$view])){
@@ -66,6 +72,7 @@ function core_user_update(){
 // 		));
 	}
 	setting_save(null, "MSCSV", request_value("mscsv"), true);
+	setting_save(null, "CMPCTVIEW", request_value("CMPCTVIEW"), true);
 	ajax_refresh("Speichere Daten...", "user.".CFG_EXTENSION."?cmd=updated");
 }
 ?>

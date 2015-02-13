@@ -80,6 +80,7 @@ class page{
 		$mm_class="";
 		if (setting_get(null, 'HM_ICONS')) $mm_class.=" icons";
 		if (!setting_get(null, 'HM_TEXT')) $mm_class.=" notext";
+		if (setting_get_user(null, "CMPCTVIEW")) $mm_class.=" cmpctview";
 		
 		$menu=($menu?"<div class=\"mainmenu$mm_class\">
 				$menu

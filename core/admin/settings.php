@@ -100,6 +100,7 @@ $form->add_field( new form_field("CFG_MODULES[]","Module",$modules,'SELECT_MULTI
 $form->add_fields("Benutzer",null);
 settings_add_field2($form,"CFG_EDIT_NICK","Eigenen Nick bearbeiten",'CHECKBOX');
 settings_add_field2($form,"CFG_EDIT_FILE","Stammdaten bearbeiten",'CHECKBOX');
+settings_add_field2($form,"CFG_UPROF_CMPCTVIEW","Compact View",'CHECKBOX');
 $form->add_field( new form_field("CFG_MAX_USERS","Maximale Benutzeranzahl",setting_get(null, 'CFG_MAX_USERS'),'TEXT',"setting_get(null,'CFG_MAX_USERS')") );
 settings_add_field2($form,"CFG_AUTHPATTERN","HTTP-Auth-Pattern",'TEXT');
 settings_add_field2($form,"CFG_MAILPATTERN","eMail-Pattern",'TEXT');
