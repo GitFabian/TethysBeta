@@ -77,10 +77,14 @@ class page{
 			$views="\n<ul$dev class=\"views_menu\">$views\n</ul>";
 		}
 		
+		$bodyclass="";
 		$mm_class="";
 		if (setting_get(null, 'HM_ICONS')) $mm_class.=" icons";
 		if (!setting_get(null, 'HM_TEXT')) $mm_class.=" notext";
-		if (setting_get_user(null, "CMPCTVIEW")) $mm_class.=" cmpctview";
+		if (setting_get_user(null, "CMPCTVIEW")){
+			$bodyclass=" class=\"cmpctview\"";
+			$mm_class.=" cmpctview";
+		}
 		
 		$menu=($menu?"<div class=\"mainmenu$mm_class\">
 				$menu
@@ -120,7 +124,7 @@ class page{
 	$this->head
 	$favicon
 </head>
-<body id="$this->page_id"$onload>
+<body id="$this->page_id"$onload$bodyclass>
 	$waitSpinner
 	<div class="outerbody">
 		$menu
