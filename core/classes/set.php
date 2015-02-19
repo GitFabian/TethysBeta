@@ -49,6 +49,7 @@ class set_card{
 	var $edit;
 	var $delete=true;
 	var $details;
+	var $class="";
 	function __construct($title,$infotext="",$picture="",$edit_db_=null,$details=null){
 		$this->header3=$title;
 		$this->infotext=$infotext;
@@ -70,7 +71,7 @@ class set_card{
 		$title="\n\t\t\t<h3>$this->header3</h3>";
 
 		if ($this->picture){
-			$picture="\n\t\t<div class=\"picture_wrapper\"><img src=\"$this->picture\" class=\"picture\" />$this->picture_more</div>";
+			$picture="\n\t\t<div class=\"picture_wrapper\"><img src=\"$this->picture\" class=\"picture $this->class\" />$this->picture_more</div>";
 		}else{
 			$picture="\n\t\t<div class=\"picture_wrapper leer\"></div>";
 		}
