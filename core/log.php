@@ -85,7 +85,7 @@ function logs_for_entity($table,$row_id){
 		"pars"=>"pars",
 	));
 	$table->datatable->paginate=true;
-	return (USER_ADMIN?html_header1("Verlauf").$table->toHTML():"");
+	return (USER_ADMIN&&!setting_get_user(null, "PRESENTATIONMODE")?html_header1("Verlauf").$table->toHTML():"");
 }
 
 ?>
