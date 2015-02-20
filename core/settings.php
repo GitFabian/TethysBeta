@@ -80,7 +80,8 @@ function setting_get_default($modul,$key){
 		if ($key=='MAIL_SUFFIX') return "@company.de";
 		if ($key=='CFG_UPROF_CMPCTVIEW') return "0";
 		if ($key=='CMPCTVIEW') return "0";
-		if (USER_ADMIN) echo "Kein Default-Value für \"$key\"! /core/settings.php:83";
+		if ($key=='PRESENTATIONMODE') return "0";
+		if (USER_ADMIN) echo "Kein Default-Value für \"$key\"! /core/settings.php:84";
 		return null;
 	}else{
 		global $modules;

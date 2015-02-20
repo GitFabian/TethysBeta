@@ -49,6 +49,8 @@ if ($view=="core"){
 			new form_field("CMPCTVIEW","Compact View",setting_get_user(null, "CMPCTVIEW"),"CHECKBOX")
 		);
 	}
+
+	if(USER_ADMIN)$form->add_field(new form_field("PRESENTATIONMODE","Präsentationsmodus",setting_get_user(null, "PRESENTATIONMODE"),"CHECKBOX"));
 	
 	if ($form->field_groups)
 		$page->add_html($form->toHTML());
@@ -73,6 +75,7 @@ function core_user_update(){
 	}
 	setting_save(null, "MSCSV", request_value("mscsv"), true);
 	setting_save(null, "CMPCTVIEW", request_value("CMPCTVIEW"), true);
+	setting_save(null, "PRESENTATIONMODE", request_value("PRESENTATIONMODE"), true);
 	ajax_refresh("Speichere Daten...", "user.".CFG_EXTENSION."?cmd=updated");
 }
 ?>
