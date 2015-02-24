@@ -71,9 +71,9 @@ class set_card{
 		$title="\n\t\t\t<h3>$this->header3</h3>";
 
 		if ($this->picture){
-			$picture="\n\t\t<div class=\"picture_wrapper\"><img src=\"$this->picture\" class=\"picture $this->class\" />$this->picture_more</div>";
+			$picture="\n\t\t<div class=\"picture_wrapper $this->class\"><img src=\"$this->picture\" class=\"picture\" />$this->picture_more</div>";
 		}else{
-			$picture="\n\t\t<div class=\"picture_wrapper leer\"></div>";
+			$picture="\n\t\t<div class=\"picture_wrapper $this->class leer\"></div>";
 		}
 		
 		$infotext="\n\t\t\t<div class=\"infotext\">$this->infotext</div>";
