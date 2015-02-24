@@ -185,9 +185,11 @@ if ($version<17){dbio_query("CREATE TABLE IF NOT EXISTS `core_listen` (
 
 if ($version<18){dbio_query("ALTER TABLE `core_users` DROP `durchwahl`, DROP `handy`, DROP `raum`;");}
 
+if ($version<19){dbio_query("ALTER TABLE `core_users` ADD `picture_landscape` BOOLEAN NOT NULL DEFAULT FALSE AFTER `picture` ;");}
+
 #if ($version<){dbio_query("");}
 
-$current_version=18;
+$current_version=19;
 //=================================================================================================
 dbio_query("UPDATE `core_meta_dbversion` SET `version` = '$current_version' WHERE `modul_uc` = 'CORE';");
 //=================================================================================================

@@ -1,9 +1,9 @@
 Tethys (Beta)
 =============
 
-Version 0.17.11
+Version 0.17.12
 
-Database-Version: 18
+Database-Version: 19
 
 TODO:
 * Widgets
