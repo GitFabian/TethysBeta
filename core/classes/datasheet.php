@@ -13,6 +13,7 @@ class datasheet{
 	var $db;
 	var $id;
 	var $datensatz;
+	var $buttons=array();
 	
 	function __construct($modul, $db, $id, $datensatz=null){
 		$this->modul=$modul;
@@ -34,7 +35,7 @@ class datasheet{
 		}
 		$data=implode("", $data);
 		
-		$buttons=array();
+		$buttons=$this->buttons;
 		$edit=($this->edit&&edit_rights($this->modul, $this->db, $this->id));
 		$datensatz=($this->datensatz?"&datensatz=".$this->datensatz:"");
 		if ($edit) $buttons[]=html_a_button("Bearbeiten",ROOT_HTTP_CORE."/core/edit.".CFG_EXTENSION."?db=".$this->db."&id=".$this->id.$datensatz);

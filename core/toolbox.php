@@ -822,4 +822,19 @@ function anchor($id){
 	return "<div class=\"tethys_anchor\" id=\"$id\"></div>";
 }
 
+/**
+ * $type=["DATUM"]
+ */
+function edit_data($query,$field,$else="",$type=""){
+	if (isset($_REQUEST[$field])){
+		$r=$_REQUEST[$field];
+	}else if (isset($query[$field])){
+		$r=$query[$field];
+		if($type=="DATUM")$r=date("j.n.Y",strtotime($r));
+	}else{
+		$r=$else;
+	}
+	return $r;
+}
+
 ?>
