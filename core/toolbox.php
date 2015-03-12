@@ -209,8 +209,9 @@ function include_jquery(){
 function include_jquery_ui(){
 	include_jquery();
 	global $page;
-	$page->add_library(ROOT_HTTP_CORE."/core/html/jquery-ui-1.11.2/jquery-ui.min.js");
+	$ok=$page->add_library(ROOT_HTTP_CORE."/core/html/jquery-ui-1.11.2/jquery-ui.min.js");
 	$page->add_stylesheet(ROOT_HTTP_CORE."/core/html/jquery-ui-1.11.2/jquery-ui.min.css");
+	return $ok;
 }
 
 function include_datatables(){
@@ -249,9 +250,16 @@ function chosen_select_multi($name,$options,$selecteds=null,$id=null,$onChange=n
 }
 
 function datepicker($id){
-	include_jquery_ui();
+	$ok=include_jquery_ui();
 	global $page;
 	$page->onload_JS.="\$('#$id').datepicker();";
+	if($ok)
+		$page->add_inline_script("$(document).ready(function(){\$(document).find('input[datum]').keypress(function(evt){ 
+        if(evt.which==44){
+            $(this).val($(this).val()+'.');
+            evt.preventDefault();
+        }
+    });});");
 }
 
 function html_checkbox($name=null,$checked=false,$js=null,$id=null,$onChange=null){
