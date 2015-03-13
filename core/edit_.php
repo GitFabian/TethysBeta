@@ -41,6 +41,9 @@ function edit_default_form($form,$query,$db,$idkey){
 				foreach (explode(",", substr($type,5,strlen($type)-6)) as $option) {
 					$o=trim($option,"'");
 					$options[$o]=$o;
+					if($col_info[$key]['Null']=="YES"){
+						$options=array_unshift_assoc($options, "null", "(-/-)");
+					}
 				}
 			}
 			else if ($type=='date'){
