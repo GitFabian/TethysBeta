@@ -1,4 +1,23 @@
 <?php
+/*
+
+$views=array(
+	new menu_topic2("core", CFG_TITLE),
+);
+$view=$page->init_views("core",$views);
+
+=====================================
+
+$views=array(new menu_topic2("core", CFG_TITLE));
+foreach ($modules as $mod_id=>$modul){
+	if ($modul->has_user_page){
+		$views[]=new menu_topic2($mod_id, $modul->modul_name);
+	}
+}
+$view=$page->init_views(setting_get_user(null,'SET_PGSEL_USERSETS'),$views);
+setting_save(null, 'SET_PGSEL_USERSETS', $view, true);
+
+ */
 include_once '../config_start.php';
 if(!USER_ADMIN)page_send_exit("Keine Berechtigung!");
 $page->init("core_view", "Datensatz Details");
