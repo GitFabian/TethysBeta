@@ -57,7 +57,9 @@ class page{
 		$onload=$this->onload_JS;
 		if ($this->focus){
 			include_jquery();
-			$onload.="window.setTimeout(&quot;$('$this->focus').first().focus();&quot;,$this->focus_delay);";
+			$delay=$this->focus_delay;
+			if(USER_ADMIN&&isset($_REQUEST['tethys_focus_delay']))$delay=$_REQUEST['tethys_focus_delay'];
+			$onload.="window.setTimeout(&quot;$('$this->focus').first().focus();&quot;,$delay);";
 		}
 		$onload=($onload?" onload=\"$onload\"":"");
 		
