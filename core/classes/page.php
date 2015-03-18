@@ -12,6 +12,7 @@ class page{
 	var $views;
 	var $focus;
 	var $focus_delay=500;//ms
+	var $focus_downward_compatibility=false;
 	var $messages=array();
 	var $head="";
 	var $waitSpinner=false;
@@ -59,7 +60,8 @@ class page{
 			include_jquery();
 			$delay=$this->focus_delay;
 			if(USER_ADMIN&&isset($_REQUEST['tethys_focus_delay']))$delay=$_REQUEST['tethys_focus_delay'];
-			$onload.="window.setTimeout(&quot;$('$this->focus').first().focus();&quot;,$delay);";
+			$downward=($this->focus_downward_compatibility?".first()":"");
+			$onload.="window.setTimeout(&quot;$('$this->focus')$downward.focus();&quot;,$delay);";
 		}
 		$onload=($onload?" onload=\"$onload\"":"");
 		
