@@ -249,7 +249,7 @@ class form_field{
 				$input.="<ul class=\"radio\">";
 				foreach ($this->options as $key=>$value) {
 					$selected=($this->value==$key?" checked":"");
-					$input.="\n<li><input$id type=\"radio\"$selected name=\"".$this->name."\" value=\"$key\" /><span class=\"label radio\">$value</span></li>";
+					$input.="\n<li><input$id$onChange type=\"radio\"$selected name=\"".$this->name."\" value=\"$key\" /><span class=\"label radio\">$value</span></li>";
 				}
 				$input.="</ul>";
 			}

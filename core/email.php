@@ -60,7 +60,10 @@ function email_send($id){
 	$commandline.=' -html';
 	$commandline.=' -noh2';
 	if ($attachment){
-		$commandline.=' -attach "'.preg_replace("/\\//", "\\", $attachment).'"';
+		$attachments=explode("|", $attachment);
+		foreach ($attachments as $attachment) {
+			$commandline.=' -attach "'.preg_replace("/\\//", "\\", $attachment).'"';
+		}
 	}
 	if ($sender) $commandline.=' -replyto "'.blat_escape($sender).'"';
 	if ($bcc) $commandline.=' -bcc '.$bcc;
