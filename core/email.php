@@ -6,7 +6,7 @@ include_once ROOT_HDD_CORE.'/core/email.php';
 
 define('BLAT_EXE',ROOT_HDD_CORE.'/core/email/blat.exe');
 
-function email_create_schedule_send($to,$title,$body,$sender=null,$ajax=false){
+function email_create_schedule_send($to,$title,$body,$sender=null,$ajax=false,$attachment=null){
 	if(!setting_get(null, 'MAIL_SERVER'))return false;
 	global $page;
 	if (!$to){
@@ -20,7 +20,7 @@ function email_create_schedule_send($to,$title,$body,$sender=null,$ajax=false){
 		"message"=>$body,
 		"sent"=>null,
 		"subject"=>$title,
-		"attachment"=>null,
+		"attachment"=>$attachment,
 		"replyto"=>$sender,
 	));
 	if($ajax){
