@@ -37,6 +37,7 @@ foreach ($users as $u) {
 foreach ($query as $row) {
 	$uid=$row['user'];
 	$rid=$row['rolle'];
+	if(isset($data[$uid][$rid]))//Inaktive Benutzer auslassen
 	$data[$uid][$rid]=html_checkbox(null,true,"rolleSetzen(this,'$uid','$rid');");
 }
 $table=new table($data);
