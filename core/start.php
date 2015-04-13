@@ -70,6 +70,9 @@ module_read();
  * Benutzerkonfiguration
  */
 $page->add_stylesheet(CFG_SKINPATH."/screen.css");
+if (file_exists(CFG_SKINDIR."/print.css")){
+	$page->add_stylesheet(CFG_SKINPATH."/print.css",(isset($_REQUEST["printview"])?null:"print"));
+}
 foreach ($modules as $mod_id => $module) {
 	if (file_exists(CFG_SKINDIR."/mod_$mod_id.css")){
 		$page->add_stylesheet(CFG_SKINPATH."/mod_$mod_id.css");
