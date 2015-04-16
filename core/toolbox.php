@@ -845,4 +845,39 @@ function edit_data($query,$field,$else="",$type=""){
 	return $r;
 }
 
+function dirlist($dir,$excludes=null,$link=null,$header="Datei-Anhänge"){
+	include_once ROOT_HDD_CORE.'/core/classes/table.php';
+	$html=html_header1($header);
+	if (file_exists($dir)){
+		$files=scandir($dir);
+	}else{
+		$files=array();
+	}
+	$filenames=array();
+	foreach ($files as $file) {
+		$filenames[$file]=$file;
+	}
+	unset($filenames["."]);
+	unset($filenames[".."]);
+	if($excludes){
+		foreach ($excludes as $excl) {
+			unset($filenames[$excl]);
+		}
+	}
+	$data=array();
+	foreach ($filenames as $file) {
+		$d=array(
+				"Name"=>$file,
+		);
+		if($link){
+			$filelink=preg_replace("/\\[FILE\\]/", $file, $link);
+			$d["Name"]=html_a($d["Name"], $filelink);
+		}
+		$data[]=$d;
+	}
+	$table=new table($data);
+	$html.=$table->toHTML();
+	return $html;
+}
+
 ?>
