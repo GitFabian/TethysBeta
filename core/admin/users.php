@@ -15,7 +15,7 @@ $joins=array();
 if($modul_inventur)$joins[]=new dbio_leftjoin("id", "inventur_user", "i");
 if($modul_team)$joins[]=new dbio_leftjoin("id", "team_user_file", "t");
 $query=dbio_SELECT("core_users",null,
-		"core_users.id,active,nachname,vorname,http_auth,nick,email"
+		"core_users.id,active,nachname,vorname,http_auth,nick,email,geb"
 		.($modul_inventur?",i.raum":"")
 		.($modul_team?",t.durchwahl,t.handy":"")
 		,$joins);
@@ -27,6 +27,7 @@ if(USER_ADMIN){
 $data=array();
 foreach ($query as $row) {
 	if(!isset($query_exclude[$row['id']]))
+	$row["geb"]=$row["geb"]?date("j.n.Y",strtotime($row["geb"])):"";
 	$data[]=$row;
 }
 $table=new table($data);

@@ -24,7 +24,8 @@ function get_edit_form($form,$db,$id,$query){
 		$pass_field=module::edit_form_field($form,$query,'password',"Passwort".autofill_password($nid=get_next_id()));
 		$pass_field->id=$nid;
 		
-		module::edit_form_field($form,$query,'geb',"Geburtstag","DATUM");
+		#module::edit_form_field($form,$query,'geb',"Geburtstag","DATUM");
+		$form->add_field(new form_field("geb","Geburtstag",$query["geb"]?date("j.n.Y",strtotime($query["geb"])):"","DATUM"));
 		
 		module::edit_form_field($form,$query,'picture',"Bild");
 // 		module::edit_form_field($form,$query,'durchwahl',"Durchwahl");
