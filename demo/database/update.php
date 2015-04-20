@@ -187,9 +187,11 @@ if ($version<18){dbio_query("ALTER TABLE `core_users` DROP `durchwahl`, DROP `ha
 
 if ($version<19){dbio_query("ALTER TABLE `core_users` ADD `picture_landscape` BOOLEAN NOT NULL DEFAULT FALSE AFTER `picture` ;");}
 
+if ($version<20){dbio_query("ALTER TABLE `core_users` ADD `geb` DATE NULL ;");}
+
 #if ($version<){dbio_query("");}
 
-$current_version=19;
+$current_version=20;
 //=================================================================================================
 dbio_query("UPDATE `core_meta_dbversion` SET `version` = '$current_version' WHERE `modul_uc` = 'CORE';");
 //=================================================================================================
