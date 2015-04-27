@@ -89,9 +89,11 @@ while($from<$too){
 			$headers[$right_id]=$header;
 		}
 		foreach ($query_user_right as $right) {
-			$rights_grid[$right['user']][$right['right']]=rights_checkbox(true,$right['user'],$right['right']);
-			$table->rows[$right['user']]->data[$right['right']]=rights_checkbox(true,$right['user'],$right['right']);
-			$table->rows[$right['user']]->sort_values[$right['right']]=1;
+			if(isset($table->rows[$right['user']])){
+				$rights_grid[$right['user']][$right['right']]=rights_checkbox(true,$right['user'],$right['right']);
+				$table->rows[$right['user']]->data[$right['right']]=rights_checkbox(true,$right['user'],$right['right']);
+				$table->rows[$right['user']]->sort_values[$right['right']]=1;
+			}
 		}
 		
 		// $table = new table($rights_grid);
