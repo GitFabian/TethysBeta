@@ -175,12 +175,15 @@ div.mainmenu > ul{
 	margin:0px;
 	padding:0px;
 	background:url(img/core/mm_bg1.png) repeat-x;
+	padding-top:10px;
 }
 /* Menüpunkte: */
 div.mainmenu > ul > li{
 	display:inline-block;
 	height:63px;
 	padding-top:20px;
+	margin-top:-10px;
+	margin-bottom:-46px;/*Für die zweite Zeile*/
 }
 div.mainmenu > ul > li > a,
 div.mainmenu > ul > li > div.submenulabel{
