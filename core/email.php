@@ -6,7 +6,7 @@ include_once ROOT_HDD_CORE.'/core/email.php';
 
 define('BLAT_EXE',ROOT_HDD_CORE.'/core/email/blat.exe');
 
-function email_create_schedule_send($to,$title,$body,$sender=null,$ajax=false,$attachment=null){
+function email_create_schedule_send($to,$title,$body,$sender=null,$ajax=false,$attachment=null,$bccs=null){
 	if(!setting_get(null, 'MAIL_SERVER'))return false;
 	global $page;
 	if (!$to){
@@ -22,6 +22,7 @@ function email_create_schedule_send($to,$title,$body,$sender=null,$ajax=false,$a
 		"subject"=>$title,
 		"attachment"=>$attachment,
 		"replyto"=>$sender,
+		"bccs"=>$bccs,
 	));
 	if($ajax){
 		email_send(mysql_insert_id());
@@ -40,7 +41,13 @@ function email_send($id){
 	
 	$message_body=$msg['message'];
 	$attachment=$msg['attachment'];
-	$bcc=setting_get(null, 'MAIL_BCC');
+	
+	$bcc=array();
+	$bccP=setting_get(null, 'MAIL_BCC');
+	if($bccP)$bcc[]=$bccP;
+	$bccs=$msg['bccs'];
+	if($bccs)foreach (explode(",", $bccs) as $b) {$bcc[]=$b;}
+	
 	$sender=$msg['replyto'];
 	
 	$commandline='"'.BLAT_EXE.'"';
@@ -66,7 +73,7 @@ function email_send($id){
 		}
 	}
 	if ($sender) $commandline.=' -replyto "'.blat_escape($sender).'"';
-	if ($bcc) $commandline.=' -bcc '.$bcc;
+	if ($bcc) $commandline.=' -bcc '.implode(",", $bcc);
 	
 	$commandline.=' 2>&1 >"'.$history_dir.'/output.txt"';
 	

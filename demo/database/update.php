@@ -189,9 +189,11 @@ if ($version<19){dbio_query("ALTER TABLE `core_users` ADD `picture_landscape` BO
 
 if ($version<20){dbio_query("ALTER TABLE `core_users` ADD `geb` DATE NULL ;");}
 
+if ($version<21){dbio_query("ALTER TABLE `core_mails` ADD `bccs` VARCHAR( 500 ) NULL ;");}
+
 #if ($version<){dbio_query("");}
 
-$current_version=20;
+$current_version=21;
 //=================================================================================================
 dbio_query("UPDATE `core_meta_dbversion` SET `version` = '$current_version' WHERE `modul_uc` = 'CORE';");
 //=================================================================================================
