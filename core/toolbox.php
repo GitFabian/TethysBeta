@@ -880,4 +880,13 @@ function dirlist($dir,$excludes=null,$link=null,$header="Datei-Anhänge"){
 	return $html;
 }
 
+function array_val2key($array_vals){
+	$array_keys=array();
+	if($array_vals)
+	foreach ($array_vals as $value) {
+		$array_keys[$value]=true;
+	}
+	return $array_keys;
+}
+
 ?>
