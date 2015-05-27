@@ -38,9 +38,11 @@ $global_id_counter=0;
 /*
  * Login
  */
-$user=null;
-include_once ROOT_HDD_CORE.'/core/login.php';
-login();
+if (!isset($standalone_logon)){
+	$user=null;
+	include_once ROOT_HDD_CORE.'/core/login.php';
+	login();
+}
 
 /*
  * Berechtigungen
@@ -90,6 +92,7 @@ include_once setting_get(null,'CFG_HAUPTMENUE');
 /*
  * Kompatibilität
  */
+if (!isset($standalone_logon))
 if(setting_get(null, "FIREFOX_EXCLUSIVE")){
 	include_once ROOT_HDD_CORE.'/core/classes/userAgent.php';
 	if(!userAgent::is_firefox()){

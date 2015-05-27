@@ -66,6 +66,11 @@ class module{
 	function format_default_for_column($table,$column){
 		return "[$column]";
 	}
+	
+	function send_chronjob($command,$value){
+		if (USER_ADMIN) echo("Nicht implementiert: Funktion \"".__FUNCTION__."\" in Modul \"".$this->modul_name."\"!");
+		return null;
+	}
 }
 
 function new_form_field($modul,$key,$label,$type,$options=null){

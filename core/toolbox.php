@@ -889,4 +889,25 @@ function array_val2key($array_vals){
 	return $array_keys;
 }
 
+/**
+
+$configOnly=true;
+include_once '../../config_start.php';
+include_once ROOT_HDD_CORE.'/core/toolbox.php';
+standalone_start(array(
+	"id"=>"0",
+	"nick"=>"Tethys",
+));
+include_once ROOT_HDD_CORE.'\\core\\start.php';
+$page->init("tethys_", "Tethys");
+
+ */
+function standalone_start($autouser){
+	global $standalone_logon,$user;
+	$standalone_logon=true;
+	$user=$autouser;
+	define('USER_ID', $user['id']);
+	define('USER_NICK', $user['nick']);
+}
+
 ?>

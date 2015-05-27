@@ -26,6 +26,7 @@ function edit_rights_core($db,$id){
 	if ($db=="core_rollen"){
 		return USER_ADMIN;
 	}
+	if ($db=="core_chronjobs"){ return USER_ADMIN; }
 	if ($db=="core_user_rolle"){
 		return berechtigung('RIGHT_USERMGMT');
 	}
