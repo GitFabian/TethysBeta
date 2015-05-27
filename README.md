@@ -1,17 +1,15 @@
 Tethys (Beta)
 =============
 
-Version 0.17.14
+Version 0.17.15
 
-Database-Version: 21
+Database-Version: 22
 
 TODO:
 * Widgets
 * LDAP-Authentifizierung
 * Upload-UI
 * Generische members_direct-Tabelle
-* SMS
-* Excel-Export
 
 BUGS:
 * Hauptmenü-Datei bei der Installation falsch angegeben->Installer nicht mehr zu retten

@@ -191,9 +191,21 @@ if ($version<20){dbio_query("ALTER TABLE `core_users` ADD `geb` DATE NULL ;");}
 
 if ($version<21){dbio_query("ALTER TABLE `core_mails` ADD `bccs` VARCHAR( 500 ) NULL ;");}
 
+if ($version<22){
+	dbio_query("CREATE TABLE IF NOT EXISTS `core_chronjobs` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `schedule` int(11) NOT NULL,
+  `sent` int(11) DEFAULT NULL,
+  `modul` varchar(100) COLLATE utf8_bin NOT NULL,
+  `command` varchar(100) COLLATE utf8_bin NOT NULL,
+  `value` text COLLATE utf8_bin NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;");
+}
+
 #if ($version<){dbio_query("");}
 
-$current_version=21;
+$current_version=22;
 //=================================================================================================
 dbio_query("UPDATE `core_meta_dbversion` SET `version` = '$current_version' WHERE `modul_uc` = 'CORE';");
 //=================================================================================================
