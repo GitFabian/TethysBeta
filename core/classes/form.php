@@ -154,8 +154,8 @@ class form_field_info extends form_field{
 	function toHTML(){
 		$title=($this->title?" title=\"".encode_html($this->title)."\"":"");
 		$id=($this->id?" id=\"".$this->id."\"":"");
-		return "<div class=\"form_field info ".$this->outer_class."\"><label for=\"".$this->name."\"$title>".$this->label."</label><pre>$this->value</pre></div>"
-				.($this->submit_value?"<input type=\"hidden\" name=\"$this->name\" value=\"$this->submit_value\"$id>":"")
+		return "<div class=\"form_field info ".$this->outer_class."\"><label for=\"".$this->name."\"$title>".$this->label."</label><pre$id>$this->value</pre></div>"
+				.($this->submit_value?"<input type=\"hidden\" name=\"$this->name\" value=\"$this->submit_value\">":"")
 				;
 	}
 
