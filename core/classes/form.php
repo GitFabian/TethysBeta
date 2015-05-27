@@ -153,7 +153,8 @@ class form_field_info extends form_field{
 
 	function toHTML(){
 		$title=($this->title?" title=\"".encode_html($this->title)."\"":"");
-		return "<div class=\"form_field info ".$this->outer_class."\"><label for=\"".$this->name."\"$title>".$this->label."</label><pre>$this->value</pre></div>"
+		$id=($this->id?" id=\"".$this->id."\"":"");
+		return "<div class=\"form_field info ".$this->outer_class."\"><label for=\"".$this->name."\"$title$id>".$this->label."</label><pre>$this->value</pre></div>"
 				.($this->submit_value?"<input type=\"hidden\" name=\"$this->name\" value=\"$this->submit_value\">":"")
 				;
 	}
@@ -239,7 +240,7 @@ class form_field{
 		}else if ($this->type=="PASSWORD"){
 			$input="<input$id type=\"password\" name=\"".$this->name."\" value=\"$thisvalue\" />";
 		}else if ($this->type=="TEXTAREA"){
-			$input="<textarea$id name=\"".$this->name."\">$thisvalue</textarea>";
+			$input="<textarea$id name=\"".$this->name."\"$onChange>$thisvalue</textarea>";
 		}else if ($this->type=="DATUM"){
 			$id=($this->id?:get_next_id());
 			datepicker($id);
