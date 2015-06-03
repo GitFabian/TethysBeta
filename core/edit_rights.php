@@ -37,8 +37,19 @@ function edit_rights_core($db,$id){
 function edit_rights2($db,$id){
 	global $modules;
 	$modul=substr($db, 0, strpos($db, "_"));
+	/*
+	 * Modul "a_b", Tabelle "c_d":
+	 * ::_a_b,c_d
+	 */
+	if($modul=="::"){
+		$mod_db=explode(",", $db);
+		$modul=substr($mod_db[0], 3);
+		$db=$mod_db[1];
+// 		echo "Modul=$modul<br>";
+// 		echo "DB=$db<br>";
+	}
 	if ($modul!='core'&&!isset($modules[$modul])){
-		if(USER_ADMIN){echo "Modul \"$modul\" nicht gefunden! edit_rights.php:31";return false;}
+		if(USER_ADMIN){echo "Modul \"$modul\" nicht gefunden! edit_rights.php:42";return false;}
 	}
 	return edit_rights($modul, $db, $id);
 }

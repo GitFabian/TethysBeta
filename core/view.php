@@ -28,12 +28,23 @@ include_once ROOT_HDD_CORE.'/core/classes/datasheet.php';
 $db=request_value("db");
 $id=request_value("id");
 
+$modul=substr($db, 0, strpos($db, "_"));
+/*
+ * Modul "a_b", Tabelle "c_d":
+ * ::_a_b,c_d
+*/
+$db0=$db;
+if($modul=="::"){
+	$mod_db=explode(",", $db);
+	$modul=substr($mod_db[0], 3);
+	$db=$mod_db[1];
+}
+
 $query=dbio_SELECT_SINGLE($db, $id);
 
 $form=new form(null,null,null,"datasheet");
 edit_default_form($form,$query,$db,'id');
 
-$modul=substr($db, 0, strpos($db, "_"));
 $datasheet=new datasheet($modul, $db, $id);
 $datasheet->edit=false;
 

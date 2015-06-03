@@ -39,8 +39,15 @@ class table{
 		return $this->toHTML();
 	}
 	
+	/**
+	 * @param string $db
+	 * Modul "a_b", Tabelle "c_d":
+	 * $db="::_a_b,c_d"
+	 * 
+	 * 
+	 */
 	function set_options($new,$edit,$delete,$db,$idkey='id',$datensatz=null,$and_return=null,$details=false){
-		include_once ROOT_HDD_CORE.'/core/edit_rights.php'; 
+		include_once ROOT_HDD_CORE.'/core/edit_rights.php';
 		$this->options=array();
 		$this->options2="";
 		if($details)$this->details=$details;

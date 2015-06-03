@@ -21,13 +21,23 @@ if (!$db){
 	page_send_exit();
 }
 
-if (!dbio_table_exists($db)){
-	page_send_exit("Datensatz nicht gefunden!");
-}
-
 $modul=substr($db, 0, strpos($db, "_"));
+/*
+ * Modul "a_b", Tabelle "c_d":
+ * ::_a_b,c_d
+ */
+$db0=$db;
+if($modul=="::"){
+	$mod_db=explode(",", $db);
+	$modul=substr($mod_db[0], 3);
+	$db=$mod_db[1];
+}
 if ($modul!='core'&&!isset($modules[$modul])){
 	page_send_exit("Modul \"$modul\" nicht gefunden!");
+}
+
+if (!dbio_table_exists($db)){
+	page_send_exit("Datensatz nicht gefunden!");
 }
 
 if (request_command("do")){
@@ -153,7 +163,7 @@ $referer=request_value("return",(isset($_SERVER['HTTP_REFERER'])?$_SERVER['HTTP_
 
 $form=new form("do","?",null,$db);
 $form->add_hidden("return", $referer);
-$form->add_hidden("db", $db);
+$form->add_hidden("db", $db0);
 $form->add_hidden("idkey", $idkey);
 $form->add_hidden($idkey, $id);
 if ($new_with_id)
