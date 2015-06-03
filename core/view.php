@@ -50,7 +50,7 @@ $datasheet->edit=false;
 
 foreach ($form->field_groups as $g) {
 	foreach ($g->fields as $field) {
-		$datasheet->add_data(new datasheet_data($field->name,$field->label, $field->value));
+		$datasheet->add_data(new datasheet_data($field->name,$field->label, html_pre($field->value) ));
 	}
 }
 
