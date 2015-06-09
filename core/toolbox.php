@@ -911,4 +911,15 @@ function standalone_start($autouser){
 	define('USER_NICK', $user['nick']);
 }
 
+function auto_reload($time){
+	global $page;
+	$page->message_info("Reload in T - <span id=\"reload_timer\"></span>...");
+	$page->add_inline_script(js_document_ready("reload_update();".js_runLater("reload_update();", 1, true)));
+	$page->add_inline_script("i=$time+1;function reload_update(){
+		i--;
+		$('#reload_timer').html(i);
+		if(i<=0)location.reload();
+	}");
+}
+
 ?>
