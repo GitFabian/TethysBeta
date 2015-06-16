@@ -1,5 +1,7 @@
 <?php
 
+if (isset($argv[1])&&strcasecmp($argv[1],"WRAPPER")==0) wrapper();
+
 $configOnly=true;
 include_once '../../config_start.php';
 include_once ROOT_HDD_CORE.'/core/toolbox.php';
@@ -43,4 +45,11 @@ foreach ($query_unsent_jobs as $job) {
 
 #$page->send();
 exit;//============================================================================================
+function wrapper(){
+	while (true) {
+		echo date("[y-m-d H:i:s]")." chronjobs_do...\n";
+		passthru("php chronjobs_do.php");
+		sleep(15);
+	}
+}
 ?>
