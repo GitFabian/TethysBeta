@@ -911,6 +911,12 @@ function standalone_start($autouser){
 	define('USER_NICK', $user['nick']);
 }
 
+/**
+ * <code>
+if(isset($_REQUEST["reload"])) auto_reload($_REQUEST["reload"]);
+ * </code>
+ * @param integer $time Time in seconds
+ */
 function auto_reload($time){
 	global $page;
 	$page->message_info("Reload in T - <span id=\"reload_timer\"></span>...");
@@ -920,6 +926,16 @@ function auto_reload($time){
 		$('#reload_timer').html(i);
 		if(i<=0)location.reload();
 	}");
+}
+
+function chronjob_schedule($schedule,$modul,$command,$value){
+	dbio_INSERT("core_chronjobs", array(
+		"schedule"=>$schedule,
+		"sent"=>null,
+		"modul"=>$modul,
+		"command"=>$command,
+		"value"=>$value,
+	));
 }
 
 ?>
