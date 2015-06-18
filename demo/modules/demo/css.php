@@ -11,12 +11,13 @@ $views=array(
 		new menu_topic2("two", "Tabellen"),
 		new menu_topic2("three", "Formular"),
 		new menu_topic2("datasheets", "Datenblatt / Set"),
+		new menu_topic2("charts", "Charts"),
 );
 $view=$page->init_views("one",$views);
 
 if ($view=="two"){ include 'tabelle.php'; }
 if ($view=="three"){ include 'formular.php'; }
-if ($view=="datasheets"){ include 'datasheets.php'; }
+if ($view=="datasheets"||$view=="charts"){ include "$view.php"; }
 
 $page->message_info("Info.");
 $page->message_ask("Frage?");

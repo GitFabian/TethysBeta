@@ -121,3 +121,50 @@ div.spinnerContent{
 	font-weight:bold;
 	text-align:center;
 }
+
+/*==================================================================
+    GANTT-CHARTS
+==================================================================*/
+
+div.gantt_chart{
+	position:relative;
+	overflow:auto;
+	background:white;
+	color:black;
+}
+div.gantt_legend{
+	background:white;
+	color:black;
+	float:left;
+}
+div.gantt_head{
+	height:100%;
+	position:absolute;
+	text-align:center;
+}
+div.gantt_head:nth-child(even){
+	background:#ccc;
+}
+span.gantt_head_text{
+	position:relative;
+	z-index:1;
+}
+div.gantt_bar{
+	display:inline-block;
+	border:1px solid black;
+	background:white;
+	height:10px;
+	position:relative;
+	z-index:1;
+}
+div.gantt_progress{
+	background:gray;
+	position:relative;
+	height:10px;
+}
+div.gantt_today{
+	position:absolute;
+	border-right:2px solid gray;
+	top:0px;
+	height:100%;
+}

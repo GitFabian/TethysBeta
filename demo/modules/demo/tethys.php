@@ -76,9 +76,8 @@ class modul_demo extends module{
 	}
 	
 	function get_edit_right($table,$id){
-		if ($table=='demo_lorumipsum'){
-			return berechtigung('RIGHT_DEMOMGMT');
-		}
+		if ($table=='demo_lorumipsum'){ return berechtigung('RIGHT_DEMOMGMT'); }
+		if ($table=='demo_projekt'){ return USER_ADMIN; }
 		if (USER_ADMIN) echo"Kein edit_right für $table!";
 		return false;
 	}

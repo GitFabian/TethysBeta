@@ -4,6 +4,18 @@
 include_once ROOT_HDD_CORE.'/core/classes/table.php';
 
 http://tethys-framework.de/wiki/?title=Tabelle
+
+$query=dbio_SELECT("sms1_duhshrubbery");
+$data=array();
+foreach ($query as $row) {
+	$data[]=$row;
+}
+$table=new table($data);
+$table->details=true;//ROOT_HTTP_MODULES."/sms1/duhshrubbery.".CFG_EXTENSION."?id=[ID:id]";
+$table->set_options(true, true, true, "sms1_duhshrubbery");
+$page->say(html_header1("Index"));
+$page->say($table);
+
  */
 
 class table{
