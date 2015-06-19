@@ -152,6 +152,14 @@ $view=$page->init_views('xxxxxDEFAULTIDxxxxxxx',array(
 	new menu_topic2('xxxxxxIDxxxxxxxx', "xxxxxxxxLABELxxxxxxx"),
 ));
 
+- oder -
+
+$views=array(
+	new menu_topic2("xxxxxxIDxxxxxxxx", "xxxxxxxxLABELxxxxxxx"),
+);
+$view=$page->init_views(setting_get_user(null,'USRSET_xxxxx'),$views);
+setting_save(null, 'USRSET_xxxxx', $view, true);
+
 	 *</code> 
 	 */
 	function init_views($default,$views){
