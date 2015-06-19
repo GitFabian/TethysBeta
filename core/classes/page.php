@@ -70,7 +70,7 @@ class page{
 			$this->messages[]=new message("CSS nicht aktuell! ".html_button("Neu laden",null,"location.reload();"),"error css_version v".CFG_CSS_VERSION);
 		}
 		
-		$devel_zeitmessung=(USER_ADMIN?$this::get_performance():"");
+		$devel_zeitmessung=(setting_get_user(null,"DEBUGMODE")?$this::get_performance():"");
 		
 		$views="";
 		if ($this->views){

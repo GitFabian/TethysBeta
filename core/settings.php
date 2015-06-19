@@ -81,7 +81,8 @@ function setting_get_default($modul,$key){
 		if ($key=='CFG_UPROF_CMPCTVIEW') return "0";
 		if ($key=='CMPCTVIEW') return "0";
 		if ($key=='PRESENTATIONMODE') return "0";
-		if (USER_ADMIN) echo "Kein Default-Value für \"$key\"! /core/settings.php:84";
+		if ($key=='DEBUGMODE') return "0";//Wichtig:Aus!
+		if (USER_ADMIN) echo "Kein Default-Value für \"$key\"! /core/settings.php:85";
 		return null;
 	}else{
 		global $modules;

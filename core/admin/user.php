@@ -51,6 +51,7 @@ if ($view=="core"){
 	}
 
 	if(USER_ADMIN)$form->add_field(new form_field("PRESENTATIONMODE","Präsentationsmodus",setting_get_user(null, "PRESENTATIONMODE"),"CHECKBOX"));
+	if(USER_ADMIN)$form->add_field(new form_field("DEBUGMODE","Debug-Modus",setting_get_user(null, "DEBUGMODE"),"CHECKBOX"));
 	
 	if ($form->field_groups)
 		$page->add_html($form->toHTML());
@@ -76,6 +77,7 @@ function core_user_update(){
 	setting_save(null, "MSCSV", request_value("mscsv"), true);
 	setting_save(null, "CMPCTVIEW", request_value("CMPCTVIEW"), true);
 	setting_save(null, "PRESENTATIONMODE", request_value("PRESENTATIONMODE"), true);
+	setting_save(null, "DEBUGMODE", request_value("DEBUGMODE"), true);
 	ajax_refresh("Speichere Daten...", "user.".CFG_EXTENSION."?cmd=updated");
 }
 ?>

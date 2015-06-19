@@ -124,7 +124,7 @@ function sqlEscape($text){
 function ajax_refresh($msg,$url,$break=true,$wait_s=0){
 	global $page;
 	$page->content=$msg;
-	if (USER_ADMIN&&$break){
+	if ($break && setting_get_user(null,"DEBUGMODE") ){
 		$page->say(html_div(html_a_button("Zurück", $url, "admin_back")));
 		include_jquery();
 		$page->focus="a.admin_back";
