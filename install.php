@@ -38,9 +38,9 @@ if(file_exists('config_start.php')){
 	define('CFG_EXTENSION', $extension);
 	$mydir=getcwd();
 	define('ROOT_HDD_CORE', $mydir);
-	define('ROOT_HDD_MODULES', $mydir.'\\modules');
-	define('ROOT_HDD_SKINS', $mydir.'\\skins');
-	define('ROOT_HDD_DATA', $mydir.'\\DATA');
+	define('ROOT_HDD_MODULES', $mydir.'/modules');
+	define('ROOT_HDD_SKINS', $mydir.'/skins');
+	define('ROOT_HDD_DATA', $mydir.'/DATA');
 	$http_core=substr($_SERVER["SCRIPT_NAME"],0,strrpos($_SERVER["SCRIPT_NAME"], "/"));
 	define('ROOT_HTTP_MODULES', $http_core.'/modules');
 	define('ROOT_HTTP_SKINS', $http_core.'/skins');
