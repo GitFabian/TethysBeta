@@ -130,7 +130,7 @@ function run($update){
 	//SQL-Server
 	if (!@mysql_connect($sql_server,$sql_user,$sql_pass)){
 		$fehler="Fehler bei SQL-Verbindung: ".mysql_error();
-	}else if(!file_exists($ROOT_HDD_CORE."\install.php")){
+	}else if(!file_exists($ROOT_HDD_CORE."/install.php")){
 		$fehler="Server-Verzeichnis nicht gefunden!";
 	}
 	
