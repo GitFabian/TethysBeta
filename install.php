@@ -190,7 +190,7 @@ return null;
 /*
  * Start
  */
-if (!isset(\$configOnly)) include_once ROOT_HDD_CORE.'\\\\core\\\\start.php';
+if (!isset(\$configOnly)) include_once ROOT_HDD_CORE.'/core/start.php';
 ENDE;
 	$config_file="<?php\n$config_file\n?>";
 	
