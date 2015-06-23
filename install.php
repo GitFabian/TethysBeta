@@ -198,8 +198,17 @@ ENDE;
 	fwrite($file, $config_file);
 	fclose($file);
 	
+	//Verweis auf config_start eine Ebene über den Modulen (Shared-Verzeichnis):
+	$verweis=dirname($ROOT_HDD_MODULES)."/config_start.php";
+	if (!file_exists($verweis)){
+		$file=fopen($verweis, "w");
+		fwrite($file, "<?php\n\ninclude_once '$ROOT_HDD_CORE2/config_start.php';\n\n?>");
+		fclose($file);
+	}
+	
 	if (!file_exists($ROOT_HDD_SKINS)){ mkdir($ROOT_HDD_SKINS); }
 	if (!file_exists($ROOT_HDD_MODULES)){ mkdir($ROOT_HDD_MODULES); }
+	if (!file_exists($ROOT_HDD_DATA)){ mkdir($ROOT_HDD_DATA); }
 	
 	$page->say(html_div("Konfigurationsdatei erstellt."));
 	if (!mysql_select_db($TETHYSDB)||!$update)
