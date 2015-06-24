@@ -3,6 +3,7 @@ $update=false;
 if(file_exists('config_start.php')){
 	include_once 'config_start.php';
 	if (!USER_ADMIN) page_send_exit("Keine Berechtigung!");
+	ini_set('display_errors', 'On');
 	$http_core=ROOT_HTTP_CORE;
 	$update=true;
 	
@@ -21,6 +22,7 @@ if(file_exists('config_start.php')){
 	$override=$matches[1];
 	
 }else{
+	ini_set('display_errors', 'On');
 	include_once 'core/classes/page.php';
 	include_once 'core/classes/menu.php';
 	include_once 'core/toolbox.php';
@@ -113,9 +115,25 @@ $form->add_fields("",array(
 		new form_field("override","Server-spezifische Konfiguration",request_value("override",$override),'TEXTAREA'),
 ));
 
-$page->say(html_header1(($update?"Server-Konfiguration":"Installation")));
-$page->say($form->toHTML());
+if($update){
 
+	$page->say(html_header1("Server-Konfiguration"));
+	
+	if(isset($_REQUEST["config_files"])){
+		$page->say(apache_config(ROOT_HDD_CORE, ROOT_HDD_MODULES, ROOT_HDD_SKINS, ROOT_HDD_DATA,
+				ROOT_HTTP_CORE, ROOT_HTTP_MODULES, ROOT_HTTP_SKINS, ROOT_HTTP_DATA,
+				CFG_EXTENSION));
+		page_send_exit();
+	}else{
+		$page->say(html_a("Config-Files", "?config_files"));
+	}
+	
+}else{
+
+	$page->say(html_header1("Installation"));
+
+}
+$page->say($form->toHTML());
 $page->send();
 exit;
 //===========================================================================
@@ -220,7 +238,18 @@ ENDE;
 	/*
 	 * Apache-Konfiguration
 	 */
-	$page->say(html_header1("Apache-Konfiguration"));
+	$page->say(apache_config($ROOT_HDD_CORE,$ROOT_HDD_MODULES,$ROOT_HDD_SKINS,$ROOT_HDD_DATA,
+		$ROOT_HTTP_CORE,$ROOT_HTTP_MODULES,$ROOT_HTTP_SKINS,$ROOT_HTTP_DATA,
+		$CFG_EXTENSION));
+	
+	page_send_exit();
+}
+
+function apache_config($ROOT_HDD_CORE,$ROOT_HDD_MODULES,$ROOT_HDD_SKINS,$ROOT_HDD_DATA,
+		$ROOT_HTTP_CORE,$ROOT_HTTP_MODULES,$ROOT_HTTP_SKINS,$ROOT_HTTP_DATA,
+		$CFG_EXTENSION){
+	$html="";
+	$html.=(html_header1("Apache-Konfiguration"));
 	$ROOT_HDD_CORE3=preg_replace("/\\\\/", "/", $ROOT_HDD_CORE);
 	$ROOT_HDD_MODULES3=preg_replace("/\\\\/", "/", $ROOT_HDD_MODULES);
 	$ROOT_HDD_SKINS3=preg_replace("/\\\\/", "/", $ROOT_HDD_SKINS);
@@ -238,7 +267,7 @@ END_ALIAS;
 			||substr($ROOT_HTTP_MODULES, 0, strlen($ROOT_HTTP_CORE))!=$ROOT_HTTP_CORE
 			||substr($ROOT_HDD_MODULES3, strlen($ROOT_HDD_CORE))!=substr($ROOT_HTTP_MODULES, strlen($ROOT_HTTP_CORE))
 			||substr($ROOT_HDD_MODULES3, strlen($ROOT_HDD_CORE), 1)!='/'
-			){
+	){
 		$alias_mod=<<<END_ALIAS_MOD
 Alias $ROOT_HTTP_MODULES "$ROOT_HDD_MODULES3"
 <Directory "$ROOT_HDD_MODULES3">
@@ -248,7 +277,7 @@ Alias $ROOT_HTTP_MODULES "$ROOT_HDD_MODULES3"
 END_ALIAS_MOD;
 		$aliasse=$alias_mod."\n\n".$aliasse;
 	}
-
+	
 	if (substr($ROOT_HDD_SKINS, 0, strlen($ROOT_HDD_CORE))!=$ROOT_HDD_CORE
 			||substr($ROOT_HTTP_SKINS, 0, strlen($ROOT_HTTP_CORE))!=$ROOT_HTTP_CORE
 			||substr($ROOT_HDD_SKINS3, strlen($ROOT_HDD_CORE))!=substr($ROOT_HTTP_SKINS, strlen($ROOT_HTTP_CORE))
@@ -263,7 +292,7 @@ Alias $ROOT_HTTP_SKINS "$ROOT_HDD_SKINS3"
 END_ALIAS_MOD;
 		$aliasse=$alias_skin."\n\n".$aliasse;
 	}
-
+	
 	$alias_data=<<<END_ALIAS_DATA
 Alias $ROOT_HTTP_DATA "$ROOT_HDD_DATA3"
 <Directory "$ROOT_HDD_DATA3">
@@ -284,15 +313,24 @@ END_REWRITE;
 	$info=<<<END_INFO
 LoadModule alias_module modules/mod_alias.so
 LoadModule rewrite_module modules/mod_rewrite.so
-
+	
 $aliasse
-
+	
 RewriteEngine on
 RewriteRule ^$ROOT_HTTP_DATA/(.*)\$ "$ROOT_HDD_CORE3/core/data.php?url=\$1"
 $rewrite#RewriteRule ^$ROOT_HTTP_CORE/export/(.*)\.csv\$ "$ROOT_HDD_CORE3/core/export_csv.php?db=\$1"
 END_INFO;
-	$page->say(html_code(encode_html($info)));
+
+	$html.=html_code(encode_html($info));
 	
-	page_send_exit();
+	$html.=html_header1("PHP-Konfiguration");
+	$info=<<<ENDE
+date.timezone = Europe/Berlin	
+ENDE;
+	$html.=html_code(encode_html($info));
+	
+	return($html);
+	
 }
+
 ?>
