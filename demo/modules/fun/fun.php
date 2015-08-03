@@ -21,7 +21,7 @@ function fun_sprichwortgenerator($ajax=true,$plain=false){
 		$content = file_get_contents("http://sprichwort.gener.at/or/");
 		
 		#$content=htmlentities($content);
-		$content=utf8_encode($content);
+// 		$content=utf8_encode($content);
 		preg_match("/<div class=\"spwort\"\\>(.*?)\\<\\/div\\>/", $content, $matches);
 		if (!isset($matches[1])){
 			return ((USER_ADMIN?"--- Sprichwortgenerator kaputt! ---":""));

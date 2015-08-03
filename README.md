@@ -11,6 +11,7 @@ TODO:
 * Upload-UI
 * Generische members_direct-Tabelle
 * Feeds
+* Form-Check (Prüf-Funktion übergeben)
 
 BUGS:
 (keine)
