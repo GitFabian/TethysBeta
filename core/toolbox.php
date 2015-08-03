@@ -938,4 +938,9 @@ function chronjob_schedule($schedule,$modul,$command,$value){
 	));
 }
 
+function focus_input(){
+	global $page;
+	$page->focus="input";
+}
+
 ?>
