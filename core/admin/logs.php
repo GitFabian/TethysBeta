@@ -12,6 +12,8 @@ $seite=(isset($_REQUEST['page'])?(($_REQUEST['page']-1)*500).",":"");
 $table=new table(dbio_query_to_array("SELECT * FROM `core_logs_dbedit` ORDER BY `time` DESC LIMIT {$seite} 500"));
 $page->say($table);
 
+if(isset($_REQUEST["reload"])) auto_reload($_REQUEST["reload"]);
+
 $page->send();
 exit;//============================================================================================
 ?>
