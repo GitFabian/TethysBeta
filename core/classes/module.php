@@ -71,6 +71,13 @@ class module{
 		if (USER_ADMIN) echo("Nicht implementiert: Funktion \"".__FUNCTION__."\" in Modul \"".$this->modul_name."\"!");
 		return null;
 	}
+	
+	function get_log_entry($action,$table,$row,$pars){
+		return new log_entry(
+				html_a("#".$row, ROOT_HTTP_CORE."/core/view.".CFG_EXTENSION."?db=".$table."&id=".$row),
+				$pars);
+	}
+
 }
 
 function new_form_field($modul,$key,$label,$type,$options=null){

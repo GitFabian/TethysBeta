@@ -943,4 +943,17 @@ function focus_input(){
 	$page->focus="input";
 }
 
+function combine_sort($array1,$array2,$sort_key,$asc=true){
+	global $t_cs_cmpval,$t_cs_sort_key;
+	$t_cs_cmpval=$asc?-1:1;
+	$t_cs_sort_key=$sort_key;
+	$r=$array1+$array2;
+	usort($r, function($a,$b){
+		global $t_cs_cmpval,$t_cs_sort_key;
+		if($a[$t_cs_sort_key]==$b[$t_cs_sort_key])return 0;
+		return ($a[$t_cs_sort_key]>$b[$t_cs_sort_key]?$t_cs_cmpval:-$t_cs_cmpval);
+	});
+	return $r;
+}
+
 ?>

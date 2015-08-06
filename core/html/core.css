@@ -168,3 +168,17 @@ div.gantt_today{
 	top:0px;
 	height:100%;
 }
+
+/*==================================================================
+    USER THUMBNAILS
+==================================================================*/
+
+div.userthumb_wrapper{
+	display:inline-block;
+	max-height:32px;
+	overflow:hidden;
+}
+div.userthumb_wrapper div img{
+	vertical-align:top;
+	width:32px;
+}

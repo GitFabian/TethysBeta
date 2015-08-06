@@ -82,6 +82,7 @@ function setting_get_default($modul,$key){
 		if ($key=='CMPCTVIEW') return "0";
 		if ($key=='PRESENTATIONMODE') return "0";
 		if ($key=='DEBUGMODE') return "0";//Wichtig:Aus!
+		if ($key=='LOG_VIEW_MODULES') return "";
 		if (USER_ADMIN) echo "Kein Default-Value für \"$key\"! /core/settings.php:85";
 		return null;
 	}else{

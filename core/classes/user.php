@@ -27,4 +27,8 @@ function get_user_picture_url($uid=USER_ID){
 		);
 }
 
+function get_user_thumb($uid=USER_ID){
+	return html_div(html_div("<img src=\"".get_user_picture_url($uid)."\" />"),"userthumb_wrapper");
+}
+
 ?>

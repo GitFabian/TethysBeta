@@ -132,6 +132,21 @@ function dbio_UPDATE_LOG($modul,$db,$zeile,$where,$data,$link_identifier=null){
 	log_db_edit($modul, $db, $zeile, json_encode($data));
 }
 
+function dbio_UPDATE_LOG_CHANGES($modul,$db,$id,$where,$data,$idkey="id",$link_identifier=null){
+	include_once ROOT_HDD_CORE.'/core/log.php';
+	$old=dbio_SELECT_SINGLE($db, $id, $idkey);
+	$delta=array();
+	foreach ($data as $key => $value) {
+		if($old[$key]!=$value&&!(($value===null||$value=='null')&&$old[$key]=='')){
+			$delta[$key]=$value;
+		}
+	}
+	if($delta){
+		dbio_UPDATE($db, "`$idkey`='$id'", $delta);
+		log_db_edit($modul, $db, $id, json_encode($delta));
+	}
+}
+
 function dbio_UPDATE_groupMember($db,$new,$group,$gid,$user="user"){
 	$query_users=dbio_SELECT_keyValueArray($db, $user, 'id', "`$group`=$gid");
 
