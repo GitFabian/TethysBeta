@@ -26,26 +26,29 @@ if(request_command("filter")){
 	// 	print_r(request_value("module"));
 	// 	echo implode(";", request_value("module"));
 	setting_save(null, "LOG_VIEW_MODULES", request_value("module")?implode(",",request_value("module")):"", true);
+	setting_save(null, "LOG_SHOW_MINE", request_value("mine"), true);
 }
 $filter=setting_get_user(null, "LOG_VIEW_MODULES");
 if($filter)$filter=explode(",",$filter);
+$eigene=setting_get_user(null, "LOG_SHOW_MINE");
 
 /*
  * DB-Edit
  */
-$where="";
+$where=array();
 if($filter){
-	$where="WHERE";
 	$w=array();
 	foreach ($filter as $f) {
 		$w[]="modul='$f'";
 	}
-	$where.=" ".implode(" OR ", $w);
+	$where[]="(".implode(" OR ", $w).")";
 }
+if(!$eigene)$where[]="user!=".USER_ID;
+if(!$where)$where[]="1";
 // echo "-$where-";
 $seite=request_value("page","1");
 $seite_sql=(isset($_REQUEST['page'])?(($_REQUEST['page']-1)*100).",":"");
-$query2=dbio_query_to_array("SELECT * FROM `core_logs_dbedit` $where ORDER BY `time` DESC LIMIT {$seite_sql} 100");
+$query2=dbio_query_to_array("SELECT * FROM `core_logs_dbedit` WHERE ".implode(" AND ", $where)." ORDER BY `time` DESC LIMIT {$seite_sql} 100");
 
 // $query=combine_sort($query1,$query2,"time");
 #$table=new table($query2);
@@ -80,7 +83,8 @@ function logs_entry($dat){
 }
 
 $blaettern="Seite ".$seite;
-$blaettern.=html_a_button("&gt;", "?page=".($seite+1));
+if(count($query2)>=100)
+	$blaettern.=html_a_button("&gt;", "?page=".($seite+1));
 if($seite>1){
 	$blaettern=html_a_button("&lt;", "?page=".($seite-1)).$blaettern;
 }
@@ -92,6 +96,7 @@ foreach ($modules as $key=>$modul) {
 	$modullist[$key]=$modul->modul_name;
 }
 $filterform->add_field(new form_field("module[]","Module",array_val2key($filter),"SELECT_MULTIPLE",null,$modullist));
+$filterform->add_field(new form_field("mine","Eigene Einträge anzeigen",$eigene,"CHECKBOX"));
 
 if(!isset($_REQUEST["reload"]))
 $page->say($filterform);
