@@ -75,15 +75,10 @@ class module{
 	function get_log_entry($action,$table,$id,$pars){
 		$link_html=html_a("#".$id, ROOT_HTTP_CORE."/core/view.".CFG_EXTENSION."?db=".$table."&id=".$id);
 		$message=htmlentities(string_kuerzen($pars,500));
-// 		if($table=="kunden_personen"){
-// 			$query_kunde=dbio_SELECT("kunden_personen", "kunden_personen.id='$id'", "vorname,nachname,kurzname,f.id as fid", array(
-// 					new dbio_leftjoin("firma", "kunden_firma", "f"),
-// 			));
-// 			if(!$query_kunde)return new log_entry( "<strike>".$link_html."</strike>", $message );
-// 			$query_kunde=$query_kunde[0];
-// 			$name=$query_kunde["vorname"]." ".$query_kunde["nachname"];
-// 			$link_html=html_a(trim($name)?:"???", url_kunden("kontakt")."?id=$id");
-// 			$link_html.=" (".html_a(trim($query_kunde["kurzname"])?:"???", url_kunden("firma0")."?id=".$query_kunde["fid"]).")";
+// 		if($table=="kunden_firma"){
+// 			$query=dbio_SELECT_SINGLE("kunden_firma", $id);
+// 			if(!$query)return new log_entry( "<strike>".$link_html."</strike>", $message );
+// 			$link_html=html_a(trim($query["name"])?:"???", url_kunden("firma0")."?id=$id");
 // 		}
 		return new log_entry( $link_html, $message );
 	}
