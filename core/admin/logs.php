@@ -54,33 +54,16 @@ $query2=dbio_query_to_array("SELECT * FROM `core_logs_dbedit` WHERE ".implode(" 
 #$table=new table($query2);
 $user_nicklist=dbio_SELECT_asList("core_users", "[nick]");
 $table="";
+$datum=0;
 foreach ($query2 as $dat) {
+	$dat_neu=floor($dat["time"]/86400);
+	if($datum!=$dat_neu){
+		$datum=$dat_neu;
+		$table.=html_header2(format_Wochentag_tm_j($datum*86400,null,"Y",true));
+	}
 	$table.=logs_entry($dat);
 }
 $table=html_div($table,"log_list");
-function logs_entry($dat){
-	global $user_nicklist,$modules;
-	$html="";
-	
-	if(!$dat["modul"]||$dat["modul"]=="core"||!isset($modules[$dat["modul"]])){
-		$log_entry=core_get_log_entry($dat["action"],$dat["tabelle"],$dat["zeile"],$dat["pars"]);
-	}else{
-		$log_entry=$modules[$dat["modul"]]->get_log_entry($dat["action"],$dat["tabelle"],$dat["zeile"],$dat["pars"]);
-	}
-	
-	$html.=html_div($dat["id"],"id");
-	$html.=html_div("<span title=\""
-			.($dat["user"]?$user_nicklist[$dat["user"]]." @ ":"")
-			.$dat["ip"]."\">".get_user_thumb($dat["user"])."</span>","user");
-	$html.=html_div(format_Wochentag_Uhrzeit($dat["time"]),"time");
-	$html.=html_div($dat["action"],"action");
-	$html.=html_div($dat["tabelle"],"tabelle");
-	$html.=html_div($log_entry->name_and_link,"zeile");
-	$html.=html_div($log_entry->description,"pars");
-	
-	$html=html_div($html,"log_entry");
-	return $html;
-}
 
 $blaettern="Seite ".$seite;
 if(count($query2)>=100)
@@ -114,6 +97,29 @@ class log_entry{
 		$this->name_and_link=$name_and_link;
 		$this->description=$description;
 	}
+}
+function logs_entry($dat){
+	global $user_nicklist,$modules;
+	$html="";
+	
+	if(!$dat["modul"]||$dat["modul"]=="core"||!isset($modules[$dat["modul"]])){
+		$log_entry=core_get_log_entry($dat["action"],$dat["tabelle"],$dat["zeile"],$dat["pars"]);
+	}else{
+		$log_entry=$modules[$dat["modul"]]->get_log_entry($dat["action"],$dat["tabelle"],$dat["zeile"],$dat["pars"]);
+	}
+	
+	$html.=html_div($dat["id"],"id");
+	$html.=html_div("<span title=\""
+			.($dat["user"]?$user_nicklist[$dat["user"]]." @ ":"")
+			.$dat["ip"]."\">".get_user_thumb($dat["user"])."</span>","user");
+	$html.=html_div(format_Wochentag_Uhrzeit($dat["time"]),"time");
+	$html.=html_div($dat["action"],"action");
+	$html.=html_div($dat["tabelle"],"tabelle");
+	$html.=html_div($log_entry->name_and_link,"zeile");
+	$html.=html_div($log_entry->description,"pars");
+	
+	$html=html_div($html,"log_entry");
+	return $html;
 }
 function core_get_log_entry($action,$table,$row,$pars){
 	return new log_entry(
