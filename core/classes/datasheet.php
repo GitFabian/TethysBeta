@@ -50,6 +50,28 @@ class datasheet{
 		return "\n<div class=\"datasheet $this->modul $this->db\">\n<ul class=\"datasheet\">$data\n</ul>$btn_html\n</div>";
 	}
 	
+	/**
+	 * DEFAULT DATASHEET PAGE:
+	 * <code>
+function crungely_detail($id){
+	include_once ROOT_HDD_CORE.'/core/classes/datasheet.php';
+	global $page;
+	
+	$query=dbio_SELECT_SINGLE("crungely_flobble",$id);
+	
+	$datasheet=datasheet::from_db("crungely", "crungely_flobble", $id);
+
+	$page->say(html_header1($query["razzle"]));
+	$page->say($datasheet);
+	
+	include_once ROOT_HDD_CORE.'/core/log.php';
+	$logs=logs_for_entity("crungely_flobble", $id);
+	$page->say($logs);
+	
+	page_send_exit();
+}
+	 * </code>
+	 */
 	static function from_db($modul, $db, $id, $query=null, $idkey='id'){
 		global $modules;
 		include_once ROOT_HDD_CORE.'/core/classes/form.php';
