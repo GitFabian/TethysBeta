@@ -26,6 +26,10 @@ body,div,th,td,h1,h2,h3,h4,hr,pre{
 	padding:0px;
 }
 
+h2 span.h2_right{
+	float:right;
+}
+
 ul{
 	margin:0px;
 	padding:0px 0px 0px 20px;

@@ -55,11 +55,13 @@ $query2=dbio_query_to_array("SELECT * FROM `core_logs_dbedit` WHERE ".implode(" 
 $user_nicklist=dbio_SELECT_asList("core_users", "[nick]");
 $table="";
 $datum=0;
+$heute=floor(time()/86400);
 foreach ($query2 as $dat) {
 	$dat_neu=floor($dat["time"]/86400);
 	if($datum!=$dat_neu){
 		$datum=$dat_neu;
-		$table.=html_header2(format_Wochentag_tm_j($datum*86400,null,"Y",true));
+		$table.=html_header2(format_Wochentag_tm_j($datum*86400,null,"Y",true)
+				."<span class=\"h2_right\">".format_days_delta($datum-$heute)."</span>");
 	}
 	$table.=logs_entry($dat);
 }
