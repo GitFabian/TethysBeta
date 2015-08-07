@@ -72,10 +72,10 @@ class module{
 		return null;
 	}
 	
-	function get_log_entry($action,$table,$row,$pars){
-		return new log_entry(
-				html_a("#".$row, ROOT_HTTP_CORE."/core/view.".CFG_EXTENSION."?db=".$table."&id=".$row),
-				$pars);
+	function get_log_entry($action,$table,$id,$pars){
+		$link_html=html_a("#".$id, ROOT_HTTP_CORE."/core/view.".CFG_EXTENSION."?db=".$table."&id=".$id);
+		$message=$pars;
+		return new log_entry( $link_html, $message );
 	}
 
 }
