@@ -113,8 +113,8 @@ function logs_entry($dat){
 			.($dat["user"]?$user_nicklist[$dat["user"]]." @ ":"")
 			.$dat["ip"]."\">".get_user_thumb($dat["user"])."</span>","user");
 	$html.=html_div(format_Wochentag_Uhrzeit($dat["time"]),"time");
-	$html.=html_div($dat["action"],"action");
 	$html.=html_div($dat["tabelle"],"tabelle");
+	$html.=html_div($dat["action"],"action");
 	$html.=html_div($log_entry->name_and_link,"zeile");
 	$html.=html_div($log_entry->description,"pars");
 	
