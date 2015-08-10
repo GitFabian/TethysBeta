@@ -74,7 +74,7 @@ class module{
 	
 	function get_log_entry($action,$table,$id,$pars){
 		$link_html=html_a("#".$id, ROOT_HTTP_CORE."/core/view.".CFG_EXTENSION."?db=".$table."&id=".$id);
-		$message=htmlentities(string_kuerzen($pars,500));
+		$message=htmlentities(string_kuerzen($pars,500),null,"UTF-8");
 // 		if($table=="kunden_firma"){
 // 			$query=dbio_SELECT_SINGLE("kunden_firma", $id);
 // 			if(!$query)return new log_entry( "<strike>".$link_html."</strike>", $message );
