@@ -16,7 +16,8 @@ class menu extends menu_topic{
 	function toHTML(){
 		$html="";
 		if ($this->label){
-			$html.="<div class=\"submenulabel\">".parent::toHTML()."</div>";
+			$title=$this->title?" title=\"".$this->title."\"":"";
+			$html.="<div class=\"submenulabel\"$title>".parent::toHTML()."</div>";
 		}
 		if ($this->topics){
 			$sub="";
@@ -48,6 +49,7 @@ class menu_topic{
 	var $external;
 	var $class_a;
 	var $tiefe=0;
+	var $title="";
 	
 	function __construct($parent_menu,$page_id,$highlight,$label,$link=null,$external=false){
 		$this->page_id=$page_id;
@@ -73,7 +75,8 @@ class menu_topic{
 		$html=$this->label;
 		$ext=($this->external?" target=\"_blank\"":"");
 		$class_a=($this->class_a?" class=\"".$this->class_a."\"":"");
-		if ($this->link) $html="<a href=\"".$this->link."\"$ext$class_a>$html</a>";
+		$title=$this->title?" title=\"".$this->title."\"":"";
+		if ($this->link) $html="<a href=\"".$this->link."\"$ext$class_a$title>$html</a>";
 		$hcl=($this->highlight?" highlight":"");
 		if (setting_get(null, 'DEPRECATED_HMLICLASS'))
 		$html="<div class=\"menutopic $this->page_id$hcl\">$html</div>";
