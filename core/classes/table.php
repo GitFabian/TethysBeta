@@ -188,6 +188,7 @@ $table_X->set_header(array(
 class datatable{
 	var $selector;
 	var $paginate;
+	var $localize=true;
 	function __construct($selector,$paginate=false){
 		$this->selector=$selector;
 		$this->paginate=$paginate;
@@ -196,8 +197,8 @@ class datatable{
 		$options="'bLengthChange':false,"
 				."'aaSorting':[],"//Initial Sorting/Default Sorting
 // 				."'iDisplayLength':15,"
-				."language:{url:'".ROOT_HTTP_CORE."/core/html/jquery.dataTables.German.json'},"
 			;
+		if($this->localize)$options.="language:{url:'".ROOT_HTTP_CORE."/core/html/jquery.dataTables.German.json'},";
 		if (!$this->paginate) $options.="'bPaginate':false,";
 		$varname=($varname?"$varname=":"");
 		return "$varname\$('$this->selector').dataTable({".$options."});";
