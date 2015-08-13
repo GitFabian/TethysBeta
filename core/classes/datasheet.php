@@ -14,6 +14,7 @@ class datasheet{
 	var $id;
 	var $datensatz;
 	var $buttons=array();
+	var $header="";
 	
 	function __construct($modul, $db, $id, $datensatz=null){
 		$this->modul=$modul;
@@ -47,7 +48,7 @@ class datasheet{
 		}
 		$btn_html=($buttons?"\n<div class=\"ds_btns\">\n\t".implode("\n\t", $buttons)."\n</div>":"");
 		
-		return "\n<div class=\"datasheet $this->modul $this->db\">\n<ul class=\"datasheet\">$data\n</ul>$btn_html\n</div>";
+		return "\n<div class=\"datasheet $this->modul $this->db\">\n$this->header<ul class=\"datasheet\">$data\n</ul>$btn_html\n</div>";
 	}
 	
 	/**
