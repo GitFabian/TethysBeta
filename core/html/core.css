@@ -172,6 +172,9 @@ div.gantt_today{
 	top:0px;
 	height:100%;
 }
+div.gantt_title{
+	white-space: nowrap;
+}
 
 /*==================================================================
     USER THUMBNAILS
