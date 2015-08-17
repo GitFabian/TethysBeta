@@ -39,7 +39,7 @@ function log_db_new($modul,$tabelle,$zeile=null,$pars=null){
 function log_db_edit($modul,$tabelle,$zeile,$pars=null){
 	dbio_INSERT("core_logs_dbedit", array(
 		"time"=>time(),
-		"user"=>USER_ID,
+		"user"=>USER_ID?:null,
 		"modul"=>$modul,
 		"ip"=>$_SERVER['REMOTE_ADDR'],
 		"action"=>"edit",
