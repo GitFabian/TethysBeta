@@ -43,7 +43,7 @@ if($filter){
 	}
 	$where[]="(".implode(" OR ", $w).")";
 }
-if(!$eigene)$where[]="user!=".USER_ID;
+if(!$eigene)$where[]="(user!=".USER_ID." OR user IS NULL)";
 if(!$where)$where[]="1";
 // echo "-$where-";
 $seite=request_value("page","1");
