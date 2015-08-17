@@ -956,4 +956,14 @@ function combine_sort($array1,$array2,$sort_key,$asc=true){
 	return $r;
 }
 
+function webpage_get_contents($webpage,$username=null,$password=null){
+	if (!$username) return file_get_contents($webpage);
+	$context = stream_context_create(array(
+			'http' => array(
+					'header'  => "Authorization: Basic " . base64_encode("$username:$password")
+			)
+	));
+	return file_get_contents($webpage, false, $context);
+}
+
 ?>
