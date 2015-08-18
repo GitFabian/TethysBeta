@@ -42,6 +42,14 @@ class modul_fun extends module{
 		return false;
 	}
 	
+	function get_widgets(){
+		#include_once ROOT_HDD_MODULES.'/demo/widget.php';
+		include_once ROOT_HDD_CORE.'/demo/modules/fun/widgets.php';
+		return array(
+				new widget_fun_widget1(),
+		);
+	}
+	
 }
 
 function url_fun($page){

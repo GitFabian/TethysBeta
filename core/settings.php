@@ -84,7 +84,8 @@ function setting_get_default($modul,$key){
 		if ($key=='DEBUGMODE') return "0";//Wichtig:Aus!
 		if ($key=='LOG_VIEW_MODULES') return "";
 		if ($key=='LOG_SHOW_MINE') return "1";
-		if (USER_ADMIN) echo "Kein Default-Value für \"$key\"! /core/settings.php:87";
+		if ($key=='WIDGETS') return "";//Komma-getrennte Liste der Widget-IDs
+		if (USER_ADMIN) echo "Kein Default-Value für \"$key\"! /core/settings.php:88";
 		return null;
 	}else{
 		global $modules;

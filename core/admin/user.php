@@ -53,6 +53,22 @@ if ($view=="core"){
 	if(USER_ADMIN)$form->add_field(new form_field("PRESENTATIONMODE","Präsentationsmodus",setting_get_user(null, "PRESENTATIONMODE"),"CHECKBOX"));
 	if(USER_ADMIN)$form->add_field(new form_field("DEBUGMODE","Debug-Modus",setting_get_user(null, "DEBUGMODE"),"CHECKBOX"));
 	
+	/*
+	 * Module
+	 */
+	$widgets=array();
+	$wid_sets=array_val2key(explode(",", setting_get_user(null, "WIDGETS")));
+	foreach ($modules as $mod_id=>$modul) {
+		$widg=$modul->get_widgets();
+		foreach ($widg as $widget) {
+			$widgets[]=new form_field("widget_".$mod_id."_".$widget->name_id,$widget->name_full,
+					isset($wid_sets[$mod_id."_".$widget->name_id])?"1":"0"
+					,"CHECKBOX");
+		}
+	}
+	if($widgets)$form->add_fields("Widgets", $widgets);
+	#$form->add_field(new form_field("","SETTING",setting_get_user(null, "WIDGETS")));
+	
 	if ($form->field_groups)
 		$page->add_html($form->toHTML());
 }else if(isset($modules[$view])){
@@ -62,6 +78,7 @@ if ($view=="core"){
 $page->send();
 exit;//============================================================================================
 function core_user_update(){
+	global $modules;
 	if (setting_get(null,'CFG_EDIT_NICK')&&request_value("nick")){
 		dbio_UPDATE("core_users", "id=".USER_ID, array("nick"=>request_value("nick")));
 	}
@@ -78,6 +95,19 @@ function core_user_update(){
 	setting_save(null, "CMPCTVIEW", request_value("CMPCTVIEW"), true);
 	setting_save(null, "PRESENTATIONMODE", request_value("PRESENTATIONMODE"), true);
 	setting_save(null, "DEBUGMODE", request_value("DEBUGMODE"), true);
+	
+	/*
+	 * Module
+	 */
+	$wids_set=array();
+	foreach ($modules as $mod_id=>$modul) {
+		$widg=$modul->get_widgets();
+		foreach ($widg as $widget) {
+			if(request_value("widget_".$mod_id."_".$widget->name_id)) $wids_set[]=$mod_id."_".$widget->name_id;
+		}
+	}
+	setting_save(null, "WIDGETS", implode(",", $wids_set), true);
+	
 	ajax_refresh("Speichere Daten...", "user.".CFG_EXTENSION."?cmd=updated");
 }
 ?>

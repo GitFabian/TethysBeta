@@ -189,3 +189,17 @@ div.userthumb_wrapper div img{
 	vertical-align:top;
 	width:32px;
 }
+
+/*==================================================================
+    WIDGETS
+==================================================================*/
+
+body#core_index div.widget{
+	position:absolute;
+	border:1px solid black;
+}
+
+body#core_index div.widget_header{
+	background:black;
+	color:white;
+}

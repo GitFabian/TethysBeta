@@ -114,6 +114,14 @@ class modul_demo extends module{
 		}
 		return false;
 	}
+
+	function get_widgets(){
+		#include_once ROOT_HDD_MODULES.'/demo/widgets.php';
+		include_once ROOT_HDD_CORE.'/demo/modules/demo/widgets.php';
+		return array(
+			new widget_demo_widget1(),
+		);
+	}
 	
 }
 

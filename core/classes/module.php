@@ -83,6 +83,13 @@ class module{
 		return new log_entry( $link_html, $message );
 	}
 
+	function get_widgets(){
+		#include_once ROOT_HDD_MODULES.'/xxxxxxxxxxxx/widgets.php';
+		return array(
+			#new widget_xxxxxxxxxxxx_widget1(),
+		);
+	}
+
 }
 
 function new_form_field($modul,$key,$label,$type,$options=null){
