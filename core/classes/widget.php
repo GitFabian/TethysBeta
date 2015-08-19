@@ -21,7 +21,9 @@ class widget{
 	}
 	
 	function __toString(){
-		$html=html_div($this->name_full,"widget_header")
+		$html=html_div($this->name_full,"widget_header"
+				.(USER_ADMIN||false/*Setting:Widgets selber anordnen?*/?" moveable":"")
+				)
 			.html_div($this->getContent(),"widget_body");
 		$html=html_div($html,"widget",null,"left:".$this->pos_left."px;top:".$this->pos_top."px;");
 		return $html;

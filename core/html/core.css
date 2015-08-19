@@ -39,6 +39,10 @@ span.strike{
 	text-decoration:line-through;
 }
 
+div.moveable{
+    cursor: move;
+}
+
 pre{
 	white-space:pre-wrap;
 }
