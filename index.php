@@ -27,5 +27,42 @@ foreach ($modules as $mod_id=>$modul) {
 	}
 }
 
+widgets_move_js();
+
 $page->send();
+//=================================================================================
+// function widgets_containment_js(){
+// 	return "[ 0, 100, window.innerWidth, window.innerHeight ]"
+// 		#.",snap:true"
+// 		#.",stack:'div.widget'"
+// 	;
+// }
+function widgets_move_js(){
+	global $page;
+	include_jquery_ui();
+	$containment=function_exists('widgets_containment_js')?widgets_containment_js():"'window'";
+	if($containment)$containment="containment: $containment,";
+	$page->add_inline_script(
+"function start_widget_editor(){
+			
+			$( \"div.widget\" ).draggable({
+				grid: [ 10, 10 ],
+				stop: handleDragStop,
+				handle: \"div.widget_header\",
+				$containment
+			});
+			
+			
+}
+			
+function handleDragStop( event, ui ) {
+  var offsetXPos = parseInt( ui.offset.left );
+  var offsetYPos = parseInt( ui.offset.top );
+  alert( \"Drag stopped!\\n\\nOffset: (\" + offsetXPos + \", \" + offsetYPos + \")\\n\");
+}
+
+			
+");
+	$page->add_inline_script(js_document_ready("start_widget_editor();"));
+}
 ?>
