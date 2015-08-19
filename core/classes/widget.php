@@ -10,6 +10,7 @@ class widget{
 	var $name_full;
 	var $pos_left=300;
 	var $pos_top=300;
+	var $modul="X";
 	
 	function __construct($name_id,$name_full){
 		$this->name_id=$name_id;
@@ -25,7 +26,7 @@ class widget{
 				.(USER_ADMIN||false/*Setting:Widgets selber anordnen?*/?" moveable":"")
 				)
 			.html_div($this->getContent(),"widget_body");
-		$html=html_div($html,"widget",null,"left:".$this->pos_left."px;top:".$this->pos_top."px;");
+		$html=html_div($html,"widget ".$this->modul."_".$this->name_id,null,"left:".$this->pos_left."px;top:".$this->pos_top."px;");
 		return $html;
 	}
 	

@@ -12,7 +12,7 @@ class widget_demo_widget1 extends widget{
 	}
 	
 	function getContent(){
-		$html=format_Wochentag_Uhrzeit();
+		$html=html_div(format_Wochentag_Uhrzeit(),"datum");
 		return $html;
 	}
 	

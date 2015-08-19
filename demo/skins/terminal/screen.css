@@ -97,6 +97,11 @@ div.innerbody{
 	max-width:1200px;
 	background:linear-gradient(to top, #1f2831 0px, #2d3844 60px, #2d3844 90px, #1f2831 250px);
 }
+div.innerbody.empty{
+	border:none;
+	box-shadow:none;
+	background:none;
+}
 u{
 	text-decoration:none;
 }

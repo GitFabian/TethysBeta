@@ -39,7 +39,7 @@ class page{
 		$content=$this->content;
 		$title=$this->title;
 		$menu=hauptmenue($this->page_id);
-		$checkContent=($content?"":" empty");
+		$checkContent=($content&&$this->page_id!="core_index"?"":" empty");
 		
 		$stylesheets="";
 		foreach ($this->stylesheets as $url => $media) {

@@ -1,0 +1,46 @@
+@CHARSET "utf-8";
+
+/*==================================================================
+    WIDGETS
+==================================================================*/
+
+body#core_index div.widget{
+	background:#1f2831;
+	padding:10px;
+	border:2px solid #004f70;
+	border-radius:4px;
+	box-shadow:2px 2px 2px black inset,2px 2px 2px #004f70;
+	background:linear-gradient(to top, #1f2831 0px, #2d3844 60px, #2d3844 90px, #1f2831 250px);
+}
+
+body#core_index div.widget_header{
+	background:none;
+	text-align:right;
+}
+
+body#core_index div.widget_body{
+}
+
+/*==================================================================
+    DEMO-WIDGET (demo_widget1)
+==================================================================*/
+
+div.widget.demo_widget1 div.widget_header{
+	display:none;
+	position:absolute;
+}
+div.widget.demo_widget1:hover div.widget_header{
+	display:block;
+}
+div.widget.demo_widget1 div.widget_body{
+	width:200px;
+	height:50px;
+	overflow:auto;
+	color:white;
+	text-shadow:0px 0px 1px yellow;
+	text-align:center;
+}
+
+div.widget.demo_widget1 div.datum{
+	margin-top:18px;
+}
