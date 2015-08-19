@@ -45,9 +45,24 @@ class modul_fun extends module{
 	function get_widgets(){
 		#include_once ROOT_HDD_MODULES.'/demo/widget.php';
 		include_once ROOT_HDD_CORE.'/demo/modules/fun/widgets.php';
-		return array(
-				new widget_fun_widget1(),
-		);
+		$r=array();
+		if(setting_get("fun", "SHOW_FUN_WIDGET1"))$r[]=new widget_fun_widget1();
+		return $r;
+	}
+
+	function global_settings($form){
+		if($form){
+			$form->add_field(new_form_field('fun', "SHOW_FUN_WIDGET1", "Widget1", 'CHECKBOX'));
+		}
+		return true;
+	}
+	function get_default_setting($key){
+		//Global:
+		if ($key=='SHOW_FUN_WIDGET1') return "1";
+		//User Specific:
+		#if ($key=='demosetting') return "Duh bleepity gobble nizzle!";
+		if (USER_ADMIN) echo("Kein Default-Value für \"$key\"! /modules/sms1/tethys.php:95");
+		return null;
 	}
 	
 }

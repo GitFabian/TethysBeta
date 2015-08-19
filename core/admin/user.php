@@ -56,19 +56,21 @@ if ($view=="core"){
 	/*
 	 * Module
 	 */
-	$widgets=array();
-	$wid_sets=array_val2key(explode(",", setting_get_user(null, "WIDGETS")));
-	foreach ($modules as $mod_id=>$modul) {
-		$widg=$modul->get_widgets();
-		foreach ($widg as $widget) {
-			$widgets[]=new form_field("widget_".$mod_id."_".$widget->name_id,$widget->name_full,
-					isset($wid_sets[$mod_id."_".$widget->name_id])?"1":"0"
-					,"CHECKBOX");
+	if(setting_get(null, "CFG_EDITWIDGETS")){
+		$widgets=array();
+		$wid_sets=array_val2key(explode(",", setting_get_user(null, "WIDGETS")));
+		foreach ($modules as $mod_id=>$modul) {
+			$widg=$modul->get_widgets();
+			foreach ($widg as $widget) {
+				$widgets[]=new form_field("widget_".$mod_id."_".$widget->name_id,$widget->name_full,
+						isset($wid_sets[$mod_id."_".$widget->name_id])?"1":"0"
+						,"CHECKBOX");
+			}
 		}
+		if($widgets)$form->add_fields("Widgets", $widgets);
+		#$form->add_field(new form_field("","SETTING",setting_get_user(null, "WIDGETS")));
 	}
-	if($widgets)$form->add_fields("Widgets", $widgets);
-	#$form->add_field(new form_field("","SETTING",setting_get_user(null, "WIDGETS")));
-	
+		
 	if ($form->field_groups)
 		$page->add_html($form->toHTML());
 }else if(isset($modules[$view])){
