@@ -966,4 +966,15 @@ function webpage_get_contents($webpage,$username=null,$password=null){
 	return file_get_contents($webpage, false, $context);
 }
 
+function nachkommastellen($number,$digits){
+	$r=round($number,$digits);
+	if(!$digits)return $r;
+	for ($i = 0; $i < $digits; $i++) {
+		if($r==round($r,$i))return $r
+			.($i==0?".":"")
+			.str_repeat("0", $digits-$i);
+	}
+	return $r;
+}
+
 ?>
