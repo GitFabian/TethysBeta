@@ -7,10 +7,61 @@ if ($cmd=="update_rights") update_rights();
 if ($cmd=="lorumipsum") lorumipsum();
 if ($cmd=="rolleSetzen") rolleSetzen();
 if ($cmd=="sendmail") sendmail();
+if ($cmd=="widgetposition") widgetposition();
+if ($cmd=="widgetcheck") widgetcheck();
 
 echo "!Unbekanntes AJAX-Kommando \"$cmd\"!";
 exit;//===========================================================================================
 
+function widgetcheck(){
+	if(!USER_ADMIN)ajax_exit("!Keine Berechtigung!");
+	$state=request_value("state")=="true"?true:false;
+	$modul=request_value("modul");
+	$widget=request_value("widget");
+	$user=request_value("user");
+
+	$wuid=$modul."_".$widget;
+	
+	$query_widgets=dbio_SELECT("core_settings","`key`='WIDGETS' AND modul IS NULL AND user=$user");
+	$widgets=array();
+	if($query_widgets && $query_widgets[0]["value"]){
+		$widgets=array_val2key(explode(",", $query_widgets[0]["value"]));
+	}
+	if($state){
+		$widgets[$wuid]=true;
+	}else{
+		unset($widgets[$wuid]);
+	}
+	
+	$widgets_sql_arr=array();
+	foreach ($widgets as $wid => $dummy) {
+		$widgets_sql_arr[]=$wid;
+	}
+	dbio_UPDATE_OR_INSERT2("core_settings", "`key`='WIDGETS' AND modul IS NULL AND user=$user", array(
+		"key"=>"WIDGETS",
+		"modul"=>null,
+		"user"=>$user,
+		"value"=>implode(",", $widgets_sql_arr),
+	));
+	ajax_exit("Gespeichert.");
+}
+function widgetposition(){
+	$pos_x=request_value("x");
+	$pos_y=request_value("y");
+	$modul=request_value("modul");
+	$widget=request_value("widget");
+	dbio_UPDATE_OR_INSERT2("core_widgetpos", "user=".USER_ID." AND modul='".sqlEscape($modul)."' AND widget='".sqlEscape($widget)."'", array(
+		"user"=>USER_ID,
+		"modul"=>$modul,
+		"widget"=>$widget,
+		"x"=>$pos_x,
+		"y"=>$pos_y,
+	));
+	ajax_exit("Position gespeichert."
+			.(USER_ADMIN?" {$pos_x}x$pos_y":"")
+			#.(USER_ADMIN?"<br>$modul:$widget":"")
+			);
+}
 function sendmail(){
 	$id=request_value("id");
 	if (!$id) ajax_exit("!E-Mail nicht verschickt.");

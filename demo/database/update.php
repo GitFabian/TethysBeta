@@ -203,9 +203,24 @@ if ($version<22){
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;");
 }
 
+if ($version<23){
+	dbio_query("CREATE TABLE IF NOT EXISTS `core_widgetpos` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user` int(11) NOT NULL,
+  `modul` varchar(50) COLLATE utf8_bin NOT NULL,
+  `widget` varchar(50) COLLATE utf8_bin NOT NULL,
+  `x` int(11) NOT NULL,
+  `y` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user` (`user`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;");
+	dbio_query("ALTER TABLE `core_widgetpos`
+  ADD CONSTRAINT `core_widgetpos_ibfk_1` FOREIGN KEY (`user`) REFERENCES `core_users` (`id`);");
+}
+
 #if ($version<){dbio_query("");}
 
-$current_version=22;
+$current_version=23;
 //=================================================================================================
 dbio_query("UPDATE `core_meta_dbversion` SET `version` = '$current_version' WHERE `modul_uc` = 'CORE';");
 //=================================================================================================

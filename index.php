@@ -14,20 +14,29 @@ if (CFG_HOME_URL){
 	exit;
 }
 
+$query_positions=dbio_SELECT("core_widgetpos","user=".USER_ID);
+$widget_positions=array();
+foreach ($query_positions as $row) {
+	$widget_positions[$row["modul"]."_".$row["widget"]]=$row;
+}
+
 $wid_sets=array_val2key(explode(",", setting_get_user(null, "WIDGETS")));
 foreach ($modules as $mod_id=>$modul) {
 	$widgets=$modul->get_widgets();
 	foreach ($widgets as $widget) {
-		if(isset($wid_sets[$mod_id."_".$widget->name_id])){
-// 			$widget->pos_left=300;
-// 			$widget->pos_top=200;
+		$widget_unique_name=$mod_id."_".$widget->name_id;
+		if(isset($wid_sets[$widget_unique_name])){
+			if(isset($widget_positions[$widget_unique_name])){
+				$widget->pos_left=$widget_positions[$widget_unique_name]["x"];
+				$widget->pos_top=$widget_positions[$widget_unique_name]["y"];
+			}
 			$widget->modul=$mod_id;
 			$page->add_html($widget);
 		}
 	}
 }
 
-widgets_move_js();
+if(setting_get(null, "CFG_MOVEWIDGETS")) widgets_move_js();
 
 $page->send();
 //=================================================================================
@@ -44,25 +53,20 @@ function widgets_move_js(){
 	if($containment)$containment="containment: $containment,";
 	$page->add_inline_script(
 "function start_widget_editor(){
-			
-			$( \"div.widget\" ).draggable({
-				grid: [ 10, 10 ],
-				stop: handleDragStop,
-				handle: \"div.widget_header\",
-				$containment
-			});
-			
-			
+	$( \"div.widget\" ).draggable({
+		grid: [ 10, 10 ],
+		stop: handleDragStop,
+		handle: \"div.widget_header\",
+		$containment
+	});
 }
-			
 function handleDragStop( event, ui ) {
-  var offsetXPos = parseInt( ui.offset.left );
-  var offsetYPos = parseInt( ui.offset.top );
-  alert( \"Drag stopped!\\n\\nOffset: (\" + offsetXPos + \", \" + offsetYPos + \")\\n\");
-}
-
-			
-");
+	var offsetXPos = parseInt( ui.offset.left );
+	var offsetYPos = parseInt( ui.offset.top );
+	var modul=ui.helper.data('modul');
+	var widget=ui.helper.data('widget');
+	".ajax_to_alertify("widgetposition&x=\"+offsetXPos+\"&y=\"+offsetYPos+\"&modul=\"+modul+\"&widget=\"+widget+\"")."
+}");
 	$page->add_inline_script(js_document_ready("start_widget_editor();"));
 }
 ?>

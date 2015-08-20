@@ -102,6 +102,7 @@ settings_add_field2($form,"CFG_EDIT_NICK","Eigenen Nick bearbeiten",'CHECKBOX');
 settings_add_field2($form,"CFG_EDIT_FILE","Stammdaten bearbeiten",'CHECKBOX');
 settings_add_field2($form,"CFG_UPROF_CMPCTVIEW","Compact View",'CHECKBOX');
 settings_add_field2($form,"CFG_EDITWIDGETS","Widgets (de)aktivieren",'CHECKBOX');
+settings_add_field2($form,"CFG_MOVEWIDGETS","Widgets verschieben",'CHECKBOX');
 $form->add_field( new form_field("CFG_MAX_USERS","Maximale Benutzeranzahl",setting_get(null, 'CFG_MAX_USERS'),'TEXT',"setting_get(null,'CFG_MAX_USERS')") );
 settings_add_field2($form,"CFG_AUTHPATTERN","HTTP-Auth-Pattern",'TEXT');
 settings_add_field2($form,"CFG_MAILPATTERN","eMail-Pattern",'TEXT');

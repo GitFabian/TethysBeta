@@ -54,7 +54,7 @@ if ($view=="core"){
 	if(USER_ADMIN)$form->add_field(new form_field("DEBUGMODE","Debug-Modus",setting_get_user(null, "DEBUGMODE"),"CHECKBOX"));
 	
 	/*
-	 * Module
+	 * Widgets
 	 */
 	if(setting_get(null, "CFG_EDITWIDGETS")){
 		$widgets=array();

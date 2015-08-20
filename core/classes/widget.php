@@ -23,10 +23,13 @@ class widget{
 	
 	function __toString(){
 		$html=html_div($this->name_full,"widget_header"
-				.(USER_ADMIN||false/*Setting:Widgets selber anordnen?*/?" moveable":"")
+				.(setting_get(null, "CFG_MOVEWIDGETS")?" moveable":"")
 				)
 			.html_div($this->getContent(),"widget_body");
-		$html=html_div($html,"widget ".$this->modul."_".$this->name_id,null,"left:".$this->pos_left."px;top:".$this->pos_top."px;");
+		$html=html_div($html,"widget ".$this->modul."_".$this->name_id
+				."\" data-modul=\"".$this->modul
+				."\" data-widget=\"".$this->name_id
+				,null,"left:".$this->pos_left."px;top:".$this->pos_top."px;");
 		return $html;
 	}
 	

@@ -130,6 +130,7 @@ function menu_add_default_admin($menu,$page_id){
 		new menu_topic($menu_admin,"core_rollen",$page_id,"Rollen",url_core_admin("rollen"));
 	}
 	if(USER_ADMIN){
+		new menu_topic($menu_admin,"core_widgets",$page_id,"Widgets",url_core_admin("widgets"));
 		new menu_topic($menu_admin,"core_settings",$page_id,"Konfig",url_core_admin("settings"));
 		new menu_topic($menu_admin,"core_logs",$page_id,"Logs",url_core_admin("logs"));
 		new menu_topic($menu_admin,"core_chronjobs",$page_id,"Chronjobs",url_core_admin("chronjobs"));
