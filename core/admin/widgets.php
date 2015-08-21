@@ -11,11 +11,13 @@ $query_widgets=dbio_SELECT("core_settings","`key`='WIDGETS' AND modul IS NULL");
 $query_users=dbio_SELECT("core_users","active");
 
 $widgets=array();
+$sort_values=array();
 foreach ($modules as $mod_id=>$modul) {
 	$widg=$modul->get_widgets();
 	foreach ($widg as $widget) {
 		$widget->modul=$mod_id;
 		$widgets[$mod_id."_".$widget->name_id]=$widget;
+		$sort_values[$mod_id."_".$widget->name_id]=array();
 	}
 }
 
@@ -34,14 +36,21 @@ foreach ($query_users as $u) {
 		"Benutzer"=>$u["nick"],
 	);
 	foreach ($widgets as $wid => $widget) {
-		$row[$wid]=html_checkbox(null,false,ajax_to_alertify("widgetcheck&user=$uid&state=&quot;+this.checked+&quot;&modul=".$widget->modul."&widget=".$widget->name_id,null,true));
 		if(isset($users_widgets[$uid]) && isset($users_widgets[$uid][$wid])){
+			$sort_values[$wid][]="1";
 			$row[$wid]=html_checkbox(null,true,ajax_to_alertify("widgetcheck&user=$uid&state=&quot;+this.checked+&quot;&modul=".$widget->modul."&widget=".$widget->name_id,null,true));
+		}else{
+			$sort_values[$wid][]="0";
+			$row[$wid]=html_checkbox(null,false,ajax_to_alertify("widgetcheck&user=$uid&state=&quot;+this.checked+&quot;&modul=".$widget->modul."&widget=".$widget->name_id,null,true));
 		}
 	}
 	$data[]=$row;
 }
 $table=new table($data,"wide");
+#debug_out($sort_values);
+foreach ($sort_values as $key=>$sort_column) {
+	$table->set_sort_values($key, $sort_column);
+}
 $table->datatable->paginate=true;
 $page->say($table);
 
