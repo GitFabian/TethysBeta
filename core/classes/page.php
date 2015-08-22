@@ -16,6 +16,7 @@ class page{
 	var $messages=array();
 	var $head="";
 	var $waitSpinner=false;
+	var $wap=false;
 	
 	function __construct(){
 		$this->content="";
@@ -117,8 +118,10 @@ class page{
 			$waitSpinner="<div id=\"uploadSpinner\"><div class=\"spinnerContent\"><img src=\"".CFG_SKINPATH."/spinner.gif\"><div>Bitte warten...</div></div></div>";
 		}
 		
+		$wap=$this->wap?" PUBLIC \"-//WAPFORUM//DTD XHTML Mobile 1.0//EN\" \"http://www.wapforum.org/DTD/xhtml-mobile10.dtd\"":"";
+		
 		echo <<<ENDE
-<!DOCTYPE HTML>
+<!DOCTYPE HTML$wap>
 <html>
 <head>
 	<title>$title</title>
