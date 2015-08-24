@@ -122,9 +122,9 @@ if(setting_get(null, "FIREFOX_EXCLUSIVE")){
 /*
  * Nochmal Login
  */
-if ((CFG_LOGON_TYPE!='none' && !USER_ID && CFG_LOGON_TYPE!='http')
+if (((CFG_LOGON_TYPE!='none' && !USER_ID && CFG_LOGON_TYPE!='http')
 		||CFG_LOGON_COOKIE && request_command("logon")
-		){
+		)&&!isset($standalone_logon)){
 	$ich=pathinfo($_SERVER['SCRIPT_FILENAME'], PATHINFO_BASENAME);
 	if ($ich=="ajax.php"){
 		echo"!AJAX:Fehler beim Login!";exit;
