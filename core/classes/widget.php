@@ -11,6 +11,7 @@ class widget{
 	var $pos_left=300;
 	var $pos_top=300;
 	var $modul="X";
+	var $bodycss="";
 	
 	function __construct($name_id,$name_full){
 		$this->name_id=$name_id;
@@ -25,7 +26,7 @@ class widget{
 		$html=html_div($this->name_full,"widget_header"
 				.(setting_get(null, "CFG_MOVEWIDGETS")?" moveable":"")
 				)
-			.html_div($this->getContent(),"widget_body");
+			.html_div($this->getContent(),"widget_body", null, $this->bodycss);
 		$html=html_div($html,"widget ".$this->modul."_".$this->name_id
 				."\" data-modul=\"".$this->modul
 				."\" data-widget=\"".$this->name_id
