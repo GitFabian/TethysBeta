@@ -87,7 +87,8 @@ function setting_get_default($modul,$key){
 		if ($key=='WIDGETS') return "";//Komma-getrennte Liste der Widget-IDs
 		if ($key=='CFG_EDITWIDGETS') return "0";
 		if ($key=='CFG_MOVEWIDGETS') return "0";
-		if (USER_ADMIN) echo "Kein Default-Value für \"$key\"! /core/settings.php:90";
+		if ($key=='CFG_SMSPUSHURL') return "";//http://.../sms_insert.php
+		if (USER_ADMIN) echo "Kein Default-Value für \"$key\"! /core/settings.php:91";
 		return null;
 	}else{
 		global $modules;

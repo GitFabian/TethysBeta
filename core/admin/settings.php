@@ -96,6 +96,7 @@ $form->add_field( new form_field("HM_TEXT","Haupmenü Text",setting_get(null, 'H
 
 $form->add_fields("Module",null);
 $form->add_field( new form_field("CFG_MODULES[]","Module",$modules,'SELECT_MULTIPLE',null,$module) );
+settings_add_field2($form,"CFG_SMSPUSHURL","SMS Push URL",'TEXT');
 
 $form->add_fields("Benutzer",null);
 settings_add_field2($form,"CFG_EDIT_NICK","Eigenen Nick bearbeiten",'CHECKBOX');
