@@ -17,6 +17,7 @@ class page{
 	var $head="";
 	var $waitSpinner=false;
 	var $wap=false;
+	var $bodyclass="";
 	
 	function __construct(){
 		$this->content="";
@@ -82,14 +83,16 @@ class page{
 			$views="\n<ul$dev class=\"views_menu\">$views\n</ul>";
 		}
 		
-		$bodyclass="";
+		$bodyclass=array();
 		$mm_class="";
 		if (setting_get(null, 'HM_ICONS')) $mm_class.=" icons";
 		if (!setting_get(null, 'HM_TEXT')) $mm_class.=" notext";
 		if (setting_get_user(null, "CMPCTVIEW")){
-			$bodyclass=" class=\"cmpctview\"";
+			$bodyclass[]="cmpctview";
 			$mm_class.=" cmpctview";
 		}
+		if($this->bodyclass)$bodyclass[]=$this->bodyclass;
+		if($bodyclass)$bodyclass=" class=\"".implode(" ", $bodyclass)."\"";else $bodyclass="";
 		
 		$menu=($menu?"<div class=\"mainmenu$mm_class\">
 				$menu
