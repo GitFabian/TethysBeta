@@ -81,6 +81,9 @@ function js_getSelectedValue(id){
 	return document.getElementById(id).options[document.getElementById(id).selectedIndex].value
 }
 
+/**
+ * datatable neu laden/refresh/reload: "datatable_init('table','".ROOT_HTTP_CORE."');"
+ */
 function datatable_init(selector,ROOT_HTTP_CORE){
 	$(selector).dataTable({
 		'bLengthChange':false,
