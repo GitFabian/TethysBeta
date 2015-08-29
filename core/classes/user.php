@@ -22,9 +22,9 @@ function get_user_setcard_CORE($uid=USER_ID,$query=null){
 }
 
 function get_user_picture_url($uid=USER_ID){
-	return(file_exists(ROOT_HDD_DATA."/core_users/person$uid.jpg")?ROOT_HTTP_DATA."/core_users/person$uid.jpg"
-				:CFG_SKINPATH."/img/nopic.png"
-		);
+	if(file_exists(ROOT_HDD_DATA."/core_users/person$uid.jpg"))return ROOT_HTTP_DATA."/core_users/person$uid.jpg";
+	if(file_exists(ROOT_HDD_DATA."/core_users/placeholder$uid.jpg"))return ROOT_HTTP_DATA."/core_users/placeholder$uid.jpg";
+	return CFG_SKINPATH."/img/nopic.png";
 }
 
 function get_user_thumb($uid=USER_ID){
