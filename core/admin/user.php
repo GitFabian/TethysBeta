@@ -99,16 +99,18 @@ function core_user_update(){
 	setting_save(null, "DEBUGMODE", request_value("DEBUGMODE"), true);
 	
 	/*
-	 * Module
+	 * Widgets
 	 */
-	$wids_set=array();
-	foreach ($modules as $mod_id=>$modul) {
-		$widg=$modul->get_widgets();
-		foreach ($widg as $widget) {
-			if(request_value("widget_".$mod_id."_".$widget->name_id)) $wids_set[]=$mod_id."_".$widget->name_id;
+	if(setting_get(null, "CFG_EDITWIDGETS")){
+		$wids_set=array();
+		foreach ($modules as $mod_id=>$modul) {
+			$widg=$modul->get_widgets();
+			foreach ($widg as $widget) {
+				if(request_value("widget_".$mod_id."_".$widget->name_id)) $wids_set[]=$mod_id."_".$widget->name_id;
+			}
 		}
+		setting_save(null, "WIDGETS", implode(",", $wids_set), true);
 	}
-	setting_save(null, "WIDGETS", implode(",", $wids_set), true);
 	
 	ajax_refresh("Speichere Daten...", "user.".CFG_EXTENSION."?cmd=updated");
 }
