@@ -32,6 +32,10 @@ function euro_string_from_cent($cents){
 	}else{
 		$euro=substr($euro, 0, $trenner).",".substr($euro, $trenner);
 	}
+	$tausend=strlen($euro)-6;
+	if($tausend>0){
+		$euro=substr($euro, 0, $tausend).".".substr($euro, $tausend);
+	}
 	return $vorzeichen.$euro;
 }
 

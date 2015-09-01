@@ -21,6 +21,10 @@ function autofill_password(target_id){
 	document.getElementById(target_id).value=pass;
 }
 
+function random_integer(min,max){
+	return Math.floor(Math.random() * (max*1 - min*1 +1)) + min*1;
+}
+
 
 /**
  * tethys_ajax('.../ajax.php?cmd=...',"alert(response);");
