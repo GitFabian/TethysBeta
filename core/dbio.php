@@ -177,7 +177,7 @@ function dbio_UPDATE_groupMember($db,$new,$group,$gid,$user="user"){
 }
 
 function dbio_query_to_array($anfrage,$link_identifier=null,$assoc_key=null){
-	if(USER_ADMIN&&isset($_REQUEST["sqlinfo"])){
+	if(defined("USER_ADMIN")&&USER_ADMIN&&isset($_REQUEST["sqlinfo"])){
 		global $page;
 		$page->message_info($anfrage);
 	}
