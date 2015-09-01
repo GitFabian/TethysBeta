@@ -126,11 +126,13 @@ function login(){
 			if ($user){
 				define('USER_ID', $user['id']);
 				
-				$version=dbio_SELECT("core_meta_dbversion","`modul_uc` = 'CORE'");
-				if($version)
+				//Abwärtskompatibilität gewährleisten
+// 				$version=dbio_SELECT("core_meta_dbversion","`modul_uc` = 'CORE'");
+// 				if($version)
+				if(isset($user["logon_time"]))
 				{
-					$version=$version[0]["version"];
-					if($version>=24)
+// 					$version=$version[0]["version"];
+// 					if($version>=24)
 
 					dbio_UPDATE("core_users", "id=".USER_ID, array(
 						"logon_time"=>time(),

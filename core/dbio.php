@@ -177,10 +177,6 @@ function dbio_UPDATE_groupMember($db,$new,$group,$gid,$user="user"){
 }
 
 function dbio_query_to_array($anfrage,$link_identifier=null,$assoc_key=null){
-	if(defined("USER_ADMIN")&&USER_ADMIN&&isset($_REQUEST["sqlinfo"])){
-		global $page;
-		$page->message_info($anfrage);
-	}
 	$result=dbio_query($anfrage,$link_identifier);
 	if (!$result) return array();
 
@@ -198,7 +194,11 @@ function dbio_query_to_array($anfrage,$link_identifier=null,$assoc_key=null){
 }
 
 function dbio_query($anfrage,$link_identifier=null){
-	#echo "<pre>".escape_html($anfrage)."</pre><hr>";
+	if(defined("USER_ADMIN")&&USER_ADMIN&&isset($_REQUEST["sqlinfo"]))
+	{
+		global $page;
+		$page->message_info($anfrage);
+	}
 	global $devel_performance_query_counter;
 	$devel_performance_query_counter++;
 	if ($link_identifier){
