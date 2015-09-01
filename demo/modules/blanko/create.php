@@ -155,6 +155,31 @@ function ajax_exit(\$msg){
 
 ?>
 END_AJAX;
+
+$file_widgets=<<<END_WIDGETS
+<?php
+
+include_once ROOT_HDD_CORE.'/core/classes/widget.php';
+		
+class widget_{$id}_widget1 extends widget{
+
+	//Default-Position:
+	#var \$pos_left=100,\$pos_top=100;
+
+	function __construct(){
+		parent::__construct("widget1", "Widget");
+	}
+
+	function getContent(){
+		\$html="";
+		
+		return \$html;
+	}
+
+}		
+
+?>
+END_WIDGETS;
 	
 	mkdir($dir);
 	$file=fopen($dir."/tethys.php", "w");
@@ -168,6 +193,9 @@ END_AJAX;
 	fclose($file);
 	$file=fopen($dir."/ajax.php", "w");
 		fwrite($file, $file_ajax);
+	fclose($file);
+	$file=fopen($dir."/widgets.php", "w");
+		fwrite($file, $file_widgets);
 	fclose($file);
 	
 	$m=array();
