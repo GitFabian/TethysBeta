@@ -1,17 +1,19 @@
 <?php
 if(!file_exists('config_start.php'))include'install.php';
 include_once 'config_start.php';
+if (CFG_HOME_URL){
+	Header( "HTTP/1.1 301 Moved Permanently" );
+	Header( "Location: ".CFG_HOME_URL );
+	exit;
+}
+include_once ROOT_HDD_CORE.'/core/log.php';
+
+log_others("VIEW","core","INDEX");
 
 $page->init('core_index',CFG_HOME_TITLE);
 
 if (file_exists(CFG_SKINDIR."/widgets.css")){
 	$page->add_stylesheet(CFG_SKINPATH."/widgets.css");
-}
-
-if (CFG_HOME_URL){
-	Header( "HTTP/1.1 301 Moved Permanently" );
-	Header( "Location: ".CFG_HOME_URL );
-	exit;
 }
 
 $query_positions=dbio_SELECT("core_widgetpos","user=".USER_ID);

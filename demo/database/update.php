@@ -218,9 +218,16 @@ if ($version<23){
   ADD CONSTRAINT `core_widgetpos_ibfk_1` FOREIGN KEY (`user`) REFERENCES `core_users` (`id`);");
 }
 
+if ($version<24){
+	dbio_query("ALTER TABLE `core_logs` ADD `uid` INT NOT NULL AFTER `ip` ;");
+	dbio_query("ALTER TABLE `core_logs` ADD `modul` VARCHAR( 50 ) NOT NULL AFTER `uid` ;");
+	dbio_query("ALTER TABLE `core_users` ADD `logon_time` INT NOT NULL ;");
+	dbio_query("ALTER TABLE `core_users` ADD `logon_ip` VARCHAR( 15 ) NOT NULL ;");
+}
+
 #if ($version<){dbio_query("");}
 
-$current_version=23;
+$current_version=24;
 //=================================================================================================
 dbio_query("UPDATE `core_meta_dbversion` SET `version` = '$current_version' WHERE `modul_uc` = 'CORE';");
 //=================================================================================================

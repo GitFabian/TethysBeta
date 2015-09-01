@@ -4,10 +4,12 @@
 include_once ROOT_HDD_CORE.'/core/log.php';
  */
 
-function log_others($keyword,$pars=null){
+function log_others($keyword,$modul="core",$pars=null){
 	dbio_INSERT("core_logs", array(
 		"time"=>time(),
 		"ip"=>$_SERVER['REMOTE_ADDR'],
+		"uid"=>USER_ID,
+		"modul"=>$modul,
 		"keyword"=>$keyword,
 		"pars"=>$pars,
 	));
