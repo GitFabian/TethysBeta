@@ -125,6 +125,8 @@ function login(){
 			
 			if ($user){
 				define('USER_ID', $user['id']);
+				include_once ROOT_HDD_CORE.'/core/log.php';
+				log_others("LOGIN_HTTPAUTH",USER_ID);
 			}else{
 				define('USER_ID', 0);
 				$page->message_error("Benutzer \"$http_auth\" nicht gefunden!");

@@ -23,6 +23,10 @@ if ($modul=='core'){
 		}
 		csv_out($data,"users.csv");
 	}
+	if($db=="core_logs" && USER_ADMIN){
+		$query1=dbio_SELECT("core_logs",null,"*",null,"time",false,"999");
+		csv_out($query1,"logs.csv");
+	}
 	if ($db=="core_rollen"){
 		$rollen=dbio_SELECT_keyValueArray("core_rollen", "name");
 		$users=dbio_SELECT("core_users","active","*",null,"nick");

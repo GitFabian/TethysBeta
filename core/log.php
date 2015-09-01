@@ -4,6 +4,15 @@
 include_once ROOT_HDD_CORE.'/core/log.php';
  */
 
+function log_others($keyword,$pars=null){
+	dbio_INSERT("core_logs", array(
+		"time"=>time(),
+		"ip"=>$_SERVER['REMOTE_ADDR'],
+		"keyword"=>$keyword,
+		"pars"=>$pars,
+	));
+}
+
 function log_db_new2($modul,$tabelle,$zeile,$data){
 	unset($data['id']);
 	$pars=json_encode($data);

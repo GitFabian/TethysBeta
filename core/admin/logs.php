@@ -15,8 +15,9 @@ $views=array(
 $view=$page->init_views("dbedit",$views);
 
 if($view=="others"){
-	$query1=dbio_SELECT("core_logs");
+	$query1=dbio_SELECT("core_logs",null,"*",null,"time",false,"999");
 	$table=new table($query1);
+	$table->export_csv_id="core_logs";
 // 	if($table->rows)
 		$page->say($table);
 	page_send_exit();
