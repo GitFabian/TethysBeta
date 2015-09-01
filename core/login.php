@@ -125,10 +125,18 @@ function login(){
 			
 			if ($user){
 				define('USER_ID', $user['id']);
-				dbio_UPDATE("core_users", "id=".USER_ID, array(
-					"logon_time"=>time(),
-					"logon_ip"=>$_SERVER['REMOTE_ADDR'],
-				));
+				
+				$version=dbio_SELECT("core_meta_dbversion","`modul_uc` = 'CORE'");
+				if($version)
+				{
+					$version=$version[0]["version"];
+					if($version>=24)
+
+					dbio_UPDATE("core_users", "id=".USER_ID, array(
+						"logon_time"=>time(),
+						"logon_ip"=>$_SERVER['REMOTE_ADDR'],
+					));
+				}
 			}else{
 				define('USER_ID', 0);
 				$page->message_error("Benutzer \"$http_auth\" nicht gefunden!");
