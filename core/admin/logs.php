@@ -14,12 +14,54 @@ $views=array(
 #if(isset($_REQUEST["reload"]))$view=request_value("view","dbedit");else
 $view=$page->init_views("dbedit",$views);
 
-if($view=="others"){
+if($view=="others"){logs_others();}
+function logs_others(){
+	global $page;
+	/*
+	 * Presets
+	 */
+	$presets=array(
+		"view_index"=>"VIEW INDEX",
+	);
+	$preset_selector=new form("preset");
+	$preset_selector->add_field(new form_field("selection","","[REQ]","SELECT",null,$presets));
+	$preset_selector->add_hidden("view", "others");
+	$page->say($preset_selector);
+	
+	if(request_command("preset")){
+		$preset=request_value("selection");
+		if($preset=="view_index")preset_view_index();
+	}
+	
+	/*
+	 * Tabelle
+	 */
 	$query1=dbio_SELECT("core_logs",null,"*",null,"time",false,"999");
 	$table=new table($query1);
 	$table->export_csv_id="core_logs";
-// 	if($table->rows)
-		$page->say($table);
+	$page->say($table);
+	page_send_exit();
+}
+function preset_view_index(){
+	global $page;
+	$query_users=dbio_SELECT_asList("core_users", "[nick]");
+	$data=array();
+	$sort_time=array();
+	$sort_uid=array();
+	foreach ($query_users as $uid=>$nick) {
+		$query_access=dbio_SELECT("core_logs","uid=$uid AND keyword='VIEW' AND pars='INDEX'","*",null,"time",false,"1");
+		$time=$query_access?$query_access[0]["time"]:0;
+		$data[]=array(
+			"user"=>"$nick (#$uid)",
+			"view_index"=>$query_access?format_Wochentag_Uhrzeit($time):"-/-",
+		);
+		$sort_uid[]=$uid;
+		$sort_time[]=$time;
+	}
+	$table=new table($data);
+	//$table->set_sort_values("user", $sort_uid);
+	$table->set_sort_values("view_index", $sort_time);
+	$page->say($table);
 	page_send_exit();
 }
 
