@@ -5,6 +5,8 @@ function get_edit_form($form,$db,$id,$query){
 		global $page;
 		if ($id=="NEW"){
 			$query['active']="1";
+			$form->add_hidden("logon_time","0");
+			$form->add_hidden("logon_ip","");
 		}
 		$ff=module::edit_form_field($form,$query,'vorname',"Vorname");
 		$ff->id="id_vorname";
