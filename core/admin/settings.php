@@ -93,6 +93,7 @@ settings_add_field($form,"CFG_CSS_VERSION","CSS-Version",'TEXT');
 settings_add_field2($form,"CFG_HAUPTMENUE","Haupmenü");
 $form->add_field( new form_field("HM_ICONS","Haupmenü Icons",setting_get(null, 'HM_ICONS'),'CHECKBOX') );
 $form->add_field( new form_field("HM_TEXT","Haupmenü Text",setting_get(null, 'HM_TEXT'),'CHECKBOX') );
+settings_add_field2($form,"CFG_CSS_BLENDER","CSS-Blender","CHECKBOX");
 
 $form->add_fields("Module",null);
 $form->add_field( new form_field("CFG_MODULES[]","Module",$modules,'SELECT_MULTIPLE',null,$module) );
@@ -119,8 +120,8 @@ $form->add_fields("(Abwärts-)Kompatibilität",null);
 settings_add_field2($form,"FEATURE_PRERELEASE","Pre-Release",'CHECKBOX');
 settings_add_field2($form,"FIREFOX_EXCLUSIVE","Firefox Exklusiv",'CHECKBOX');
 settings_add_field2($form,"FIREFOX_EXCLUSIV_MSG","Firefox Exklusiv - Meldung",'TEXTAREA');
-settings_add_field2($form,"DEPRECATED_HMLICLASS","div.mainmenu li div.menutopic",'CHECKBOX');//10-14
-settings_add_field2($form,"DEPRECATED_DSDLCLASS","ul.datasheet li div.data_label",'CHECKBOX');//11-14
+settings_add_field2($form,"DEPRECATED_HMLICLASS","div.mainmenu li div.menutopic",'CHECKBOX');//10'14
+settings_add_field2($form,"DEPRECATED_DSDLCLASS","ul.datasheet li div.data_label",'CHECKBOX');//11'14
 
 $form->add_fields("Server",null);
 settings_add_field2($form,"CFG_SERVER","Server",'TEXT');

@@ -9,10 +9,29 @@ if ($cmd=="rolleSetzen") rolleSetzen();
 if ($cmd=="sendmail") sendmail();
 if ($cmd=="widgetposition") widgetposition();
 if ($cmd=="widgetcheck") widgetcheck();
+if ($cmd=="AJAX_CSS_BLEND") AJAX_CSS_BLEND();
 
 echo "!Unbekanntes AJAX-Kommando \"$cmd\"!";
 exit;//===========================================================================================
 
+function AJAX_CSS_BLEND(){
+	include_once ROOT_HDD_CORE.'/core/css_blender_.php';
+	
+	$blend_url=explode(",", request_value("urls"));
+	
+	$hashkey=blender_hash($blend_url);
+	$blended_file=ROOT_HDD_CORE."/core/html/CSS/$hashkey.css";
+	
+	$server=setting_get(null, "CFG_SERVER");
+
+	$blend=array();
+	foreach ($blend_url as $value) {
+		$blend[]=file_get_contents($server.$value);
+	}
+	file_put_contents($blended_file, implode("\n", $blend));
+
+	exit;
+}
 function widgetcheck(){
 	if(!USER_ADMIN)ajax_exit("!Keine Berechtigung!");
 	$state=request_value("state")=="true"?true:false;

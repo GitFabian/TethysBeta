@@ -44,9 +44,14 @@ class page{
 		$checkContent=($content&&$this->page_id!="core_index"?"":" empty");
 		
 		$stylesheets="";
-		foreach ($this->stylesheets as $url => $media) {
-			$mediahtml=($media?" media=\"$media\"":"");
-			$stylesheets.="\n\t<link href=\"$url\" rel=\"stylesheet\" type=\"text/css\"$mediahtml />";
+		if(setting_get(null, "CFG_CSS_BLENDER")){
+			include_once ROOT_HDD_CORE.'/core/css_blender_.php';
+			$stylesheets=css_blender($this->stylesheets);
+		}else{
+			foreach ($this->stylesheets as $url => $media) {
+				$mediahtml=($media?" media=\"$media\"":"");
+				$stylesheets.="\n\t<link href=\"$url\" rel=\"stylesheet\" type=\"text/css\"$mediahtml />";
+			}
 		}
 		
 		$libraries="";
