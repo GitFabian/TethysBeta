@@ -44,7 +44,7 @@ class page{
 		$checkContent=($content&&$this->page_id!="core_index"?"":" empty");
 		
 		$stylesheets="";
-		if(setting_get(null, "CFG_CSS_BLENDER")){
+		if(setting_get(null, "CFG_CSS_BLENDER") && ( !USER_ADMIN||!setting_get_user(null, "DEBUGMODE") ) ){
 			include_once ROOT_HDD_CORE.'/core/css_blender_.php';
 			$stylesheets=css_blender($this->stylesheets);
 		}else{

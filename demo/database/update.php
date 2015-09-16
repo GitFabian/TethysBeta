@@ -292,6 +292,13 @@ if (CFG_CSS_VERSION){
 	}
 }
 
+if(setting_get(null, "CFG_CSS_BLENDER")){
+	$page->say(html_header1("CSS-Blender"));
+	array_map('unlink', glob(ROOT_HDD_CORE."/core/html/CSS/*.css"));
+	$page->say("Bereinigt.");
+}
+
+
 page_send_exit();//-----------------------------------------------------------
 function get_version($modul){
 	$query_version=dbio_SELECT_SINGLE("core_meta_dbversion", strtoupper($modul), "modul_uc");

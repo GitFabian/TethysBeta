@@ -44,5 +44,36 @@ function blender_hash($blend_url){
 	$hash=hash("sha256", implode("+", $blend_url));
 	return $hash;
 }
+
+function blend_ajax(){
+	$blend_url=explode(",", request_value("urls"));
+	
+	$hashkey=blender_hash($blend_url);
+	$blended_file=ROOT_HDD_CORE."/core/html/CSS/$hashkey.css";
+	
+	$server=setting_get(null, "CFG_SERVER");
+	$skin_prefix=CFG_SKINPATH."/";
+	$spl=strlen($skin_prefix);
+	
+	$blend=array();
+	foreach ($blend_url as $value) {
+		$content="/* $value */\n";
+		$content.=file_get_contents($server.$value);
+
+		//Relative Pfade anpassen:
+		//if(substr($value, 0, $spl)==$skin_prefix)
+		{
+			$content=preg_replace("/url\\(([^\"'].*?)\\)/", "url('$1')", $content);
+			$skin_prefix=substr($value, 0, strrpos($value, "/")+1);
+			$content=preg_replace("/url\\((.)((?!http:)(?!data:).*?.)\\)/", "url($1".$skin_prefix."$2)", $content);
+		}
+		
+		$blend[]=$content;
+	}
+	file_put_contents(
+			$blended_file, "/*\n".implode("\n", $blend_url)."\n*/\n".
+			implode("\n", $blend)
+		);
+}
 		
 ?>
