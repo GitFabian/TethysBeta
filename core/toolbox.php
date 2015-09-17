@@ -809,14 +809,14 @@ function getUpload($name,$datapathname,$override=false,$history=true){
 					}
 				}else{
 					$page->message_error("Datei existiert bereits!");
-					return;
+					return false;
 				}
 			}
 			copy($file["tmp_name"], $datapathname);
 			return utf8_encode($filename);
 		}
 	}
-	return null;
+	return 0;
 }
 
 function flowplayer($url){
