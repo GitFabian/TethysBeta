@@ -206,7 +206,7 @@ setting_save(null, 'USRSET_xxxxx', $view, true);
 	
 	function init($page_id,$page_title){
 		$this->title=CFG_TITLE;
-		if($page_title)$this->title.=' - '.$page_title;
+		if($page_title)$this->title=$page_title." - ".$this->title;
 		$this->page_id=$page_id;
 	}
 	

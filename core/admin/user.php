@@ -41,7 +41,7 @@ if ($view=="core"){
 	if ($persoenlich) $form->add_fields("Persönliche Daten", $persoenlich);
 	
 	$form->add_fields("", array(
-		new form_field("mscsv","CSV für MS",setting_get_user(null, "MSCSV"),"CHECKBOX"),
+		new form_field("MSCSV","CSV für MS",setting_get_user(null, "MSCSV"),"CHECKBOX"),
 	));
 	
 	if(setting_get(null, "CFG_UPROF_CMPCTVIEW")){
@@ -81,22 +81,22 @@ $page->send();
 exit;//============================================================================================
 function core_user_update(){
 	global $modules;
+	$changes=array();
+	
 	if (setting_get(null,'CFG_EDIT_NICK')&&request_value("nick")){
 		dbio_UPDATE("core_users", "id=".USER_ID, array("nick"=>request_value("nick")));
 	}
 	if (setting_get(null,'CFG_EDIT_FILE')){
-		getUpload("picturee", "core_users/person".USER_ID.".jpg", true);
-// 		dbio_UPDATE("core_users", "id=".USER_ID, array(
-// 			#"picture"=>request_value("picture"),
-// // 			"durchwahl"=>request_value("durchwahl"),
-// // 			"handy"=>request_value("handy"),
-// // 			"raum"=>request_value("raum"),
-// 		));
+		$uploaded=getUpload("picturee", "core_users/person".USER_ID.".jpg", true);
+		if($uploaded){ $changes["picture"]=$uploaded; }
 	}
-	setting_save(null, "MSCSV", request_value("mscsv"), true);
-	setting_save(null, "CMPCTVIEW", request_value("CMPCTVIEW"), true);
-	setting_save(null, "PRESENTATIONMODE", request_value("PRESENTATIONMODE"), true);
-	setting_save(null, "DEBUGMODE", request_value("DEBUGMODE"), true);
+	foreach (array(
+			"MSCSV","CMPCTVIEW","PRESENTATIONMODE","DEBUGMODE"
+			) as $par) {
+		$new=request_value($par);
+		if($new!=(setting_get_user(null, $par)?"on":null))$changes[$par]=$new;
+		setting_save(null, $par, $new, true);
+	}
 	
 	/*
 	 * Widgets
@@ -109,9 +109,27 @@ function core_user_update(){
 				if(request_value("widget_".$mod_id."_".$widget->name_id)) $wids_set[]=$mod_id."_".$widget->name_id;
 			}
 		}
-		setting_save(null, "WIDGETS", implode(",", $wids_set), true);
+		$string=implode(",", $wids_set);
+		if($string!=setting_get_user(null, "WIDGETS")){
+			$alt=array_val2key(explode(",", setting_get_user(null, "WIDGETS")));
+			setting_save(null, "WIDGETS", $string, true);
+			$neu=array_val2key($wids_set);
+			$dazu=array();
+			foreach ($neu as $w=>$dummy) {
+				if (isset($alt[$w])) unset($alt[$w]); else $dazu[]=$w; 
+			}
+			if($alt)$changes["WIDGETS_AUS"]=$alt;
+			if($dazu)$changes["WIDGETS_EIN"]=$dazu;
+		}
 	}
 	
-	ajax_refresh("Speichere Daten...", "user.".CFG_EXTENSION."?cmd=updated");
+	if($changes){
+		include_once ROOT_HDD_CORE.'/core/log.php';
+		log_db_edit("CORE", "users", USER_ID, json_encode($changes));
+		ajax_refresh("Speichere Daten...", "user.".CFG_EXTENSION."?cmd=updated");
+	}
+	
+// 	global $page;
+// 	$page->message_info("Keine Änderung.");
 }
 ?>

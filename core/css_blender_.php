@@ -8,12 +8,13 @@ function css_blender($page_stylesheets){
 	global $page;
 
 	$stylesheets="";
+	$stylesheets2="";
 	if(setting_get(null, "CFG_CSS_BLENDER")){
 		$blend_url=array();
 		$server=setting_get(null, "CFG_SERVER");
 		foreach ($page_stylesheets as $url => $media) {
 			if($media){
-				$stylesheets.="\n\t<link href=\"$url\" rel=\"stylesheet\" type=\"text/css\" media=\"$media\" />";
+				$stylesheets2.="\n\t<link href=\"$url\" rel=\"stylesheet\" type=\"text/css\" media=\"$media\" />";
 			}else{
 				$blend_url[]=$url;
 			}
@@ -30,6 +31,7 @@ function css_blender($page_stylesheets){
 			}
 			$page->onload_JS.=ajax("AJAX_CSS_BLEND&urls=".urlencode(implode(",", $blend_url)),null,null,true);
 		}
+		$stylesheets.=$stylesheets2;
 	}else{
 		foreach ($page_stylesheets as $url => $media) {
 			$mediahtml=($media?" media=\"$media\"":"");
