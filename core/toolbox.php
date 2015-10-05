@@ -819,12 +819,13 @@ function getUpload($name,$datapathname,$override=false,$history=true){
 	return null;
 }
 
-function flowplayer($url){
+function flowplayer($url,$style=""){
 	global $page;
 	include_jquery();
 	$page->add_library(ROOT_HTTP_CORE."/core/html/flowplayer/flowplayer.min.js");
 	$page->add_stylesheet(ROOT_HTTP_CORE."/core/html/flowplayer/functional.css");
-	return "<div class=\"flowplayer\"><video src=\"$url\"></video></div>";
+	$style=$style?" style=\"$style\"":"";
+	return "<div class=\"flowplayer\"$style><video src=\"$url\"></video></div>";
 }
 
 function anchor($id){
