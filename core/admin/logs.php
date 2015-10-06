@@ -106,7 +106,8 @@ foreach ($query2 as $dat) {
 		$table.=html_header2(format_Wochentag_tm_j($datum*86400,null,"Y",true)
 				."<span class=\"h2_right\">".format_days_delta($datum-$heute)."</span>");
 	}
-	$table.=logs_entry($dat);
+	$logentry=logs_entry($dat);
+	$table.=($logentry===false?"":$logentry);
 }
 $table=html_div($table,"log_list");
 
@@ -152,6 +153,7 @@ function logs_entry($dat){
 	}else{
 		$log_entry=$modules[$dat["modul"]]->get_log_entry($dat["action"],$dat["tabelle"],$dat["zeile"],$dat["pars"]);
 	}
+	if ($log_entry===false) return false;
 	
 	$html.=html_div($dat["id"],"id");
 	$html.=html_div("<span title=\""
