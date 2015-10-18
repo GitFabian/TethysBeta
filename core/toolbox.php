@@ -450,8 +450,8 @@ function string_random($length,$key){
 }
 
 function string_kuerzen($string,$maxlen){
-	if($string&&strlen($string)>$maxlen){
-		return substr($string, 0, $maxlen-3)."...";
+	if($string&&strlen(utf8_decode($string))>$maxlen){
+		return utf8_encode(substr(utf8_decode($string), 0, $maxlen-3)."...");
 	}
 	return $string;
 }
