@@ -780,6 +780,10 @@ function waitSpinner(){
 
 /**
  * @param string $datapathname Datei-Pfad und -Name (Ursprüngl. Dateiname einfügen: ":FILENAME:"), relativ zum DATA-Verzeichnis
+ * 
+ * <code>
+$file=getUpload('datei1',"demo/uploads/:FILENAME:",true,true);
+ * </code>
  */
 function getUpload($name,$datapathname,$override=false,$history=true){
 	global $page;
