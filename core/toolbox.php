@@ -740,11 +740,13 @@ function toolbox_css_position($id){
 	return html_div("...",null,$myid);
 }
 
-function dir_list($path,$utf8=true){
+function dir_list($path,$utf8=true,$exclude_assoc=array()){
+	if(!file_exists($path))return false;
 	$dir=opendir($path);
+	if(!$dir)return false;
 	$files=array();
 	while (false !== ($file = readdir($dir))) {
-		if($file!='.'&&$file!='..')$files[]=($utf8?utf8_encode($file):$file);
+		if($file!='.'&&$file!='..'&&!isset($exclude_assoc[$file]))$files[]=($utf8?utf8_encode($file):$file);
 	}
 	closedir($dir);
 	return $files;
