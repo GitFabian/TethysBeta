@@ -510,17 +510,23 @@ function format_datum_to_sql($string=null){
 function format_datum_to_sql2($string=null){
 	if($string===null)return date("Y-m-d");
 	$string=trim($string);
+	// 1979 , 79
 	if(preg_match("/^[0-9]{1,4}$/", $string))return $string."-00-00";
+	// 5-23 , 23.5.
 	if(preg_match("/^[0-9]{1,2}-[0-9]{1,2}$/", $string))return "0000-".$string;
-	if(preg_match("/^[0-9]{1,4}-[0-9]{1,2}-[0-9]{1,2}$/", $string))return $string;
 	if(preg_match("/^[0-9]{1,2}\\.[0-9]{1,2}\\.$/", $string)){
 		$tm=explode(".", $string);
 		return "0000-".$tm[1]."-".$tm[0];
 	}
+	// 23.5.79 , 23.5.1979 , 1979-5-23 , 79-5-23
 	if(preg_match("/^[0-9]{1,2}\\.[0-9]{1,2}\\.[0-9]{1,4}$/", $string)){
 		$tmj=explode(".", $string);
 		return $tmj[2]."-".$tmj[1]."-".$tmj[0];
 	}
+	if(preg_match("/^[0-9]{1,4}-[0-9]{1,2}-[0-9]{1,2}$/", $string))return $string;
+	// 1979-5
+	if(preg_match("/^[0-9]{4}-[0-9]{1,2}$/", $string))return $string."-00";
+	
 	return "0000-00-00";
 }
 
