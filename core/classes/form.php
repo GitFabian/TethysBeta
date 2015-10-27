@@ -25,6 +25,7 @@ class form{
 	var $hidden_fields;
 	var $booleans;
 	var $dates=array();
+	var $dates2=array();//Eigener Parser, kein Datechooser
 	var $buttons="";
 	var $tag="form";
 	var $onsubmit="";
@@ -64,6 +65,9 @@ class form{
 		}
 		if ($field->type=='DATUM'){
 			$this->dates[]=$field->name;
+		}
+		if ($field->type=='DATUM2'){
+			$this->dates2[]=$field->name;
 		}
 		if ($field->type=='FILE'){
 			$this->fileUpload=true;
@@ -124,6 +128,10 @@ class form{
 		if ($this->dates){
 			$dates=implode(",", $this->dates);
 			$hidden_fields.="\n\t<input type=\"hidden\" name=\"t_dates\" value=\"$dates\" />";
+		}
+		if ($this->dates2){
+			$dates=implode(",", $this->dates2);
+			$hidden_fields.="\n\t<input type=\"hidden\" name=\"t_dates2\" value=\"$dates\" />";
 		}
 		
 		$action=($this->action?" action=\"$this->action\" method=\"$this->method\"":"");
@@ -245,6 +253,8 @@ class form_field{
 			$id=($this->id?:get_next_id());
 			datepicker($id);
 			$input="<input$onChange id=\"$id\" type=\"text\" datum name=\"".$this->name."\" value=\"$thisvalue\" />";
+		}else if ($this->type=="DATUM2"){
+			$input="<input$onChange$id type=\"text\" name=\"".$this->name."\" value=\"$thisvalue\" />";
 		}else if ($this->type=="RADIO"){
 			if($this->options){
 				$input.="<ul class=\"radio\">";

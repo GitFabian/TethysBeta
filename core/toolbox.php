@@ -50,16 +50,28 @@ function request_unset($key){
 }
 
 function request_extract_dates(){
-	if (!isset($_REQUEST['t_dates'])) return;
-	$dates=$_REQUEST['t_dates'];
-	unset($_REQUEST['t_dates']);
-	
-	$dates=explode(",", $dates);
-	
-	foreach ($dates as $d) {
-		$value=false;
-		if (isset($_REQUEST[$d])){
-			$_REQUEST[$d]=$_REQUEST[$d]?format_datum_to_sql($_REQUEST[$d]):null;
+	if (isset($_REQUEST['t_dates'])){
+		$dates=$_REQUEST['t_dates'];
+		unset($_REQUEST['t_dates']);
+		
+		$dates=explode(",", $dates);
+		
+		foreach ($dates as $d) {
+			$value=false;
+			if (isset($_REQUEST[$d])){
+				$_REQUEST[$d]=$_REQUEST[$d]?format_datum_to_sql($_REQUEST[$d]):null;
+			}
+		}
+	}
+	if (isset($_REQUEST['t_dates2'])){
+		$dates=$_REQUEST['t_dates2'];
+		unset($_REQUEST['t_dates2']);
+		$dates=explode(",", $dates);
+		foreach ($dates as $d) {
+			$value=false;
+			if (isset($_REQUEST[$d])){
+				$_REQUEST[$d]=$_REQUEST[$d]?format_datum_to_sql2($_REQUEST[$d]):null;
+			}
 		}
 	}
 }
@@ -493,6 +505,23 @@ function format_Wochentag_tm_j($string,$j=null,$Y='Y',$ts=false){
 
 function format_datum_to_sql($string=null){
 	return date("Y-m-d",($string===null?time():strtotime($string)));
+}
+
+function format_datum_to_sql2($string=null){
+	if($string===null)return date("Y-m-d");
+	$string=trim($string);
+	if(preg_match("/^[0-9]{1,4}$/", $string))return $string."-00-00";
+	if(preg_match("/^[0-9]{1,2}-[0-9]{1,2}$/", $string))return "0000-".$string;
+	if(preg_match("/^[0-9]{1,4}-[0-9]{1,2}-[0-9]{1,2}$/", $string))return $string;
+	if(preg_match("/^[0-9]{1,2}\\.[0-9]{1,2}\\.$/", $string)){
+		$tm=explode(".", $string);
+		return "0000-".$tm[1]."-".$tm[0];
+	}
+	if(preg_match("/^[0-9]{1,2}\\.[0-9]{1,2}\\.[0-9]{1,4}$/", $string)){
+		$tmj=explode(".", $string);
+		return $tmj[2]."-".$tmj[1]."-".$tmj[0];
+	}
+	return "0000-00-00";
 }
 
 function time_delta($time,$futur='noch'){
