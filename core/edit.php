@@ -187,8 +187,10 @@ if ($id=="NEW"){
 }
 
 $page->say($form);
-$page->focus="label:first-child + *";
-$page->focus_downward_compatibility=true;
+if(!$page->focus){
+	$page->focus="label:first-child + *";
+	$page->focus_downward_compatibility=true;
+}
 
 page_send_exit();//=======================================================================================
 ?>

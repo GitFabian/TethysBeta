@@ -50,16 +50,28 @@ function request_unset($key){
 }
 
 function request_extract_dates(){
-	if (!isset($_REQUEST['t_dates'])) return;
-	$dates=$_REQUEST['t_dates'];
-	unset($_REQUEST['t_dates']);
-	
-	$dates=explode(",", $dates);
-	
-	foreach ($dates as $d) {
-		$value=false;
-		if (isset($_REQUEST[$d])){
-			$_REQUEST[$d]=$_REQUEST[$d]?format_datum_to_sql($_REQUEST[$d]):null;
+	if (isset($_REQUEST['t_dates'])){
+		$dates=$_REQUEST['t_dates'];
+		unset($_REQUEST['t_dates']);
+		
+		$dates=explode(",", $dates);
+		
+		foreach ($dates as $d) {
+			$value=false;
+			if (isset($_REQUEST[$d])){
+				$_REQUEST[$d]=$_REQUEST[$d]?format_datum_to_sql($_REQUEST[$d]):null;
+			}
+		}
+	}
+	if (isset($_REQUEST['t_dates2'])){
+		$dates=$_REQUEST['t_dates2'];
+		unset($_REQUEST['t_dates2']);
+		$dates=explode(",", $dates);
+		foreach ($dates as $d) {
+			$value=false;
+			if (isset($_REQUEST[$d])){
+				$_REQUEST[$d]=$_REQUEST[$d]?format_datum_to_sql2($_REQUEST[$d]):null;
+			}
 		}
 	}
 }
@@ -450,8 +462,8 @@ function string_random($length,$key){
 }
 
 function string_kuerzen($string,$maxlen){
-	if($string&&strlen($string)>$maxlen){
-		return substr($string, 0, $maxlen-3)."...";
+	if($string&&strlen(utf8_decode($string))>$maxlen){
+		return utf8_encode(substr(utf8_decode($string), 0, $maxlen-3)."...");
 	}
 	return $string;
 }
@@ -493,6 +505,29 @@ function format_Wochentag_tm_j($string,$j=null,$Y='Y',$ts=false){
 
 function format_datum_to_sql($string=null){
 	return date("Y-m-d",($string===null?time():strtotime($string)));
+}
+
+function format_datum_to_sql2($string=null){
+	if($string===null)return date("Y-m-d");
+	$string=trim($string);
+	// 1979 , 79
+	if(preg_match("/^[0-9]{1,4}$/", $string))return $string."-00-00";
+	// 5-23 , 23.5.
+	if(preg_match("/^[0-9]{1,2}-[0-9]{1,2}$/", $string))return "0000-".$string;
+	if(preg_match("/^[0-9]{1,2}\\.[0-9]{1,2}\\.$/", $string)){
+		$tm=explode(".", $string);
+		return "0000-".$tm[1]."-".$tm[0];
+	}
+	// 23.5.79 , 23.5.1979 , 1979-5-23 , 79-5-23
+	if(preg_match("/^[0-9]{1,2}\\.[0-9]{1,2}\\.[0-9]{1,4}$/", $string)){
+		$tmj=explode(".", $string);
+		return $tmj[2]."-".$tmj[1]."-".$tmj[0];
+	}
+	if(preg_match("/^[0-9]{1,4}-[0-9]{1,2}-[0-9]{1,2}$/", $string))return $string;
+	// 1979-5
+	if(preg_match("/^[0-9]{4}-[0-9]{1,2}$/", $string))return $string."-00";
+	
+	return "0000-00-00";
 }
 
 function time_delta($time,$futur='noch'){
@@ -740,11 +775,13 @@ function toolbox_css_position($id){
 	return html_div("...",null,$myid);
 }
 
-function dir_list($path,$utf8=true){
+function dir_list($path,$utf8=true,$exclude_assoc=array()){
+	if(!file_exists($path))return false;
 	$dir=opendir($path);
+	if(!$dir)return false;
 	$files=array();
 	while (false !== ($file = readdir($dir))) {
-		if($file!='.'&&$file!='..')$files[]=($utf8?utf8_encode($file):$file);
+		if($file!='.'&&$file!='..'&&!isset($exclude_assoc[$file]))$files[]=($utf8?utf8_encode($file):$file);
 	}
 	closedir($dir);
 	return $files;
@@ -780,6 +817,10 @@ function waitSpinner(){
 
 /**
  * @param string $datapathname Datei-Pfad und -Name (Ursprüngl. Dateiname einfügen: ":FILENAME:"), relativ zum DATA-Verzeichnis
+ * 
+ * <code>
+$file=getUpload('datei1',"demo/uploads/:FILENAME:",true,true);
+ * </code>
  */
 function getUpload($name,$datapathname,$override=false,$history=true){
 	global $page;

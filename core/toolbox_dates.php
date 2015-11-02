@@ -90,4 +90,12 @@ function sql_zeitraum_matches_jahr($jahr=null,$von='von',$bis='bis'){
 	return "(($von <= '$jahr-12-31' AND $von >= '$jahr-01-01') OR ($bis <= '$jahr-12-31' AND $bis >= '$jahr-01-01'))";
 }
 
+function alter($geburtstag_str,$heute_ts=null){
+	if(!$heute_ts)$heute_ts=time();
+	$ts_alt=strtotime($geburtstag_str);
+	$jahr_delta=date("Y",$heute_ts)-date("Y",$ts_alt);
+	$age = (date("md", $ts_alt ) > date("md",$heute_ts) ? ($jahr_delta - 1) :$jahr_delta );
+	return $age;
+}
+
 ?>

@@ -159,3 +159,11 @@ function tethys_update_members(url,cmd,id,e,func){
 		ids=ids.join(',');
 		tethys_ajax(url+"?cmd="+cmd+"&id="+id+"&ids="+ids,func);
 }
+
+function showhide(state,target_selector){
+	if(state){
+		$(target_selector).removeClass('invisible');
+	}else{
+		$(target_selector).addClass('invisible');
+	}
+}
