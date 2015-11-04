@@ -97,7 +97,7 @@ if(setting_get(null, "FIREFOX_EXCLUSIVE")){
 	include_once ROOT_HDD_CORE.'/core/classes/userAgent.php';
 	if(!userAgent::is_firefox()){
 		if (isset($_COOKIE['tethys_browseroverride'])){
-			$page->message_error( setting_get(null, "FIREFOX_EXCLUSIV_MSG") );
+			$page->message_error( setting_get(null, "FIREFOX_EXCLUSIV_MSG") ,"noprint" );
 			$css="/browser/".$_COOKIE['tethys_browseroverride']."/browser.css";
 			if(file_exists(CFG_SKINDIR.$css)){
 				$page->add_stylesheet(CFG_SKINPATH.$css);}
@@ -105,7 +105,7 @@ if(setting_get(null, "FIREFOX_EXCLUSIVE")){
 			if (isset($_REQUEST['browseroverride'])){
 				$vendor=(userAgent::get_vendor()?:"Unbekannt");
 				setcookie("tethys_browseroverride",$vendor,null,"/");
-				$page->message_error(setting_get(null, "FIREFOX_EXCLUSIV_MSG"));
+				$page->message_error(setting_get(null, "FIREFOX_EXCLUSIV_MSG"),"noprint");
 				$css="/browser/$vendor/browser.css";
 				if(file_exists(CFG_SKINDIR.$css)){
 					$page->add_stylesheet(CFG_SKINPATH.$css);}
