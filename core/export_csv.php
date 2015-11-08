@@ -55,11 +55,12 @@ if ($modul=='core'){
 if (!$ok) page_send_exit("Export fehlgeschlagen!");
 
 page_send_exit();//====================================================================================================
-function csv_out($data,$filename="export.csv"){
+function csv_out($data,$filename="export.csv",$prefix="",$suffix=""){
 	header('Content-type: text/csv; charset=ISO-8859-1');
 	header("Content-Disposition: attachment; filename=\"$filename\"");
 	#header('Content-type: text/html; charset=ISO-8859-1');echo"<pre>";
 	if(setting_get_user(null,"MSCSV"))echo "sep=,\r\n";
+	if($prefix)echo utf8_decode($prefix)."\r\n";
 	$row_counter=0;
 	foreach ($data as $row) {
 		$row_counter++;
@@ -86,6 +87,7 @@ function csv_out($data,$filename="export.csv"){
 		}
 		echo implode(",", $values)."\r\n";
 	}
+	if($suffix)echo "\r\n".utf8_decode($suffix);
 	exit;
 }
 ?>

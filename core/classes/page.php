@@ -242,9 +242,9 @@ setting_save(null, 'USRSET_xxxxx', $view, true);
 		include_once ROOT_HDD_CORE.'/core/classes/message.php';
 		$this->messages[]=new message($text,'info');
 	}
-	function message_error($text){
+	function message_error($text,$class=""){
 		include_once ROOT_HDD_CORE.'/core/classes/message.php';
-		$this->messages[]=new message($text,'error');
+		$this->messages[]=new message($text,"error $class");
 	}
 	function message_ask($text){
 		include_once ROOT_HDD_CORE.'/core/classes/message.php';

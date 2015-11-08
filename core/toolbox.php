@@ -1019,4 +1019,8 @@ function nachkommastellen($number,$digits){
 	return $r;
 }
 
+function edit_link($db,$id="NEW"){
+	return ROOT_HTTP_CORE."/core/edit.".CFG_EXTENSION."?db=".$db."&id=".$id;
+}
+
 ?>

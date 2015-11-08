@@ -15,6 +15,7 @@ foreach ($query as $d) {
 
 $table=new table($data);
 $table->set_options(true, true, true, "core_chronjobs");
+$table->datatable->paginate=true;
 $page->say($table);
 // if($table->rows)
 // 	$page->say($table);
