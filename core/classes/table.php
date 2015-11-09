@@ -189,6 +189,7 @@ class datatable{
 	var $selector;
 	var $paginate;
 	var $localize=true;
+	var $fixedheader=false;
 	function __construct($selector,$paginate=false){
 		$this->selector=$selector;
 		$this->paginate=$paginate;
@@ -200,8 +201,16 @@ class datatable{
 			;
 		if($this->localize)$options.="language:{url:'".ROOT_HTTP_CORE."/core/html/jquery.dataTables.German.json'},";
 		if (!$this->paginate) $options.="'bPaginate':false,";
-		$varname=($varname?"$varname=":"");
-		return "$varname\$('$this->selector').dataTable({".$options."});";
+		$varname2=($varname?"$varname=":"");
+		$runmore="";
+		if($this->fixedheader){
+			global $page;
+			$page->add_library(ROOT_HTTP_CORE."/core/html/jquery.dataTables.fixedHeader.js");
+			$offsetTop=setting_get(null, "CFG_OFFSETTOP");
+			$runmore=$varname?"new $.fn.dataTable.FixedHeader( $varname, { \"offsetTop\":$offsetTop, } );":"";
+			$runmore=js_runLater($runmore, 1);//DataTables muss fertig sein mit der Formatierung
+		}
+		return "$varname2\$('$this->selector').dataTable({".$options."});$runmore";
 	}
 	function execute(){
 		include_datatables();

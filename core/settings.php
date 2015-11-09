@@ -89,7 +89,8 @@ function setting_get_default($modul,$key){
 		if ($key=='CFG_MOVEWIDGETS') return "0";
 		if ($key=='CFG_SMSPUSHURL') return "";//http://.../sms_insert.php
 		if ($key=='CFG_CSS_BLENDER') return "0";
-		if (USER_ADMIN) echo "Kein Default-Value für \"$key\"! /core/settings.php:92";
+		if ($key=='CFG_OFFSETTOP') return "0";//px
+		if (USER_ADMIN) echo "Kein Default-Value für \"$key\"! /core/settings.php:93";
 		return null;
 	}else{
 		global $modules;
