@@ -524,9 +524,13 @@ function format_datum_to_sql2($string=null){
 		return $tmj[2]."-".$tmj[1]."-".$tmj[0];
 	}
 	if(preg_match("/^[0-9]{1,4}-[0-9]{1,2}-[0-9]{1,2}$/", $string))return $string;
-	// 1979-5
+	// 1979-5 , 5.1979
 	if(preg_match("/^[0-9]{4}-[0-9]{1,2}$/", $string))return $string."-00";
-	
+	if(preg_match("/^[0-9]{1,2}\\.[0-9]{4}$/", $string)){
+		$tmj=explode(".", $string);
+		return $tmj[1]."-".$tmj[0]."-00";
+	}
+		
 	return "0000-00-00";
 }
 

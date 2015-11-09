@@ -98,4 +98,11 @@ function alter($geburtstag_str,$heute_ts=null){
 	return $age;
 }
 
+function format_date_sql_to_tmj($sql_date){
+	$d=substr($sql_date, 8,2)*1;
+	$m=substr($sql_date, 5,2)*1;
+	$j=substr($sql_date, 0,4)*1;
+	return ($d?$d.".":"").($m?$m.".":($d?"?.":"")).($j?:"");
+}
+
 ?>
