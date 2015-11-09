@@ -353,11 +353,12 @@ function htmlEntity2($name,$pars){
 	return "<$name$pars_html />";
 }
 
-function html_div($html,$class=null,$id=null,$style=null){
+function html_div($html,$class=null,$id=null,$style=null,$title=null){
 	return "\n".htmlEntity('div', $html, array(
 			"class"=>$class,
 			"id"=>$id,
 			"style"=>$style,
+			"title"=>$title,
 		));
 }
 
