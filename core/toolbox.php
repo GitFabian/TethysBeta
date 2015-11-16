@@ -334,6 +334,34 @@ function html_select_options($data,$selected=null){
 	return implode("", $html);
 }
 
+/**
+ * <code>
+$state=html_radio_selection("radio".get_next_id(),array(
+	"new"=>"New",
+	"progress"=>"in progress",
+	"bug"=>"Bug",
+	"ok"=>"OK",
+),$step["state"],"alert('[KEY]');");
+ * </code>
+ */
+function html_radio_selection($name,$options,$selected=null,$js_function=null){
+	$html=array();
+	foreach ($options as $key => $value) {
+		$js="";
+		if($js_function){
+			$js=$js_function;
+			$js=preg_replace("/\\[KEY\\]/", $key, $js);
+			$js=" onClick=\"$js\"";
+		}
+		$html[]="<div class=\"tradio $key\"><input type=\"radio\" name=\"$name\" value=\"$key\""
+				.($key==$selected?" checked":"")
+				.$js
+				.">$value</div>";
+	}
+	$html="<div class=\"tradioc $name\">".implode("\n",$html)."</div>";
+	return $html;
+}
+
 function htmlEntity($name,$html,$pars){
 	$pars_html="";
 	if($pars)
