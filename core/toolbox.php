@@ -353,12 +353,10 @@ function html_radio_selection($name,$options,$selected=null,$js_function=null){
 			$js=preg_replace("/\\[KEY\\]/", $key, $js);
 			$js=" onClick=\"$js\"";
 		}
-		$html[]="<div class=\"tradio $key"
-				.($key==$selected?" checked":"")
-				."\"><input type=\"radio\" name=\"$name\" value=\"$key\""
+		$html[]="<input title=\"$value\" type=\"radio\" name=\"$name\" value=\"$key\""
 				.($key==$selected?" checked":"")
 				.$js
-				.">$value</div>";
+				."><div class=\"tradio $key\">$value</div>";
 	}
 	$html="<div class=\"tradioc $name\">".implode("\n",$html)."</div>";
 	return $html;
