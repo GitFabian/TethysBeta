@@ -63,7 +63,7 @@ class gantt{
 				$day=date("j",$start+1800/*Mitte des Tages*/);
 				$mon=$monate[date("n",$start+1800/*Mitte des Tages*/)-1]."&nbsp;".date("Y",$start+1800/*Mitte des Tages*/);
 				if($mon!=$monat){ $monat=$mon; }else{ $mon=""; }
-				$html.="<div class=\"gantt_head\" style=\"width:{$width}px;left:{$left}px;\">"
+				$html.="<div class=\"gantt_head d$day\" style=\"width:{$width}px;left:{$left}px;\">"
 						."<span class=\"gantt_head_text\">$mon<br>$day</span>"
 					."</div>";
 				$start+=86400/*1 Tag*/;
