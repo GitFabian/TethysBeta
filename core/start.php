@@ -39,6 +39,7 @@ $global_id_counter=0;
 /*
  * Login
  */
+global $standalone_logon;
 if (!isset($standalone_logon)){
 	$user=null;
 	include_once ROOT_HDD_CORE.'/core/login.php';
@@ -66,6 +67,7 @@ init_settings();
  * Module
  */
 include_once ROOT_HDD_CORE.'/core/classes/module.php';
+global $modules;
 $modules=array();
 module_read();
 
