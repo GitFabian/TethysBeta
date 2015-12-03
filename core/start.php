@@ -31,6 +31,7 @@ mysql_query ('SET NAMES utf8');
  * HTML-Page
  */
 include_once ROOT_HDD_CORE.'/core/classes/page.php';
+global $page;
 $page=new page();
 header('Content-type: text/html; charset=UTF-8');
 $global_id_counter=0;
