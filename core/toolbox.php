@@ -497,6 +497,7 @@ function string_kuerzen($string,$maxlen){
 	return $string;
 }
 
+global $wochentage;
 $wochentage=array("So","Mo","Di","Mi","Do","Fr","Sa");
 
 /**
