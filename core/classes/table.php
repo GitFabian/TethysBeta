@@ -77,7 +77,7 @@ class table{
 		}
 		if ($delete){
 			include_once ROOT_HDD_CORE.'/core/alertify.php';
-			$url=ROOT_HTTP_CORE."/core/edit.".CFG_EXTENSION."?cmd=delete&db=$db&id=[ID:$idkey]$idkeyquery";
+			$url=ROOT_HTTP_CORE."/core/edit.".CFG_EXTENSION."?cmd=delete&db=$db&$idkey=[ID:$idkey]$idkeyquery";
 			#$this->options.=html_a_button("Löschen", $url, "tbl_option tbl_delete");
 			$this->options[]=html_a_button("Löschen", "", "tbl_option tbl_delete","ask_delete('$url','$datensatz');");
 		}
