@@ -168,8 +168,8 @@ $view=$page->init_views('xxxxxDEFAULTIDxxxxxxx',array(
 $views=array(
 	new menu_topic2("xxxxxxIDxxxxxxxx", "xxxxxxxxLABELxxxxxxx"),
 );
-$view=$page->init_views(setting_get_user(null,'USRSET_xxxxx'),$views);
-setting_save(null, 'USRSET_xxxxx', $view, true);
+$view=$page->init_views(setting_get_user('xxxMODULxxx','USRSET_xxxxx'),$views);
+setting_save('xxxMODULxxx', 'USRSET_xxxxx', $view, true);
 
 	 *</code> 
 	 */

@@ -41,6 +41,7 @@ foreach ($query as $row) {
 	$data[$uid][$rid]=html_checkbox(null,true,"rolleSetzen(this,'$uid','$rid');");
 }
 $table=new table($data);
+$table->datatable->fixedheader=true;
 $header=array("name"=>"Name");
 foreach ($rollen as $key => $value) {
 	$header[$key]=$value;

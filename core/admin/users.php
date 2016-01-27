@@ -27,7 +27,7 @@ if(USER_ADMIN){
 $data=array();
 foreach ($query as $row) {
 	if(!isset($query_exclude[$row['id']]))
-	$row["geb"]=$row["geb"]?date("j.n.Y",strtotime($row["geb"])):"";
+	#$row["geb"]=$row["geb"]?date("j.n.Y",strtotime($row["geb"])):"";
 	$data[]=$row;
 }
 $table=new table($data);

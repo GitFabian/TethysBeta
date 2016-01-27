@@ -334,6 +334,34 @@ function html_select_options($data,$selected=null){
 	return implode("", $html);
 }
 
+/**
+ * <code>
+$state=html_radio_selection("radio".get_next_id(),array(
+	"new"=>"New",
+	"progress"=>"in progress",
+	"bug"=>"Bug",
+	"ok"=>"OK",
+),$step["state"],"alert('[KEY]');");
+ * </code>
+ */
+function html_radio_selection($name,$options,$selected=null,$js_function=null){
+	$html=array();
+	foreach ($options as $key => $value) {
+		$js="";
+		if($js_function){
+			$js=$js_function;
+			$js=preg_replace("/\\[KEY\\]/", $key, $js);
+			$js=" onClick=\"$js\"";
+		}
+		$html[]="<input title=\"$value\" type=\"radio\" name=\"$name\" value=\"$key\""
+				.($key==$selected?" checked":"")
+				.$js
+				."><div class=\"tradio $key\">$value</div>";
+	}
+	$html="<div class=\"tradioc $name\">".implode("\n",$html)."</div>";
+	return $html;
+}
+
 function htmlEntity($name,$html,$pars){
 	$pars_html="";
 	if($pars)
@@ -353,11 +381,12 @@ function htmlEntity2($name,$pars){
 	return "<$name$pars_html />";
 }
 
-function html_div($html,$class=null,$id=null,$style=null){
+function html_div($html,$class=null,$id=null,$style=null,$title=null){
 	return "\n".htmlEntity('div', $html, array(
 			"class"=>$class,
 			"id"=>$id,
 			"style"=>$style,
+			"title"=>$title,
 		));
 }
 
@@ -468,6 +497,7 @@ function string_kuerzen($string,$maxlen){
 	return $string;
 }
 
+global $wochentage;
 $wochentage=array("So","Mo","Di","Mi","Do","Fr","Sa");
 
 /**
@@ -1025,6 +1055,14 @@ function nachkommastellen($number,$digits){
 
 function edit_link($db,$id="NEW"){
 	return ROOT_HTTP_CORE."/core/edit.".CFG_EXTENSION."?db=".$db."&id=".$id;
+}
+
+function verzeichnis_leeren($path){
+	$files = glob("$path/*"); // get all file names
+	foreach($files as $file){ // iterate files
+		if(is_file($file))
+			unlink($file); // delete file
+	}
 }
 
 ?>

@@ -89,6 +89,7 @@ settings_add_field2($form,"MAIL_SUFFIX","E-Mail Suffix",'TEXT');
 
 $form->add_fields("Aussehen",null);
 settings_add_field2($form,"CFG_SKIN","Skin",'SELECT',$skins);
+settings_add_field2($form,"CFG_OFFSETTOP","OffsetTop",'TEXT');
 settings_add_field($form,"CFG_CSS_VERSION","CSS-Version",'TEXT');
 settings_add_field2($form,"CFG_HAUPTMENUE","Haupmenü");
 $form->add_field( new form_field("HM_ICONS","Haupmenü Icons",setting_get(null, 'HM_ICONS'),'CHECKBOX') );

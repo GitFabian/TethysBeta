@@ -77,7 +77,7 @@ class table{
 		}
 		if ($delete){
 			include_once ROOT_HDD_CORE.'/core/alertify.php';
-			$url=ROOT_HTTP_CORE."/core/edit.".CFG_EXTENSION."?cmd=delete&db=$db&id=[ID:$idkey]$idkeyquery";
+			$url=ROOT_HTTP_CORE."/core/edit.".CFG_EXTENSION."?cmd=delete&db=$db&$idkey=[ID:$idkey]$idkeyquery";
 			#$this->options.=html_a_button("Löschen", $url, "tbl_option tbl_delete");
 			$this->options[]=html_a_button("Löschen", "", "tbl_option tbl_delete","ask_delete('$url','$datensatz');");
 		}
@@ -189,6 +189,7 @@ class datatable{
 	var $selector;
 	var $paginate;
 	var $localize=true;
+	var $fixedheader=false;
 	function __construct($selector,$paginate=false){
 		$this->selector=$selector;
 		$this->paginate=$paginate;
@@ -200,8 +201,16 @@ class datatable{
 			;
 		if($this->localize)$options.="language:{url:'".ROOT_HTTP_CORE."/core/html/jquery.dataTables.German.json'},";
 		if (!$this->paginate) $options.="'bPaginate':false,";
-		$varname=($varname?"$varname=":"");
-		return "$varname\$('$this->selector').dataTable({".$options."});";
+		$varname2=($varname?"$varname=":"");
+		$runmore="";
+		if($this->fixedheader){
+			global $page;
+			$page->add_library(ROOT_HTTP_CORE."/core/html/jquery.dataTables.fixedHeader.js");
+			$offsetTop=setting_get(null, "CFG_OFFSETTOP");
+			$runmore=$varname?"new $.fn.dataTable.FixedHeader( $varname, { \"offsetTop\":$offsetTop, } );":"";
+			$runmore=js_runLater($runmore, 1);//DataTables muss fertig sein mit der Formatierung
+		}
+		return "$varname2\$('$this->selector').dataTable({".$options."});$runmore";
 	}
 	function execute(){
 		include_datatables();

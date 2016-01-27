@@ -27,8 +27,9 @@ function get_user_picture_url($uid=USER_ID){
 	return CFG_SKINPATH."/img/nopic.png";
 }
 
-function get_user_thumb($uid=USER_ID){
-	return html_div(html_div("<img src=\"".get_user_picture_url($uid)."\" />"),"userthumb_wrapper");
+function get_user_thumb($uid=USER_ID,$title=null){
+	$title=$title?" title=\"$title\"":"";
+	return html_div(html_div("<img$title src=\"".get_user_picture_url($uid)."\" />"),"userthumb_wrapper");
 }
 
 ?>
