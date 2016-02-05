@@ -248,7 +248,7 @@ class form_field{
 		}else if ($this->type=="PASSWORD"){
 			$input="<input$id type=\"password\" name=\"".$this->name."\" value=\"$thisvalue\" />";
 		}else if ($this->type=="TEXTAREA"){
-			$input="<textarea$id name=\"".$this->name."\"$onChange>$thisvalue</textarea>";
+			$input="<textarea$id name=\"".$this->name."\"$onChange>\n$thisvalue</textarea>";
 		}else if ($this->type=="DATUM"){
 			$id=($this->id?:get_next_id());
 			datepicker($id);
