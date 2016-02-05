@@ -11,6 +11,7 @@ class suche{
 	var $initial_html="";
 	var $options=array();
 	var $options_checked=array();
+	var $paginate=true;
 	
 	function __construct($modul=null,$ajax_cmd="such"){
 		$this->modul=$modul;
@@ -50,7 +51,7 @@ class suche{
 	query=$('#id_suche').val();
 	".ajax_to_id($this->ajax_cmd."&such=\"+encodeURIComponent(query)+\""
 			.implode("", $ajax_options)
-			, "results", $this->modul, false, "datatable_init('table','".ROOT_HTTP_CORE."');")."
+			, "results", $this->modul, false, "datatable_init2('table','".ROOT_HTTP_CORE."',".($this->paginate?"true":"false").");")."
 }"
 			.js_document_ready(
 "$('#id_suche').keydown(function(event) {

@@ -86,13 +86,16 @@ function js_getSelectedValue(id){
 }
 
 /**
- * datatable neu laden/refresh/reload: "datatable_init('table','".ROOT_HTTP_CORE."');"
+ * datatable neu laden/refresh/reload: "datatable_init2('table','".ROOT_HTTP_CORE."',true);"
  */
 function datatable_init(selector,ROOT_HTTP_CORE){
+	datatable_init2(selector,ROOT_HTTP_CORE,true);
+}
+function datatable_init2(selector,ROOT_HTTP_CORE,paginate){
 	$(selector).dataTable({
 		'bLengthChange':false,
 		'aaSorting':[],
-//		'bPaginate':false,
+		'bPaginate':paginate,
 		language:{url:ROOT_HTTP_CORE+'/core/html/jquery.dataTables.German.json'},
 	});
 }
