@@ -843,6 +843,10 @@ function update_members_by_request($db,$idKey,$id,$valKey,$request_key){
 	unset($_REQUEST[$request_key]);
 }
 
+function string_startswith($string,$prefix){
+	return substr($string, 0, strlen($prefix))==$prefix;
+}
+
 function waitSpinner(){
 	global $page;
 	$page->waitSpinner=true;
