@@ -23,7 +23,7 @@ if (!$access){exit_404("Keine Berechtigung!");}
  * Dateierweiterung
  */
 #$mime=finfo_file(finfo_open(FILEINFO_MIME_TYPE), $file);//PHP >= 5.3.0, PECL fileinfo >= 0.1.0
-$filename=pathinfo($file_utf, PATHINFO_FILENAME);
+$filename=pathinfo($file_utf, PATHINFO_BASENAME);
 $extension=pathinfo($file, PATHINFO_EXTENSION);
 $extension=strtolower($extension);
 if ($extension=='png'
