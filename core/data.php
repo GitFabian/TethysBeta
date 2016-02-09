@@ -4,7 +4,8 @@ $page->init("core_data", "DATA");
 
 $url=request_value("url");
 if (!$url) exit_404("Seite existiert nicht!");
-$file=ROOT_HDD_DATA."/".$url;
+$file_utf=ROOT_HDD_DATA."/".$url;
+$file=utf8_decode($file_utf);
 if (!file_exists($file)){exit_404("Datei nicht gefunden!");}
 
 /*
@@ -15,15 +16,21 @@ if (!file_exists($file)){exit_404("Datei nicht gefunden!");}
 /*
  * Dateierweiterung
  */
+#$mime=finfo_file(finfo_open(FILEINFO_MIME_TYPE), $file);//PHP >= 5.3.0, PECL fileinfo >= 0.1.0
+$filename=pathinfo($file_utf, PATHINFO_FILENAME);
 $extension=pathinfo($file, PATHINFO_EXTENSION);
 $extension=strtolower($extension);
-if ($extension=='png'){
+if ($extension=='png'
+	||$extension=='jpg'
+	){
 	$mime="image/".$extension;
+}else if($extension=='txt'){
+	$mime="text/plain";
 }else{
 	$mime="application/octet-stream";
 }
-
 header('Content-type: '.$mime);
+header("Content-Disposition: attachment; filename=\"$filename\"");
 readfile($file);
 exit;//============================================================================================
 function exit_404($msg){

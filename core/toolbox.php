@@ -926,6 +926,9 @@ function edit_data($query,$field,$else="",$type=""){
 	return $r;
 }
 
+/**
+ * $page->say(dirlist(ROOT_HDD_DATA."/modulname/id$id",array(),ROOT_HTTP_DATA."/modulname/id$id/[FILE]"));
+ */
 function dirlist($dir,$excludes=null,$link=null,$header="Datei-Anhänge"){
 	include_once ROOT_HDD_CORE.'/core/classes/table.php';
 	$html=html_header1($header);
@@ -936,6 +939,7 @@ function dirlist($dir,$excludes=null,$link=null,$header="Datei-Anhänge"){
 	}
 	$filenames=array();
 	foreach ($files as $file) {
+		$file=utf8_encode($file);
 		$filenames[$file]=$file;
 	}
 	unset($filenames["."]);
@@ -947,11 +951,13 @@ function dirlist($dir,$excludes=null,$link=null,$header="Datei-Anhänge"){
 	}
 	$data=array();
 	foreach ($filenames as $file) {
+		$filehtml=$file;
+		#$filehtml=htmlentities($filehtml,null,"UTF-8");
 		$d=array(
-				"Name"=>$file,
+				"Name"=>$filehtml,
 		);
 		if($link){
-			$filelink=preg_replace("/\\[FILE\\]/", $file, $link);
+			$filelink=preg_replace("/\\[FILE\\]/", $filehtml, $link);
 			$d["Name"]=html_a($d["Name"], $filelink);
 		}
 		$data[]=$d;
