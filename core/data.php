@@ -11,7 +11,13 @@ if (!file_exists($file)){exit_404("Datei nicht gefunden!");}
 /*
  * Berechtigung überprüfen
  */
-//TODO
+$query_accessrights=dbio_SELECT("core_accessrights","user=".USER_ID);
+$access=false;
+foreach ($query_accessrights as $r) {
+	$prefix=$r["file"];
+	if(string_startswith($url, $prefix))$access=true;
+}
+if (!$access){exit_404("Keine Berechtigung!");}
 
 /*
  * Dateierweiterung

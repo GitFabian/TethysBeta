@@ -1,9 +1,9 @@
 Tethys (Beta)
 =============
 
-Version 0.18.1
+Version 0.2016.6
 
-Database-Version: 23
+Database-Version: 25
 
 TODO:
 * Widgets (in arbeit)
@@ -12,6 +12,12 @@ TODO:
 * Generische members_direct-Tabelle
 * Feeds
 * Form-Check (Prüf-Funktion übergeben)
+
+TODO Version 1.0.0:
+- Build-in gantt raus
+- Wap css
+- Demo Modul: (Beispiel)php in die GUI
+- Liste der aufzuräumenden Dateien
 
 BUGS:
 (keine)

@@ -225,9 +225,22 @@ if ($version<24){
 	dbio_query("ALTER TABLE `core_users` ADD `logon_ip` VARCHAR( 15 ) NOT NULL ;");
 }
 
+if ($version<25){
+	dbio_query("CREATE TABLE IF NOT EXISTS `core_accessrights` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user` int(11) NOT NULL,
+  `file` varchar(500) COLLATE utf8_bin NOT NULL,
+  `level` enum('read','write') COLLATE utf8_bin NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user` (`user`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;");
+	dbio_query("ALTER TABLE `core_accessrights`
+  ADD CONSTRAINT `core_accessrights_ibfk_1` FOREIGN KEY (`user`) REFERENCES `core_users` (`id`);");
+}
+
 #if ($version<){dbio_query("");}
 
-$current_version=24;
+$current_version=25;
 //=================================================================================================
 dbio_query("UPDATE `core_meta_dbversion` SET `version` = '$current_version' WHERE `modul_uc` = 'CORE';");
 //=================================================================================================
