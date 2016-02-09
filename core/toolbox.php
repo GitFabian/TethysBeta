@@ -114,6 +114,14 @@ function request_add($pars){
 	$request=(isset($_SERVER['QUERY_STRING'])&&$_SERVER['QUERY_STRING']?$_SERVER['QUERY_STRING']."&":"");
 	return "?".$request.$pars;
 }
+function request_add2($pars){
+	$request=$pars+$_REQUEST;
+	$pairs="";
+	foreach ($request as $key => $value) {
+		$pairs[]=$key."=".urlencode($value);
+	}
+	return "?".implode("&", $pairs);
+}
 
 function page_send_exit($error_message=null){
 	global $page;
