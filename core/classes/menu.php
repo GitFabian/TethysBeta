@@ -123,10 +123,10 @@ function menu_add_default_admin($menu,$page_id){
 	if(berechtigung('RIGHT_USERMGMT')){
 		new menu_topic($menu_admin,"core_users",$page_id,"Benutzer",url_core_admin("users"));
 	}
-	if(USER_ADMIN){
+	if(USER_ADMIN || berechtigung('RIGHT_DATAACCESS') ){
 		new menu_topic($menu_admin,"core_rights",$page_id,"Rechte",url_core_admin("rights"));
 	}
-	if(USER_ADMIN||berechtigung('RIGHT_USERMGMT')){
+	if(USER_ADMIN){
 		new menu_topic($menu_admin,"core_rollen",$page_id,"Rollen",url_core_admin("rollen"));
 	}
 	if(USER_ADMIN){
