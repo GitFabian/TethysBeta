@@ -24,6 +24,7 @@ class filebrowser{
 	
 	function __toString(){ return $this->toHTML(); }
 	function toHTML(){
+		include_once ROOT_HDD_CORE.'/core/classes/table.php';
 		
 		$subdir=request_value("subdir",".");
 		$subdir=preg_replace("/\\\\/", "/", $subdir);
@@ -35,8 +36,6 @@ class filebrowser{
 		$dir_hdd=ROOT_HDD_DATA."/".$dir_rel;
 			$dir_hdd=utf8_decode($dir_hdd);
 		$dir_http=ROOT_HTTP_DATA."/".$dir_rel;
-		
-		include_once ROOT_HDD_CORE.'/core/classes/table.php';
 		
 		if (file_exists($dir_hdd)){
 			$files=scandir($dir_hdd);
@@ -109,15 +108,30 @@ class filebrowser{
 			}
 			$header.=" &gt; ".$subdirA[count($subdirA)-1];
 		}
-		
+
 		/*
 		 * Ausgabe
 		 */
 		$html="";
 		if($header)$html.=html_header1($header);
 		$html.=$table->toHTML();
-		return $html;
 		
+		/*
+		 * Drop-Target
+		 */
+		$query_write_right=dbio_SELECT("core_accessrights","user=".USER_ID." AND level='write'");
+		$right=false;
+		$dir_rel_as_dir=$dir_rel."/";
+		foreach ($query_write_right as $r) {
+			$prefix=$r["file"];
+			if(string_startswith($dir_rel_as_dir, $prefix))$right=true;
+		}
+		if($right){
+			#$html.="Datei(en) hinzufügen durch Drag & Drop.";
+		}
+		
+		return $html;
+
 	}
 	
 }
