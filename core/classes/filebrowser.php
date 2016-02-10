@@ -25,16 +25,19 @@ class filebrowser{
 	function __toString(){ return $this->toHTML(); }
 	function toHTML(){
 		
-		$dir_hdd=ROOT_HDD_DATA."/".$this->dir;
-		$dir_http=ROOT_HTTP_DATA."/".$this->dir;
-		
 		$subdir=request_value("subdir",".");
 		$subdir=preg_replace("/\\\\/", "/", $subdir);
-		$subdirs=explode($subdir, "/");
-		//HERE
-
+		$subdirA=explode("/", $subdir);
+		#debug_out($subdirA);
+		
+		$dir_rel=$this->dir.($subdir=="."?"":"/".$subdir);
+		#echo $dir_rel;
+		$dir_hdd=ROOT_HDD_DATA."/".$dir_rel;
+			$dir_hdd=utf8_decode($dir_hdd);
+		$dir_http=ROOT_HTTP_DATA."/".$dir_rel;
+		
 		include_once ROOT_HDD_CORE.'/core/classes/table.php';
-		$html="";//html_header1($header);
+		
 		if (file_exists($dir_hdd)){
 			$files=scandir($dir_hdd);
 		}else{
@@ -64,7 +67,8 @@ class filebrowser{
 			$d=array(
 				"Name"=>$filehtml,
 			);
-			$d["Name"]=html_a($d["Name"], request_add2(array("subdir"=>$file)));
+			$file_path=($subdir=="."?"":$subdir."/").$file;
+			$d["Name"]=html_a($d["Name"], request_add2(array("subdir"=>$file_path)));
 			$data[]=$d;
 		}
 		foreach ($filenames as $file) {
@@ -76,7 +80,7 @@ class filebrowser{
 			if(true){
 				#$filelink=preg_replace("/\\[FILE\\]/", $filehtml, $link);
 				if($this->downloadlink){
-					$filelink=$this->downloadlink."&".$this->downloadlink_key."=".urlencode($this->dir."/".$d["Name"]);
+					$filelink=$this->downloadlink."&".$this->downloadlink_key."=".urlencode($dir_rel."/".$d["Name"]);
 				}else{
 					$filelink=$dir_http."/".$d["Name"];
 				}
@@ -85,9 +89,32 @@ class filebrowser{
 			$data[]=$d;
 		}
 		$table=new table($data);
+		
+		/*
+		 * Header
+		 */
+		$header="";
 		if($this->titel_root){
-			$html.=html_header1($this->titel_root);
+			if($subdir=="."){
+				$header.=$this->titel_root;
+			}else{
+				$header.=html_a($this->titel_root, request_add2(array("subdir"=>".")), "filebrowserheader");
+			}
 		}
+		if($subdir!="."){
+			$subpath=$subdirA[0];
+			for ($i = 0; $i < count($subdirA)-1; $i++) {
+				$header.=" &gt; <a href=\"".request_add2(array("subdir"=>$subpath))."\">".$subdirA[$i]."</a>";
+				$subpath.="/".$subdirA[$i+1];
+			}
+			$header.=" &gt; ".$subdirA[count($subdirA)-1];
+		}
+		
+		/*
+		 * Ausgabe
+		 */
+		$html="";
+		if($header)$html.=html_header1($header);
 		$html.=$table->toHTML();
 		return $html;
 		
