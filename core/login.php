@@ -38,11 +38,20 @@ function login(){
 				$fehler=true;
 			}else{
 			
+				$users=false;
+				/*
+				 * http_auth
+				 */
+				$users=dbio_query_to_array("SELECT * FROM `core_users` WHERE `http_auth` COLLATE utf8_general_ci = '".sqlEscape($name)."' AND active");
+
+				//...
+				
 				/*
 				 * Nick
 				 */
+				if(!$users)
 				$users=dbio_query_to_array("SELECT * FROM `core_users` WHERE `nick` COLLATE utf8_general_ci = '".sqlEscape($name)."' AND active");
-					
+				
 				if ($users){
 			
 					if (count($users)==1){
