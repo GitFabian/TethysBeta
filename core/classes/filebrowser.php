@@ -29,6 +29,9 @@ class filebrowser{
 		$subdir=request_value("subdir",".");
 		$subdir=preg_replace("/\\\\/", "/", $subdir);
 		$subdirA=explode("/", $subdir);
+		foreach ($subdirA as $subdir_check) {
+			if(strpos($subdir_check, "..")===0)page_send_exit("Ungültiges Verzeichnis!");
+		}
 		#debug_out($subdirA);
 		
 		$dir_rel=$this->dir.($subdir=="."?"":"/".$subdir);
