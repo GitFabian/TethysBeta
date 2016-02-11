@@ -33,6 +33,7 @@ class filebrowser{
 			if(strpos($subdir_check, "..")===0)page_send_exit("Ungültiges Verzeichnis!");
 		}
 		#debug_out($subdirA);
+		//TODO:Recht checken des Verzeichnisses!
 		
 		$dir_rel=$this->dir.($subdir=="."?"":"/".$subdir);
 		#echo $dir_rel;
@@ -64,6 +65,7 @@ class filebrowser{
 		}
 		$data=array();
 		foreach ($subdirs as $file) {
+			//TODO:Recht checken des Unterverzeichnisses!
 			$filehtml=$file;
 			#$filehtml=htmlentities($filehtml,null,"UTF-8");
 			$d=array(
