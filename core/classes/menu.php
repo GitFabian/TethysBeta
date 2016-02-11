@@ -116,6 +116,7 @@ function menu_add_default_user($menu,$page_id){
 		}else if (CFG_LOGON_COOKIE){
 			new menu_topic($usermenu,"core_user_logon",$page_id, "Anmelden", "?cmd=logon" );
 		}
+		return $usermenu;
 	}
 }
 function menu_add_default_admin($menu,$page_id){
