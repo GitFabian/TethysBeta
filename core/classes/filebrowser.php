@@ -107,6 +107,7 @@ class filebrowser{
 				$subpath.="/".$subdirA[$i+1];
 			}
 			$header.=" &gt; ".$subdirA[count($subdirA)-1];
+			if(!$this->titel_root)$header=substr($header, 6);
 		}
 
 		/*
