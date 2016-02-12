@@ -1,7 +1,7 @@
 <?php
 include_once '../../config_start.php';
 $page->init('core_rights','Rechte');
-if (!USER_ADMIN && !berechtigung('RIGHT_DATAACCESS')) page_send_exit("Keine Berechtigung!");
+if (!USER_ADMIN /*&& !berechtigung('RIGHTxDATAACCESS')*/) page_send_exit("Keine Berechtigung!");
 
 include_once ROOT_HDD_CORE.'/core/classes/table.php';
 include_once ROOT_HDD_CORE.'/core/classes/rights.php';
@@ -115,18 +115,18 @@ while($from<$too){
 /*
  * Datei-Zugriffs-Rechte
  */
-if(berechtigung('RIGHT_DATAACCESS')){
-	$query=dbio_SELECT("core_accessrights");
-	$data=array();
-	foreach ($query as $row) {
-		$data[]=$row;
-	}
-	$table=new table($data);
-	$table->details=true;//ROOT_HTTP_MODULES."/mymodule/duhshrubbery.".CFG_EXTENSION."?id=[ID:id]";
-	$table->set_options(true, true, true, "core_accessrights");
-	$page->say(html_header1("DATA-Folder Zugriffsrechte"));
-	$page->say($table);
-}
+// if(berechtigung('RIGHTxDATAACCESS')){
+// 	$query=dbio_SELECT("coreXaccessrights");
+// 	$data=array();
+// 	foreach ($query as $row) {
+// 		$data[]=$row;
+// 	}
+// 	$table=new table($data);
+// 	$table->details=true;//ROOT_HTTP_MODULES."/mymodule/duhshrubbery.".CFG_EXTENSION."?id=[ID:id]";
+// 	$table->set_options(true, true, true, "coreXaccessrights");
+// 	$page->say(html_header1("DATA-Folder Zugriffsrechte"));
+// 	$page->say($table);
+// }
 
 
 $page->send();

@@ -124,7 +124,7 @@ function menu_add_default_admin($menu,$page_id){
 	if(berechtigung('RIGHT_USERMGMT')){
 		new menu_topic($menu_admin,"core_users",$page_id,"Benutzer",url_core_admin("users"));
 	}
-	if(USER_ADMIN || berechtigung('RIGHT_DATAACCESS') ){
+	if(USER_ADMIN /* || berechtigung('RIGHTxDATAACCESS')*/ ){
 		new menu_topic($menu_admin,"core_rights",$page_id,"Rechte",url_core_admin("rights"));
 	}
 	if(USER_ADMIN){

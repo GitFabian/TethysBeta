@@ -30,9 +30,9 @@ function edit_rights_core($db,$id){
 	if ($db=="core_user_rolle"){
 		return berechtigung('RIGHT_USERMGMT');
 	}
-	if ($db=="core_accessrights"){
-		return berechtigung('RIGHT_DATAACCESS');
-	}
+// 	if ($db=="coreXaccessrights"){
+// 		return berechtigung('RIGHTxDATAACCESS');
+// 	}
 	if (USER_ADMIN) echo"Kein edit_rights für $db!";
 	return false;
 }

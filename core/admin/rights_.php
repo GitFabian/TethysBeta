@@ -13,7 +13,8 @@ function all_rights(){
 	$all_rights=array(
 		"RIGHT_ADMIN"=>new right("Administrator/Entwickler","Vorsicht! ALLE Rechte. Auch instabile BETA-Features und Entwickler-Ausgaben!","CORE"),
 		"RIGHT_USERMGMT"=>new right("Personalverwaltung","Benutzer anlegen, bearbeiten und löschen. Rollen zuweisen.","CORE"),
-		"RIGHT_DATAACCESS"=>new right("DATA-Zugriffe","Zugriffsrechte anzeigen und verwalten.","CORE"),
+			//DEPRECATED: RIGHT_DATAACCESS / RIGHTxDATAACCESS
+// 		"RIGHTxDATAACCESS"=>new right("DATA-Zugriffe","Zugriffsrechte anzeigen und verwalten.","CORE"),
 	);
 	/*
 	 * Modulspezifische Rechte

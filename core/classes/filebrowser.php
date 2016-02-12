@@ -125,14 +125,15 @@ class filebrowser{
 		/*
 		 * Drop-Target
 		 */
-		$query_write_right=dbio_SELECT("core_accessrights","user=".USER_ID." AND level='write'");
-		$right=false;
-		$dir_rel_as_dir=$dir_rel."/";
-		foreach ($query_write_right as $r) {
-			$prefix=$r["file"];
-			if(string_startswith($dir_rel_as_dir, $prefix))$right=true;
-		}
-		if($right){
+// 		$query_write_right=dbio_SELECT("coreXaccessrights","user=".USER_ID." AND level='write'");
+// 		$right=false;
+// 		$dir_rel_as_dir=$dir_rel."/";
+// 		foreach ($query_write_right as $r) {
+// 			$prefix=$r["file"];
+// 			if(string_startswith($dir_rel_as_dir, $prefix))$right=true;
+// 		}
+// 		if($right)
+		{
 			#$html.="Datei(en) hinzufügen durch Drag & Drop.";
 		}
 		

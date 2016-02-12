@@ -17,4 +17,8 @@ function hauptmenue($page_id){
 // 	return "[LOGON]";
 // }
 
+// function datafolder_access($file){
+// 	return false;
+// }
+
 ?>

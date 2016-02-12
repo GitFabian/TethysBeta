@@ -90,6 +90,10 @@ class module{
 		);
 	}
 
+	function datafolder_access($file){
+		return false;
+	}
+	
 }
 
 function new_form_field($modul,$key,$label,$type,$options=null){

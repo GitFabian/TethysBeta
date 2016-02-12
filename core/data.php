@@ -11,11 +11,21 @@ if (!file_exists($file)){exit_404("Datei nicht gefunden!");}
 /*
  * Berechtigung überprüfen
  */
-$query_accessrights=dbio_SELECT("core_accessrights","user=".USER_ID);
 $access=false;
-foreach ($query_accessrights as $r) {
-	$prefix=$r["file"];
-	if(string_startswith($url, $prefix))$access=true;
+// $query_accessrights=dbio_SELECT("coreXaccessrights","user=".USER_ID);
+// foreach ($query_accessrights as $r) {
+// 	$prefix=$r["file"];
+// 	if(string_startswith($url, $prefix))$access=true;
+// }
+$slash=strpos($url, "/");
+if($slash){
+	$modul=substr($url, 0, $slash);
+	if(isset($modules[$modul])){
+		$access=$modules[$modul]->datafolder_access($url);
+	}
+}
+if (!$access){
+	if (function_exists('datafolder_access')) $access=datafolder_access($url);
 }
 if (!$access){exit_404("Keine Berechtigung!");}
 
