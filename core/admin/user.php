@@ -58,6 +58,7 @@ if ($view=="core"){
 	 */
 	if(setting_get(null, "CFG_EDITWIDGETS")){
 		$widgets=array();
+		$widgets[]=new form_field_info("xyz", "", html_a_button("Alle Positionen zurücksetzen", "?resetallwidgetpositions"));
 		$wid_sets=array_val2key(explode(",", setting_get_user(null, "WIDGETS")));
 		foreach ($modules as $mod_id=>$modul) {
 			$widg=$modul->get_widgets();
@@ -69,6 +70,10 @@ if ($view=="core"){
 		}
 		if($widgets)$form->add_fields("Widgets", $widgets);
 		#$form->add_field(new form_field("","SETTING",setting_get_user(null, "WIDGETS")));
+	}
+	if(isset($_REQUEST["resetallwidgetpositions"])){
+		dbio_DELETE("core_widgetpos", "user=".USER_ID);
+		$page->message_ok("Alle Widget-Positionen zurückgesetzt.");
 	}
 		
 	if ($form->field_groups)
