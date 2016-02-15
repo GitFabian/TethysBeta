@@ -66,7 +66,7 @@ class table{
 		$idkeyquery=($idkey=='id'?"":"&idkey=$idkey");
 		if($this->details){
 			$details=$this->details;
-			if($details===true)$details=ROOT_HTTP_CORE."/core/view.".CFG_EXTENSION."?db=$db&id=[ID:$idkey]";
+			if($details===true)$details=ROOT_HTTP_CORE."/core/view.".CFG_EXTENSION."?db=$db&id=[ID:$idkey]".$idkeyquery;
 			$this->options[]=html_a_button("Details",$details,"tbl_option tbl_detail");
 		}
 		if (!edit_rights2($db, null)) return;

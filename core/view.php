@@ -27,6 +27,7 @@ include_once ROOT_HDD_CORE.'/core/classes/datasheet.php';
 
 $db=request_value("db");
 $id=request_value("id");
+$idkey=request_value("idkey","id");
 
 $modul=substr($db, 0, strpos($db, "_"));
 /*
@@ -40,7 +41,7 @@ if($modul=="::"){
 	$db=$mod_db[1];
 }
 
-$query=dbio_SELECT_SINGLE($db, $id);
+$query=dbio_SELECT_SINGLE($db, $id, $idkey);
 
 $form=new form(null,null,null,"datasheet");
 edit_default_form($form,$query,$db,'id');
