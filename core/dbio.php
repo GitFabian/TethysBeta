@@ -111,7 +111,7 @@ function dbio_UPDATE_OR_INSERT2($db,$where,$data){
 	}
 }
 
-function dbio_UPDATE($db,$where,$data){
+function dbio_UPDATE($db,$where,$data,$link_identifier=null){
 	$anfrage="UPDATE `$db` SET ";
 
 	$sets="";
@@ -123,7 +123,7 @@ function dbio_UPDATE($db,$where,$data){
 
 	$anfrage.=" WHERE $where;";
 
-	dbio_query($anfrage);
+	dbio_query($anfrage,$link_identifier);
 }
 
 function dbio_UPDATE_LOG($modul,$db,$zeile,$where,$data,$link_identifier=null){
