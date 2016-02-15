@@ -45,9 +45,9 @@ function dbio_SELECT_asList($db,$format,$where=null,$key="id",$sort=null,$sortAs
 	return $list;
 }
 
-function dbio_DELETE($db,$where){
+function dbio_DELETE($db,$where,$link_identifier=null){
 	$anfrage="DELETE FROM `$db` WHERE $where;";
-	dbio_query($anfrage);
+	dbio_query($anfrage,$link_identifier);
 }
 
 function dbio_NEW_FROM_REQUEST($db,$idkey="id",$unsets=null){
