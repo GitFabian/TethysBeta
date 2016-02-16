@@ -91,6 +91,8 @@ function dbio_INSERT($db,$data,$link_identifier=null){
 	$anfrage="INSERT INTO `$db` ( $keys ) VALUES ( $values );";
 	
 	dbio_query($anfrage,$link_identifier);
+	if($link_identifier)return mysql_insert_id($link_identifier);
+	return mysql_insert_id();
 }
 
 function dbio_UPDATE_OR_INSERT($db,$id,$data,$idkey='id'){
