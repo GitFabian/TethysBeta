@@ -105,6 +105,12 @@ div.innerbody.empty{
 u{
 	text-decoration:none;
 }
+div.paper,
+pre.paper{
+	background:#394a60;
+x	padding:10px;
+x	border-radius:10px;
+}
 
 /*==================================================================
     FRAME
@@ -284,6 +290,10 @@ div.messages div.message:before{
 div.messages div.message:after{
 	content:" ---";
 }
+div.messages div.message.ask:before{ content:"-?- "; }
+div.messages div.message.ask:after{ content:" -?-"; }
+div.messages div.message.error:before{ content:"-!- "; }
+div.messages div.message.error:after{ content:" -!-"; }
 
 /*==================================================================
     BUTTONS,LINKS

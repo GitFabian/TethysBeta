@@ -25,7 +25,7 @@ $page->message_error("Fehler!");
 $page->message_ok("OK!");
 
 $page->say(html_header1("Header 1"));
-$page->say(html_div("Dee zip Boba Fett razzleshnoz!"));
+$page->say(html_div("html_div(\"Dee zip Boba Fett razzleshnoz!\",\"<b>paper</b>\")<br>html_pre(\"Razzle! Blob dobba slappy yip zungleflong?\",\"<b>paper</b>\")", "paper"));
 $page->say(html_header2("Header 2"));
 $page->say(html_div("Duh doo yap Cartman flapizzle. Nip flippity wobble flooble wibble loo zingle."));
 $page->say(html_header3("Header 3"));
