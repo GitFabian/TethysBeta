@@ -67,20 +67,20 @@ while($from<$too){
 		$rights_grid=array();
 		$user_sort_values=array();
 		$table = new table(null,'core_rights wide',true);
-		foreach ($query_users as $user) {
+		foreach ($query_users as $u) {
 			$row=new table_row();
 			$row_sort=array();
-			$user_rights=array("-USER-"=>$user['nick']." (".$user['id'].")");
-			$row->data["-USER-"]=$user['nick']." (".$user['id'].")";
-			$user_sort_values[]=$user['id'];
+			$user_rights=array("-USER-"=>$u['nick']." (".$u['id'].")");
+			$row->data["-USER-"]=$u['nick']." (".$u['id'].")";
+			$user_sort_values[]=$u['id'];
 			foreach ($all_rights2 as $right_id => $dummy) {
-				$user_rights[$right_id]=rights_checkbox(false,$user['id'],$right_id);
-				$row->data[$right_id]=rights_checkbox(false,$user['id'],$right_id);
+				$user_rights[$right_id]=rights_checkbox(false,$u['id'],$right_id);
+				$row->data[$right_id]=rights_checkbox(false,$u['id'],$right_id);
 				$row_sort[$right_id]=0;
 			}
-			$rights_grid[$user['id']]=$user_rights;
+			$rights_grid[$u['id']]=$user_rights;
 			$row->sort_values=$row_sort;
-			$table->rows[$user['id']]=$row;
+			$table->rows[$u['id']]=$row;
 		}
 		$headers=array("-USER-"=>"Benutzer");
 		foreach ($all_rights2 as $right_id => $right_object) {
