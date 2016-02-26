@@ -53,8 +53,8 @@ class table{
 	
 	/**
 	 * @param string $db
-	 * Modul "a_b", Tabelle "c_d":
-	 * $db="::_a_b,c_d"
+	 * Modul "modul_name", Tabelle "table_name":
+	 * $db="::_modul_name,table_name"
 	 * 
 	 * 
 	 */
