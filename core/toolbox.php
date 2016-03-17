@@ -1083,4 +1083,10 @@ function verzeichnis_leeren($path){
 	}
 }
 
+function string_linebreak2html($string){
+	$string=preg_replace("/\\r\\n/", "\n", $string);
+	$string=preg_replace("/\\n/", "<br>", $string);
+	return $string;
+}
+
 ?>
