@@ -586,6 +586,14 @@ form select{
 	background:none;
 	padding:0 0 0 2px;
 }
+div.form_field input[type=number]{
+	margin-left:10px;
+	padding-left:5px;
+	background:url(img/core/input_bg_number.png) no-repeat;
+	background-position:0 3px;
+	border:none;
+	width:50px;
+}
 input[type=checkbox]{
 	width:20px;
 	height:13px;
@@ -643,6 +651,10 @@ div.form_field ul.radio li input[type=radio]:checked + span.label.radio:before{
 div.form_field ul.radio li input[type=radio]:hover + span.label.radio{
 	color:#77e4ff;
 	text-shadow:0px 0px 2px #77e4ff;
+}
+div.form_field.nebeneinander ul.radio li{
+	display:inline-block;
+	margin-right:16px;
 }
 form fieldset{
 	border:none;

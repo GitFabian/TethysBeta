@@ -25,6 +25,7 @@ $form->add_fields("Überschrift / Sektion", array(
 				"eins"=>"Eins",
 				"zwei"=>"Zwei",
 		)),
+		new form_field("zahl","Zahl (NUMBER)",request_value("zahl","2"),"NUMBER",null,null,null,array("min"=>"-3","max"=>"3")),
 		new form_field("zippity","Dropdown (SELECT)",request_value("zippity","ts"),"SELECT",null,array(
 				"ms"=>"Mr. Slave",
 				"ts"=>"Tony Soprano",

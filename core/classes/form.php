@@ -178,6 +178,7 @@ class form_field{
 	var $title;
 	var $options;
 	var $id;
+	var $more_key_vals;
 	
 	var $maxlength=0;
 	var $onChange=null;
@@ -185,7 +186,7 @@ class form_field{
 	var $outer_class="";
 	var $accesskey=null;
 	
-	function __construct($name,$label=null,$value="[REQ]",$type="TEXT",$title=null,$options=null,$id=null){
+	function __construct($name,$label=null,$value="[REQ]",$type="TEXT",$title=null,$options=null,$id=null,$more_key_vals=false){
 		if ($label===null) $label=$name;
 		$this->label=$label;
 		$this->name=$name;
@@ -210,6 +211,7 @@ class form_field{
 		$this->title=$title;
 		$this->options=$options;
 		$this->id=$id;
+		$this->more_key_vals=$more_key_vals;
 	}
 	
 	function toHTML(){
@@ -223,6 +225,12 @@ class form_field{
 		$outer_class=$this->outer_class;
 		$label=$this->label;
 		$accesskey=($this->accesskey?" accesskey=\"$this->accesskey\"":"");
+		$morekeyvals="";
+		if($this->more_key_vals){
+			foreach ($this->more_key_vals as $key => $value) {
+				$morekeyvals.=" ".$key."=\"".escape_html_unicode($value)."\"";
+			}
+		}
 		if($accesskey){
 			$original_value=$label;
 			$label=preg_replace("/^(.*?)([".strtolower($this->accesskey).strtoupper($this->accesskey)."])(.*)$/", "$1<u>$2</u>$3", $label);
@@ -249,13 +257,12 @@ class form_field{
 			$input="<input$id type=\"password\" name=\"".$this->name."\" value=\"$thisvalue\" />";
 		}else if ($this->type=="TEXTAREA"){
 			$input="<textarea$id name=\"".$this->name."\"$onChange>\n$thisvalue</textarea>";
-			
-			//<input id="job_prio_1138" onchange="updateJobPriority(1138,this.value);" min="-3" max="3" style="width:30px;" value="0" type="number">
-			
+		}else if ($this->type=="NUMBER"){
+			$input="<input$onChange$id type=\"number\" name=\"".$this->name."\" value=\"$thisvalue\"$morekeyvals />";
 		}else if ($this->type=="DATUM"){
-			$id=($this->id?:get_next_id());
-			datepicker($id);
-			$input="<input$onChange id=\"$id\" type=\"text\" datum name=\"".$this->name."\" value=\"$thisvalue\" />";
+			$idx=($this->id?:get_next_id());
+			datepicker($idx);
+			$input="<input$onChange id=\"$idx\" type=\"text\" datum name=\"".$this->name."\" value=\"$thisvalue\" />";
 		}else if ($this->type=="DATUM2"){
 			$input="<input$onChange$id type=\"text\" name=\"".$this->name."\" value=\"$thisvalue\" />";
 		}else if ($this->type=="RADIO"||$this->type=="RADIO2"){
