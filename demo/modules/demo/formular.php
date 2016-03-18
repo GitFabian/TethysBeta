@@ -21,6 +21,10 @@ $form->add_fields("Überschrift / Sektion", array(
 				"one"=>"One",
 				"two"=>"Two",
 		)),
+		new form_field("radio2","Radio-Buttons nebeneinander (RADIO2)",request_value("radio2"),"RADIO2",null,array(
+				"eins"=>"Eins",
+				"zwei"=>"Zwei",
+		)),
 		new form_field("zippity","Dropdown (SELECT)",request_value("zippity","ts"),"SELECT",null,array(
 				"ms"=>"Mr. Slave",
 				"ts"=>"Tony Soprano",

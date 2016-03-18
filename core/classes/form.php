@@ -249,13 +249,17 @@ class form_field{
 			$input="<input$id type=\"password\" name=\"".$this->name."\" value=\"$thisvalue\" />";
 		}else if ($this->type=="TEXTAREA"){
 			$input="<textarea$id name=\"".$this->name."\"$onChange>\n$thisvalue</textarea>";
+			
+			//<input id="job_prio_1138" onchange="updateJobPriority(1138,this.value);" min="-3" max="3" style="width:30px;" value="0" type="number">
+			
 		}else if ($this->type=="DATUM"){
 			$id=($this->id?:get_next_id());
 			datepicker($id);
 			$input="<input$onChange id=\"$id\" type=\"text\" datum name=\"".$this->name."\" value=\"$thisvalue\" />";
 		}else if ($this->type=="DATUM2"){
 			$input="<input$onChange$id type=\"text\" name=\"".$this->name."\" value=\"$thisvalue\" />";
-		}else if ($this->type=="RADIO"){
+		}else if ($this->type=="RADIO"||$this->type=="RADIO2"){
+			if($this->type=="RADIO2")$outer_class.=" nebeneinander";
 			if($this->options){
 				$input.="<ul class=\"radio\">";
 				foreach ($this->options as $key=>$value) {
