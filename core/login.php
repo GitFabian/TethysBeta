@@ -126,8 +126,8 @@ function login(){
 		define('USER_ID', 0);
 	
 	}else if (CFG_LOGON_TYPE=='http'){
-		if (isset($_SERVER['REMOTE_USER'])){
-			$http_auth=$_SERVER['REMOTE_USER'];
+		if (isset($_SERVER['REMOTE_USER'])||isset($_SERVER['REDIRECT_REMOTE_USER'])){
+			$http_auth=(isset($_SERVER['REMOTE_USER'])?$_SERVER['REMOTE_USER']:$_SERVER['REDIRECT_REMOTE_USER']);
 
 			$user=dbio_query_to_array("SELECT * FROM `core_users` WHERE `http_auth` COLLATE utf8_general_ci = '$http_auth' AND active");
 			if ($user) $user=$user[0];
@@ -154,7 +154,7 @@ function login(){
 			}
 			
 		}else{
-			echo("Fehlerhafte Server-Konfiguration! HTTP-Auth übermittelte keinen Benutzer (\$_SERVER['REMOTE_USER']).");
+			echo("Fehlerhafte Server-Konfiguration! HTTP-Auth übermittelte keinen Benutzer.");// (\$_SERVER['REMOTE_USER']).");
 			exit;
 		}
 		
