@@ -239,9 +239,13 @@ if ($version<24){
 //   ADD CONSTRAINT `coreXaccessrights_ibfk_1` FOREIGN KEY (`user`) REFERENCES `core_users` (`id`);");
 // }
 
+if ($version<26){
+	dbio_query("ALTER TABLE `core_users` ADD `valid_until` DATE NULL ;");
+}
+
 #if ($version<){dbio_query("");}
 
-$current_version=25;
+$current_version=26;
 //=================================================================================================
 dbio_query("UPDATE `core_meta_dbversion` SET `version` = '$current_version' WHERE `modul_uc` = 'CORE';");
 //=================================================================================================
