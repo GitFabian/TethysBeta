@@ -13,6 +13,7 @@ function get_edit_form($form,$db,$id,$query){
 		$ff=module::edit_form_field($form,$query,'nachname',"Nachname");
 		$ff->id="id_nachname";
 		module::edit_form_field($form,$query,'active',"Aktiv",'CHECKBOX');
+		module::edit_form_field($form,$query,'valid_until',"valid_until",'DATUM');
 		module::edit_form_field($form,$query,'nick',"Nick");
 		
 		$ff=module::edit_form_field($form,$query,'http_auth',"HTTP-Auth".(setting_get(null, "CFG_AUTHPATTERN")?autofill_manuell("autofill_auth();"):""));

@@ -4,6 +4,9 @@
 include_once ROOT_HDD_CORE.'/core/classes/message.php';
  */
 
+/**
+ * ok, info, error, ask
+ */
 class message{
 	var $type;
 	var $text;

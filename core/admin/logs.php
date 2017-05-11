@@ -44,7 +44,7 @@ function logs_others(){
 }
 function preset_view_index(){
 	global $page;
-	$query_users=dbio_SELECT_asList("core_users", "[nick]");
+	$query_users=dbio_SELECT_asList("core_users", "[nick]", "active");
 	$data=array();
 	$sort_time=array();
 	$sort_uid=array();
