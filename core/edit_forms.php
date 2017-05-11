@@ -21,6 +21,8 @@ function get_edit_form($form,$db,$id,$query){
 		$page->add_inline_script("function autofill_auth(){
 				vorname=document.getElementById('id_vorname').value.toLowerCase().replace(/[^a-z]/g,'');
 				nachname=document.getElementById('id_nachname').value.toLowerCase().replace(/[^a-z]/g,'');
+				v=document.getElementById('id_vorname').value.substr(0,1).toLowerCase();
+				V=document.getElementById('id_vorname').value.substr(0,1);
 				document.getElementById('$nid').value=".setting_get(null, "CFG_AUTHPATTERN").";
 			}");
 		

@@ -324,4 +324,8 @@ function dbio_information_schema_constraints($table){
 	return $list;
 }
 
+//function dbio_information_schema_constraints($table){
+//select * from information_schema.`COLUMNS` where TABLE_SCHEMA='tethys' and TABLE_NAME='projects_projects' and COLUMN_COMMENT!='';
+
+
 ?>

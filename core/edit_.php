@@ -19,11 +19,18 @@ function edit_default_form($form,$query,$db,$idkey){
 	#debug_out($infos);
 	$col_info=dbio_info_columns($db);
 	#debug_out($col_info);
+	$new=(isset($_REQUEST['id'])&&$_REQUEST['id']=='NEW');
 	foreach ($query as $key => $value) {
 		if ($key!=$idkey){
 			$options=null;
+			/*
+			 * Default-Value
+			 */
+			if($new){
+				$value=$col_info[$key]['Default'];
+			}
 			$v=request_value($key,$value);
-			
+
 			/*
 			 * Datentyp
 			 */
@@ -50,7 +57,11 @@ function edit_default_form($form,$query,$db,$idkey){
 				$typ='DATUM';
 				$v=($v?format_datum_to_tmj($v):"");
 			}
-			
+			else if (substr($type,0,4)=="int("){
+				if($col_info[$key]['Null']=="YES" && !$value) $v="null";
+			}
+
+
 			/*
 			 * Constraints
 			 */
@@ -63,7 +74,7 @@ function edit_default_form($form,$query,$db,$idkey){
 					$options=array_unshift_assoc($options, "null", "(-/-)");
 				}
 			}
-			
+
 			$form->add_field($ff=new form_field($key,null,$v,$typ,null,$options));
 			
 			//Maxlength
