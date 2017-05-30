@@ -188,9 +188,9 @@ function string_kuerzen2($string, $maxlen, $escape=true, $teaser="[mehr...]"){
 	return ($escape?escape_html($string):$string);
 }
 
-function url_mod_pg($modul,$page){
+function url_mod_pg($modul,$page,$pars=""){
 	if ($modul=='demo'||$modul=='fun'||$modul=='myqueries') return ROOT_HTTP_CORE."/demo/modules/$modul/$page.".CFG_EXTENSION;
-	return ROOT_HTTP_MODULES."/$modul/$page.".CFG_EXTENSION;
+	return ROOT_HTTP_MODULES."/$modul/$page.".CFG_EXTENSION.$pars;
 }
 
 function url_core_admin($page,$request=null){
