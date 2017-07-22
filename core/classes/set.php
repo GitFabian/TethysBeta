@@ -52,6 +52,7 @@ class set_card{
 	var $details_text="Details";
 	var $class="";
 	var $class_outer="";
+	var $id="";
 	function __construct($title,$infotext="",$picture="",$edit_db_=null,$details=null){
 		$this->header3=$title;
 		$this->infotext=$infotext;
@@ -92,7 +93,9 @@ class set_card{
 		if ($this->details){array_unshift($buttons,html_a_button($this->details_text, $this->details));}
 		$buttons=($buttons?"\n<div class=\"buttons\">".(implode("", $buttons))."</div>":"");
 		
-		return "\n\t<div class=\"set_card $this->class_outer\">$picture\n\t\t<div class=\"set_head\">$title$infotext\n\t\t</div>$data$buttons</div>";
+		$id=$this->id?" id=\"$this->id\"":"";
+		
+		return "\n\t<div$id class=\"set_card $this->class_outer\">$picture\n\t\t<div class=\"set_head\">$title$infotext\n\t\t</div>$data$buttons</div>";
 	}
 	static function get_default($name,$data){
 		$card=new set_card($name);
