@@ -27,4 +27,8 @@ function tmarkup($string){
 	return $string;
 }
 
+function string_genitiv_english($name){
+	return $name."'s";
+}
+
 ?>

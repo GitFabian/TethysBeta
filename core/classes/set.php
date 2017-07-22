@@ -49,6 +49,7 @@ class set_card{
 	var $edit;
 	var $delete=true;
 	var $details;
+	var $details_text="Details";
 	var $class="";
 	var $class_outer="";
 	function __construct($title,$infotext="",$picture="",$edit_db_=null,$details=null){
@@ -88,7 +89,7 @@ class set_card{
 				$buttons[]=html_a_button("Löschen", "", "","ask_delete('$url','".html_to_plain($this->header3)."');");
 			}
 		}
-		if ($this->details){array_unshift($buttons,html_a_button("Details", $this->details));}
+		if ($this->details){array_unshift($buttons,html_a_button($this->details_text, $this->details));}
 		$buttons=($buttons?"\n<div class=\"buttons\">".(implode("", $buttons))."</div>":"");
 		
 		return "\n\t<div class=\"set_card $this->class_outer\">$picture\n\t\t<div class=\"set_head\">$title$infotext\n\t\t</div>$data$buttons</div>";
