@@ -18,6 +18,7 @@ class page{
 	var $waitSpinner=false;
 	var $wap=false;
 	var $bodyclass="";
+	var $hints=array();
 	
 	function __construct(){
 		$this->content="";
@@ -28,6 +29,11 @@ class page{
 		$this->inline_JS="";
 		$this->onload_JS="";
 		$this->focus=null;
+	}
+	
+	function add_hint($desc,$request_key=null){
+		include_once ROOT_HDD_CORE.'/core/classes/page_hint.php';
+		$this->hints[]=new page_hint($desc,$request_key);
 	}
 	
 	function send(){
@@ -128,6 +134,19 @@ class page{
 		
 		$wap=$this->wap?" PUBLIC \"-//WAPFORUM//DTD XHTML Mobile 1.0//EN\" \"http://www.wapforum.org/DTD/xhtml-mobile10.dtd\"":"";
 		
+		$hints="";
+		if($this->hints){
+			foreach ($this->hints as $hint) {
+				if($hint instanceof page_hint){
+					$hints.="<div class=\"hint\">";
+						$hints.="<b class='hint_key'>".$hint->request_key."</b>";
+						$hints.="<span class='hint_desc'>".$hint->desc."</span>";
+					$hints.="</div>";
+				}
+			}
+			$hints="<div class=\"hints\">$hints</div>";
+		}
+		
 		echo <<<ENDE
 <!DOCTYPE HTML$wap>
 <html>
@@ -149,6 +168,7 @@ class page{
 			$messages
 			$content
 		</div>
+		$hints
 	</div>
 	$devel_zeitmessung
 </body>
